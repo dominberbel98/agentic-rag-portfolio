@@ -8,6 +8,11 @@ const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
 export default function Chat() {
   const [question, setQuestion] = useState("");
+
+  // Warm-up: ping backend on mount so cold-start resolves while user reads
+  useEffect(() => {
+    fetch(`${API_URL}/health`).catch(() => {});
+  }, []);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
