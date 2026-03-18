@@ -61,9 +61,9 @@ export default function Chat() {
     setLoading(true);
     setMessages((prev) => [...prev, { role: "user", text: currentQuestion }]);
 
-    // Build conversation history from last 12 messages (6 full turns) to give
+    // Build conversation history from last 20 messages (10 full turns) to give
     // the backend stronger context for follow-up questions.
-    const recentHistory = messages.slice(-12).map((m) => ({
+    const recentHistory = messages.slice(-20).map((m) => ({
       role: m.role,
       content: m.text,
     }));
@@ -74,7 +74,7 @@ export default function Chat() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question: currentQuestion,
-          top_k: 3,
+          top_k: 5,
           captcha_token: captchaToken || null,
           history: recentHistory,
         }),

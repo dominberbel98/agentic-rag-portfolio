@@ -146,29 +146,31 @@ class AgenticRAGService:
         if not self._llm_client or not self._chat_model:
             return self._fallback_answer(question, chunks)
 
-        # Keep context compact to reduce latency and token usage.
-        context_block = "\n\n".join([f"[{i+1}] {c.source}: {c.chunk[:900]}" for i, c in enumerate(chunks)])
+        context_block = "\n\n".join([f"[{i+1}] {c.source}: {c.chunk}" for i, c in enumerate(chunks)])
         system_prompt = (
             "You are an AI assistant for Domingo Berbel's professional profile. "
+            "IMPORTANT: Base your answers strictly on the retrieved document context below. "
+            "Quote specific facts, dates, roles, companies, technologies, and achievements from the documents. "
+            "Do not invent facts, metrics, clients or roles that are not supported by the retrieved context. "
+            "If the documents contain the answer, use that information with precision and detail. "
             "You must only answer about his professional trajectory, achievements, projects, skills, education, and ability "
             "to deliver AI and RAG systems in production, especially on Azure. "
             "Your job is to present him in a strong, credible, recruiter-friendly and commercially compelling way. "
             "Highlight business impact, ownership, adaptability, technical breadth, delivery mindset, and value for employers. "
-            "Do not invent facts, metrics, clients or roles that are not supported by the retrieved context. "
             "Never answer personal questions. "
             "Only provide contact information if it is one of the configured professional emails. "
             "If the question is outside professional scope, reply with exactly: OUT_OF_SCOPE. "
-            "If context is limited, still answer with the strongest accurate professional summary you can from the available information. "
+            "Use the conversation history to maintain coherent, contextual responses across turns. "
+            "If the user refers to something discussed earlier, use the history to answer accurately. "
             "You can answer in Spanish or English depending on the user language. "
             "Tone: polished, persuasive, concise, confident. "
-            "Keep answers short by default (90-140 words) unless the user explicitly asks for more detail."
+            "Keep answers between 100-200 words unless the user explicitly asks for more or less detail."
         )
 
         # Build messages list: system → history turns → current user turn
         messages: list[dict] = [{"role": "system", "content": system_prompt}]
 
-        # Include a larger history window to improve follow-up coherence.
-        for msg in (history or [])[-12:]:
+        for msg in (history or [])[-20:]:
             role = msg.get("role", "user")
             content = msg.get("content", "")
             if role in ("user", "assistant") and content:
@@ -179,8 +181,8 @@ class AgenticRAGService:
 
         response = self._llm_client.chat.completions.create(
             model=self._chat_model,
-            temperature=0.2,
-            max_tokens=260,
+            temperature=0.15,
+            max_tokens=500,
             messages=messages,
         )
         content = (response.choices[0].message.content or "").strip()
