@@ -54,20 +54,6 @@ class AgenticRAGService:
                 contact_linkedin=settings.professional_linkedin or None,
             )
 
-        if self._is_language_question(question):
-            chunks = self._retrieve(question, top_k, history)
-            answer = self._language_answer(question, chunks)
-            logger.info("[ANSWER] language_intent=True preview=%r", answer[:150])
-            citations = [Citation(source=c.source, chunk=c.chunk) for c in chunks] if settings.show_citations else []
-            return ChatResponse(
-                answer=answer,
-                used_retrieval=True,
-                citations=citations,
-                needs_contact_form=False,
-                contact_emails=self._contact_emails(),
-                contact_linkedin=settings.professional_linkedin or None,
-            )
-
         use_retrieval = self._should_retrieve(question)
         chunks = self._retrieve(question, top_k, history) if use_retrieval else []
         logger.info("[RETRIEVE] chunks=%d sources=%s", len(chunks), [c.source for c in chunks])
@@ -182,7 +168,7 @@ class AgenticRAGService:
         response = self._llm_client.chat.completions.create(
             model=self._chat_model,
             temperature=0.15,
-            max_tokens=500,
+            max_tokens=350,
             messages=messages,
         )
         content = (response.choices[0].message.content or "").strip()
@@ -226,7 +212,7 @@ class AgenticRAGService:
         return any(k in q for k in keywords)
 
     def _is_greeting_question(self, question: str) -> bool:
-        q = question.strip().lower()
+        q = question.strip().lower().rstrip("!.?¿¡,")
         greetings = [
             "hola",
             "buenas",
@@ -238,7 +224,8 @@ class AgenticRAGService:
             "hi",
             "hey",
         ]
-        return q in greetings or any(q.startswith(f"{g} ") for g in greetings)
+        # Only match pure greetings — not "hola que estudio domingo"
+        return q in greetings
 
     def _greeting_answer(self) -> str:
         return (
