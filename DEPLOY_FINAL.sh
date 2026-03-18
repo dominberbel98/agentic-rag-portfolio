@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+# DEPLOYMENT: domingoberbel.com RAG - Run this script locally
+
+set -euo pipefail
+
+cd /home/domin/PROYECTOS
+
+echo "=========================================="
+echo "PASO 1: Autenticar en Azure (MFA requerida)"
+echo "=========================================="
+source .venv/bin/activate
+# Usa device code flow con tenant específico
+az login --use-device-code --tenant 13a1d5c0-ccab-4b8c-8b11-fd56c168f069
+# Abre https://microsoft.com/devicelogin en navegador y entra el código + MFA
+
+echo ""
+echo "✓ Autenticación completada"
+echo ""
+
+echo "=========================================="
+echo "PASO 2: Seleccionar subscription y desplegar"
+echo "=========================================="
+source infra/aca/azure.env
+
+az account set --subscription "$AZ_SUBSCRIPTION_ID"
+echo "✓ Subscription: $AZ_SUBSCRIPTION_ID"
+
+echo ""
+echo "✓ Ejecutando despliegue..."
+chmod +x scripts/deploy_azure.sh
+./scripts/deploy_azure.sh
+
+echo ""
+echo "=========================================="
+echo "PASO 3: Guardar FQDNs"
+echo "=========================================="
+BACKEND_FQDN=$(az containerapp show -g "$AZ_RESOURCE_GROUP" -n "$AZ_BACKEND_APP" --query properties.configuration.ingress.fqdn -o tsv)
+FRONTEND_FQDN=$(az containerapp show -g "$AZ_RESOURCE_GROUP" -n "$AZ_FRONTEND_APP" --query properties.configuration.ingress.fqdn -o tsv)
+
+echo "Backend FQDN: $BACKEND_FQDN"
+echo "Frontend FQDN: $FRONTEND_FQDN"
+echo ""
+echo "⚠️  GUARDA ESTOS DOS VALORES. Los necesitarás para Hostinger DNS."
+echo ""
+
+echo "=========================================="
+echo "PASO 4: Ingestar documentos"
+echo "=========================================="
+export PYTHONPATH=/home/domin/PROYECTOS
+python scripts/index_documents.py
+echo "✓ Documentos indexados"
+
+echo ""
+echo "=========================================="
+echo "PASO 5: Setup de presupuesto (15 USD/mes)"
+echo "=========================================="
+chmod +x scripts/setup_budget.sh
+./scripts/setup_budget.sh
+echo "✓ Presupuesto configurado"
+
+echo ""
+echo "=========================================="
+echo "PASO 6: Configurar Hostinger"
+echo "=========================================="
+echo ""
+echo "Entra a Hostinger y crea estos registros DNS:"
+echo ""
+echo "1. CNAME: api -> $BACKEND_FQDN"
+echo "2. CNAME: www -> $FRONTEND_FQDN"
+echo "3. (if ALIAS available) @ -> www.domingoberbel.com"
+echo "   (else) Redirect @ -> www.domingoberbel.com"
+echo ""
+echo "⏳ Espera 24h para que DNS propague"
+echo ""
+
+echo "=========================================="
+echo "PASO 7: Vincular dominios en Azure"
+echo "=========================================="
+echo ""
+echo "Ejecuta después que DNS esté configurado:"
+echo ""
+echo "az containerapp hostname add -g $AZ_RESOURCE_GROUP -n $AZ_BACKEND_APP --hostname api.domingoberbel.com"
+echo "az containerapp hostname add -g $AZ_RESOURCE_GROUP -n $AZ_FRONTEND_APP --hostname www.domingoberbel.com"
+echo ""
+
+echo "=========================================="
+echo "PASO 8: Verificar HTTPS y SSL"
+echo "=========================================="
+echo ""
+echo "Espera a que Azure emita certificados + DNS propague, luego:"
+echo ""
+echo "curl https://api.domingoberbel.com/health"
+echo "curl https://www.domingoberbel.com"
+echo ""
+echo "Si ambos devuelven 200, ¡LISTO!"
+echo ""
+
+echo "=========================================="
+echo "FIN"
+echo "=========================================="
+echo ""
+echo "Para auditoria de preguntas:"
+echo "curl -H \"x-admin-key: $ADMIN_READ_KEY\" https://api.domingoberbel.com/api/admin/questions"
+echo ""
