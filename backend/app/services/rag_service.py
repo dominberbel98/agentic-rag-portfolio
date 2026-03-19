@@ -54,6 +54,18 @@ class AgenticRAGService:
                 contact_linkedin=settings.professional_linkedin or None,
             )
 
+        if self._is_inappropriate_question(question):
+            answer = self._out_of_scope_message()
+            logger.info("[ANSWER] inappropriate_filter=True Q=%r", question[:120])
+            return ChatResponse(
+                answer=answer,
+                used_retrieval=False,
+                citations=[],
+                needs_contact_form=True,
+                contact_emails=self._contact_emails(),
+                contact_linkedin=settings.professional_linkedin or None,
+            )
+
         use_retrieval = self._should_retrieve(question)
         chunks = self._retrieve(question, top_k, history) if use_retrieval else []
         logger.info("[RETRIEVE] chunks=%d sources=%s", len(chunks), [c.source for c in chunks])
@@ -143,9 +155,10 @@ class AgenticRAGService:
             "to deliver AI and RAG systems in production, especially on Azure. "
             "Your job is to present him in a strong, credible, recruiter-friendly and commercially compelling way. "
             "Highlight business impact, ownership, adaptability, technical breadth, delivery mindset, and value for employers. "
-            "Never answer personal questions. "
+            "NEVER answer personal, sexual, romantic, political, religious, or offensive questions about Domingo or anyone else. "
+            "Questions about sexual orientation, relationships, physical appearance, personal life, or any non-professional topic must be rejected. "
             "Only provide contact information if it is one of the configured professional emails. "
-            "If the question is outside professional scope, reply with exactly: OUT_OF_SCOPE. "
+            "If the question is outside professional scope OR is inappropriate/offensive, reply with exactly: OUT_OF_SCOPE. "
             "Use the conversation history to maintain coherent, contextual responses across turns. "
             "If the user refers to something discussed earlier, use the history to answer accurately. "
             "You can answer in Spanish or English depending on the user language. "
@@ -190,6 +203,25 @@ class AgenticRAGService:
             "a producción con impacto real.",
             False,
         )
+
+    @staticmethod
+    def _is_inappropriate_question(question: str) -> bool:
+        """Pre-LLM filter: reject clearly inappropriate/personal/offensive questions."""
+        q = question.lower().strip()
+        inappropriate_patterns = [
+            "gustan los hombre", "gustan los mujer", "gustan las mujer", "gustan las chica",
+            "gustan los chico", "es gay", "es homosexual", "es hetero", "orientaci",
+            "novia", "novio", "pareja", "casado", "soltero", "sexual",
+            "relaci", "follar", "sexo", "polla", "culo", "tetas",
+            "pene", "vagina", "mierda", "puta", "hijo de",
+            "gilipollas", "subnormal", "idiota", "imbecil", "imbécil",
+            "maric", "bollera", "travesti", "transexual",
+            "gordo", "feo", "guapo", "atractivo",
+            "religión", "religion", "político", "politico", "partido",
+            "votar", "votó", "droga", "alcohol", "borracho",
+            "raza", "racis", "matar", "morir", "suicid",
+        ]
+        return any(p in q for p in inappropriate_patterns)
 
     def _out_of_scope_message(self) -> str:
         emails = self._contact_emails()
