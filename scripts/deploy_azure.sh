@@ -22,6 +22,11 @@ required=(
   AZURE_SEARCH_ENDPOINT AZURE_SEARCH_API_KEY AZURE_SEARCH_INDEX_NAME
 )
 
+BACKEND_MIN_REPLICAS="${BACKEND_MIN_REPLICAS:-1}"
+BACKEND_MAX_REPLICAS="${BACKEND_MAX_REPLICAS:-2}"
+FRONTEND_MIN_REPLICAS="${FRONTEND_MIN_REPLICAS:-1}"
+FRONTEND_MAX_REPLICAS="${FRONTEND_MAX_REPLICAS:-2}"
+
 for var in "${required[@]}"; do
   if [[ -z "${!var:-}" ]]; then
     echo "Variable requerida vacia: $var"
@@ -100,6 +105,8 @@ if ! az containerapp show --name "$AZ_BACKEND_APP" --resource-group "$AZ_RESOURC
     --environment "$AZ_CONTAINERAPPS_ENV" \
     --ingress external \
     --target-port 8000 \
+    --min-replicas "$BACKEND_MIN_REPLICAS" \
+    --max-replicas "$BACKEND_MAX_REPLICAS" \
     --image "$ACR_LOGIN_SERVER/rag-backend:latest" \
     --registry-server "$ACR_LOGIN_SERVER" \
     --registry-username "$ACR_USER" \
@@ -128,6 +135,8 @@ else
     --name "$AZ_BACKEND_APP" \
     --resource-group "$AZ_RESOURCE_GROUP" \
     --image "$ACR_LOGIN_SERVER/rag-backend:latest" \
+    --min-replicas "$BACKEND_MIN_REPLICAS" \
+    --max-replicas "$BACKEND_MAX_REPLICAS" \
     --set-env-vars \
       APP_ENV=prod \
       CORS_ORIGINS="https://$WEB_SUBDOMAIN" \
@@ -158,6 +167,8 @@ if ! az containerapp show --name "$AZ_FRONTEND_APP" --resource-group "$AZ_RESOUR
     --environment "$AZ_CONTAINERAPPS_ENV" \
     --ingress external \
     --target-port 80 \
+    --min-replicas "$FRONTEND_MIN_REPLICAS" \
+    --max-replicas "$FRONTEND_MAX_REPLICAS" \
     --image "$ACR_LOGIN_SERVER/rag-frontend:latest" \
     --registry-server "$ACR_LOGIN_SERVER" \
     --registry-username "$ACR_USER" \
@@ -166,7 +177,9 @@ else
   az containerapp update \
     --name "$AZ_FRONTEND_APP" \
     --resource-group "$AZ_RESOURCE_GROUP" \
-    --image "$ACR_LOGIN_SERVER/rag-frontend:latest"
+    --image "$ACR_LOGIN_SERVER/rag-frontend:latest" \
+    --min-replicas "$FRONTEND_MIN_REPLICAS" \
+    --max-replicas "$FRONTEND_MAX_REPLICAS"
 fi
 
 FRONTEND_FQDN="$(az containerapp show --name "$AZ_FRONTEND_APP" --resource-group "$AZ_RESOURCE_GROUP" --query properties.configuration.ingress.fqdn -o tsv)"
