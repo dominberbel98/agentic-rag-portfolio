@@ -198,6 +198,17 @@ class AgenticRAGService:
             effective_top_k = max(effective_top_k, 20)
             query = f"{query} idiomas ingles inglés nivel language skills bilingual communication"
 
+        if self._is_education_question(question):
+            # Education questions need explicit grade-heavy context to avoid generic summaries.
+            effective_top_k = max(effective_top_k, 30)
+            query = (
+                f"{query} formacion estudios educacion calificaciones notas matricula de honor "
+                "python avanzado 10 deep learning 9.75 estadistica 9.5 apache spark 9.20 "
+                "tfm maxima calificacion tercera posicion competicion becas master "
+                "soft skills adaptabilidad resiliencia trabajo en equipo comunicacion "
+                "proyecto chatbot rag react fastapi azure ai search"
+            )
+
         # For very short or anaphoric follow-up questions, enrich the search query
         # with relevant terms from the most recent history turn so Azure Search
         # can retrieve meaningful chunks even when the question uses pronouns or
@@ -266,11 +277,14 @@ class AgenticRAGService:
             "Simple questions get 50-90 words. Medium questions get 100-180 words. "
             "Only detailed or multi-part questions should reach 180-230 words. Never pad answers with filler. "
             "EDUCATION DEPTH: Questions about education, studies, or academic background are ALWAYS treated as medium-to-detailed "
-            "(minimum 130 words). You MUST cite the exact grades and distinctions found in the context — do not summarize them vaguely. "
-            "Specifically mention: Matrículas de Honor (10) in Estadística Avanzada and Investigación de Mercados in the Grado, "
-            "and outstanding grades in the Máster en Data Science (Python Avanzado 10, Deep Learning 9.75, Estadística 9.5, Apache Spark 9.20) "
-            "if they appear in the retrieved context. Also mention the TFM maximum grade and competitive academic recognition when relevant. "
-            "Present the grades with the subject name and numeric score explicitly — never omit them or say just 'calificaciones destacadas'."
+            "(minimum 140 words). You MUST cite exact grades and distinctions from context, never vague summaries. "
+            "Mandatory when available in context: Matrículas de Honor (10) in Estadística Avanzada and Investigación de Mercados; "
+            "Máster grades Python Avanzado 10, Deep Learning 9.75, Estadística 9.5, Apache Spark 9.20; and the TFM máxima calificación "
+            "plus tercera posición en la competición de becas del máster. "
+            "For education answers, include at least 2 soft skills evidenced by trajectory (adaptabilidad, resiliencia, trabajo en equipo, "
+            "comunicación, orientación a negocio) tied to real examples from context. "
+            "If the user asks broadly about formation/perfil/proyectos, also explain briefly the portfolio chatbot project itself "
+            "(RAG con React + FastAPI + Azure AI Search + OpenAI, desplegado en Azure) and why it demonstrates applied capability."
         )
 
         messages: list[dict] = [{"role": "system", "content": system_prompt}]
@@ -447,6 +461,29 @@ class AgenticRAGService:
             "nivel ingles",
             "bilingüe",
             "bilingue",
+        ]
+        return any(k in q for k in keywords)
+
+    def _is_education_question(self, question: str) -> bool:
+        q = question.lower()
+        keywords = [
+            "formacion",
+            "formación",
+            "educacion",
+            "educación",
+            "estudios",
+            "academico",
+            "académico",
+            "calificaciones",
+            "notas",
+            "grado",
+            "master",
+            "máster",
+            "universidad",
+            "tfm",
+            "donde estudio",
+            "dónde estudió",
+            "donde estudió",
         ]
         return any(k in q for k in keywords)
 
