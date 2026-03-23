@@ -122,7 +122,7 @@ class AgenticRAGService:
             stream = self._llm_client.chat.completions.create(
                 model=self._chat_model,
                 temperature=0.15,
-                max_tokens=350,
+                max_tokens=500,
                 messages=messages,
                 stream=True,
             )
@@ -263,8 +263,10 @@ class AgenticRAGService:
             "You can answer in Spanish or English depending on the user language. "
             "Tone: polished, persuasive, concise, confident. "
             "ANSWER LENGTH: Match the depth of your answer to the complexity of the question. "
-            "Simple questions get 40-80 words. Medium questions get 80-150 words. "
-            "Only detailed or multi-part questions should reach 150-200 words. Never pad answers with filler."
+            "Simple questions get 60-100 words. Medium questions get 100-180 words. "
+            "Only detailed or multi-part questions should reach 180-230 words. Never pad answers with filler. "
+            "When the question is about education or academic background, always include notable grades, distinctions, "
+            "honors, or academic achievements (e.g. Matrícula de Honor, 10, distinctions) if they appear in the context."
         )
 
         messages: list[dict] = [{"role": "system", "content": system_prompt}]
@@ -288,7 +290,7 @@ class AgenticRAGService:
         response = self._llm_client.chat.completions.create(
             model=self._chat_model,
             temperature=0.15,
-            max_tokens=350,
+            max_tokens=500,
             messages=messages,
         )
         content = (response.choices[0].message.content or "").strip()
