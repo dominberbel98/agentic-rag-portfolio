@@ -28,7 +28,7 @@ class AgenticRAGService:
         self._llm_client = self._build_llm_client()
         self._chat_model = self._build_chat_model()
 
-    def ask(self, question: str, top_k: int = 4, history: list[dict] | None = None) -> ChatResponse:
+    def ask(self, question: str, top_k: int = 13, history: list[dict] | None = None) -> ChatResponse:
         history = history or []
         logger.info("[ASK] Q=%r  history_turns=%d", question[:120], len(history))
 
@@ -83,7 +83,7 @@ class AgenticRAGService:
             contact_linkedin=settings.professional_linkedin or None,
         )
 
-    def ask_stream(self, question: str, top_k: int = 10, history: list[dict] | None = None) -> Generator[str, None, None]:
+    def ask_stream(self, question: str, top_k: int = 13, history: list[dict] | None = None) -> Generator[str, None, None]:
         """Yield SSE-formatted chunks for streaming responses."""
         history = history or []
 
@@ -191,11 +191,11 @@ class AgenticRAGService:
         if self._is_company_question(question):
             # Company/work questions need deeper retrieval because the relevant
             # employment chunks can rank below generic profile summaries.
-            effective_top_k = max(top_k, 8)
+            effective_top_k = max(top_k, 13)
             query = f"{query} experiencia laboral empresas trabajo actual Data Equity Suministros Medina"
 
         if self._is_language_question(question):
-            effective_top_k = max(effective_top_k, 8)
+            effective_top_k = max(effective_top_k, 13)
             query = f"{query} idiomas ingles inglés nivel language skills bilingual communication"
 
         # For very short or anaphoric follow-up questions, enrich the search query
