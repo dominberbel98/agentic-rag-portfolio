@@ -73,13 +73,17 @@ export default function Chat() {
       content: m.text,
     }));
 
+    // Add a placeholder assistant message that we'll stream into
+    const assistantIdx = messages.length + 1; // +1 because we just pushed user msg
+    setMessages((prev) => [...prev, { role: "assistant", text: "", meta: "" }]);
+
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch(`${API_URL}/api/chat/stream`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question: currentQuestion,
-          top_k: 5,
+          top_k: 10,
           captcha_token: captchaToken || null,
           history: recentHistory,
         }),
@@ -89,27 +93,48 @@ export default function Chat() {
         throw new Error(`Error ${response.status}`);
       }
 
-      const data = await response.json();
-      setShowContactForm(Boolean(data.needs_contact_form));
-      setContactEmails(data.contact_emails || []);
-      setContactLinkedin(data.contact_linkedin || "");
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          text: data.answer,
-          meta: "",
-        },
-      ]);
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop(); // keep incomplete line in buffer
+
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const payload = JSON.parse(line.slice(6));
+
+          if (payload.done) {
+            setShowContactForm(Boolean(payload.needs_contact_form));
+            setContactEmails(payload.contact_emails || []);
+            setContactLinkedin(payload.contact_linkedin || "");
+          } else if (payload.token !== undefined) {
+            setMessages((prev) => {
+              const updated = [...prev];
+              updated[assistantIdx] = {
+                ...updated[assistantIdx],
+                text: updated[assistantIdx].text + payload.token,
+              };
+              return updated;
+            });
+          }
+        }
+      }
     } catch (error) {
-      setMessages((prev) => [
-        ...prev,
-        {
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[assistantIdx] = {
           role: "assistant",
-          text: "No se pudo conectar con el backend.",
+          text: updated[assistantIdx]?.text || "No se pudo conectar con el backend.",
           meta: String(error),
-        },
-      ]);
+        };
+        return updated;
+      });
     } finally {
       setLoading(false);
     }

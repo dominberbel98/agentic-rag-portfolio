@@ -1,4 +1,6 @@
 from fastapi import APIRouter, Header, HTTPException, Request
+from starlette.responses import StreamingResponse
+import json
 
 from app.models import ChatRequest, ChatResponse
 from app.config import settings
@@ -50,6 +52,59 @@ def chat(payload: ChatRequest, request: Request) -> ChatResponse:
     except Exception as exc:  # pragma: no cover
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
+
+@router.post("/chat/stream")
+def chat_stream(payload: ChatRequest, request: Request):
+    client_ip = request.client.host if request.client else "unknown"
+    user_agent = request.headers.get("user-agent")
+
+    rate_decision = guards.enforce_rate_limit(client_ip)
+    if not rate_decision.allowed:
+        raise HTTPException(status_code=429, detail=rate_decision.message)
+
+    if not captcha_service.validate(payload.captcha_token, client_ip):
+        raise HTTPException(status_code=400, detail="Captcha invalido")
+
+    estimated_tokens = max(100, len(payload.question) // 3)
+    today_usage = analytics_store.get_today_usage()
+    budget_decision = guards.enforce_token_budget(today_usage.tokens_used, estimated_tokens)
+    if not budget_decision.allowed:
+        raise HTTPException(status_code=429, detail=budget_decision.message)
+
+    analytics_store.increment_today_usage(estimated_tokens)
+
+    history = [{"role": m.role, "content": m.content} for m in payload.history]
+
+    def _stream_and_log():
+        collected_tokens = []
+        out_of_scope = False
+        for chunk in rag_service.ask_stream(payload.question, payload.top_k, history=history):
+            yield chunk
+            # Parse SSE data lines to capture answer text
+            if chunk.startswith("data: "):
+                try:
+                    payload_data = json.loads(chunk[6:])
+                    if payload_data.get("done"):
+                        out_of_scope = payload_data.get("needs_contact_form", False)
+                    elif "token" in payload_data:
+                        collected_tokens.append(payload_data["token"])
+                except (json.JSONDecodeError, KeyError):
+                    pass
+        # Log with real answer after stream completes
+        full_answer = "".join(collected_tokens).strip()
+        analytics_store.log_question(
+            client_ip=client_ip,
+            user_agent=user_agent,
+            question=payload.question,
+            answer_preview=full_answer[:500] if full_answer else "(empty)",
+            out_of_scope=out_of_scope,
+        )
+
+    return StreamingResponse(
+        _stream_and_log(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 @router.get("/admin/questions")
 def recent_questions(

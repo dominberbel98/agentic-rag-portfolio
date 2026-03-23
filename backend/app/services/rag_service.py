@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import logging
+from collections.abc import Generator
 from dataclasses import dataclass
 from typing import Any
 
@@ -81,6 +83,96 @@ class AgenticRAGService:
             contact_linkedin=settings.professional_linkedin or None,
         )
 
+    def ask_stream(self, question: str, top_k: int = 10, history: list[dict] | None = None) -> Generator[str, None, None]:
+        """Yield SSE-formatted chunks for streaming responses."""
+        history = history or []
+
+        # Fast-path intents (no LLM needed)
+        for fast_check, fast_fn in [
+            (self._is_greeting_question, self._greeting_answer),
+            (self._is_contact_question, self._contact_answer),
+        ]:
+            if fast_check(question):
+                answer = fast_fn()
+                yield f"data: {json.dumps({'token': answer})}\n\n"
+                yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+                return
+
+        if self._is_inappropriate_question(question):
+            answer = self._out_of_scope_message()
+            yield f"data: {json.dumps({'token': answer})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'needs_contact_form': True, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+            return
+
+        use_retrieval = self._should_retrieve(question)
+        chunks = self._retrieve(question, top_k, history) if use_retrieval else []
+
+        if not self._llm_client or not self._chat_model:
+            fallback, out_of_scope = self._fallback_answer(question, chunks)
+            yield f"data: {json.dumps({'token': fallback})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'needs_contact_form': out_of_scope, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+            return
+
+        messages = self._build_messages(question, chunks, history)
+        collected = []
+        _OOS = "OUT_OF_SCOPE"
+        buffering = True  # hold tokens while they could still spell OUT_OF_SCOPE
+        buffer_tokens: list[str] = []
+        try:
+            stream = self._llm_client.chat.completions.create(
+                model=self._chat_model,
+                temperature=0.15,
+                max_tokens=350,
+                messages=messages,
+                stream=True,
+            )
+            for chunk in stream:
+                delta = chunk.choices[0].delta if chunk.choices else None
+                if delta and delta.content:
+                    collected.append(delta.content)
+                    if buffering:
+                        buffer_tokens.append(delta.content)
+                        so_far = "".join(buffer_tokens).strip()
+                        if so_far == _OOS:
+                            # Confirmed OUT_OF_SCOPE — replace entirely
+                            if self._is_professional_scope_question(question):
+                                fallback, _ = self._fallback_answer(question, chunks)
+                                yield f"data: {json.dumps({'token': fallback})}\n\n"
+                                yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+                            else:
+                                yield f"data: {json.dumps({'token': self._out_of_scope_message()})}\n\n"
+                                yield f"data: {json.dumps({'done': True, 'needs_contact_form': True, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+                            return
+                        elif not _OOS.startswith(so_far):
+                            # Diverged — flush buffer and switch to direct streaming
+                            buffering = False
+                            for bt in buffer_tokens:
+                                yield f"data: {json.dumps({'token': bt})}\n\n"
+                    else:
+                        yield f"data: {json.dumps({'token': delta.content})}\n\n"
+        except Exception as exc:
+            logger.error("[STREAM] LLM error: %s", exc)
+            yield f"data: {json.dumps({'token': 'Error generando respuesta.'})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+            return
+
+        # Flush any remaining buffer (response ended before diverging from OOS prefix)
+        if buffering and buffer_tokens:
+            text = "".join(buffer_tokens).strip()
+            if text == _OOS:
+                if self._is_professional_scope_question(question):
+                    fallback, _ = self._fallback_answer(question, chunks)
+                    yield f"data: {json.dumps({'token': fallback})}\n\n"
+                    yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+                else:
+                    yield f"data: {json.dumps({'token': self._out_of_scope_message()})}\n\n"
+                    yield f"data: {json.dumps({'done': True, 'needs_contact_form': True, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+                return
+            for bt in buffer_tokens:
+                yield f"data: {json.dumps({'token': bt})}\n\n"
+
+        yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+
     def _should_retrieve(self, question: str) -> bool:
         return bool(question.strip())
 
@@ -140,10 +232,8 @@ class AgenticRAGService:
 
         return chunks
 
-    def _generate_answer(self, question: str, chunks: list[RetrievedChunk], history: list[dict] | None = None) -> tuple[str, bool]:
-        if not self._llm_client or not self._chat_model:
-            return self._fallback_answer(question, chunks)
-
+    def _build_messages(self, question: str, chunks: list[RetrievedChunk], history: list[dict] | None = None) -> list[dict]:
+        """Build the messages list shared by streaming and non-streaming paths."""
         context_block = "\n\n".join([f"[{i+1}] {c.source}: {c.chunk}" for i, c in enumerate(chunks)])
         system_prompt = (
             "You are an AI assistant for Domingo Berbel's professional profile. "
@@ -157,16 +247,21 @@ class AgenticRAGService:
             "Highlight business impact, ownership, adaptability, technical breadth, delivery mindset, and value for employers. "
             "NEVER answer personal, sexual, romantic, political, religious, or offensive questions about Domingo or anyone else. "
             "Questions about sexual orientation, relationships, physical appearance, personal life, or any non-professional topic must be rejected. "
+            "CRITICAL: If the user sends a statement, exclamation, or opinion that is NOT a question about Domingo's professional profile "
+            "(e.g. sports cheers, random comments, greetings to third parties, jokes, memes, off-topic remarks), "
+            "reply with exactly: OUT_OF_SCOPE. Do NOT try to connect unrelated statements to Domingo's profile. "
+            "Only answer if the user is genuinely asking about or can reasonably be connected to Domingo's professional value. "
             "Only provide contact information if it is one of the configured professional emails. "
             "If the question is outside professional scope OR is inappropriate/offensive, reply with exactly: OUT_OF_SCOPE. "
             "Use the conversation history to maintain coherent, contextual responses across turns. "
             "If the user refers to something discussed earlier, use the history to answer accurately. "
             "You can answer in Spanish or English depending on the user language. "
             "Tone: polished, persuasive, concise, confident. "
-            "Keep answers between 100-200 words unless the user explicitly asks for more or less detail."
+            "ANSWER LENGTH: Match the depth of your answer to the complexity of the question. "
+            "Simple questions get 40-80 words. Medium questions get 80-150 words. "
+            "Only detailed or multi-part questions should reach 150-200 words. Never pad answers with filler."
         )
 
-        # Build messages list: system → history turns → current user turn
         messages: list[dict] = [{"role": "system", "content": system_prompt}]
 
         for msg in (history or [])[-20:]:
@@ -177,6 +272,13 @@ class AgenticRAGService:
 
         user_prompt = f"Pregunta: {question}\n\nContexto:\n{context_block if context_block else 'Sin contexto recuperado.'}"
         messages.append({"role": "user", "content": user_prompt})
+        return messages
+
+    def _generate_answer(self, question: str, chunks: list[RetrievedChunk], history: list[dict] | None = None) -> tuple[str, bool]:
+        if not self._llm_client or not self._chat_model:
+            return self._fallback_answer(question, chunks)
+
+        messages = self._build_messages(question, chunks, history)
 
         response = self._llm_client.chat.completions.create(
             model=self._chat_model,
@@ -229,8 +331,8 @@ class AgenticRAGService:
         linkedin = settings.professional_linkedin.strip()
         linkedin_text = f" LinkedIn: {linkedin}." if linkedin else ""
         return (
-            "Solo puedo responder sobre la trayectoria profesional de Domingo Berbel y su experiencia tecnica. "
-            f"Si necesitas mas contexto profesional, puedes contactar por: {contact_text}.{linkedin_text}"
+            "Solo puedo responder sobre la trayectoria profesional de Domingo Berbel y su experiencia técnica. "
+            f"Si necesitas más contexto profesional, puedes contactar por: {contact_text}.{linkedin_text}"
         )
 
     def _contact_emails(self) -> list[str]:
