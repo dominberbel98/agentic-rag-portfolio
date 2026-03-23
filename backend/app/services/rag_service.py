@@ -234,9 +234,14 @@ class AgenticRAGService:
 
     def _build_messages(self, question: str, chunks: list[RetrievedChunk], history: list[dict] | None = None) -> list[dict]:
         """Build the messages list shared by streaming and non-streaming paths."""
+        from datetime import date as _date
+        today_str = _date.today().strftime("%B %Y")  # e.g. "March 2026"
+
         context_block = "\n\n".join([f"[{i+1}] {c.source}: {c.chunk}" for i, c in enumerate(chunks)])
         system_prompt = (
             "You are an AI assistant for Domingo Berbel's professional profile. "
+            f"Today's date is {today_str}. Use this to determine what is current vs. past. "
+            "If a degree or role has an end date before today, treat it as completed, NOT ongoing. "
             "IMPORTANT: Base your answers strictly on the retrieved document context below. "
             "Quote specific facts, dates, roles, companies, technologies, and achievements from the documents. "
             "Do not invent facts, metrics, clients or roles that are not supported by the retrieved context. "
