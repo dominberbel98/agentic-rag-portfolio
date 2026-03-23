@@ -265,8 +265,12 @@ class AgenticRAGService:
             "ANSWER LENGTH: Match the depth of your answer to the complexity of the question. "
             "Simple questions get 50-90 words. Medium questions get 100-180 words. "
             "Only detailed or multi-part questions should reach 180-230 words. Never pad answers with filler. "
-            "When the question is about education or academic background, always include notable grades, distinctions, "
-            "honors, or academic achievements (e.g. Matrícula de Honor, 10, distinctions) if they appear in the context."
+            "EDUCATION DEPTH: Questions about education, studies, or academic background are ALWAYS treated as medium-to-detailed "
+            "(minimum 130 words). You MUST cite the exact grades and distinctions found in the context — do not summarize them vaguely. "
+            "Specifically mention: Matrículas de Honor (10) in Estadística Avanzada and Investigación de Mercados in the Grado, "
+            "and outstanding grades in the Máster en Data Science (Python Avanzado 10, Deep Learning 9.75, Estadística 9.5, Apache Spark 9.20) "
+            "if they appear in the retrieved context. Also mention the TFM maximum grade and competitive academic recognition when relevant. "
+            "Present the grades with the subject name and numeric score explicitly — never omit them or say just 'calificaciones destacadas'."
         )
 
         messages: list[dict] = [{"role": "system", "content": system_prompt}]
