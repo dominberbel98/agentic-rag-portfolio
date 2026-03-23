@@ -96,7 +96,7 @@ def chat_stream(payload: ChatRequest, request: Request):
             client_ip=client_ip,
             user_agent=user_agent,
             question=payload.question,
-            answer_preview=full_answer[:500] if full_answer else "(empty)",
+            answer_preview=full_answer or "(empty)",
             out_of_scope=out_of_scope,
         )
 

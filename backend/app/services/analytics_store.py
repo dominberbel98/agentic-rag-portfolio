@@ -83,7 +83,7 @@ class AnalyticsStore:
                         created_at, client_ip, user_agent, question, answer_preview, out_of_scope
                     ) VALUES (?, ?, ?, ?, ?, ?)
                     """,
-                    (now, client_ip, user_agent, question, answer_preview[:300], int(out_of_scope)),
+                    (now, client_ip, user_agent, question, answer_preview, int(out_of_scope)),
                 )
                 conn.commit()
 
