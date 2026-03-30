@@ -4,10 +4,10 @@ import json
 import logging
 from collections.abc import Generator
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
-from azure.core.credentials import AzureKeyCredential
-from azure.search.documents import SearchClient
+import numpy as np
 from openai import AzureOpenAI, OpenAI
 
 from app.config import settings
@@ -22,11 +22,72 @@ class RetrievedChunk:
     chunk: str
 
 
+@dataclass
+class CachedEmbedding:
+    """In-memory representation of a cached embedding chunk."""
+    chunk_id: str
+    source: str
+    chunk_text: str
+    embedding: np.ndarray  # 3072-dimensional vector
+
+
 class AgenticRAGService:
+    # Class variable: shared cache loaded at startup
+    _cached_embeddings: list[CachedEmbedding] | None = None
+    _embedding_model: str | None = None
+    _embedding_dimensions: int | None = None
+    _bm25: Any | None = None
+
     def __init__(self) -> None:
-        self._search_client = self._build_search_client()
         self._llm_client = self._build_llm_client()
         self._chat_model = self._build_chat_model()
+
+    @classmethod
+    def initialize_cache(cls, cache_path: str = "embeddings_cache.json") -> None:
+        """Load embeddings cache at application startup (FastAPI lifespan event)."""
+        try:
+            cache_file = Path(cache_path)
+            if not cache_file.exists():
+                logger.warning(f"Embeddings cache not found at {cache_path}")
+                cls._cached_embeddings = []
+                return
+
+            with open(cache_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            cls._embedding_model = data.get("model", "unknown")
+            cls._embedding_dimensions = data.get("dimensions", 3072)
+            logger.info(
+                f"Loaded embedding metadata: model={cls._embedding_model}, "
+                f"dimensions={cls._embedding_dimensions}"
+            )
+
+            cls._cached_embeddings = []
+            for item in data.get("chunks", []):
+                embedding_vector = np.array(item["embedding"], dtype=np.float32)
+                cached = CachedEmbedding(
+                    chunk_id=item["id"],
+                    source=item["source"],
+                    chunk_text=item["chunk"],
+                    embedding=embedding_vector,
+                )
+                cls._cached_embeddings.append(cached)
+
+            logger.info(f"Loaded {len(cls._cached_embeddings)} embedding chunks from cache")
+
+            # Build BM25 index over cached chunks
+            try:
+                from rank_bm25 import BM25Okapi
+                tokenized = [item.chunk_text.lower().split() for item in cls._cached_embeddings]
+                cls._bm25 = BM25Okapi(tokenized)
+                logger.info(f"Built BM25 index over {len(tokenized)} chunks")
+            except ImportError:
+                logger.warning("rank-bm25 not installed, hybrid search disabled")
+                cls._bm25 = None
+        except Exception as e:
+            logger.error(f"Failed to load embeddings cache: {e}")
+            cls._cached_embeddings = []
+            cls._bm25 = None
 
     def ask(self, question: str, top_k: int = 20, history: list[dict] | None = None) -> ChatResponse:
         history = history or []
@@ -122,7 +183,7 @@ class AgenticRAGService:
             stream = self._llm_client.chat.completions.create(
                 model=self._chat_model,
                 temperature=0.15,
-                max_tokens=400,
+                max_tokens=600,
                 messages=messages,
                 stream=True,
             )
@@ -177,11 +238,13 @@ class AgenticRAGService:
         return bool(question.strip())
 
     def _retrieve(self, question: str, top_k: int, history: list[dict] | None = None) -> list[RetrievedChunk]:
-        if not self._search_client:
+        """Retrieve chunks using cosine similarity over cached embeddings."""
+        if not self._cached_embeddings:
+            logger.warning("No cached embeddings available")
             return [
                 RetrievedChunk(
                     source="demo/doc-1",
-                    chunk="No hay Azure AI Search configurado. Este es un contexto de ejemplo para pruebas locales.",
+                    chunk="No hay embeddings cacheados. Ejecuta 'python scripts/index_documents.py' primero.",
                 )
             ]
 
@@ -189,8 +252,6 @@ class AgenticRAGService:
         effective_top_k = top_k
 
         if self._is_company_question(question):
-            # Company/work questions need deeper retrieval because the relevant
-            # employment chunks can rank below generic profile summaries.
             effective_top_k = max(top_k, 20)
             query = f"{query} experiencia laboral empresas trabajo actual Data Equity Suministros Medina"
 
@@ -198,8 +259,16 @@ class AgenticRAGService:
             effective_top_k = max(effective_top_k, 20)
             query = f"{query} idiomas ingles inglés nivel language skills bilingual communication"
 
+        if self._is_project_question(question):
+            effective_top_k = max(effective_top_k, 25)
+            query = (
+                f"{query} proyectos portfolio chatbot rag react fastapi azure ai search openai "
+                "sistema recomendacion turistica tui deep learning tensorflow "
+                "power bi dashboards scoring clientes machine learning "
+                "desplegado produccion docker container apps"
+            )
+
         if self._is_education_question(question):
-            # Education questions need explicit grade-heavy context to avoid generic summaries.
             effective_top_k = max(effective_top_k, 30)
             query = (
                 f"{query} formacion estudios educacion calificaciones notas matricula de honor "
@@ -209,44 +278,88 @@ class AgenticRAGService:
                 "proyecto chatbot rag react fastapi azure ai search"
             )
 
-        # For very short or anaphoric follow-up questions, enrich the search query
-        # with relevant terms from the most recent history turn so Azure Search
-        # can retrieve meaningful chunks even when the question uses pronouns or
-        # vague references like "eso", "eso mismo", "más detalles", etc.
         if len(query.split()) < 5 and history:
-            # Grab the last user message from history as additional context
             last_user = next(
                 (m["content"] for m in reversed(history) if m.get("role") == "user"), ""
             )
             last_assistant = next(
                 (m["content"] for m in reversed(history) if m.get("role") == "assistant"), ""
             )
-            # Append key nouns from the prior exchange (first 60 chars keeps it focused)
             context_hint = f"{last_user[:60]} {last_assistant[:60]}".strip()
             if context_hint:
                 query = f"{query} {context_hint}"
 
-        # Fallback enrichment for very generic short queries with no history
         if len(query.split()) < 4:
             query = f"{query} perfil profesional experiencia proyectos habilidades trayectoria"
 
-        results = self._search_client.search(search_text=query, top=effective_top_k)
+        # Generate embedding for the query using Google API (or fallback to demo if not available)
+        query_embedding = self._embed_query(query)
+        if query_embedding is None:
+            # Fallback if embedding fails
+            return [RetrievedChunk(source="demo", chunk="No hay modelo de embeddings configurado.")]
+
+        # Compute cosine similarity between query and all cached chunks
+        vector_scores: list[tuple[int, float]] = []
+        for idx, cached in enumerate(self._cached_embeddings):
+            similarity = self._cosine_similarity(query_embedding, cached.embedding)
+            vector_scores.append((idx, similarity))
+        vector_scores.sort(key=lambda x: x[1], reverse=True)
+
+        # BM25 keyword scores
+        bm25_scores: list[tuple[int, float]] = []
+        if self._bm25 is not None:
+            raw_bm25 = self._bm25.get_scores(query.lower().split())
+            bm25_scores = sorted(enumerate(raw_bm25), key=lambda x: x[1], reverse=True)
+
+        # Reciprocal Rank Fusion (RRF) — combine vector + BM25 rankings
+        RRF_K = 60
+        rrf: dict[int, float] = {}
+        for rank, (idx, _) in enumerate(vector_scores):
+            rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (RRF_K + rank + 1)
+        for rank, (idx, _) in enumerate(bm25_scores):
+            rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (RRF_K + rank + 1)
+
+        ranked = sorted(rrf.items(), key=lambda x: x[1], reverse=True)
+        top_indices = [idx for idx, _ in ranked[:effective_top_k]]
+
         chunks: list[RetrievedChunk] = []
-        for item in results:
-            payload = self._map_result(item)
-            if payload:
-                chunks.append(payload)
+        for idx in top_indices:
+            cached = self._cached_embeddings[idx]
+            chunks.append(RetrievedChunk(source=cached.source, chunk=cached.chunk_text))
 
         if self._is_company_question(question):
-            # Prioritize CV chunks for employment-specific questions.
             chunks.sort(key=lambda c: (0 if "cv_rag" in c.source.lower() else 1))
 
         return chunks
 
+    def _embed_query(self, query: str) -> np.ndarray | None:
+        """Embed a query string using Google API if available, else return None."""
+        if not settings.google_api_key:
+            logger.warning("GOOGLE_API_KEY not set, cannot embed query")
+            return None
+
+        try:
+            from app.services.embedding_service import EmbeddingService
+            embedder = EmbeddingService(settings.google_api_key)
+            embedding = embedder.embed(query)
+            return np.array(embedding, dtype=np.float32)
+        except Exception as e:
+            logger.error(f"Failed to embed query: {e}")
+            return None
+
+    @staticmethod
+    def _cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -> float:
+        """Compute cosine similarity between two vectors."""
+        norm1 = np.linalg.norm(vec1)
+        norm2 = np.linalg.norm(vec2)
+        if norm1 == 0 or norm2 == 0:
+            return 0.0
+        return float(np.dot(vec1, vec2) / (norm1 * norm2))
+
     def _build_messages(self, question: str, chunks: list[RetrievedChunk], history: list[dict] | None = None) -> list[dict]:
         """Build the messages list shared by streaming and non-streaming paths."""
         from datetime import date as _date
-        today_str = _date.today().strftime("%B %Y")  # e.g. "March 2026"
+        today_str = _date.today().strftime("%B %Y")
 
         context_block = "\n\n".join([f"[{i+1}] {c.source}: {c.chunk}" for i, c in enumerate(chunks)])
         system_prompt = (
@@ -284,7 +397,17 @@ class AgenticRAGService:
             "For education answers, include at least 2 soft skills evidenced by trajectory (adaptabilidad, resiliencia, trabajo en equipo, "
             "comunicación, orientación a negocio) tied to real examples from context. "
             "If the user asks broadly about formation/perfil/proyectos, also explain briefly the portfolio chatbot project itself "
-            "(RAG con React + FastAPI + Azure AI Search + OpenAI, desplegado en Azure) and why it demonstrates applied capability."
+            "(RAG con React + FastAPI + Azure AI Search + OpenAI, desplegado en Azure) and why it demonstrates applied capability. "
+            "PROJECTS: When the user asks about projects, you MUST mention the portfolio chatbot project as one of Domingo's key projects. "
+            "This chatbot (the one answering the question) is itself a project built by Domingo: a full-stack RAG system "
+            "with React frontend, FastAPI backend, Azure AI Search for document retrieval, OpenAI for generation, "
+            "deployed on Azure Container Apps with Docker, custom domain, and HTTPS. It demonstrates end-to-end capability "
+            "from architecture to production deployment. Always mention it alongside other projects like the TUI recommendation system. "
+            "GRADES: When the user asks about grades, calificaciones, or notas, you MUST cite ALL of these specific grades from context: "
+            "Grado: Matrícula de Honor (10) en Estadística Avanzada, Matrícula de Honor (10) en Investigación de Mercados, Estadística 9.2. "
+            "Máster Data Science: Python Avanzado 10, Deep Learning 9.75, Estadística 9.5, Apache Spark 9.20. "
+            "TFM con máxima calificación y tercera posición en la competición de becas del máster. "
+            "Never omit available grades — list them all explicitly."
         )
 
         messages: list[dict] = [{"role": "system", "content": system_prompt}]
@@ -308,12 +431,11 @@ class AgenticRAGService:
         response = self._llm_client.chat.completions.create(
             model=self._chat_model,
             temperature=0.15,
-            max_tokens=400,
+            max_tokens=600,
             messages=messages,
         )
         content = (response.choices[0].message.content or "").strip()
         if content == "OUT_OF_SCOPE":
-            # Guardrail: avoid false negatives for clearly professional questions.
             if self._is_professional_scope_question(question):
                 fallback, _ = self._fallback_answer(question, chunks)
                 return fallback, False
@@ -383,7 +505,6 @@ class AgenticRAGService:
             "hi",
             "hey",
         ]
-        # Only match pure greetings — not "hola que estudio domingo"
         return q in greetings
 
     def _greeting_answer(self) -> str:
@@ -487,6 +608,22 @@ class AgenticRAGService:
         ]
         return any(k in q for k in keywords)
 
+    def _is_project_question(self, question: str) -> bool:
+        q = question.lower()
+        keywords = [
+            "proyecto",
+            "proyectos",
+            "project",
+            "projects",
+            "portfolio",
+            "chatbot",
+            "ha construido",
+            "ha desarrollado",
+            "que ha hecho",
+            "qué ha hecho",
+        ]
+        return any(k in q for k in keywords)
+
     def _language_answer(self, question: str, chunks: list[RetrievedChunk]) -> str:
         q = question.lower()
 
@@ -512,21 +649,6 @@ class AgenticRAGService:
             "como refleja su experiencia internacional."
         )
 
-    def _build_search_client(self) -> SearchClient | None:
-        required = [
-            settings.azure_search_endpoint,
-            settings.azure_search_api_key,
-            settings.azure_search_index_name,
-        ]
-        if not all(required):
-            return None
-
-        return SearchClient(
-            endpoint=settings.azure_search_endpoint,
-            index_name=settings.azure_search_index_name,
-            credential=AzureKeyCredential(settings.azure_search_api_key),
-        )
-
     def _build_llm_client(self) -> AzureOpenAI | OpenAI | None:
         if settings.openai_api_key:
             return OpenAI(api_key=settings.openai_api_key)
@@ -550,10 +672,3 @@ class AgenticRAGService:
             return settings.openai_model
 
         return settings.azure_openai_chat_deployment
-
-    def _map_result(self, item: dict[str, Any]) -> RetrievedChunk | None:
-        source = item.get("source") or item.get("id") or "unknown"
-        chunk = item.get("content") or item.get("chunk") or item.get("text")
-        if not chunk:
-            return None
-        return RetrievedChunk(source=str(source), chunk=str(chunk))

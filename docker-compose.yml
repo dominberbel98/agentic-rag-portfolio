@@ -7,8 +7,12 @@ services:
     container_name: rag-backend
     env_file:
       - ./backend/.env
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     ports:
       - "8000:8000"
+    volumes:
+      - ./embeddings_cache.json:/app/embeddings_cache.json:ro
 
   frontend:
     build:

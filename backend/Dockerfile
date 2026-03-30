@@ -9,6 +9,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app ./app
+COPY embeddings_cache.json ./embeddings_cache.json
 
 EXPOSE 8000
 

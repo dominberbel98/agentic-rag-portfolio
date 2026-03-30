@@ -4,7 +4,9 @@ uvicorn[standard]>=0.32.1
 pydantic==2.10.3
 pydantic-settings==2.7.0
 openai==1.57.4
-azure-search-documents==11.6.0b4
+google-generativeai==0.8.4
+numpy>=1.24.0
+rank-bm25>=0.2.2
 python-dotenv==1.0.1
 httpx==0.28.1
 python-docx==1.1.2

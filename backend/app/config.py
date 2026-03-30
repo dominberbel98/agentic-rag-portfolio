@@ -16,9 +16,8 @@ class Settings(BaseSettings):
     azure_openai_api_version: str = "2024-10-21"
     azure_openai_chat_deployment: str | None = None
 
-    azure_search_endpoint: str | None = None
-    azure_search_api_key: str | None = None
-    azure_search_index_name: str | None = None
+    # Google Generative AI for embeddings
+    google_api_key: str | None = None
 
     # Product guardrails
     contact_emails: str = ""

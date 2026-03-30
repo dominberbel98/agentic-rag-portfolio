@@ -78,27 +78,29 @@ def chat_stream(payload: ChatRequest, request: Request):
     def _stream_and_log():
         collected_tokens = []
         out_of_scope = False
-        for chunk in rag_service.ask_stream(payload.question, payload.top_k, history=history):
-            yield chunk
-            # Parse SSE data lines to capture answer text
-            if chunk.startswith("data: "):
-                try:
-                    payload_data = json.loads(chunk[6:])
-                    if payload_data.get("done"):
-                        out_of_scope = payload_data.get("needs_contact_form", False)
-                    elif "token" in payload_data:
-                        collected_tokens.append(payload_data["token"])
-                except (json.JSONDecodeError, KeyError):
-                    pass
-        # Log with real answer after stream completes
-        full_answer = "".join(collected_tokens).strip()
-        analytics_store.log_question(
-            client_ip=client_ip,
-            user_agent=user_agent,
-            question=payload.question,
-            answer_preview=full_answer or "(empty)",
-            out_of_scope=out_of_scope,
-        )
+        try:
+            for chunk in rag_service.ask_stream(payload.question, payload.top_k, history=history):
+                yield chunk
+                # Parse SSE data lines to capture answer text
+                if chunk.startswith("data: "):
+                    try:
+                        payload_data = json.loads(chunk[6:])
+                        if payload_data.get("done"):
+                            out_of_scope = payload_data.get("needs_contact_form", False)
+                        elif "token" in payload_data:
+                            collected_tokens.append(payload_data["token"])
+                    except (json.JSONDecodeError, KeyError):
+                        pass
+        finally:
+            # Log with real answer even if client disconnects mid-stream
+            full_answer = "".join(collected_tokens).strip()
+            analytics_store.log_question(
+                client_ip=client_ip,
+                user_agent=user_agent,
+                question=payload.question,
+                answer_preview=full_answer or "(empty)",
+                out_of_scope=out_of_scope,
+            )
 
     return StreamingResponse(
         _stream_and_log(),

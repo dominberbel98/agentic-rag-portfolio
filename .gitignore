@@ -31,3 +31,8 @@ preguntas.json
 preguntas_sync.log
 descargar_preguntas
 DEPLOYMENT.md
+embeddings_cache.json
+backend/embeddings_cache.json
+backup/
+migration/
+=0.2.2
