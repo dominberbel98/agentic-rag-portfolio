@@ -1,18 +1,18 @@
 # Agentic RAG — Personal Portfolio Chatbot
 
-Full-stack RAG (Retrieval-Augmented Generation) chatbot that answers questions about my professional profile. Built with FastAPI, React, OpenAI and Azure AI Search, deployed on Azure Container Apps.
+Full-stack RAG chatbot that answers questions about a professional profile. Built with FastAPI, React, OpenAI-compatible chat models and local cached embeddings, with deployment assets for Azure Container Apps.
 
 **Live:** [domingoberbel.com](https://domingoberbel.com)
 
 ## Architecture
 
 ```
-User → Nginx (React SPA) → FastAPI API → OpenAI + Azure AI Search
+User → Nginx (React SPA) → FastAPI API → LLM + cached document embeddings
 ```
 
-- **Backend:** FastAPI, OpenAI SDK (direct or Azure OpenAI), Azure AI Search for document retrieval
-- **Frontend:** React 18 + Vite, served by Nginx with full security headers (CSP, HSTS, X-Frame-Options)
-- **Infra:** Azure Container Apps, Azure Container Registry, managed TLS certificates
+- **Backend:** FastAPI, OpenAI SDK (direct or Azure OpenAI), Google embeddings + local hybrid retrieval cache
+- **Frontend:** React 18 + Vite, served by Nginx in containers
+- **Infra:** Docker Compose locally, Azure Container Apps deployment scripts/templates
 - **Security:** Rate limiting, token budget, admin key auth, security headers middleware, CORS
 
 ## Project Structure
@@ -35,7 +35,7 @@ cp infra/aca/azure.env.example infra/aca/azure.env
 # Fill in your real values
 ```
 
-2. Start the stack:
+2. Start the stack with Docker:
 
 ```bash
 docker compose up --build
@@ -45,11 +45,21 @@ docker compose up --build
    - Frontend: http://localhost:3000
    - Backend: http://localhost:8000/health
 
+4. Optional direct frontend development:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Vite runs on `http://localhost:5173`, so `CORS_ORIGINS` should include both `http://localhost:3000` and `http://localhost:5173` during mixed local development.
+
 ## Azure Deployment
 
 1. Fill `infra/aca/azure.env` with your Azure and OpenAI credentials.
 
-2. Login and deploy:
+2. Login and prepare the Azure resources/images:
 
 ```bash
 az login
@@ -57,6 +67,8 @@ source infra/aca/azure.env
 chmod +x scripts/deploy_azure.sh
 ./scripts/deploy_azure.sh
 ```
+
+The script creates the resource group and Container Apps environment, builds/pushes the images, and then prints the remaining manual Container Apps configuration steps.
 
 3. Index documents:
 
@@ -79,20 +91,20 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for the full step-by-step guide.
 
 ## Cost Optimization
 
-- `minReplicas=0` on both Container Apps (scale to zero when idle)
+- `minReplicas=0` on both Container Apps if you optimize for cost over cold-start latency
 - `maxReplicas` capped at 3 (backend) / 2 (frontend)
-- Basic SKU ACR
+- GHCR avoids paying for a dedicated Azure registry
 - Trade-off: cold start on first request after inactivity
 
 ## Tech Stack
 
 | Layer     | Technology                          |
 |-----------|-------------------------------------|
-| LLM       | OpenAI API (gpt-4.1-mini)          |
-| Retrieval | Azure AI Search                     |
+| LLM       | OpenAI API or Azure OpenAI          |
+| Retrieval | Local cached embeddings + BM25      |
 | Backend   | FastAPI, Uvicorn, Pydantic          |
-| Frontend  | React 18, Vite, Nginx              |
-| Infra     | Azure Container Apps, ACR           |
+| Frontend  | React 18, Vite, Nginx               |
+| Infra     | Azure Container Apps, GHCR          |
 | CI/CD     | Bash deploy script + Docker         |
 
 ## License

@@ -26,6 +26,7 @@ BACKEND_MIN_REPLICAS="${BACKEND_MIN_REPLICAS:-1}"
 BACKEND_MAX_REPLICAS="${BACKEND_MAX_REPLICAS:-2}"
 FRONTEND_MIN_REPLICAS="${FRONTEND_MIN_REPLICAS:-1}"
 FRONTEND_MAX_REPLICAS="${FRONTEND_MAX_REPLICAS:-2}"
+IMAGE_TAG="${IMAGE_TAG:-$(date -u +%Y%m%d%H%M%S)}"
 
 for var in "${required[@]}"; do
   if [[ -z "${!var:-}" ]]; then
@@ -33,6 +34,28 @@ for var in "${required[@]}"; do
     exit 1
   fi
 done
+
+resolve_ghcr_token() {
+  if [[ -n "${GHCR_TOKEN:-}" ]]; then
+    printf '%s' "$GHCR_TOKEN"
+    return 0
+  fi
+
+  if command -v docker-credential-desktop.exe >/dev/null 2>&1; then
+    printf 'ghcr.io' | docker-credential-desktop.exe get | python3 -c "import json,sys; print(json.load(sys.stdin)['Secret'])"
+    return 0
+  fi
+
+  if command -v docker-credential-desktop >/dev/null 2>&1; then
+    printf 'ghcr.io' | docker-credential-desktop get | python3 -c "import json,sys; print(json.load(sys.stdin)['Secret'])"
+    return 0
+  fi
+
+  echo "No se pudo resolver GHCR_TOKEN. Define GHCR_TOKEN o haz docker login ghcr.io con un helper compatible." >&2
+  return 1
+}
+
+GHCR_TOKEN_RESOLVED="$(resolve_ghcr_token)"
 
 if [[ -n "${OPENAI_API_KEY:-}" ]]; then
   if [[ -z "${OPENAI_MODEL:-}" ]]; then
@@ -65,46 +88,71 @@ if ! az containerapp env show --name "$AZ_CONTAINERAPPS_ENV" --resource-group "$
     --location "$AZ_LOCATION"
 fi
 
-BACKEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-backend:latest"
-FRONTEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-frontend:latest"
+BACKEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-backend:${IMAGE_TAG}"
+FRONTEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-frontend:${IMAGE_TAG}"
+BACKEND_IMAGE_LATEST="ghcr.io/${GHCR_USERNAME}/rag-backend:latest"
+FRONTEND_IMAGE_LATEST="ghcr.io/${GHCR_USERNAME}/rag-frontend:latest"
 
 echo "Buildear imágenes localmente con Docker..."
 docker build -t "$BACKEND_IMAGE" "$ROOT_DIR/backend"
+docker tag "$BACKEND_IMAGE" "$BACKEND_IMAGE_LATEST"
 docker build -t "$FRONTEND_IMAGE" \
   --build-arg VITE_API_URL="https://$API_SUBDOMAIN" \
   "$ROOT_DIR/frontend"
+docker tag "$FRONTEND_IMAGE" "$FRONTEND_IMAGE_LATEST"
 
-echo "Authenticando en GitHub Container Registry..."
-echo "Para pushear a ghcr.io, necesitas:"
-echo "  1. Un Personal Access Token de GitHub con permiso 'write:packages'"
-echo "  2. Ejecutar: echo <PAT> | docker login ghcr.io -u <username> --password-stdin"
-echo ""
-read -p "¿Ya has autenticado en ghcr.io con 'docker login'? (s/n): " auth_check
-if [[ "$auth_check" != "s" && "$auth_check" != "S" ]]; then
-  echo "Por favor, autentica en ghcr.io primero:"
-  docker login ghcr.io
-fi
+echo "Autenticando en GitHub Container Registry..."
+echo "$GHCR_TOKEN_RESOLVED" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
 
 echo "Pusheando imágenes a GitHub Container Registry..."
 docker push "$BACKEND_IMAGE"
+docker push "$BACKEND_IMAGE_LATEST"
 docker push "$FRONTEND_IMAGE"
+docker push "$FRONTEND_IMAGE_LATEST"
 
 echo "Imágenes pusheadas correctamente a ghcr.io"
 
-echo ""
-echo "⚠️  PRÓXIMOS PASOS MANUALES:"
-echo "1. Configura Azure Container Apps para usar las imágenes:"
-echo "   - Backend:  $BACKEND_IMAGE"
-echo "   - Frontend: $FRONTEND_IMAGE"
-echo ""
-echo "2. En Azure Portal, configura las siguientes variables de entorno para el backend:"
-echo "   - GOOGLE_API_KEY=$GOOGLE_API_KEY"
-echo "   - CONTACT_EMAILS=$CONTACT_EMAILS"
-echo "   - PROFESSIONAL_LINKEDIN=$PROFESSIONAL_LINKEDIN"
-echo "   - ADMIN_READ_KEY=$ADMIN_READ_KEY"
-echo "   - TURNSTILE_SECRET_KEY=$TURNSTILE_SECRET_KEY"
-echo "   (Según corresponda: OPENAI_* o AZURE_OPENAI_*)"
-echo ""
-echo "3. Redeploy las apps en Azure Container Apps"
-echo ""
-echo "✓ Script de build completado. Procede con la configuración manual en Azure."
+echo "Configurando GHCR en Azure Container Apps..."
+az containerapp registry set \
+  --name "$AZ_BACKEND_APP" \
+  --resource-group "$AZ_RESOURCE_GROUP" \
+  --server ghcr.io \
+  --username "$GHCR_USERNAME" \
+  --password "$GHCR_TOKEN_RESOLVED"
+
+az containerapp registry set \
+  --name "$AZ_FRONTEND_APP" \
+  --resource-group "$AZ_RESOURCE_GROUP" \
+  --server ghcr.io \
+  --username "$GHCR_USERNAME" \
+  --password "$GHCR_TOKEN_RESOLVED"
+
+echo "Actualizando imágenes en Azure Container Apps..."
+az containerapp update \
+  --name "$AZ_BACKEND_APP" \
+  --resource-group "$AZ_RESOURCE_GROUP" \
+  --image "$BACKEND_IMAGE" \
+  --min-replicas "$BACKEND_MIN_REPLICAS" \
+  --max-replicas "$BACKEND_MAX_REPLICAS"
+
+az containerapp update \
+  --name "$AZ_FRONTEND_APP" \
+  --resource-group "$AZ_RESOURCE_GROUP" \
+  --image "$FRONTEND_IMAGE" \
+  --min-replicas "$FRONTEND_MIN_REPLICAS" \
+  --max-replicas "$FRONTEND_MAX_REPLICAS"
+
+echo "Eliminando referencia antigua a ACR si existe..."
+az containerapp registry remove \
+  --name "$AZ_BACKEND_APP" \
+  --resource-group "$AZ_RESOURCE_GROUP" \
+  --server acrdomingorag.azurecr.io || true
+
+az containerapp registry remove \
+  --name "$AZ_FRONTEND_APP" \
+  --resource-group "$AZ_RESOURCE_GROUP" \
+  --server acrdomingorag.azurecr.io || true
+
+echo "✓ Redeploy completado"
+echo "  Backend image:  $BACKEND_IMAGE"
+echo "  Frontend image: $FRONTEND_IMAGE"

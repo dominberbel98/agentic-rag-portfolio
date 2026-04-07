@@ -3,7 +3,10 @@
 
 set -euo pipefail
 
-cd /home/domin/PROYECTOS
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$SCRIPT_DIR"
+
+cd "$ROOT_DIR"
 
 echo "=========================================="
 echo "PASO 1: Autenticar en Azure (MFA requerida)"
@@ -46,8 +49,8 @@ echo ""
 echo "=========================================="
 echo "PASO 4: Ingestar documentos"
 echo "=========================================="
-export PYTHONPATH=/home/domin/PROYECTOS
-python scripts/index_documents.py
+export PYTHONPATH="$ROOT_DIR"
+"$ROOT_DIR/.venv/bin/python" scripts/index_documents.py
 echo "✓ Documentos indexados"
 
 echo ""
