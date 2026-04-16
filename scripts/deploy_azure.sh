@@ -19,7 +19,7 @@ required=(
   AZ_CONTAINERAPPS_ENV AZ_BACKEND_APP AZ_STATIC_WEB_APP
   API_SUBDOMAIN WEB_SUBDOMAIN CONTACT_EMAILS PROFESSIONAL_LINKEDIN ADMIN_READ_KEY
   MAX_REQUESTS_PER_MINUTE_PER_IP MAX_TOKENS_PER_DAY
-  GOOGLE_API_KEY GHCR_USERNAME TURNSTILE_SITE_KEY
+  GOOGLE_API_KEY GHCR_USERNAME
 )
 
 BACKEND_MIN_REPLICAS="${BACKEND_MIN_REPLICAS:-1}"
@@ -70,6 +70,7 @@ az account set --subscription "$AZ_SUBSCRIPTION_ID"
 echo "Registrando providers necesarios..."
 az provider register --namespace Microsoft.App
 az provider register --namespace Microsoft.OperationalInsights
+az provider register --namespace Microsoft.Web
 echo "Esperando que se registren los providers (puede tardar 1-2 minutos)..."
 sleep 30
 
@@ -124,12 +125,42 @@ az containerapp registry set \
   --password "$GHCR_TOKEN_RESOLVED"
 
 echo "Actualizando imagen backend en Azure Container Apps..."
+
+# Build env-vars string for the container
+BACKEND_ENV_VARS=(
+  "APP_ENV=${APP_ENV:-production}"
+  "CORS_ORIGINS=${CORS_ORIGINS:-https://domingoberbel.com,https://www.domingoberbel.com}"
+  "CONTACT_EMAILS=${CONTACT_EMAILS}"
+  "PROFESSIONAL_LINKEDIN=${PROFESSIONAL_LINKEDIN}"
+  "ADMIN_READ_KEY=${ADMIN_READ_KEY}"
+  "MAX_REQUESTS_PER_MINUTE_PER_IP=${MAX_REQUESTS_PER_MINUTE_PER_IP}"
+  "MAX_TOKENS_PER_DAY=${MAX_TOKENS_PER_DAY}"
+  "GOOGLE_API_KEY=${GOOGLE_API_KEY}"
+)
+
+# Add OpenAI config
+if [[ -n "${OPENAI_API_KEY:-}" ]]; then
+  BACKEND_ENV_VARS+=("OPENAI_API_KEY=${OPENAI_API_KEY}" "OPENAI_MODEL=${OPENAI_MODEL}")
+fi
+if [[ -n "${AZURE_OPENAI_ENDPOINT:-}" ]]; then
+  BACKEND_ENV_VARS+=(
+    "AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}"
+    "AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}"
+    "AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION}"
+    "AZURE_OPENAI_CHAT_DEPLOYMENT=${AZURE_OPENAI_CHAT_DEPLOYMENT}"
+  )
+fi
+if [[ -n "${TURNSTILE_SECRET_KEY:-}" ]]; then
+  BACKEND_ENV_VARS+=("TURNSTILE_SECRET_KEY=${TURNSTILE_SECRET_KEY}")
+fi
+
 az containerapp update \
   --name "$AZ_BACKEND_APP" \
   --resource-group "$AZ_RESOURCE_GROUP" \
   --image "$BACKEND_IMAGE" \
   --min-replicas "$BACKEND_MIN_REPLICAS" \
-  --max-replicas "$BACKEND_MAX_REPLICAS"
+  --max-replicas "$BACKEND_MAX_REPLICAS" \
+  --set-env-vars "${BACKEND_ENV_VARS[@]}"
 
 echo "Eliminando referencia antigua a ACR si existe..."
 az containerapp registry remove \

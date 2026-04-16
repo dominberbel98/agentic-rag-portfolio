@@ -38,12 +38,12 @@ echo "=========================================="
 echo "PASO 3: Guardar FQDNs"
 echo "=========================================="
 BACKEND_FQDN=$(az containerapp show -g "$AZ_RESOURCE_GROUP" -n "$AZ_BACKEND_APP" --query properties.configuration.ingress.fqdn -o tsv)
-FRONTEND_FQDN=$(az containerapp show -g "$AZ_RESOURCE_GROUP" -n "$AZ_FRONTEND_APP" --query properties.configuration.ingress.fqdn -o tsv)
+SWA_DEFAULT_HOSTNAME=$(az staticwebapp show -g "$AZ_RESOURCE_GROUP" -n "$AZ_STATIC_WEB_APP" --query defaultHostname -o tsv)
 
 echo "Backend FQDN: $BACKEND_FQDN"
-echo "Frontend FQDN: $FRONTEND_FQDN"
+echo "Frontend SWA:  $SWA_DEFAULT_HOSTNAME"
 echo ""
-echo "⚠️  GUARDA ESTOS DOS VALORES. Los necesitarás para Hostinger DNS."
+echo "⚠️  GUARDA ESTOS VALORES. Los necesitarás para Hostinger DNS."
 echo ""
 
 echo "=========================================="
@@ -69,7 +69,7 @@ echo ""
 echo "Entra a Hostinger y crea estos registros DNS:"
 echo ""
 echo "1. CNAME: api -> $BACKEND_FQDN"
-echo "2. CNAME: www -> $FRONTEND_FQDN"
+echo "2. CNAME: www -> $SWA_DEFAULT_HOSTNAME"
 echo "3. (if ALIAS available) @ -> www.domingoberbel.com"
 echo "   (else) Redirect @ -> www.domingoberbel.com"
 echo ""
@@ -83,7 +83,7 @@ echo ""
 echo "Ejecuta después que DNS esté configurado:"
 echo ""
 echo "az containerapp hostname add -g $AZ_RESOURCE_GROUP -n $AZ_BACKEND_APP --hostname api.domingoberbel.com"
-echo "az containerapp hostname add -g $AZ_RESOURCE_GROUP -n $AZ_FRONTEND_APP --hostname www.domingoberbel.com"
+echo "az staticwebapp hostname set -g $AZ_RESOURCE_GROUP -n $AZ_STATIC_WEB_APP --hostname www.domingoberbel.com"
 echo ""
 
 echo "=========================================="
