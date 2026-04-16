@@ -1,15 +1,22 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class HistoryMessage(BaseModel):
-    role: str  # "user" or "assistant"
+    role: str
     content: str = Field(..., max_length=4000)
+
+    @field_validator("role")
+    @classmethod
+    def validate_role(cls, v: str) -> str:
+        if v not in ("user", "assistant"):
+            raise ValueError("role must be 'user' or 'assistant'")
+        return v
 
 
 class ChatRequest(BaseModel):
     question: str = Field(..., min_length=1, max_length=8000)
-    top_k: int = Field(default=10, ge=1, le=10)
-    captcha_token: str | None = None
+    top_k: int = Field(default=35, ge=1, le=50)
+    captcha_token: str | None = Field(None, max_length=2048)
     history: list[HistoryMessage] = Field(default_factory=list, max_length=20)
 
 

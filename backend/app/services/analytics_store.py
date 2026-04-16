@@ -48,7 +48,10 @@ class AnalyticsStore:
             conn.commit()
 
     def _connect(self) -> sqlite3.Connection:
-        return sqlite3.connect(self._db_path)
+        conn = sqlite3.connect(self._db_path, timeout=5.0, check_same_thread=False)
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA busy_timeout=5000")
+        return conn
 
     def _init_json_store(self) -> None:
         self._json_path.parent.mkdir(parents=True, exist_ok=True)
@@ -89,19 +92,36 @@ class AnalyticsStore:
 
             self._append_json_entry(log_entry)
 
+    _JSON_MAX_ENTRIES = 5000
+    _JSON_MAX_BYTES = 50 * 1024 * 1024  # 50 MB hard cap
+
     def _append_json_entry(self, entry: dict[str, str | bool]) -> None:
         try:
-            existing = json.loads(self._json_path.read_text(encoding="utf-8"))
-            if not isinstance(existing, list):
-                existing = []
-        except (FileNotFoundError, json.JSONDecodeError):
-            existing = []
+            # Rotate file if it exceeds size cap before loading into memory
+            if self._json_path.exists() and self._json_path.stat().st_size > self._JSON_MAX_BYTES:
+                backup = self._json_path.with_suffix(".json.bak")
+                self._json_path.rename(backup)
+                existing: list = []
+            else:
+                try:
+                    existing = json.loads(self._json_path.read_text(encoding="utf-8"))
+                    if not isinstance(existing, list):
+                        existing = []
+                except (FileNotFoundError, json.JSONDecodeError):
+                    existing = []
 
-        existing.append(entry)
-        self._json_path.write_text(
-            json.dumps(existing, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
+            existing.append(entry)
+            # Keep only the most recent entries to bound memory and disk usage
+            if len(existing) > self._JSON_MAX_ENTRIES:
+                existing = existing[-self._JSON_MAX_ENTRIES:]
+
+            self._json_path.write_text(
+                json.dumps(existing, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).error("Failed to append analytics entry: %s", e)
 
     def get_json_logs(self, limit: int = 200) -> list[dict[str, str | bool]]:
         with self._lock:

@@ -12,7 +12,11 @@ from app.services.rag_service import AgenticRAGService
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s %(message)s")
 logger = logging.getLogger(__name__)
 
-origins = [origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()]
+_raw_origins = [o.strip() for o in settings.cors_origins.split(",") if o.strip()]
+# Reject wildcard CORS in production to avoid unauthenticated cross-origin access
+if "*" in _raw_origins and settings.app_env == "production":
+    raise RuntimeError("Wildcard CORS origin is not allowed in production. Set CORS_ORIGINS to explicit domains.")
+origins = _raw_origins if _raw_origins and "*" not in _raw_origins else ["*"]
 
 
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
@@ -21,6 +25,9 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
         response.headers.setdefault("X-Frame-Options", "DENY")
         response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+        response.headers.setdefault("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+        response.headers.setdefault("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+        response.headers.setdefault("X-Permitted-Cross-Domain-Policies", "none")
         return response
 
 
@@ -39,10 +46,10 @@ app = FastAPI(title=settings.app_name, lifespan=lifespan)
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins if origins else ["*"],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["POST", "GET", "OPTIONS"],
+    allow_headers=["Content-Type", "X-Admin-Key"],
 )
 
 app.include_router(chat_router, prefix="/api")
@@ -50,4 +57,5 @@ app.include_router(chat_router, prefix="/api")
 
 @app.get("/health")
 def health() -> dict[str, str]:
-    return {"status": "ok", "env": settings.app_env}
+    # Do not expose environment name or internal details
+    return {"status": "ok"}

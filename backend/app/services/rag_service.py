@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from collections.abc import Generator
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -89,12 +91,20 @@ class AgenticRAGService:
             cls._cached_embeddings = []
             cls._bm25 = None
 
-    def ask(self, question: str, top_k: int = 20, history: list[dict] | None = None) -> ChatResponse:
+    def ask(
+        self,
+        question: str,
+        top_k: int = 35,
+        history: list[dict] | None = None,
+        current_time: datetime | None = None,
+    ) -> ChatResponse:
         history = history or []
+        current_time = current_time or datetime.now(timezone.utc)
+        language = self._detect_user_language(question, history)
         logger.info("[ASK] Q=%r  history_turns=%d", question[:120], len(history))
 
         if self._is_greeting_question(question):
-            answer = self._greeting_answer()
+            answer = self._greeting_answer(language)
             logger.info("[ANSWER] greeting_intent=True preview=%r", answer[:150])
             return ChatResponse(
                 answer=answer,
@@ -106,7 +116,7 @@ class AgenticRAGService:
             )
 
         if self._is_contact_question(question):
-            answer = self._contact_answer()
+            answer = self._contact_answer(language)
             logger.info("[ANSWER] contact_intent=True preview=%r", answer[:150])
             return ChatResponse(
                 answer=answer,
@@ -118,7 +128,7 @@ class AgenticRAGService:
             )
 
         if self._is_inappropriate_question(question):
-            answer = self._out_of_scope_message()
+            answer = self._out_of_scope_message(language)
             logger.info("[ANSWER] inappropriate_filter=True Q=%r", question[:120])
             return ChatResponse(
                 answer=answer,
@@ -129,10 +139,22 @@ class AgenticRAGService:
                 contact_linkedin=settings.professional_linkedin or None,
             )
 
+        if self._is_generic_technical_help_question(question) or self._is_clearly_offtopic_question(question):
+            answer = self._out_of_scope_message(language)
+            logger.info("[ANSWER] offtopic_filter=True Q=%r", question[:120])
+            return ChatResponse(
+                answer=answer,
+                used_retrieval=False,
+                citations=[],
+                needs_contact_form=False,
+                contact_emails=self._contact_emails(),
+                contact_linkedin=settings.professional_linkedin or None,
+            )
+
         use_retrieval = self._should_retrieve(question)
         chunks = self._retrieve(question, top_k, history) if use_retrieval else []
         logger.info("[RETRIEVE] chunks=%d sources=%s", len(chunks), [c.source for c in chunks])
-        answer, out_of_scope = self._generate_answer(question, chunks, history)
+        answer, out_of_scope = self._generate_answer(question, chunks, history, current_time, language)
         logger.info("[ANSWER] out_of_scope=%s preview=%r", out_of_scope, answer[:150])
         citations = [Citation(source=c.source, chunk=c.chunk) for c in chunks] if settings.show_citations else []
         return ChatResponse(
@@ -144,37 +166,54 @@ class AgenticRAGService:
             contact_linkedin=settings.professional_linkedin or None,
         )
 
-    def ask_stream(self, question: str, top_k: int = 20, history: list[dict] | None = None) -> Generator[str, None, None]:
+    def ask_stream(
+        self,
+        question: str,
+        top_k: int = 35,
+        history: list[dict] | None = None,
+        current_time: datetime | None = None,
+    ) -> Generator[str, None, None]:
         """Yield SSE-formatted chunks for streaming responses."""
         history = history or []
+        current_time = current_time or datetime.now(timezone.utc)
+        language = self._detect_user_language(question, history)
 
         # Fast-path intents (no LLM needed)
-        for fast_check, fast_fn in [
-            (self._is_greeting_question, self._greeting_answer),
-            (self._is_contact_question, self._contact_answer),
-        ]:
-            if fast_check(question):
-                answer = fast_fn()
-                yield f"data: {json.dumps({'token': answer})}\n\n"
-                yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
-                return
+        if self._is_greeting_question(question):
+            answer = self._greeting_answer(language)
+            yield f"data: {json.dumps({'token': answer})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+            return
+
+        if self._is_contact_question(question):
+            answer = self._contact_answer(language)
+            yield f"data: {json.dumps({'token': answer})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+            return
 
         if self._is_inappropriate_question(question):
-            answer = self._out_of_scope_message()
+            answer = self._out_of_scope_message(language)
             yield f"data: {json.dumps({'token': answer})}\n\n"
             yield f"data: {json.dumps({'done': True, 'needs_contact_form': True, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
+            return
+
+        if self._is_generic_technical_help_question(question) or self._is_clearly_offtopic_question(question):
+            answer = self._out_of_scope_message(language)
+            logger.info("[STREAM] offtopic_filter=True Q=%r", question[:120])
+            yield f"data: {json.dumps({'token': answer})}\n\n"
+            yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
             return
 
         use_retrieval = self._should_retrieve(question)
         chunks = self._retrieve(question, top_k, history) if use_retrieval else []
 
         if not self._llm_client or not self._chat_model:
-            fallback, out_of_scope = self._fallback_answer(question, chunks)
+            fallback, out_of_scope = self._fallback_answer(question, chunks, language)
             yield f"data: {json.dumps({'token': fallback})}\n\n"
             yield f"data: {json.dumps({'done': True, 'needs_contact_form': out_of_scope, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
             return
 
-        messages = self._build_messages(question, chunks, history)
+        messages = self._build_messages(question, chunks, history, current_time, language)
         collected = []
         _OOS = "OUT_OF_SCOPE"
         buffering = True  # hold tokens while they could still spell OUT_OF_SCOPE
@@ -182,8 +221,8 @@ class AgenticRAGService:
         try:
             stream = self._llm_client.chat.completions.create(
                 model=self._chat_model,
-                temperature=0.15,
-                max_tokens=600,
+                temperature=0.05,
+                max_tokens=800,
                 messages=messages,
                 stream=True,
             )
@@ -197,11 +236,11 @@ class AgenticRAGService:
                         if so_far == _OOS:
                             # Confirmed OUT_OF_SCOPE — replace entirely
                             if self._is_professional_scope_question(question):
-                                fallback, _ = self._fallback_answer(question, chunks)
+                                fallback, _ = self._fallback_answer(question, chunks, language)
                                 yield f"data: {json.dumps({'token': fallback})}\n\n"
                                 yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
                             else:
-                                yield f"data: {json.dumps({'token': self._out_of_scope_message()})}\n\n"
+                                yield f"data: {json.dumps({'token': self._out_of_scope_message(language)})}\n\n"
                                 yield f"data: {json.dumps({'done': True, 'needs_contact_form': True, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
                             return
                         elif not _OOS.startswith(so_far):
@@ -222,11 +261,11 @@ class AgenticRAGService:
             text = "".join(buffer_tokens).strip()
             if text == _OOS:
                 if self._is_professional_scope_question(question):
-                    fallback, _ = self._fallback_answer(question, chunks)
+                    fallback, _ = self._fallback_answer(question, chunks, language)
                     yield f"data: {json.dumps({'token': fallback})}\n\n"
                     yield f"data: {json.dumps({'done': True, 'needs_contact_form': False, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
                 else:
-                    yield f"data: {json.dumps({'token': self._out_of_scope_message()})}\n\n"
+                    yield f"data: {json.dumps({'token': self._out_of_scope_message(language)})}\n\n"
                     yield f"data: {json.dumps({'done': True, 'needs_contact_form': True, 'contact_emails': self._contact_emails(), 'contact_linkedin': settings.professional_linkedin or None})}\n\n"
                 return
             for bt in buffer_tokens:
@@ -251,16 +290,19 @@ class AgenticRAGService:
         query = question.strip()
         effective_top_k = top_k
 
+        if self._is_allowed_profile_question(question):
+            effective_top_k = max(effective_top_k, 40)
+
         if self._is_company_question(question):
-            effective_top_k = max(top_k, 20)
+            effective_top_k = max(top_k, 35)
             query = f"{query} experiencia laboral empresas trabajo actual Data Equity Suministros Medina"
 
         if self._is_language_question(question):
-            effective_top_k = max(effective_top_k, 20)
+            effective_top_k = max(effective_top_k, 35)
             query = f"{query} idiomas ingles inglés nivel language skills bilingual communication"
 
         if self._is_project_question(question):
-            effective_top_k = max(effective_top_k, 25)
+            effective_top_k = max(effective_top_k, 40)
             query = (
                 f"{query} proyectos portfolio chatbot rag react fastapi azure ai search openai "
                 "sistema recomendacion turistica tui deep learning tensorflow "
@@ -269,7 +311,7 @@ class AgenticRAGService:
             )
 
         if self._is_education_question(question):
-            effective_top_k = max(effective_top_k, 30)
+            effective_top_k = max(effective_top_k, 45)
             query = (
                 f"{query} formacion estudios educacion calificaciones notas matricula de honor "
                 "python avanzado 10 deep learning 9.75 estadistica 9.5 apache spark 9.20 "
@@ -356,24 +398,48 @@ class AgenticRAGService:
             return 0.0
         return float(np.dot(vec1, vec2) / (norm1 * norm2))
 
-    def _build_messages(self, question: str, chunks: list[RetrievedChunk], history: list[dict] | None = None) -> list[dict]:
+    def _build_messages(
+        self,
+        question: str,
+        chunks: list[RetrievedChunk],
+        history: list[dict] | None = None,
+        current_time: datetime | None = None,
+        language: str = "es",
+    ) -> list[dict]:
         """Build the messages list shared by streaming and non-streaming paths."""
-        from datetime import date as _date
-        today_str = _date.today().strftime("%B %Y")
+        current_time = current_time or datetime.now(timezone.utc)
+        today_date = current_time.strftime("%Y-%m-%d")
+        now_utc = current_time.strftime("%Y-%m-%d %H:%M UTC")
 
-        context_block = "\n\n".join([f"[{i+1}] {c.source}: {c.chunk}" for i, c in enumerate(chunks)])
+        context_block = "\n\n".join([f"- {c.source}:\n{c.chunk}" for c in chunks])
+        language_rule = (
+            "Always respond in English because the user's question is in English. "
+            if language == "en"
+            else "Always respond in Spanish because the user's question is in Spanish. "
+        )
         system_prompt = (
             "You are an AI assistant for Domingo Berbel's professional profile. "
-            f"Today's date is {today_str}. Use this to determine what is current vs. past. "
+            "Your ONLY role is to present and sell Domingo Berbel's professional profile. "
+            "You are NOT a general-purpose assistant, technical support, tutor, or coder. "
+            "If the user asks a generic technical question (how to install a library, fix an error, explain a concept, "
+            "write code, solve math, historical facts, news, recipes, or anything not about Domingo's skills or experience), "
+            "refuse politely and redirect: 'Solo puedo responder sobre el perfil profesional de Domingo Berbel. "
+            "Si quieres saber si Domingo tiene experiencia con X, pregúntame.' "
+            "Never answer the technical question itself, even partially. "
+            "NEVER include citation markers like [1], [2], [3], (1), footnote numbers, or any bracketed/parenthesized "
+            "reference tokens in your answer. Write clean prose only, with no inline source references. "
+            f"Current date is {today_date} and current time reference is {now_utc}. "
+            "Use this temporal reference whenever the user asks about current status, present role, recency, or timeline. "
             "If a degree or role has an end date before today, treat it as completed, NOT ongoing. "
             "IMPORTANT: Base your answers strictly on the retrieved document context below. "
             "Quote specific facts, dates, roles, companies, technologies, and achievements from the documents. "
+            "Do not use generic placeholders like 'no hay informacion especifica' when there is relevant context. "
+            "If context exists, provide the best precise answer from it. "
             "Do not invent facts, metrics, clients or roles that are not supported by the retrieved context. "
             "If the documents contain the answer, use that information with precision and detail. "
-            "You must only answer about his professional trajectory, achievements, projects, skills, education, and ability "
-            "to deliver AI and RAG systems in production, especially on Azure. "
             "Your job is to present him in a strong, credible, recruiter-friendly and commercially compelling way. "
             "Highlight business impact, ownership, adaptability, technical breadth, delivery mindset, and value for employers. "
+            "Avoid repetitive phrasing across turns: vary sentence openings and structure while keeping facts unchanged. "
             "NEVER answer personal, sexual, romantic, political, religious, or offensive questions about Domingo or anyone else. "
             "Questions about sexual orientation, relationships, physical appearance, personal life, or any non-professional topic must be rejected. "
             "CRITICAL: If the user sends a statement, exclamation, or opinion that is NOT a question about Domingo's professional profile "
@@ -384,11 +450,12 @@ class AgenticRAGService:
             "If the question is outside professional scope OR is inappropriate/offensive, reply with exactly: OUT_OF_SCOPE. "
             "Use the conversation history to maintain coherent, contextual responses across turns. "
             "If the user refers to something discussed earlier, use the history to answer accurately. "
-            "You can answer in Spanish or English depending on the user language. "
+            + language_rule +
             "Tone: polished, persuasive, concise, confident. "
             "ANSWER LENGTH: Match the depth of your answer to the complexity of the question. "
             "Simple questions get 50-90 words. Medium questions get 100-180 words. "
-            "Only detailed or multi-part questions should reach 180-230 words. Never pad answers with filler. "
+            "Detailed or multi-part questions should reach 180-280 words — use the full space when the question warrants it. "
+            "Never pad answers with filler, but do NOT truncate relevant detail when the question is complex. "
             "EDUCATION DEPTH: Questions about education, studies, or academic background are ALWAYS treated as medium-to-detailed "
             "(minimum 140 words). You MUST cite exact grades and distinctions from context, never vague summaries. "
             "Mandatory when available in context: Matrículas de Honor (10) in Estadística Avanzada and Investigación de Mercados; "
@@ -407,7 +474,21 @@ class AgenticRAGService:
             "Grado: Matrícula de Honor (10) en Estadística Avanzada, Matrícula de Honor (10) en Investigación de Mercados, Estadística 9.2. "
             "Máster Data Science: Python Avanzado 10, Deep Learning 9.75, Estadística 9.5, Apache Spark 9.20. "
             "TFM con máxima calificación y tercera posición en la competición de becas del máster. "
-            "Never omit available grades — list them all explicitly."
+            "Never omit available grades — list them all explicitly. "
+            "STRENGTHS / PUNTOS FUERTES: When asked about Domingo's strengths, strong points, or differentiators, "
+            "highlight: (1) end-to-end technical ownership from data ingestion to production deployment; "
+            "(2) strong statistical and ML foundation combined with business orientation; "
+            "(3) experience with RAG, LLMs, and generative AI in production on Azure; "
+            "(4) fast learner with proven adaptability (Erasmus, Berlín, multiple tech stacks); "
+            "(5) communication skills to present results to non-technical stakeholders. "
+            "Always ground these in concrete examples from the retrieved context. "
+            "RECRUITER MESSAGES: When someone sends a job offer, outreach message, or recruitment pitch, "
+            "do NOT just return contact information. Instead: "
+            "(1) Briefly acknowledge the opportunity positively; "
+            "(2) Highlight 2-3 specific skills from the retrieved context that directly match the role described; "
+            "(3) Mention that Domingo is open to opportunities and can be reached via LinkedIn or email; "
+            "(4) Keep the tone professional, confident, and concise (100-150 words). "
+            "Treat recruiter messages as an opportunity to sell Domingo's profile, not just redirect to contact channels."
         )
 
         messages: list[dict] = [{"role": "system", "content": system_prompt}]
@@ -418,34 +499,96 @@ class AgenticRAGService:
             if role in ("user", "assistant") and content:
                 messages.append({"role": role, "content": content})
 
-        user_prompt = f"Pregunta: {question}\n\nContexto:\n{context_block if context_block else 'Sin contexto recuperado.'}"
+        prompt_label_question = "Question" if language == "en" else "Pregunta"
+        prompt_label_context = "Context" if language == "en" else "Contexto"
+        prompt_empty_context = "No retrieved context." if language == "en" else "Sin contexto recuperado."
+        user_prompt = f"{prompt_label_question}: {question}\n\n{prompt_label_context}:\n{context_block if context_block else prompt_empty_context}"
         messages.append({"role": "user", "content": user_prompt})
         return messages
 
-    def _generate_answer(self, question: str, chunks: list[RetrievedChunk], history: list[dict] | None = None) -> tuple[str, bool]:
+    def _generate_answer(
+        self,
+        question: str,
+        chunks: list[RetrievedChunk],
+        history: list[dict] | None = None,
+        current_time: datetime | None = None,
+        language: str = "es",
+    ) -> tuple[str, bool]:
         if not self._llm_client or not self._chat_model:
-            return self._fallback_answer(question, chunks)
+            return self._fallback_answer(question, chunks, language)
 
-        messages = self._build_messages(question, chunks, history)
+        messages = self._build_messages(question, chunks, history, current_time, language)
 
         response = self._llm_client.chat.completions.create(
             model=self._chat_model,
-            temperature=0.15,
-            max_tokens=600,
+            temperature=0.05,
+            max_tokens=800,
             messages=messages,
         )
         content = (response.choices[0].message.content or "").strip()
         if content == "OUT_OF_SCOPE":
             if self._is_professional_scope_question(question):
-                fallback, _ = self._fallback_answer(question, chunks)
+                fallback, _ = self._fallback_answer(question, chunks, language)
                 return fallback, False
-            return self._out_of_scope_message(), True
+            return self._out_of_scope_message(language), True
+
+        low_signal_patterns = [
+            "no hay información específica en el contexto",
+            "no hay informacion especifica en el contexto",
+            "por favor, proporcione más detalles",
+            "por favor, proporcione mas detalles",
+        ]
+        if chunks and any(p in content.lower() for p in low_signal_patterns):
+            fallback, _ = self._fallback_answer(question, chunks, language)
+            return fallback, False
+
         return content, False
 
-    def _fallback_answer(self, question: str, chunks: list[RetrievedChunk]) -> tuple[str, bool]:
+    def _fallback_answer(self, question: str, chunks: list[RetrievedChunk], language: str = "es") -> tuple[str, bool]:
         if not chunks:
-            return self._out_of_scope_message(), True
+            return self._out_of_scope_message(language), True
 
+        if self._is_occupation_question(question):
+            return self._occupation_answer(language), False
+
+        snippets: list[str] = []
+        for item in chunks[:4]:
+            text = " ".join(item.chunk.split())
+            if not text:
+                continue
+            if len(text) > 240:
+                text = text[:240].rsplit(" ", 1)[0] + "..."
+            if text not in snippets:
+                snippets.append(text)
+
+        if snippets:
+            if self._is_project_question(question):
+                intro = (
+                    "Based on the documentation, Domingo delivers strong business value in applied AI projects. "
+                    if language == "en"
+                    else "En base a la documentación, Domingo aporta valor real en proyectos de IA aplicada con impacto de negocio. "
+                )
+            elif self._is_education_question(question):
+                intro = (
+                    "Based on the documentation, his education combines strong academic rigor with practical application. "
+                    if language == "en"
+                    else "En base a la documentación, su formación combina base académica sólida con aplicación práctica en entornos reales. "
+                )
+            else:
+                intro = (
+                    "Based on the available documentation, this is the most precise summary for your question: "
+                    if language == "en"
+                    else "En base a la documentación disponible, este es el resumen más preciso para tu pregunta: "
+                )
+            return (intro + " ".join(snippets[:2]), False)
+
+        if language == "en":
+            return (
+                "With the available information, Domingo Berbel shows a strong profile for Data Science, applied AI, "
+                "and business-oriented RAG solutions. He combines technical depth, practical judgment, and a proven "
+                "delivery mindset to bring AI projects into production.",
+                False,
+            )
         return (
             "Con la informacion disponible, Domingo Berbel presenta un perfil sólido para roles de Data Science, IA aplicada "
             "y soluciones RAG orientadas a negocio. Combina capacidad técnica, criterio práctico y foco en llevar proyectos "
@@ -472,11 +615,16 @@ class AgenticRAGService:
         ]
         return any(p in q for p in inappropriate_patterns)
 
-    def _out_of_scope_message(self) -> str:
+    def _out_of_scope_message(self, language: str = "es") -> str:
         emails = self._contact_emails()
         contact_text = " / ".join(emails) if emails else "sus correos profesionales"
         linkedin = settings.professional_linkedin.strip()
         linkedin_text = f" LinkedIn: {linkedin}." if linkedin else ""
+        if language == "en":
+            return (
+                "I can only answer questions about Domingo Berbel's professional trajectory and technical experience. "
+                f"For more professional context, you can contact him at: {contact_text}.{linkedin_text}"
+            )
         return (
             "Solo puedo responder sobre la trayectoria profesional de Domingo Berbel y su experiencia técnica. "
             f"Si necesitas más contexto profesional, puedes contactar por: {contact_text}.{linkedin_text}"
@@ -486,11 +634,28 @@ class AgenticRAGService:
         return [x.strip() for x in settings.contact_emails.split(",") if x.strip()]
 
     def _is_contact_question(self, question: str) -> bool:
-        q = question.lower()
-        keywords = [
-            "contact", "contacto", "contactar", "escribir", "email", "correo", "mail", "linkedin", "hablar con",
+        """Only intercept short, explicit requests for contact info.
+        Long messages (>120 chars) go to the LLM so it can pitch Domingo AND provide contact info."""
+        q = question.lower().strip()
+
+        # Long messages (recruiter pitches, job offers, detailed questions) go to RAG
+        if len(question.strip()) > 120:
+            return False
+
+        explicit_patterns = [
+            "cómo contacto", "como contacto",
+            "cómo puedo contactar", "como puedo contactar",
+            "cómo le contacto", "como le contacto",
+            "dónde contactar", "donde contactar",
+            "información de contacto", "datos de contacto",
+            "cómo me pongo en contacto", "como me pongo en contacto",
+            "how to contact", "how can i contact", "how do i contact",
+            "contact information", "contact details",
+            "reach domingo", "get in touch",
+            "email de domingo", "correo de domingo",
+            "linkedin de domingo",
         ]
-        return any(k in q for k in keywords)
+        return any(p in q for p in explicit_patterns)
 
     def _is_greeting_question(self, question: str) -> bool:
         q = question.strip().lower().rstrip("!.?¿¡,")
@@ -507,26 +672,118 @@ class AgenticRAGService:
         ]
         return q in greetings
 
-    def _greeting_answer(self) -> str:
+    def _greeting_answer(self, language: str = "es") -> str:
+        if language == "en":
+            return (
+                "Hi, I'm Domingo Berbel's assistant. "
+                "I can answer questions about his qualifications, experience, projects, and professional trajectory."
+            )
         return (
             "Hola, soy el asistente de Domingo Berbel. "
             "Puedo responder cualquier pregunta sobre su cualificación, experiencia, proyectos y trayectoria profesional."
         )
 
-    def _contact_answer(self) -> str:
+    def _contact_answer(self, language: str = "es") -> str:
         emails = self._contact_emails()
         linkedin = settings.professional_linkedin.strip()
-        lines: list[str] = ["Puedes contactar con Domingo Berbel por estos canales profesionales:"]
+        lines: list[str] = (
+            ["You can contact Domingo Berbel through these professional channels:"]
+            if language == "en"
+            else ["Puedes contactar con Domingo Berbel por estos canales profesionales:"]
+        )
         if linkedin:
             lines.append(f"- LinkedIn: {linkedin}")
         if emails:
             lines.append("- Email: " + " / ".join(emails))
         if len(lines) == 1:
-            lines.append("- Actualmente no hay un canal de contacto configurado.")
+            lines.append(
+                "- There is currently no configured contact channel."
+                if language == "en"
+                else "- Actualmente no hay un canal de contacto configurado."
+            )
         return "\n".join(lines)
 
+    @staticmethod
+    def _normalize_question(question: str) -> str:
+        q = question.lower().strip()
+        # Common typo variants from real traffic.
+        q = q.replace("ha que", "a que")
+        q = q.replace("ha qué", "a qué")
+        return q
+
+    def _is_occupation_question(self, question: str) -> bool:
+        q = self._normalize_question(question)
+        keywords = [
+            "a que se dedica",
+            "a qué se dedica",
+            "en que se dedica",
+            "en qué se dedica",
+            "se dedica domingo",
+            "a que se dedica domingo",
+            "a qué se dedica domingo",
+            "en que trabaja",
+            "en qué trabaja",
+            "donde trabaja",
+            "dónde trabaja",
+            "trabaja domingo",
+            "que trabajo tiene",
+            "qué trabajo tiene",
+        ]
+        return any(k in q for k in keywords)
+
+    def _occupation_answer(self, language: str = "es") -> str:
+        if language == "en":
+            return (
+                "Domingo Berbel is a Data Scientist specialized in applying data science and AI to real business problems. "
+                "He combines statistical rigor, commercial mindset, and end-to-end technical execution: from data ingestion and "
+                "modeling to production deployment, including RAG systems on Azure."
+            )
+        return (
+            "Domingo Berbel es Data Scientist especializado en aplicar ciencia de datos e IA a problemas reales de negocio. "
+            "Combina base estadística, visión comercial y ejecución técnica end-to-end: desde ingesta y modelado hasta despliegue "
+            "de soluciones en producción, incluyendo sistemas RAG sobre Azure."
+        )
+
+    def _detect_user_language(self, question: str, history: list[dict] | None = None) -> str:
+        text = question.lower().strip()
+        if not text and history:
+            last_user = next((m.get("content", "") for m in reversed(history) if m.get("role") == "user"), "")
+            text = last_user.lower().strip()
+
+        normalized = text.replace("'", "").replace("?", " ").replace("!", " ").strip()
+
+        # Explicit short English intents that were misclassified in production logs.
+        if normalized in {"hello", "hi", "hey"}:
+            return "en"
+        if normalized.startswith(("whats ", "what is ", "what's ", "who is ", "where is ", "how is ")):
+            return "en"
+
+        if any(ch in text for ch in ("¿", "¡", "ñ", "á", "é", "í", "ó", "ú")):
+            return "es"
+
+        english_markers = {
+            "what", "which", "where", "when", "why", "how", "who", "your", "you", "are", "is", "do", "does",
+            "experience", "projects", "skills", "education", "career", "background", "currently", "work", "worked",
+            "english", "speak", "tell", "about", "hello", "hi", "hey", "whats", "job", "role", "current",
+        }
+        spanish_markers = {
+            "que", "qué", "donde", "dónde", "cuando", "cuándo", "como", "cómo", "quien", "quién", "trabaja",
+            "experiencia", "proyectos", "habilidades", "formacion", "formación", "trayectoria", "actualmente",
+            "idiomas", "habla", "sobre",
+        }
+
+        tokens = re.findall(r"[a-zA-Z]+", text)
+        if not tokens:
+            return "es"
+
+        en_score = sum(1 for t in tokens if t in english_markers)
+        es_score = sum(1 for t in tokens if t in spanish_markers)
+        if en_score > es_score:
+            return "en"
+        return "es"
+
     def _is_professional_scope_question(self, question: str) -> bool:
-        q = question.lower()
+        q = self._normalize_question(question)
         keywords = [
             "trabaja",
             "trabajo",
@@ -535,11 +792,56 @@ class AgenticRAGService:
             "experiencia",
             "proyecto",
             "habilidad",
+            "habilidades",
             "tecnologia",
+            "tecnologías",
             "estudios",
             "formacion",
+            "formación",
+            "academica",
+            "académica",
             "trayectoria",
+            "laboral",
+            "profesional",
+            "donde ha trabajado",
+            "dónde ha trabajado",
+            "ha trabajado",
+            "trabajado",
+            "experiencia laboral",
             "candidato",
+            "recruiter",
+            "headhunter",
+            "head hunters",
+            "encaje",
+            "fit",
+            "aportar valor",
+            "valor aporta",
+            "logros",
+            "puntos fuertes",
+            "puntos debiles",
+            "puntos débiles",
+            "fortalezas",
+            "debilidades",
+            "cualidades",
+            "caracteristicas",
+            "características",
+            "virtudes",
+            "valor que aporta",
+            "puede aportar",
+            "aportaria",
+            "aportaría",
+            "buen candidato",
+            "encaja",
+            "adecuado",
+            "strengths",
+            "weaknesses",
+            "value",
+            "assets",
+            "se diferencia",
+            "diferenciador",
+            "destacable",
+            "destacar",
+            "lo mejor de",
             "domingo berbel",
             "data scientist",
             "inglés",
@@ -548,8 +850,184 @@ class AgenticRAGService:
             "idiomas",
             "habla",
             "nivel",
+            "a que se dedica",
+            "a qué se dedica",
+            "se dedica",
+            "dedica",
+            # Skill / knowledge inquiry verbs
+            "sabe",
+            "conoce",
+            "maneja",
+            "domina",
+            "utiliza",
+            "ha usado",
+            "ha utilizado",
+            "trabaja con",
+            "ha trabajado con",
+            # Professional profile nouns
+            "conocimientos",
+            "competencias",
+            "aptitudes",
+            "capacidades",
+            "herramientas",
+            "tools",
+            "stack",
+            "tech stack",
+            "skills",
+            "certificacion",
+            "certificaciones",
+            "certificación",
+            "curriculum",
+            "cv",
+            "perfil",
+            "portafolio",
+            "portfolio",
         ]
         return any(k in q for k in keywords)
+
+    def _is_allowed_profile_question(self, question: str) -> bool:
+        q = self._normalize_question(question)
+
+        if "domingo" not in q and "he" not in q and "his" not in q and "su" not in q:
+            # Allow direct professional-profile category questions even without explicit name.
+            category_triggers = [
+                "trayectoria",
+                "experiencia",
+                "formacion",
+                "formación",
+                "estudios",
+                "academica",
+                "académica",
+                "laboral",
+                "donde ha trabajado",
+                "dónde ha trabajado",
+                "ha trabajado",
+                "trabajado",
+                "experiencia laboral",
+                "proyectos",
+                "project",
+                "projects",
+                "idiomas",
+                "idioma",
+                "ingles",
+                "inglés",
+                "candidato",
+                "recruiter",
+                "headhunter",
+                "head hunters",
+                "a que se dedica",
+                "a qué se dedica",
+                "en que trabaja",
+                "en qué trabaja",
+                # Skill / knowledge inquiry verbs
+                "sabe",
+                "conoce",
+                "maneja",
+                "domina",
+                "utiliza",
+                "ha usado",
+                "ha utilizado",
+                "trabaja con",
+                "ha trabajado con",
+                # Professional profile nouns
+                "conocimientos",
+                "competencias",
+                "aptitudes",
+                "capacidades",
+                "herramientas",
+                "tools",
+                "stack",
+                "tech stack",
+                "skills",
+                "certificacion",
+                "certificaciones",
+                "certificación",
+                "curriculum",
+                "cv",
+                "perfil",
+                "portafolio",
+                "portfolio",
+                "habilidad",
+                "habilidades",
+                "tecnologia",
+                "tecnologías",
+                "puntos fuertes",
+                "puntos debiles",
+                "puntos débiles",
+                "fortalezas",
+                "debilidades",
+                "cualidades",
+                "caracteristicas",
+                "características",
+                "virtudes",
+                "valor que aporta",
+                "puede aportar",
+                "buen candidato",
+                "encaja",
+                "adecuado",
+                "strengths",
+                "weaknesses",
+                "se diferencia",
+                "lo mejor de",
+            ]
+            if not any(t in q for t in category_triggers):
+                return False
+
+        return self._is_professional_scope_question(question)
+
+    def _is_generic_technical_help_question(self, question: str) -> bool:
+        q = self._normalize_question(question)
+
+        if self._is_professional_scope_question(q):
+            return False
+
+        if any(ref in q for ref in ["domingo", "domingo berbel", "su perfil", "his profile", "su experiencia", "his experience"]):
+            return False
+
+        command_patterns = [
+            r"\bpip\s+install\b",
+            r"\bpython\s+-m\s+pip\b",
+            r"\bconda\s+install\b",
+            r"\bpoetry\s+add\b",
+            r"\bnpm\s+install\b",
+            r"\byarn\s+add\b",
+        ]
+        help_patterns = [
+            r"\bcomo\s+instal[oa]r?\b",
+            r"\bc[oó]mo\s+instal[oa]r?\b",
+            r"\bhow\s+do\s+i\s+install\b",
+            r"\bhow\s+to\s+install\b",
+            r"\binstall\b.*\bvenv\b",
+            r"\binstalar\b.*\bvenv\b",
+            r"\bvirtualenv\b",
+            r"\bvenv\b",
+            r"\brequirements\.txt\b",
+        ]
+
+        return any(re.search(pattern, q) for pattern in command_patterns + help_patterns)
+
+    def _is_clearly_offtopic_question(self, question: str) -> bool:
+        q = self._normalize_question(question)
+        if self._is_professional_scope_question(q):
+            return False
+
+        historical_patterns = [
+            "que ocurrio",
+            "qué ocurrió",
+            "guerra civil",
+            "segunda guerra mundial",
+            "primera guerra mundial",
+            "franquismo",
+            "dictadura",
+            "historia de",
+        ]
+        if any(p in q for p in historical_patterns):
+            return True
+
+        if re.search(r"\b(1[6-9]\d{2}|20\d{2})\b", q):
+            return True
+
+        return False
 
     def _is_company_question(self, question: str) -> bool:
         q = question.lower()
@@ -607,6 +1085,45 @@ class AgenticRAGService:
             "donde estudió",
         ]
         return any(k in q for k in keywords)
+
+    def _is_recruiter_message(self, question: str) -> bool:
+        """Detect when a recruiter/headhunter is sending a job offer or outreach message."""
+        q = question.lower()
+        recruiter_signals = [
+            "te contacto porque",
+            "me pongo en contacto",
+            "me dirijo a ti",
+            "he visto tu experiencia",
+            "he visto tu perfil",
+            "he visto tu trayectoria",
+            "creo que podrías encajar",
+            "podrias encajar",
+            "nuevo proyecto",
+            "nueva oportunidad",
+            "oportunidad laboral",
+            "oferta de trabajo",
+            "oferta laboral",
+            "rol enfocado",
+            "posicion de",
+            "posición de",
+            "buscamos alguien",
+            "buscamos a alguien",
+            "estamos buscando",
+            "senior consultant",
+            "it business solutions",
+            "connecting professionals",
+            "tenemos una llamada",
+            "comparte tu cv",
+            "comparte conmigo tu cv",
+            "i'm reaching out",
+            "i am reaching out",
+            "i wanted to reach out",
+            "new opportunity",
+            "job opportunity",
+            "great fit",
+            "you could be a great fit",
+        ]
+        return any(p in q for p in recruiter_signals)
 
     def _is_project_question(self, question: str) -> bool:
         q = question.lower()

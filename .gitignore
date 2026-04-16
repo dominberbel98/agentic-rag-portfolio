@@ -25,6 +25,12 @@ backend/.env
 infra/aca/azure.env
 *.secret
 
+# Archivos de vídeo (binarios grandes)
+*.mp4
+*.mov
+*.avi
+video/
+
 # Datos personales y operacionales
 documentos/
 preguntas.json

@@ -93,6 +93,11 @@ FRONTEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-frontend:${IMAGE_TAG}"
 BACKEND_IMAGE_LATEST="ghcr.io/${GHCR_USERNAME}/rag-backend:latest"
 FRONTEND_IMAGE_LATEST="ghcr.io/${GHCR_USERNAME}/rag-frontend:latest"
 
+if [[ ! -f "$ROOT_DIR/backend/embeddings_cache.json" ]]; then
+  echo "Falta backend/embeddings_cache.json. Ejecuta primero: python scripts/index_documents.py"
+  exit 1
+fi
+
 echo "Buildear imágenes localmente con Docker..."
 docker build -t "$BACKEND_IMAGE" "$ROOT_DIR/backend"
 docker tag "$BACKEND_IMAGE" "$BACKEND_IMAGE_LATEST"

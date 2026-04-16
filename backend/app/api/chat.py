@@ -1,6 +1,11 @@
+import logging
+from hmac import compare_digest
+
 from fastapi import APIRouter, Header, HTTPException, Request
 from starlette.responses import StreamingResponse
 import json
+
+logger = logging.getLogger(__name__)
 
 from app.models import ChatRequest, ChatResponse
 from app.config import settings
@@ -50,7 +55,8 @@ def chat(payload: ChatRequest, request: Request) -> ChatResponse:
         )
         return response
     except Exception as exc:  # pragma: no cover
-        raise HTTPException(status_code=500, detail=str(exc)) from exc
+        logger.error("Unexpected error in /chat: %s", exc, exc_info=True)
+        raise HTTPException(status_code=500, detail="Internal server error") from exc
 
 
 @router.post("/chat/stream")
@@ -108,12 +114,19 @@ def chat_stream(payload: ChatRequest, request: Request):
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
 
+def _check_admin_key(x_admin_key: str) -> None:
+    """Timing-safe admin key check to prevent timing attacks."""
+    if not settings.admin_read_key:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    if not compare_digest(x_admin_key, settings.admin_read_key):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+
 @router.get("/admin/questions")
 def recent_questions(
     x_admin_key: str = Header(default=""),
 ) -> dict[str, list[dict[str, str | int]]]:
-    if not settings.admin_read_key or x_admin_key != settings.admin_read_key:
-        raise HTTPException(status_code=401, detail="Unauthorized")
+    _check_admin_key(x_admin_key)
     return {"items": analytics_store.get_recent_questions(limit=200)}
 
 
@@ -121,6 +134,5 @@ def recent_questions(
 def json_questions(
     x_admin_key: str = Header(default=""),
 ) -> dict[str, list[dict[str, str | bool]]]:
-    if not settings.admin_read_key or x_admin_key != settings.admin_read_key:
-        raise HTTPException(status_code=401, detail="Unauthorized")
+    _check_admin_key(x_admin_key)
     return {"items": analytics_store.get_json_logs(limit=500)}

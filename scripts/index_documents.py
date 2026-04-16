@@ -15,13 +15,15 @@ from pathlib import Path
 
 import google.generativeai as genai
 
-DOCS_DIR = Path(__file__).resolve().parents[1] / "documentos"
-CACHE_FILE = Path(__file__).resolve().parents[1] / "embeddings_cache.json"
+ROOT_DIR = Path(__file__).resolve().parents[1]
+DOCS_DIR = ROOT_DIR / "documentos"
+CACHE_FILE_ROOT = ROOT_DIR / "embeddings_cache.json"
+CACHE_FILE_BACKEND = ROOT_DIR / "backend" / "embeddings_cache.json"
 EMBEDDING_MODEL = "gemini-embedding-001"
 EMBEDDING_API_MODEL = f"models/{EMBEDDING_MODEL}"
 EMBEDDING_DIMENSIONS = 3072
-CHUNK_SIZE = 1200
-CHUNK_OVERLAP = 150
+CHUNK_SIZE = 650
+CHUNK_OVERLAP = 100
 
 
 def chunk_text(text: str, size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> list[str]:
@@ -63,10 +65,12 @@ def embed_text(text: str, api_key: str) -> list[float]:
 
 def load_existing_cache() -> dict | None:
     """Load existing cache if it exists and is valid."""
-    if not CACHE_FILE.exists():
+    # Prefer root cache, fallback to backend cache for local/docker parity.
+    cache_file = CACHE_FILE_ROOT if CACHE_FILE_ROOT.exists() else CACHE_FILE_BACKEND
+    if not cache_file.exists():
         return None
     try:
-        with open(CACHE_FILE, "r", encoding="utf-8") as f:
+        with open(cache_file, "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
         print(f"Warning: Could not load existing cache: {e}")
@@ -133,10 +137,13 @@ def main() -> None:
         "chunks": payload,
     }
 
-    with open(CACHE_FILE, "w", encoding="utf-8") as f:
-        json.dump(cache_data, f, ensure_ascii=False, indent=2)
+    for cache_file in (CACHE_FILE_ROOT, CACHE_FILE_BACKEND):
+        cache_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(cache_file, "w", encoding="utf-8") as f:
+            json.dump(cache_data, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✓ Cached {len(payload)} chunks to {CACHE_FILE}")
+    print(f"\n✓ Cached {len(payload)} chunks to {CACHE_FILE_ROOT}")
+    print(f"✓ Synced cache to {CACHE_FILE_BACKEND}")
     print(f"  Model: {EMBEDDING_MODEL}")
     print(f"  Dimensions: {EMBEDDING_DIMENSIONS}")
 

@@ -9,7 +9,11 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app ./app
-COPY embeddings_cache.json ./embeddings_cache.json
+COPY embeddings_cache.json* ./
+
+# Run as non-root user to reduce attack surface
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
 
 EXPOSE 8000
 

@@ -13,6 +13,7 @@ export default function Chat() {
   useEffect(() => {
     fetch(`${API_URL}/health`).catch(() => {});
   }, []);
+
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
@@ -66,15 +67,12 @@ export default function Chat() {
     setLoading(true);
     setMessages((prev) => [...prev, { role: "user", text: currentQuestion }]);
 
-    // Build conversation history from last 20 messages (10 full turns) to give
-    // the backend stronger context for follow-up questions.
     const recentHistory = messages.slice(-20).map((m) => ({
       role: m.role,
       content: m.text,
     }));
 
-    // Add a placeholder assistant message that we'll stream into
-    const assistantIdx = messages.length + 1; // +1 because we just pushed user msg
+    const assistantIdx = messages.length + 1;
     setMessages((prev) => [...prev, { role: "assistant", text: "", meta: "" }]);
 
     try {
@@ -103,7 +101,7 @@ export default function Chat() {
 
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split("\n");
-        buffer = lines.pop(); // keep incomplete line in buffer
+        buffer = lines.pop();
 
         for (const line of lines) {
           if (!line.startsWith("data: ")) continue;
@@ -151,51 +149,149 @@ export default function Chat() {
   };
 
   const handleComposerKeyDown = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
+    if (event.key === "Enter") {
       event.preventDefault();
       composerRef.current?.requestSubmit();
     }
   };
 
   return (
-    <div className="chat-wrap">
-      <div className="messages" ref={messagesRef}>
-        {messages.length === 0 && (
-          <div className="empty-state">
-            <p className="empty-title">Explora el perfil de Domingo</p>
-            <p className="empty">
-              Prueba con preguntas como: "¿Qué experiencia tiene en Data Science?", "¿Qué puede aportar a una
-              empresa?" o "¿Qué proyectos destacan más?"
-            </p>
-          </div>
-        )}
-        {messages.map((msg, idx) => (
-          <article key={idx} className={`msg ${msg.role}`}>
-            <p>{msg.text}</p>
-            {msg.meta && <small>{msg.meta}</small>}
-          </article>
-        ))}
+    <div className="w-full max-w-4xl h-full max-h-full md:max-h-[700px] flex flex-col bg-surface-container-low rounded-md md:rounded-lg shadow-[0_0_30px_rgba(0,255,65,0.1)] border border-[#00FF41]/10 relative overflow-hidden">
+
+      {/* Window header — traffic lights */}
+      <div className="h-9 sm:h-10 bg-surface-container-high border-b border-[#00FF41]/15 flex items-center justify-between px-3 sm:px-4 shrink-0">
+        <div className="flex items-center gap-2">
+          <div className="w-2.5 h-2.5 rounded-full bg-error-dim shadow-[0_0_5px_rgba(255,115,81,0.5)]" />
+          <div className="w-2.5 h-2.5 rounded-full bg-secondary-dim shadow-[0_0_5px_rgba(252,175,0,0.5)]" />
+          <div className="w-2.5 h-2.5 rounded-full bg-primary-dim shadow-[0_0_5px_rgba(0,252,64,0.5)]" />
+          <span className="ml-2 sm:ml-4 font-headline text-[0.58rem] sm:text-[0.7rem] uppercase tracking-wider sm:tracking-widest text-on-surface-variant truncate max-w-[170px] sm:max-w-none">
+            terminal — zsh — jupyter-kernel
+          </span>
+        </div>
+        <div className={`hidden sm:block text-primary-dim font-headline text-[0.7rem] tracking-tighter ${loading ? "flicker" : ""}`}>
+          KERNEL: {loading ? "BUSY (PYTHON 3.11)" : "IDLE (PYTHON 3.11)"}
+        </div>
       </div>
 
-      <form className="composer" onSubmit={send} ref={composerRef}>
-        <textarea
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          onKeyDown={handleComposerKeyDown}
-          placeholder="Escribe una pregunta sobre trayectoria, logros, proyectos o habilidades..."
-          rows={3}
-        />
-        {TURNSTILE_SITE_KEY ? <div ref={turnstileRef} className="captcha-slot" /> : null}
-        <button type="submit" disabled={loading}>
-          {loading ? "Generando respuesta..." : "Enviar"}
-        </button>
+      {/* Chat history */}
+      <div
+        ref={messagesRef}
+        className="flex-1 overflow-y-auto p-3 sm:p-6 md:p-8 space-y-4 sm:space-y-6 font-headline text-sm scrollbar-hide bg-surface-container-lowest/40"
+      >
+        {/* Boot log */}
+        <div className="space-y-1 hidden sm:block">
+          <div className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">[0.00104] IMPORTING PANDAS AS PD...</div>
+          <div className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">[0.00255] LOADING PRETRAINED_MODELS/BERBEL_CV.PKL...</div>
+          <div className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">[0.00389] INITIALIZING INFERENCE ENGINE...</div>
+        </div>
+
+        {/* Initial greeting — visible when no messages yet */}
+        {messages.length === 0 && (
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 text-tertiary">
+              <span className="material-symbols-outlined text-sm">psychology</span>
+              <span className="text-[0.65rem] font-bold tracking-widest">DS_ASSISTANT</span>
+            </div>
+            <div className="bg-surface-container px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-primary/30 max-w-[95%] sm:max-w-[90%]">
+              <p className="text-on-surface leading-relaxed crt-glow">
+                Hello. I am the{" "}
+                <span className="text-primary font-bold">Data Science Assistant</span> for{" "}
+                <span className="text-primary font-bold">Domingo Berbel</span>. I have access to
+                his entire dataset: professional experience in predictive modeling, statistical
+                analysis, and machine learning architectures. What insights can I extract from the
+                portfolio for you today?
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Conversation messages */}
+        {messages.map((msg, idx) =>
+          msg.role === "assistant" ? (
+            <div key={idx} className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-tertiary">
+                <span className="material-symbols-outlined text-sm">psychology</span>
+                <span className="text-[0.65rem] font-bold tracking-widest">DS_ASSISTANT</span>
+              </div>
+              <div className="bg-surface-container px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-primary/30 max-w-[95%] sm:max-w-[90%]">
+                <p className="text-on-surface leading-relaxed crt-glow whitespace-pre-wrap">
+                  {msg.text}
+                  {loading && idx === messages.length - 1 && (
+                    <span className="inline-block w-2 h-4 bg-primary ml-1 cursor-blink align-middle" />
+                  )}
+                </p>
+                {msg.meta && (
+                  <small className="block mt-2 text-error text-[0.65rem]">{msg.meta}</small>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div key={idx} className="flex flex-col gap-2 items-end">
+              <div className="flex items-center gap-2 text-secondary">
+                <span className="text-[0.65rem] font-bold tracking-widest">USER_INPUT</span>
+                <span className="material-symbols-outlined text-sm">person</span>
+              </div>
+              <div className="bg-surface-container-high px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-secondary/40 max-w-[95%] sm:max-w-[90%]">
+                <p className="text-secondary leading-relaxed whitespace-pre-wrap">{msg.text}</p>
+              </div>
+            </div>
+          )
+        )}
+
+        {/* Standalone loading indicator (before first token arrives) */}
+        {loading && messages[messages.length - 1]?.role !== "assistant" && (
+          <div className="flex items-center gap-2 text-primary/60">
+            <span className="material-symbols-outlined text-sm flicker">pending</span>
+            <span className="text-[0.65rem] font-bold tracking-widest flicker">PROCESSING...</span>
+          </div>
+        )}
+      </div>
+
+      {/* Terminal input */}
+      <form
+        onSubmit={send}
+        ref={composerRef}
+        className="p-3 sm:p-5 md:p-6 bg-surface-container-low border-t border-[#00FF41]/10 shrink-0"
+      >
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="text-primary font-bold text-base sm:text-lg flicker">&gt;</span>
+          <input
+            autoFocus
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            onKeyDown={handleComposerKeyDown}
+            disabled={loading}
+            className="flex-1 bg-transparent border-none focus:ring-0 text-primary-dim font-headline text-base sm:text-lg placeholder:text-primary-dim/20 outline-none disabled:opacity-50"
+            placeholder="ASK ABOUT MODELS, TOOLS, OR EXPERIENCE..."
+            type="text"
+          />
+          <button
+            type="submit"
+            disabled={loading || !question.trim()}
+            className="px-3 py-2 text-[0.65rem] sm:text-xs font-headline uppercase tracking-widest border border-[#00FF41]/35 text-primary bg-[#00FF41]/5 hover:bg-[#00FF41]/10 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Send
+          </button>
+        </div>
+        {TURNSTILE_SITE_KEY ? <div ref={turnstileRef} className="captcha-slot mt-3" /> : null}
       </form>
 
+      {/* Contact form — shown when backend signals needs_contact_form */}
       {showContactForm && (
-        <form className="composer" onSubmit={sendContact}>
-          <h3>Contacto</h3>
+        <form
+          onSubmit={sendContact}
+          className="p-3 sm:p-6 bg-surface-container border-t border-[#00FF41]/10 space-y-3 shrink-0"
+        >
+          <p className="text-[0.65rem] font-bold tracking-widest text-tertiary uppercase">
+            — Contacto directo
+          </p>
           {contactLinkedin && (
-            <a href={contactLinkedin} target="_blank" rel="noreferrer">
+            <a
+              href={contactLinkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-primary text-sm underline"
+            >
               Ver perfil de LinkedIn
             </a>
           )}
@@ -204,6 +300,7 @@ export default function Chat() {
             onChange={(e) => setContactData((p) => ({ ...p, name: e.target.value }))}
             placeholder="Tu nombre"
             required
+            className="w-full bg-surface-container-high border border-[#00FF41]/20 text-on-surface px-4 py-2 text-sm font-headline placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50"
           />
           <input
             type="email"
@@ -211,15 +308,22 @@ export default function Chat() {
             onChange={(e) => setContactData((p) => ({ ...p, email: e.target.value }))}
             placeholder="Tu email"
             required
+            className="w-full bg-surface-container-high border border-[#00FF41]/20 text-on-surface px-4 py-2 text-sm font-headline placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50"
           />
           <textarea
             value={contactData.message}
             onChange={(e) => setContactData((p) => ({ ...p, message: e.target.value }))}
             placeholder="Cuéntame brevemente la oportunidad o necesidad"
-            rows={4}
+            rows={3}
             required
+            className="w-full bg-surface-container-high border border-[#00FF41]/20 text-on-surface px-4 py-2 text-sm font-headline placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50 resize-none"
           />
-          <button type="submit">Enviar contacto</button>
+          <button
+            type="submit"
+            className="w-full border border-[#00FF41]/40 bg-[#00FF41]/5 text-primary font-headline text-sm uppercase tracking-widest py-2 hover:bg-[#00FF41]/10 transition-colors"
+          >
+            Enviar contacto
+          </button>
         </form>
       )}
     </div>
