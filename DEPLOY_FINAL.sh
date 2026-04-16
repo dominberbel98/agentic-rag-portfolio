@@ -12,8 +12,9 @@ echo "=========================================="
 echo "PASO 1: Autenticar en Azure (MFA requerida)"
 echo "=========================================="
 source .venv/bin/activate
+source infra/aca/azure.env
 # Usa device code flow con tenant específico
-az login --use-device-code --tenant 13a1d5c0-ccab-4b8c-8b11-fd56c168f069
+az login --use-device-code --tenant "$AZURE_TENANT_ID"
 # Abre https://microsoft.com/devicelogin en navegador y entra el código + MFA
 
 echo ""
@@ -23,7 +24,6 @@ echo ""
 echo "=========================================="
 echo "PASO 2: Seleccionar subscription y desplegar"
 echo "=========================================="
-source infra/aca/azure.env
 
 az account set --subscription "$AZ_SUBSCRIPTION_ID"
 echo "✓ Subscription: $AZ_SUBSCRIPTION_ID"
