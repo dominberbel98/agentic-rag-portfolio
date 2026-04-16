@@ -16,16 +16,14 @@ source "$ENV_FILE"
 
 required=(
   AZ_LOCATION AZ_RESOURCE_GROUP AZ_SUBSCRIPTION_ID
-  AZ_CONTAINERAPPS_ENV AZ_BACKEND_APP AZ_FRONTEND_APP
-  API_SUBDOMAIN CONTACT_EMAILS PROFESSIONAL_LINKEDIN ADMIN_READ_KEY
+  AZ_CONTAINERAPPS_ENV AZ_BACKEND_APP AZ_STATIC_WEB_APP
+  API_SUBDOMAIN WEB_SUBDOMAIN CONTACT_EMAILS PROFESSIONAL_LINKEDIN ADMIN_READ_KEY
   MAX_REQUESTS_PER_MINUTE_PER_IP MAX_TOKENS_PER_DAY
-  GOOGLE_API_KEY GHCR_USERNAME
+  GOOGLE_API_KEY GHCR_USERNAME TURNSTILE_SITE_KEY
 )
 
 BACKEND_MIN_REPLICAS="${BACKEND_MIN_REPLICAS:-1}"
 BACKEND_MAX_REPLICAS="${BACKEND_MAX_REPLICAS:-2}"
-FRONTEND_MIN_REPLICAS="${FRONTEND_MIN_REPLICAS:-1}"
-FRONTEND_MAX_REPLICAS="${FRONTEND_MAX_REPLICAS:-2}"
 IMAGE_TAG="${IMAGE_TAG:-$(date -u +%Y%m%d%H%M%S)}"
 
 for var in "${required[@]}"; do
@@ -89,35 +87,35 @@ if ! az containerapp env show --name "$AZ_CONTAINERAPPS_ENV" --resource-group "$
 fi
 
 BACKEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-backend:${IMAGE_TAG}"
-FRONTEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-frontend:${IMAGE_TAG}"
 BACKEND_IMAGE_LATEST="ghcr.io/${GHCR_USERNAME}/rag-backend:latest"
-FRONTEND_IMAGE_LATEST="ghcr.io/${GHCR_USERNAME}/rag-frontend:latest"
 
 if [[ ! -f "$ROOT_DIR/backend/embeddings_cache.json" ]]; then
   echo "Falta backend/embeddings_cache.json. Ejecuta primero: python scripts/index_documents.py"
   exit 1
 fi
 
-echo "Buildear imágenes localmente con Docker..."
+echo "Buildear imagen backend con Docker..."
 docker build -t "$BACKEND_IMAGE" "$ROOT_DIR/backend"
 docker tag "$BACKEND_IMAGE" "$BACKEND_IMAGE_LATEST"
-docker build -t "$FRONTEND_IMAGE" \
-  --build-arg VITE_API_URL="https://$API_SUBDOMAIN" \
-  "$ROOT_DIR/frontend"
-docker tag "$FRONTEND_IMAGE" "$FRONTEND_IMAGE_LATEST"
 
 echo "Autenticando en GitHub Container Registry..."
 echo "$GHCR_TOKEN_RESOLVED" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
 
-echo "Pusheando imágenes a GitHub Container Registry..."
+echo "Pusheando imagen backend a GitHub Container Registry..."
 docker push "$BACKEND_IMAGE"
 docker push "$BACKEND_IMAGE_LATEST"
-docker push "$FRONTEND_IMAGE"
-docker push "$FRONTEND_IMAGE_LATEST"
 
-echo "Imágenes pusheadas correctamente a ghcr.io"
+echo "Buildear frontend con npm..."
+cd "$ROOT_DIR/frontend"
+npm ci --silent
+VITE_API_URL="https://$API_SUBDOMAIN" \
+VITE_TURNSTILE_SITE_KEY="$TURNSTILE_SITE_KEY" \
+npm run build
+cd "$ROOT_DIR"
 
-echo "Configurando GHCR en Azure Container Apps..."
+echo "Imagen backend pusheada correctamente a ghcr.io"
+
+echo "Configurando GHCR en Azure Container Apps (backend)..."
 az containerapp registry set \
   --name "$AZ_BACKEND_APP" \
   --resource-group "$AZ_RESOURCE_GROUP" \
@@ -125,14 +123,7 @@ az containerapp registry set \
   --username "$GHCR_USERNAME" \
   --password "$GHCR_TOKEN_RESOLVED"
 
-az containerapp registry set \
-  --name "$AZ_FRONTEND_APP" \
-  --resource-group "$AZ_RESOURCE_GROUP" \
-  --server ghcr.io \
-  --username "$GHCR_USERNAME" \
-  --password "$GHCR_TOKEN_RESOLVED"
-
-echo "Actualizando imágenes en Azure Container Apps..."
+echo "Actualizando imagen backend en Azure Container Apps..."
 az containerapp update \
   --name "$AZ_BACKEND_APP" \
   --resource-group "$AZ_RESOURCE_GROUP" \
@@ -140,24 +131,40 @@ az containerapp update \
   --min-replicas "$BACKEND_MIN_REPLICAS" \
   --max-replicas "$BACKEND_MAX_REPLICAS"
 
-az containerapp update \
-  --name "$AZ_FRONTEND_APP" \
-  --resource-group "$AZ_RESOURCE_GROUP" \
-  --image "$FRONTEND_IMAGE" \
-  --min-replicas "$FRONTEND_MIN_REPLICAS" \
-  --max-replicas "$FRONTEND_MAX_REPLICAS"
-
 echo "Eliminando referencia antigua a ACR si existe..."
 az containerapp registry remove \
   --name "$AZ_BACKEND_APP" \
   --resource-group "$AZ_RESOURCE_GROUP" \
   --server acrdomingorag.azurecr.io || true
 
-az containerapp registry remove \
-  --name "$AZ_FRONTEND_APP" \
+echo "Creando Azure Static Web App si no existe..."
+if ! az staticwebapp show --name "$AZ_STATIC_WEB_APP" --resource-group "$AZ_RESOURCE_GROUP" >/dev/null 2>&1; then
+  az staticwebapp create \
+    --name "$AZ_STATIC_WEB_APP" \
+    --resource-group "$AZ_RESOURCE_GROUP" \
+    --location "westeurope" \
+    --sku Free
+  echo "Static Web App creada."
+fi
+
+echo "Obteniendo token de despliegue de Static Web App..."
+SWA_TOKEN=$(az staticwebapp secrets list \
+  --name "$AZ_STATIC_WEB_APP" \
   --resource-group "$AZ_RESOURCE_GROUP" \
-  --server acrdomingorag.azurecr.io || true
+  --query "properties.apiKey" -o tsv)
+
+echo "Desplegando frontend en Azure Static Web Apps..."
+npx --yes @azure/static-web-apps-cli deploy \
+  "$ROOT_DIR/frontend/dist" \
+  --deployment-token "$SWA_TOKEN" \
+  --env production
+
+echo "Configurando dominio personalizado en Static Web App..."
+az staticwebapp hostname set \
+  --name "$AZ_STATIC_WEB_APP" \
+  --resource-group "$AZ_RESOURCE_GROUP" \
+  --hostname "$WEB_SUBDOMAIN" || echo "AVISO: el dominio $WEB_SUBDOMAIN ya está configurado o requiere validación DNS manual."
 
 echo "✓ Redeploy completado"
-echo "  Backend image:  $BACKEND_IMAGE"
-echo "  Frontend image: $FRONTEND_IMAGE"
+echo "  Backend image: $BACKEND_IMAGE"
+echo "  Frontend URL:  https://$WEB_SUBDOMAIN (Azure Static Web Apps)"
