@@ -210,7 +210,7 @@ function WinRateMatrix({ data }) {
       </h3>
       <ResponsiveContainer width="100%" height={420}>
         <BarChart data={sorted} layout="vertical" margin={{ left: 60, right: 20, top: 5, bottom: 5 }}>
-          <XAxis type="number" domain={[0, 100]} tick={{ fill: DIM, fontSize: 10 }} axisLine={{ stroke: DIM }} unit="%" />
+          <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${Math.round(v)}%`} tick={{ fill: DIM, fontSize: 10 }} axisLine={{ stroke: DIM }} />
           <YAxis
             type="category" dataKey="teamShortName"
             tick={{ fill: GREEN, fontSize: 9, fontFamily: "Space Grotesk" }}
