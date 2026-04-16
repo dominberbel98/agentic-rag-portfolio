@@ -1,0 +1,54 @@
+name: Update La Liga Data
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # every 30 minutes
+  workflow_dispatch:          # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests pyspark xgboost scikit-learn numpy
+
+      - name: Run La Liga pipeline
+        run: python scripts/pipeline_laliga.py
+
+      - name: Run predictive model
+        run: python scripts/predict_laliga.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add frontend/public/data/la_liga_data.json frontend/public/data/la_liga_predictions.json
+          git diff --cached --quiet || git commit -m "chore: update La Liga data [skip ci]"
+          git push
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          VITE_API_URL=https://api.domingoberbel.com npm run build
+
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.SWA_DEPLOYMENT_TOKEN }}
+          action: upload
+          app_location: frontend/dist
+          skip_app_build: true

@@ -97,3 +97,44 @@ body {
 .captcha-slot {
   min-height: 65px;
 }
+
+/* ── Visualization panels ── */
+.viz-panel {
+  background: rgba(0, 255, 65, 0.03);
+  border: 1px solid rgba(0, 255, 65, 0.12);
+  border-radius: 8px;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.viz-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00FF41, transparent);
+  opacity: 0.3;
+}
+.viz-title {
+  font-family: "Space Grotesk", monospace;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00FF41;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+}
+
+/* Recharts overrides for CRT look */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(0, 255, 65, 0.06);
+}
+.recharts-tooltip-wrapper {
+  outline: none;
+}
