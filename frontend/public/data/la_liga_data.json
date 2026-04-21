@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-21T19:47:06.811998+00:00",
+  "updatedAt": "2026-04-21T20:59:24.659295+00:00",
   "season": "2025",
   "matchday": 33,
   "standings": [
@@ -25,23 +25,23 @@
     },
     {
       "position": 2,
-      "playedGames": 31,
+      "playedGames": 32,
       "form": "",
-      "won": 22,
+      "won": 23,
       "draw": 4,
       "lost": 5,
-      "points": 70,
-      "goalsFor": 65,
+      "points": 73,
+      "goalsFor": 66,
       "goalsAgainst": 29,
-      "goalDifference": 36,
+      "goalDifference": 37,
       "teamId": 86,
       "teamName": "Real Madrid CF",
       "teamShortName": "Real Madrid",
       "teamCrest": "https://sportsrc.org/img/score/86.png",
       "zone": "champions",
-      "winRate": 71.0,
-      "drawRate": 12.9,
-      "lossRate": 16.1
+      "winRate": 71.9,
+      "drawRate": 12.5,
+      "lossRate": 15.6
     },
     {
       "position": 3,
@@ -85,23 +85,23 @@
     },
     {
       "position": 5,
-      "playedGames": 31,
+      "playedGames": 32,
       "form": "",
       "won": 11,
-      "draw": 13,
+      "draw": 14,
       "lost": 7,
-      "points": 46,
-      "goalsFor": 45,
-      "goalsAgainst": 38,
+      "points": 47,
+      "goalsFor": 46,
+      "goalsAgainst": 39,
       "goalDifference": 7,
       "teamId": 90,
       "teamName": "Real Betis Balompié",
       "teamShortName": "Real Betis",
       "teamCrest": "https://sportsrc.org/img/score/90.png",
       "zone": "europa",
-      "winRate": 35.5,
-      "drawRate": 41.9,
-      "lossRate": 22.6
+      "winRate": 34.4,
+      "drawRate": 43.8,
+      "lossRate": 21.9
     },
     {
       "position": 6,
@@ -205,6 +205,26 @@
     },
     {
       "position": 11,
+      "playedGames": 32,
+      "form": "",
+      "won": 9,
+      "draw": 12,
+      "lost": 11,
+      "points": 39,
+      "goalsFor": 34,
+      "goalsAgainst": 46,
+      "goalDifference": -12,
+      "teamId": 298,
+      "teamName": "Girona FC",
+      "teamShortName": "Girona",
+      "teamCrest": "https://sportsrc.org/img/score/298.png",
+      "zone": "mid",
+      "winRate": 28.1,
+      "drawRate": 37.5,
+      "lossRate": 34.4
+    },
+    {
+      "position": 12,
       "playedGames": 31,
       "form": "",
       "won": 10,
@@ -222,26 +242,6 @@
       "winRate": 32.3,
       "drawRate": 25.8,
       "lossRate": 41.9
-    },
-    {
-      "position": 12,
-      "playedGames": 31,
-      "form": "",
-      "won": 9,
-      "draw": 11,
-      "lost": 11,
-      "points": 38,
-      "goalsFor": 33,
-      "goalsAgainst": 45,
-      "goalDifference": -12,
-      "teamId": 298,
-      "teamName": "Girona FC",
-      "teamShortName": "Girona",
-      "teamCrest": "https://sportsrc.org/img/score/298.png",
-      "zone": "mid",
-      "winRate": 29.0,
-      "drawRate": 35.5,
-      "lossRate": 35.5
     },
     {
       "position": 13,
@@ -325,23 +325,23 @@
     },
     {
       "position": 17,
-      "playedGames": 31,
+      "playedGames": 32,
       "form": "",
       "won": 8,
       "draw": 9,
-      "lost": 14,
+      "lost": 15,
       "points": 33,
       "goalsFor": 35,
-      "goalsAgainst": 46,
-      "goalDifference": -11,
+      "goalsAgainst": 47,
+      "goalDifference": -12,
       "teamId": 263,
       "teamName": "Deportivo Alavés",
       "teamShortName": "Alavés",
       "teamCrest": "https://sportsrc.org/img/score/263.png",
       "zone": "mid",
-      "winRate": 25.8,
-      "drawRate": 29.0,
-      "lossRate": 45.2
+      "winRate": 25.0,
+      "drawRate": 28.1,
+      "lossRate": 46.9
     },
     {
       "position": 18,
@@ -430,36 +430,36 @@
             "currentMatchday": 33,
             "winner": null
           },
-          "id": 544538,
+          "id": 544536,
           "utcDate": "2026-04-21T19:30:00Z",
           "status": "IN_PLAY",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-21T19:43:36Z",
+          "lastUpdated": "2026-04-21T20:53:51Z",
           "homeTeam": {
-            "id": 298,
-            "name": "Girona FC",
-            "shortName": "Girona",
-            "tla": "GIR",
-            "crest": "https://sportsrc.org/img/score/298.png"
+            "id": 86,
+            "name": "Real Madrid CF",
+            "shortName": "Real Madrid",
+            "tla": "RMA",
+            "crest": "https://sportsrc.org/img/score/86.png"
           },
           "awayTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 1,
+              "home": 2,
               "away": 0
             },
             "halfTime": {
-              "home": 0,
+              "home": 1,
               "away": 0
             },
             "regularTime": {
@@ -477,8 +477,8 @@
           },
           "referees": [
             {
-              "id": 215593,
-              "name": "Iosu Galech Apezteguía",
+              "id": 206203,
+              "name": "Juan Martínez Munuera",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -505,37 +505,37 @@
             "currentMatchday": 33,
             "winner": null
           },
-          "id": 544536,
+          "id": 544538,
           "utcDate": "2026-04-21T19:30:00Z",
           "status": "IN_PLAY",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-21T19:35:35Z",
+          "lastUpdated": "2026-04-21T20:39:58Z",
           "homeTeam": {
-            "id": 86,
-            "name": "Real Madrid CF",
-            "shortName": "Real Madrid",
-            "tla": "RMA",
-            "crest": "https://sportsrc.org/img/score/86.png"
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
           },
           "awayTeam": {
-            "id": 263,
-            "name": "Deportivo Alavés",
-            "shortName": "Alavés",
-            "tla": "ALA",
-            "crest": "https://sportsrc.org/img/score/263.png"
+            "id": 90,
+            "name": "Real Betis Balompié",
+            "shortName": "Real Betis",
+            "tla": "BET",
+            "crest": "https://sportsrc.org/img/score/90.png"
           },
           "score": {
             "winner": "DRAW",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 0,
-              "away": 0
+              "home": 1,
+              "away": 1
             },
             "halfTime": {
-              "home": 0,
-              "away": 0
+              "home": 1,
+              "away": 1
             },
             "regularTime": {
               "home": 0,
@@ -552,8 +552,8 @@
           },
           "referees": [
             {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
+              "id": 215593,
+              "name": "Iosu Galech Apezteguía",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -561,7 +561,7 @@
         }
       ],
       "finished": [],
-      "last_updated": "2026-04-21T19:45:10+00:00"
+      "last_updated": "2026-04-21T20:55:09+00:00"
     }
   }
 }
