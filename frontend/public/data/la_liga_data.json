@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-22T17:34:56.251864+00:00",
+  "updatedAt": "2026-04-22T19:21:46.394200+00:00",
   "season": "2025",
   "matchday": 33,
   "standings": [
@@ -71,8 +71,8 @@
       "draw": 7,
       "lost": 8,
       "points": 58,
-      "goalsFor": 52,
-      "goalsAgainst": 33,
+      "goalsFor": 53,
+      "goalsAgainst": 34,
       "goalDifference": 19,
       "teamId": 78,
       "teamName": "Club Atlético de Madrid",
@@ -125,12 +125,12 @@
     },
     {
       "position": 7,
-      "playedGames": 31,
+      "playedGames": 32,
       "form": "",
       "won": 11,
-      "draw": 9,
+      "draw": 10,
       "lost": 11,
-      "points": 42,
+      "points": 43,
       "goalsFor": 49,
       "goalsAgainst": 48,
       "goalDifference": 1,
@@ -139,18 +139,18 @@
       "teamShortName": "Real Sociedad",
       "teamCrest": "https://sportsrc.org/img/score/92.png",
       "zone": "mid",
-      "winRate": 35.5,
-      "drawRate": 29.0,
-      "lossRate": 35.5
+      "winRate": 34.4,
+      "drawRate": 31.3,
+      "lossRate": 34.4
     },
     {
       "position": 8,
-      "playedGames": 31,
+      "playedGames": 32,
       "form": "",
       "won": 12,
-      "draw": 5,
+      "draw": 6,
       "lost": 14,
-      "points": 41,
+      "points": 42,
       "goalsFor": 27,
       "goalsAgainst": 32,
       "goalDifference": -5,
@@ -159,9 +159,9 @@
       "teamShortName": "Getafe",
       "teamCrest": "https://sportsrc.org/img/score/82.png",
       "zone": "mid",
-      "winRate": 38.7,
-      "drawRate": 16.1,
-      "lossRate": 45.2
+      "winRate": 37.5,
+      "drawRate": 18.8,
+      "lossRate": 43.8
     },
     {
       "position": 9,
@@ -331,8 +331,8 @@
       "draw": 12,
       "lost": 13,
       "points": 33,
-      "goalsFor": 40,
-      "goalsAgainst": 48,
+      "goalsFor": 41,
+      "goalsAgainst": 49,
       "goalDifference": -8,
       "teamId": 285,
       "teamName": "Elche CF",
@@ -430,26 +430,26 @@
             "currentMatchday": 33,
             "winner": null
           },
-          "id": 544537,
-          "utcDate": "2026-04-22T17:00:00Z",
+          "id": 544540,
+          "utcDate": "2026-04-22T18:00:00Z",
           "status": "IN_PLAY",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-22T17:22:01Z",
+          "lastUpdated": "2026-04-22T19:14:07Z",
           "homeTeam": {
-            "id": 285,
-            "name": "Elche CF",
-            "shortName": "Elche",
-            "tla": "ELC",
-            "crest": "https://sportsrc.org/img/score/285.png"
+            "id": 92,
+            "name": "Real Sociedad de Fútbol",
+            "shortName": "Real Sociedad",
+            "tla": "RSO",
+            "crest": "https://sportsrc.org/img/score/92.png"
           },
           "awayTeam": {
-            "id": 78,
-            "name": "Club Atlético de Madrid",
-            "shortName": "Atleti",
-            "tla": "ATL",
-            "crest": "https://sportsrc.org/img/score/78.png"
+            "id": 82,
+            "name": "Getafe CF",
+            "shortName": "Getafe",
+            "tla": "GET",
+            "crest": "https://sportsrc.org/img/score/82.png"
           },
           "score": {
             "winner": "AWAY_TEAM",
@@ -460,7 +460,7 @@
             },
             "halfTime": {
               "home": 0,
-              "away": 0
+              "away": 1
             },
             "regularTime": {
               "home": 0,
@@ -477,8 +477,8 @@
           },
           "referees": [
             {
-              "id": 206215,
-              "name": "Guillermo Cuadra Fernández",
+              "id": 217698,
+              "name": "Mateo Busquets Ferrer",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -507,76 +507,13 @@
             "currentMatchday": 33,
             "winner": null
           },
-          "id": 544531,
-          "utcDate": "2026-04-21T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 33,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-04-22T00:21:08Z",
-          "homeTeam": {
-            "id": 77,
-            "name": "Athletic Club",
-            "shortName": "Athletic",
-            "tla": "ATH",
-            "crest": "https://sportsrc.org/img/score/77.png"
-          },
-          "awayTeam": {
-            "id": 79,
-            "name": "CA Osasuna",
-            "shortName": "Osasuna",
-            "tla": "OSA",
-            "crest": "https://sportsrc.org/img/score/79.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 0
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 56995,
-              "name": "Víctor García Verdura",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 33,
-            "winner": null
-          },
           "id": 544534,
           "utcDate": "2026-04-21T17:00:00Z",
           "status": "FINISHED",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-22T00:21:08Z",
+          "lastUpdated": "2026-04-21T19:01:38Z",
           "homeTeam": {
             "id": 89,
             "name": "RCD Mallorca",
@@ -599,6 +536,18 @@
               "away": 1
             },
             "halfTime": {
+              "home": 0,
+              "away": 0
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -633,43 +582,55 @@
             "currentMatchday": 33,
             "winner": null
           },
-          "id": 544536,
-          "utcDate": "2026-04-21T19:30:00Z",
+          "id": 544531,
+          "utcDate": "2026-04-21T17:00:00Z",
           "status": "FINISHED",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-22T00:21:08Z",
+          "lastUpdated": "2026-04-21T19:06:17Z",
           "homeTeam": {
-            "id": 86,
-            "name": "Real Madrid CF",
-            "shortName": "Real Madrid",
-            "tla": "RMA",
-            "crest": "https://sportsrc.org/img/score/86.png"
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
           },
           "awayTeam": {
-            "id": 263,
-            "name": "Deportivo Alavés",
-            "shortName": "Alavés",
-            "tla": "ALA",
-            "crest": "https://sportsrc.org/img/score/263.png"
+            "id": 79,
+            "name": "CA Osasuna",
+            "shortName": "Osasuna",
+            "tla": "OSA",
+            "crest": "https://sportsrc.org/img/score/79.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 2,
-              "away": 1
+              "home": 1,
+              "away": 0
             },
             "halfTime": {
               "home": 1,
+              "away": 0
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
               "away": 0
             }
           },
           "referees": [
             {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
+              "id": 56995,
+              "name": "Víctor García Verdura",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -702,7 +663,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-22T00:21:08Z",
+          "lastUpdated": "2026-04-21T21:31:11Z",
           "homeTeam": {
             "id": 298,
             "name": "Girona FC",
@@ -727,6 +688,18 @@
             "halfTime": {
               "home": 1,
               "away": 1
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
             }
           },
           "referees": [
@@ -737,9 +710,84 @@
               "nationality": "Spain"
             }
           ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 33,
+            "winner": null
+          },
+          "id": 544536,
+          "utcDate": "2026-04-21T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 33,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-21T21:38:30Z",
+          "homeTeam": {
+            "id": 86,
+            "name": "Real Madrid CF",
+            "shortName": "Real Madrid",
+            "tla": "RMA",
+            "crest": "https://sportsrc.org/img/score/86.png"
+          },
+          "awayTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 206203,
+              "name": "Juan Martínez Munuera",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
         }
       ],
-      "last_updated": "2026-04-22T17:25:08+00:00"
+      "last_updated": "2026-04-22T19:20:14+00:00"
     }
   }
 }
