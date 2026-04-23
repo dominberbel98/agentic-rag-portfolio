@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-23T17:42:33.268960+00:00",
+  "updatedAt": "2026-04-23T19:19:27.586530+00:00",
   "season": "2025",
   "matchday": 33,
   "standings": [
@@ -207,6 +207,26 @@
       "position": 11,
       "playedGames": 32,
       "form": "",
+      "won": 10,
+      "draw": 9,
+      "lost": 13,
+      "points": 39,
+      "goalsFor": 37,
+      "goalsAgainst": 48,
+      "goalDifference": -11,
+      "teamId": 80,
+      "teamName": "RCD Espanyol de Barcelona",
+      "teamShortName": "Espanyol",
+      "teamCrest": "https://sportsrc.org/img/score/80.png",
+      "zone": "mid",
+      "winRate": 31.3,
+      "drawRate": 28.1,
+      "lossRate": 40.6
+    },
+    {
+      "position": 12,
+      "playedGames": 32,
+      "form": "",
       "won": 9,
       "draw": 11,
       "lost": 12,
@@ -222,26 +242,6 @@
       "winRate": 28.1,
       "drawRate": 34.4,
       "lossRate": 37.5
-    },
-    {
-      "position": 12,
-      "playedGames": 31,
-      "form": "",
-      "won": 10,
-      "draw": 8,
-      "lost": 13,
-      "points": 38,
-      "goalsFor": 37,
-      "goalsAgainst": 48,
-      "goalDifference": -11,
-      "teamId": 80,
-      "teamName": "RCD Espanyol de Barcelona",
-      "teamShortName": "Espanyol",
-      "teamCrest": "https://sportsrc.org/img/score/80.png",
-      "zone": "mid",
-      "winRate": 32.3,
-      "drawRate": 25.8,
-      "lossRate": 41.9
     },
     {
       "position": 13,
@@ -267,6 +267,26 @@
       "position": 14,
       "playedGames": 32,
       "form": "",
+      "won": 8,
+      "draw": 12,
+      "lost": 12,
+      "points": 36,
+      "goalsFor": 29,
+      "goalsAgainst": 38,
+      "goalDifference": -9,
+      "teamId": 87,
+      "teamName": "Rayo Vallecano de Madrid",
+      "teamShortName": "Rayo Vallecano",
+      "teamCrest": "https://sportsrc.org/img/score/87.png",
+      "zone": "mid",
+      "winRate": 25.0,
+      "drawRate": 37.5,
+      "lossRate": 37.5
+    },
+    {
+      "position": 15,
+      "playedGames": 32,
+      "form": "",
       "won": 9,
       "draw": 8,
       "lost": 15,
@@ -284,7 +304,7 @@
       "lossRate": 46.9
     },
     {
-      "position": 15,
+      "position": 16,
       "playedGames": 32,
       "form": "",
       "won": 8,
@@ -304,44 +324,24 @@
       "lossRate": 40.6
     },
     {
-      "position": 16,
-      "playedGames": 31,
-      "form": "",
-      "won": 8,
-      "draw": 11,
-      "lost": 12,
-      "points": 35,
-      "goalsFor": 29,
-      "goalsAgainst": 38,
-      "goalDifference": -9,
-      "teamId": 87,
-      "teamName": "Rayo Vallecano de Madrid",
-      "teamShortName": "Rayo Vallecano",
-      "teamCrest": "https://sportsrc.org/img/score/87.png",
-      "zone": "mid",
-      "winRate": 25.8,
-      "drawRate": 35.5,
-      "lossRate": 38.7
-    },
-    {
       "position": 17,
-      "playedGames": 31,
+      "playedGames": 32,
       "form": "",
       "won": 9,
       "draw": 7,
-      "lost": 15,
+      "lost": 16,
       "points": 34,
       "goalsFor": 39,
-      "goalsAgainst": 51,
-      "goalDifference": -12,
+      "goalsAgainst": 52,
+      "goalDifference": -13,
       "teamId": 559,
       "teamName": "Sevilla FC",
       "teamShortName": "Sevilla FC",
       "teamCrest": "https://sportsrc.org/img/score/559.png",
       "zone": "mid",
-      "winRate": 29.0,
-      "drawRate": 22.6,
-      "lossRate": 48.4
+      "winRate": 28.1,
+      "drawRate": 21.9,
+      "lossRate": 50.0
     },
     {
       "position": 18,
@@ -365,23 +365,23 @@
     },
     {
       "position": 19,
-      "playedGames": 31,
+      "playedGames": 32,
       "form": "",
-      "won": 7,
+      "won": 8,
       "draw": 8,
       "lost": 16,
-      "points": 29,
-      "goalsFor": 35,
+      "points": 32,
+      "goalsFor": 36,
       "goalsAgainst": 50,
-      "goalDifference": -15,
+      "goalDifference": -14,
       "teamId": 88,
       "teamName": "Levante UD",
       "teamShortName": "Levante",
       "teamCrest": "https://sportsrc.org/img/score/88.png",
       "zone": "relegation",
-      "winRate": 22.6,
-      "drawRate": 25.8,
-      "lossRate": 51.6
+      "winRate": 25.0,
+      "drawRate": 25.0,
+      "lossRate": 50.0
     },
     {
       "position": 20,
@@ -427,29 +427,29 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
-          "id": 544533,
-          "utcDate": "2026-04-23T17:00:00Z",
-          "status": "IN_PLAY",
+          "id": 544539,
+          "utcDate": "2026-04-23T18:00:00Z",
+          "status": "PAUSED",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-23T17:05:02Z",
+          "lastUpdated": "2026-04-23T18:56:57Z",
           "homeTeam": {
-            "id": 88,
-            "name": "Levante UD",
-            "shortName": "Levante",
-            "tla": "LEV",
-            "crest": "https://sportsrc.org/img/score/88.png"
+            "id": 87,
+            "name": "Rayo Vallecano de Madrid",
+            "shortName": "Rayo Vallecano",
+            "tla": "RAY",
+            "crest": "https://sportsrc.org/img/score/87.png"
           },
           "awayTeam": {
-            "id": 559,
-            "name": "Sevilla FC",
-            "shortName": "Sevilla FC",
-            "tla": "SEV",
-            "crest": "https://sportsrc.org/img/score/559.png"
+            "id": 80,
+            "name": "RCD Espanyol de Barcelona",
+            "shortName": "Espanyol",
+            "tla": "ESP",
+            "crest": "https://sportsrc.org/img/score/80.png"
           },
           "score": {
             "winner": "DRAW",
@@ -477,8 +477,8 @@
           },
           "referees": [
             {
-              "id": 207080,
-              "name": "José Sánchez Martínez",
+              "id": 206205,
+              "name": "Adrián Cordero Vega",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -486,69 +486,6 @@
         }
       ],
       "finished": [
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 33,
-            "winner": null
-          },
-          "id": 544531,
-          "utcDate": "2026-04-21T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 33,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-04-23T00:21:10Z",
-          "homeTeam": {
-            "id": 77,
-            "name": "Athletic Club",
-            "shortName": "Athletic",
-            "tla": "ATH",
-            "crest": "https://sportsrc.org/img/score/77.png"
-          },
-          "awayTeam": {
-            "id": 79,
-            "name": "CA Osasuna",
-            "shortName": "Osasuna",
-            "tla": "OSA",
-            "crest": "https://sportsrc.org/img/score/79.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 0
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 56995,
-              "name": "Víctor García Verdura",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
         {
           "area": {
             "id": 2224,
@@ -607,6 +544,69 @@
             {
               "id": 207113,
               "name": "César Soto Grado",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 33,
+            "winner": null
+          },
+          "id": 544531,
+          "utcDate": "2026-04-21T17:00:00Z",
+          "status": "FINISHED",
+          "matchday": 33,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-23T00:21:10Z",
+          "homeTeam": {
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
+          },
+          "awayTeam": {
+            "id": 79,
+            "name": "CA Osasuna",
+            "shortName": "Osasuna",
+            "tla": "OSA",
+            "crest": "https://sportsrc.org/img/score/79.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 56995,
+              "name": "Víctor García Verdura",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -928,7 +928,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-23T17:40:14+00:00"
+      "last_updated": "2026-04-23T19:15:11+00:00"
     }
   }
 }
