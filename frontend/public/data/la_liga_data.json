@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-25T20:46:26.680404+00:00",
+  "updatedAt": "2026-04-25T21:41:36.309569+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -71,8 +71,8 @@
       "draw": 6,
       "lost": 9,
       "points": 60,
-      "goalsFor": 55,
-      "goalsAgainst": 36,
+      "goalsFor": 56,
+      "goalsAgainst": 37,
       "goalDifference": 19,
       "teamId": 78,
       "teamName": "Club Atlético de Madrid",
@@ -171,8 +171,8 @@
       "draw": 5,
       "lost": 16,
       "points": 41,
-      "goalsFor": 35,
-      "goalsAgainst": 47,
+      "goalsFor": 36,
+      "goalsAgainst": 48,
       "goalDifference": -12,
       "teamId": 77,
       "teamName": "Athletic Club",
@@ -225,23 +225,23 @@
     },
     {
       "position": 12,
-      "playedGames": 33,
+      "playedGames": 32,
       "form": "",
       "won": 9,
       "draw": 11,
-      "lost": 13,
+      "lost": 12,
       "points": 38,
-      "goalsFor": 36,
-      "goalsAgainst": 50,
-      "goalDifference": -14,
-      "teamId": 298,
-      "teamName": "Girona FC",
-      "teamShortName": "Girona",
-      "teamCrest": "https://sportsrc.org/img/score/298.png",
+      "goalsFor": 30,
+      "goalsAgainst": 38,
+      "goalDifference": -8,
+      "teamId": 87,
+      "teamName": "Rayo Vallecano de Madrid",
+      "teamShortName": "Rayo Vallecano",
+      "teamCrest": "https://sportsrc.org/img/score/87.png",
       "zone": "mid",
-      "winRate": 27.3,
-      "drawRate": 33.3,
-      "lossRate": 39.4
+      "winRate": 28.1,
+      "drawRate": 34.4,
+      "lossRate": 37.5
     },
     {
       "position": 13,
@@ -265,23 +265,23 @@
     },
     {
       "position": 14,
-      "playedGames": 32,
+      "playedGames": 33,
       "form": "",
       "won": 9,
       "draw": 11,
-      "lost": 12,
+      "lost": 13,
       "points": 38,
-      "goalsFor": 30,
-      "goalsAgainst": 38,
-      "goalDifference": -8,
-      "teamId": 87,
-      "teamName": "Rayo Vallecano de Madrid",
-      "teamShortName": "Rayo Vallecano",
-      "teamCrest": "https://sportsrc.org/img/score/87.png",
+      "goalsFor": 36,
+      "goalsAgainst": 50,
+      "goalDifference": -14,
+      "teamId": 298,
+      "teamName": "Girona FC",
+      "teamShortName": "Girona",
+      "teamCrest": "https://sportsrc.org/img/score/298.png",
       "zone": "mid",
-      "winRate": 28.1,
-      "drawRate": 34.4,
-      "lossRate": 37.5
+      "winRate": 27.3,
+      "drawRate": 33.3,
+      "lossRate": 39.4
     },
     {
       "position": 15,
@@ -1104,7 +1104,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-25T20:45:14+00:00"
+      "last_updated": "2026-04-25T21:40:16+00:00"
     }
   }
 }
