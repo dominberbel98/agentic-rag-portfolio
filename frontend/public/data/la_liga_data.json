@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-25T12:04:17.795254+00:00",
+  "updatedAt": "2026-04-25T13:45:28.762519+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -291,13 +291,13 @@
       "draw": 9,
       "lost": 15,
       "points": 36,
-      "goalsFor": 40,
+      "goalsFor": 38,
       "goalsAgainst": 49,
-      "goalDifference": -9,
-      "teamId": 89,
-      "teamName": "RCD Mallorca",
-      "teamShortName": "Mallorca",
-      "teamCrest": "https://sportsrc.org/img/score/89.png",
+      "goalDifference": -11,
+      "teamId": 263,
+      "teamName": "Deportivo Alavés",
+      "teamShortName": "Alavés",
+      "teamCrest": "https://sportsrc.org/img/score/263.png",
       "zone": "mid",
       "winRate": 27.3,
       "drawRate": 27.3,
@@ -305,6 +305,26 @@
     },
     {
       "position": 16,
+      "playedGames": 33,
+      "form": "",
+      "won": 9,
+      "draw": 8,
+      "lost": 16,
+      "points": 35,
+      "goalsFor": 41,
+      "goalsAgainst": 51,
+      "goalDifference": -10,
+      "teamId": 89,
+      "teamName": "RCD Mallorca",
+      "teamShortName": "Mallorca",
+      "teamCrest": "https://sportsrc.org/img/score/89.png",
+      "zone": "mid",
+      "winRate": 27.3,
+      "drawRate": 24.2,
+      "lossRate": 48.5
+    },
+    {
+      "position": 17,
       "playedGames": 32,
       "form": "",
       "won": 8,
@@ -324,7 +344,7 @@
       "lossRate": 40.6
     },
     {
-      "position": 17,
+      "position": 18,
       "playedGames": 32,
       "form": "",
       "won": 9,
@@ -338,30 +358,10 @@
       "teamName": "Sevilla FC",
       "teamShortName": "Sevilla FC",
       "teamCrest": "https://sportsrc.org/img/score/559.png",
-      "zone": "mid",
+      "zone": "relegation",
       "winRate": 28.1,
       "drawRate": 21.9,
       "lossRate": 50.0
-    },
-    {
-      "position": 18,
-      "playedGames": 33,
-      "form": "",
-      "won": 8,
-      "draw": 10,
-      "lost": 15,
-      "points": 34,
-      "goalsFor": 36,
-      "goalsAgainst": 48,
-      "goalDifference": -12,
-      "teamId": 263,
-      "teamName": "Deportivo Alavés",
-      "teamShortName": "Alavés",
-      "teamCrest": "https://sportsrc.org/img/score/263.png",
-      "zone": "relegation",
-      "winRate": 24.2,
-      "drawRate": 30.3,
-      "lossRate": 45.5
     },
     {
       "position": 19,
@@ -408,7 +408,83 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [],
+      "live": [
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 33,
+            "winner": null
+          },
+          "id": 544521,
+          "utcDate": "2026-04-25T12:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 32,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-25T13:35:02Z",
+          "homeTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "awayTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 80747,
+              "name": "Javier Alberola Rojas",
+              "type": "REFEREE",
+              "nationality": null
+            }
+          ]
+        }
+      ],
       "finished": [
         {
           "area": {
@@ -1236,7 +1312,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-25T11:55:13+00:00"
+      "last_updated": "2026-04-25T13:45:13+00:00"
     }
   }
 }
