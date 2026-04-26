@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-26T13:48:02.943258+00:00",
+  "updatedAt": "2026-04-26T14:51:49.013064+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -111,8 +111,8 @@
       "draw": 9,
       "lost": 12,
       "points": 45,
-      "goalsFor": 51,
-      "goalsAgainst": 50,
+      "goalsFor": 52,
+      "goalsAgainst": 51,
       "goalDifference": 1,
       "teamId": 92,
       "teamName": "Real Sociedad de Fútbol",
@@ -231,8 +231,8 @@
       "draw": 11,
       "lost": 13,
       "points": 38,
-      "goalsFor": 31,
-      "goalsAgainst": 40,
+      "goalsFor": 32,
+      "goalsAgainst": 41,
       "goalDifference": -9,
       "teamId": 87,
       "teamName": "Rayo Vallecano de Madrid",
@@ -1356,7 +1356,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-26T13:45:14+00:00"
+      "last_updated": "2026-04-26T14:50:16+00:00"
     }
   }
 }
