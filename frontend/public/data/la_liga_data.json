@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-26T12:06:25.762763+00:00",
+  "updatedAt": "2026-04-26T13:48:02.943258+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -107,6 +107,26 @@
       "position": 6,
       "playedGames": 33,
       "form": "",
+      "won": 12,
+      "draw": 9,
+      "lost": 12,
+      "points": 45,
+      "goalsFor": 51,
+      "goalsAgainst": 50,
+      "goalDifference": 1,
+      "teamId": 92,
+      "teamName": "Real Sociedad de Fútbol",
+      "teamShortName": "Real Sociedad",
+      "teamCrest": "https://sportsrc.org/img/score/92.png",
+      "zone": "europa",
+      "winRate": 36.4,
+      "drawRate": 27.3,
+      "lossRate": 36.4
+    },
+    {
+      "position": 7,
+      "playedGames": 33,
+      "form": "",
       "won": 13,
       "draw": 5,
       "lost": 15,
@@ -118,13 +138,13 @@
       "teamName": "Getafe CF",
       "teamShortName": "Getafe",
       "teamCrest": "https://sportsrc.org/img/score/82.png",
-      "zone": "europa",
+      "zone": "mid",
       "winRate": 39.4,
       "drawRate": 15.2,
       "lossRate": 45.5
     },
     {
-      "position": 7,
+      "position": 8,
       "playedGames": 32,
       "form": "",
       "won": 11,
@@ -142,26 +162,6 @@
       "winRate": 34.4,
       "drawRate": 34.4,
       "lossRate": 31.3
-    },
-    {
-      "position": 8,
-      "playedGames": 33,
-      "form": "",
-      "won": 11,
-      "draw": 10,
-      "lost": 12,
-      "points": 43,
-      "goalsFor": 49,
-      "goalsAgainst": 49,
-      "goalDifference": 0,
-      "teamId": 92,
-      "teamName": "Real Sociedad de Fútbol",
-      "teamShortName": "Real Sociedad",
-      "teamCrest": "https://sportsrc.org/img/score/92.png",
-      "zone": "mid",
-      "winRate": 33.3,
-      "drawRate": 30.3,
-      "lossRate": 36.4
     },
     {
       "position": 9,
@@ -228,20 +228,20 @@
       "playedGames": 33,
       "form": "",
       "won": 9,
-      "draw": 12,
-      "lost": 12,
-      "points": 39,
-      "goalsFor": 30,
-      "goalsAgainst": 38,
-      "goalDifference": -8,
+      "draw": 11,
+      "lost": 13,
+      "points": 38,
+      "goalsFor": 31,
+      "goalsAgainst": 40,
+      "goalDifference": -9,
       "teamId": 87,
       "teamName": "Rayo Vallecano de Madrid",
       "teamShortName": "Rayo Vallecano",
       "teamCrest": "https://sportsrc.org/img/score/87.png",
       "zone": "mid",
       "winRate": 27.3,
-      "drawRate": 36.4,
-      "lossRate": 36.4
+      "drawRate": 33.3,
+      "lossRate": 39.4
     },
     {
       "position": 13,
@@ -1356,7 +1356,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-26T12:05:15+00:00"
+      "last_updated": "2026-04-26T13:45:14+00:00"
     }
   }
 }
