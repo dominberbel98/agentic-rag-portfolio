@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-26T11:14:48.226034+00:00",
+  "updatedAt": "2026-04-26T12:06:25.762763+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -145,12 +145,12 @@
     },
     {
       "position": 8,
-      "playedGames": 32,
+      "playedGames": 33,
       "form": "",
       "won": 11,
-      "draw": 9,
+      "draw": 10,
       "lost": 12,
-      "points": 42,
+      "points": 43,
       "goalsFor": 49,
       "goalsAgainst": 49,
       "goalDifference": 0,
@@ -159,9 +159,9 @@
       "teamShortName": "Real Sociedad",
       "teamCrest": "https://sportsrc.org/img/score/92.png",
       "zone": "mid",
-      "winRate": 34.4,
-      "drawRate": 28.1,
-      "lossRate": 37.5
+      "winRate": 33.3,
+      "drawRate": 30.3,
+      "lossRate": 36.4
     },
     {
       "position": 9,
@@ -225,12 +225,12 @@
     },
     {
       "position": 12,
-      "playedGames": 32,
+      "playedGames": 33,
       "form": "",
       "won": 9,
-      "draw": 11,
+      "draw": 12,
       "lost": 12,
-      "points": 38,
+      "points": 39,
       "goalsFor": 30,
       "goalsAgainst": 38,
       "goalDifference": -8,
@@ -239,9 +239,9 @@
       "teamShortName": "Rayo Vallecano",
       "teamCrest": "https://sportsrc.org/img/score/87.png",
       "zone": "mid",
-      "winRate": 28.1,
-      "drawRate": 34.4,
-      "lossRate": 37.5
+      "winRate": 27.3,
+      "drawRate": 36.4,
+      "lossRate": 36.4
     },
     {
       "position": 13,
@@ -557,69 +557,6 @@
             "currentMatchday": 32,
             "winner": null
           },
-          "id": 544538,
-          "utcDate": "2026-04-21T19:30:00Z",
-          "status": "FINISHED",
-          "matchday": 33,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
-          "homeTeam": {
-            "id": 298,
-            "name": "Girona FC",
-            "shortName": "Girona",
-            "tla": "GIR",
-            "crest": "https://sportsrc.org/img/score/298.png"
-          },
-          "awayTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
-          },
-          "score": {
-            "winner": "AWAY_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 3
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 215593,
-              "name": "Iosu Galech Apezteguía",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 32,
-            "winner": null
-          },
           "id": 544536,
           "utcDate": "2026-04-21T19:30:00Z",
           "status": "FINISHED",
@@ -657,6 +594,69 @@
             {
               "id": 206203,
               "name": "Juan Martínez Munuera",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 32,
+            "winner": null
+          },
+          "id": 544538,
+          "utcDate": "2026-04-21T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 33,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-26T00:21:02Z",
+          "homeTeam": {
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
+          },
+          "awayTeam": {
+            "id": 90,
+            "name": "Real Betis Balompié",
+            "shortName": "Real Betis",
+            "tla": "BET",
+            "crest": "https://sportsrc.org/img/score/90.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 3
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 215593,
+              "name": "Iosu Galech Apezteguía",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1356,7 +1356,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-26T11:10:14+00:00"
+      "last_updated": "2026-04-26T12:05:15+00:00"
     }
   }
 }
