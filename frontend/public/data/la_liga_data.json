@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-26T07:51:57.417809+00:00",
+  "updatedAt": "2026-04-26T09:07:45.463225+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -557,69 +557,6 @@
             "currentMatchday": 32,
             "winner": null
           },
-          "id": 544536,
-          "utcDate": "2026-04-21T19:30:00Z",
-          "status": "FINISHED",
-          "matchday": 33,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
-          "homeTeam": {
-            "id": 86,
-            "name": "Real Madrid CF",
-            "shortName": "Real Madrid",
-            "tla": "RMA",
-            "crest": "https://sportsrc.org/img/score/86.png"
-          },
-          "awayTeam": {
-            "id": 263,
-            "name": "Deportivo Alavés",
-            "shortName": "Alavés",
-            "tla": "ALA",
-            "crest": "https://sportsrc.org/img/score/263.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 32,
-            "winner": null
-          },
           "id": 544538,
           "utcDate": "2026-04-21T19:30:00Z",
           "status": "FINISHED",
@@ -657,6 +594,69 @@
             {
               "id": 215593,
               "name": "Iosu Galech Apezteguía",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 32,
+            "winner": null
+          },
+          "id": 544536,
+          "utcDate": "2026-04-21T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 33,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-26T00:21:02Z",
+          "homeTeam": {
+            "id": 86,
+            "name": "Real Madrid CF",
+            "shortName": "Real Madrid",
+            "tla": "RMA",
+            "crest": "https://sportsrc.org/img/score/86.png"
+          },
+          "awayTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 206203,
+              "name": "Juan Martínez Munuera",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1356,7 +1356,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-26T07:50:14+00:00"
+      "last_updated": "2026-04-26T09:05:07+00:00"
     }
   }
 }
