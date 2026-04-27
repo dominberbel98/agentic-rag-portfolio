@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-27T14:06:17.194048+00:00",
+  "updatedAt": "2026-04-27T16:10:30.552700+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -428,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544531,
@@ -503,7 +503,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544534,
@@ -578,82 +578,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
-            "winner": null
-          },
-          "id": 544538,
-          "utcDate": "2026-04-21T19:30:00Z",
-          "status": "FINISHED",
-          "matchday": 33,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-04-21T21:31:11Z",
-          "homeTeam": {
-            "id": 298,
-            "name": "Girona FC",
-            "shortName": "Girona",
-            "tla": "GIR",
-            "crest": "https://sportsrc.org/img/score/298.png"
-          },
-          "awayTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
-          },
-          "score": {
-            "winner": "AWAY_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 3
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 1
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 215593,
-              "name": "Iosu Galech Apezteguía",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544536,
@@ -728,7 +653,82 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
+            "winner": null
+          },
+          "id": 544538,
+          "utcDate": "2026-04-21T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 33,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-21T21:31:11Z",
+          "homeTeam": {
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
+          },
+          "awayTeam": {
+            "id": 90,
+            "name": "Real Betis Balompié",
+            "shortName": "Real Betis",
+            "tla": "BET",
+            "crest": "https://sportsrc.org/img/score/90.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 3
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 1
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 215593,
+              "name": "Iosu Galech Apezteguía",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544537,
@@ -803,7 +803,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544540,
@@ -878,7 +878,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544532,
@@ -953,7 +953,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544533,
@@ -1028,7 +1028,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544539,
@@ -1103,7 +1103,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544535,
@@ -1178,7 +1178,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544522,
@@ -1253,7 +1253,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544521,
@@ -1328,7 +1328,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544527,
@@ -1403,7 +1403,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544530,
@@ -1478,7 +1478,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544526,
@@ -1553,7 +1553,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544525,
@@ -1628,7 +1628,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544529,
@@ -1703,7 +1703,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544524,
@@ -1778,7 +1778,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544528,
@@ -1836,7 +1836,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-27T14:05:10+00:00"
+      "last_updated": "2026-04-27T16:10:16+00:00"
     }
   }
 }
