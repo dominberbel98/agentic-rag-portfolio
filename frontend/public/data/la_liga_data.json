@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-27T00:07:17.316140+00:00",
+  "updatedAt": "2026-04-27T04:09:19.413290+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -431,76 +431,13 @@
             "currentMatchday": 32,
             "winner": null
           },
-          "id": 544534,
-          "utcDate": "2026-04-21T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 33,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
-          "homeTeam": {
-            "id": 89,
-            "name": "RCD Mallorca",
-            "shortName": "Mallorca",
-            "tla": "MAL",
-            "crest": "https://sportsrc.org/img/score/89.png"
-          },
-          "awayTeam": {
-            "id": 95,
-            "name": "Valencia CF",
-            "shortName": "Valencia",
-            "tla": "VAL",
-            "crest": "https://sportsrc.org/img/score/95.png"
-          },
-          "score": {
-            "winner": "DRAW",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 207113,
-              "name": "César Soto Grado",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 32,
-            "winner": null
-          },
           "id": 544531,
           "utcDate": "2026-04-21T17:00:00Z",
           "status": "FINISHED",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 77,
             "name": "Athletic Club",
@@ -557,13 +494,76 @@
             "currentMatchday": 32,
             "winner": null
           },
+          "id": 544534,
+          "utcDate": "2026-04-21T17:00:00Z",
+          "status": "FINISHED",
+          "matchday": 33,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-27T00:21:05Z",
+          "homeTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "awayTeam": {
+            "id": 95,
+            "name": "Valencia CF",
+            "shortName": "Valencia",
+            "tla": "VAL",
+            "crest": "https://sportsrc.org/img/score/95.png"
+          },
+          "score": {
+            "winner": "DRAW",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 207113,
+              "name": "César Soto Grado",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 32,
+            "winner": null
+          },
           "id": 544536,
           "utcDate": "2026-04-21T19:30:00Z",
           "status": "FINISHED",
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 86,
             "name": "Real Madrid CF",
@@ -626,7 +626,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 298,
             "name": "Girona FC",
@@ -689,7 +689,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 285,
             "name": "Elche CF",
@@ -752,7 +752,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 92,
             "name": "Real Sociedad de Fútbol",
@@ -815,7 +815,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 81,
             "name": "FC Barcelona",
@@ -878,7 +878,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 88,
             "name": "Levante UD",
@@ -941,7 +941,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 87,
             "name": "Rayo Vallecano de Madrid",
@@ -1004,7 +1004,7 @@
           "matchday": 33,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 1048,
             "name": "Real Oviedo",
@@ -1067,7 +1067,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 90,
             "name": "Real Betis Balompié",
@@ -1130,7 +1130,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 263,
             "name": "Deportivo Alavés",
@@ -1193,7 +1193,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 82,
             "name": "Getafe CF",
@@ -1256,7 +1256,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 95,
             "name": "Valencia CF",
@@ -1319,7 +1319,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T00:21:02Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 78,
             "name": "Club Atlético de Madrid",
@@ -1382,7 +1382,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T14:15:00Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 87,
             "name": "Rayo Vallecano de Madrid",
@@ -1407,18 +1407,6 @@
             "halfTime": {
               "home": 1,
               "away": 1
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
             }
           },
           "referees": [
@@ -1457,7 +1445,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T16:19:25Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 1048,
             "name": "Real Oviedo",
@@ -1482,18 +1470,6 @@
             "halfTime": {
               "home": 0,
               "away": 2
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
             }
           },
           "referees": [
@@ -1532,7 +1508,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T18:35:30Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 79,
             "name": "CA Osasuna",
@@ -1555,18 +1531,6 @@
               "away": 1
             },
             "halfTime": {
-              "home": 0,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -1607,7 +1571,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-04-26T21:02:55Z",
+          "lastUpdated": "2026-04-27T00:21:05Z",
           "homeTeam": {
             "id": 94,
             "name": "Villarreal CF",
@@ -1632,18 +1596,6 @@
             "halfTime": {
               "home": 2,
               "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
             }
           },
           "referees": [
@@ -1656,7 +1608,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-27T00:05:15+00:00"
+      "last_updated": "2026-04-27T04:05:12+00:00"
     }
   }
 }
