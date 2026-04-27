@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-27T17:50:55.619253+00:00",
+  "updatedAt": "2026-04-27T19:40:45.292252+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -247,6 +247,26 @@
       "position": 13,
       "playedGames": 33,
       "form": "",
+      "won": 10,
+      "draw": 9,
+      "lost": 14,
+      "points": 39,
+      "goalsFor": 37,
+      "goalsAgainst": 49,
+      "goalDifference": -12,
+      "teamId": 80,
+      "teamName": "RCD Espanyol de Barcelona",
+      "teamShortName": "Espanyol",
+      "teamCrest": "https://sportsrc.org/img/score/80.png",
+      "zone": "mid",
+      "winRate": 30.3,
+      "drawRate": 27.3,
+      "lossRate": 42.4
+    },
+    {
+      "position": 14,
+      "playedGames": 33,
+      "form": "",
       "won": 9,
       "draw": 11,
       "lost": 13,
@@ -262,26 +282,6 @@
       "winRate": 27.3,
       "drawRate": 33.3,
       "lossRate": 39.4
-    },
-    {
-      "position": 14,
-      "playedGames": 32,
-      "form": "",
-      "won": 10,
-      "draw": 8,
-      "lost": 14,
-      "points": 38,
-      "goalsFor": 37,
-      "goalsAgainst": 49,
-      "goalDifference": -12,
-      "teamId": 80,
-      "teamName": "RCD Espanyol de Barcelona",
-      "teamShortName": "Espanyol",
-      "teamCrest": "https://sportsrc.org/img/score/80.png",
-      "zone": "mid",
-      "winRate": 31.3,
-      "drawRate": 25.0,
-      "lossRate": 43.8
     },
     {
       "position": 15,
@@ -365,12 +365,12 @@
     },
     {
       "position": 19,
-      "playedGames": 32,
+      "playedGames": 33,
       "form": "",
       "won": 8,
-      "draw": 8,
+      "draw": 9,
       "lost": 16,
-      "points": 32,
+      "points": 33,
       "goalsFor": 37,
       "goalsAgainst": 50,
       "goalDifference": -13,
@@ -379,9 +379,9 @@
       "teamShortName": "Levante",
       "teamCrest": "https://sportsrc.org/img/score/88.png",
       "zone": "relegation",
-      "winRate": 25.0,
-      "drawRate": 25.0,
-      "lossRate": 50.0
+      "winRate": 24.2,
+      "drawRate": 27.3,
+      "lossRate": 48.5
     },
     {
       "position": 20,
@@ -557,69 +557,6 @@
             "currentMatchday": 32,
             "winner": null
           },
-          "id": 544538,
-          "utcDate": "2026-04-21T19:30:00Z",
-          "status": "FINISHED",
-          "matchday": 33,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-04-27T00:21:05Z",
-          "homeTeam": {
-            "id": 298,
-            "name": "Girona FC",
-            "shortName": "Girona",
-            "tla": "GIR",
-            "crest": "https://sportsrc.org/img/score/298.png"
-          },
-          "awayTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
-          },
-          "score": {
-            "winner": "AWAY_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 3
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 215593,
-              "name": "Iosu Galech Apezteguía",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 32,
-            "winner": null
-          },
           "id": 544536,
           "utcDate": "2026-04-21T19:30:00Z",
           "status": "FINISHED",
@@ -657,6 +594,69 @@
             {
               "id": 206203,
               "name": "Juan Martínez Munuera",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 32,
+            "winner": null
+          },
+          "id": 544538,
+          "utcDate": "2026-04-21T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 33,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-04-27T00:21:05Z",
+          "homeTeam": {
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
+          },
+          "awayTeam": {
+            "id": 90,
+            "name": "Real Betis Balompié",
+            "shortName": "Real Betis",
+            "tla": "BET",
+            "crest": "https://sportsrc.org/img/score/90.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 3
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 215593,
+              "name": "Iosu Galech Apezteguía",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1608,7 +1608,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-27T17:50:17+00:00"
+      "last_updated": "2026-04-27T19:40:19+00:00"
     }
   }
 }
