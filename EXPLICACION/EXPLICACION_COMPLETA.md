@@ -832,6 +832,356 @@ XGBClassifier(
 
 ---
 
+### `scripts/credit_scoring_pipeline.py` — Modelo de Credit Scoring (banca)
+
+Este script entrena un modelo bancario de **credit scoring** (decidir si un cliente que pide un préstamo va a pagar o entrar en mora) y exporta sus resultados a un JSON que el frontend renderiza en la sección **`modelo_scoring`**.
+
+#### ¿Qué problema resuelve?
+
+Un banco recibe miles de solicitudes de préstamo. No puede revisar cada una a mano. Necesita un modelo automático que, dadas las características del solicitante (ingresos, historial de pagos, utilización de crédito, etc.), devuelva una probabilidad de impago y un **score 300–850** estilo FICO.
+
+#### PASO 1: Generación de dataset sintético
+
+Como no podemos publicar datos reales de clientes, generamos **5 000 solicitantes ficticios** con distribuciones realistas:
+
+| Feature | Distribución | ¿Qué representa? |
+|---------|--------------|-------------------|
+| `age` | uniforme(21, 70) | Edad |
+| `annual_income` | log-normal(μ=10.8, σ=0.6) | Ingresos anuales (€) |
+| `employment_years` | exponencial(escala=6) | Años en empleo actual |
+| `loan_amount` | log-normal(μ=9.5, σ=0.7) | Importe del préstamo |
+| `payment_history_pct` | beta(8, 2) · 100 | % pagos a tiempo |
+| `credit_utilization` | beta(2, 4) · 100 | % de utilización de crédito |
+| `credit_age_years` | exponencial(escala=7) | Antigüedad del historial |
+| `num_credit_accounts` | poisson(λ=4) | Nº de cuentas de crédito |
+| `recent_inquiries` | poisson(λ=2) | Consultas recientes |
+| `derogatory_marks` | poisson(λ=0.3) | Marcas negativas (impagos pasados) |
+| `debt_to_income` | derivada | Cuota mensual / ingreso mensual |
+| `loan_to_income` | derivada | Préstamo / ingreso anual |
+| `loan_purpose` | categórica | personal, auto, mortgage, education, business |
+| `home_ownership` | categórica | rent, own, mortgage |
+
+La etiqueta `default` (1 = impago, 0 = paga) se construye con un **modelo log-odds calibrado** para que la tasa de default sea realista (~17%):
+
+```python
+log_odds = -3.0 - 0.04·payment_history_pct + 0.025·credit_utilization
+         + 0.18·recent_inquiries + 0.55·derogatory_marks + 1.20·debt_to_income
+         - 0.07·credit_age_years - 0.03·employment_years - ...
+prob_default = 1 / (1 + exp(-log_odds))
+default = 1 si rand() < prob_default
+```
+
+#### PASO 2: Preprocesado (sklearn `ColumnTransformer`)
+
+```
+NUMERICAL_FEATURES ──▶ StandardScaler   (centrar y escalar)
+CATEGORICAL_FEATURES ──▶ OneHotEncoder  (texto → columnas binarias)
+```
+
+**¿Qué es StandardScaler?** Resta la media y divide por la desviación estándar de cada feature numérica → todas en la misma escala (media 0, std 1). Necesario para que la regresión logística no dé más peso a "ingresos" (50 000) que a "% utilización" (30) solo por el rango.
+
+**¿Qué es OneHotEncoder?** Convierte una variable categórica con N niveles en N columnas binarias. Ej.: `home_ownership = "own"` → `[1, 0, 0]` para `[own, rent, mortgage]`.
+
+**Split estratificado 75/25:** se separa un 25% del dataset que el modelo NO ve durante entrenamiento (held-out test set). La estratificación mantiene la misma proporción de defaults en ambas particiones.
+
+#### PASO 3: Dos modelos en paralelo
+
+##### a) Logistic Regression — modelo INTERPRETABLE
+
+Es la regresión clásica para clasificación binaria. Output:
+
+$$P(\text{default}|x) = \sigma(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n)$$
+
+donde σ es la función sigmoide. Su gran ventaja: cada coeficiente β tiene significado directo. Si β para `derogatory_marks` es +0.4, significa que **cada marca negativa adicional multiplica las odds de default por e^0.4 ≈ 1.5**.
+
+**Por qué la usamos para la inferencia interactiva del navegador:** los coeficientes son una lista pequeña de números. Los exportamos al JSON y el navegador puede ejecutar la predicción sin servidor.
+
+```python
+LogisticRegression(C=0.5, max_iter=2000, class_weight="balanced", solver="lbfgs")
+```
+
+- **`C=0.5`**: regularización L2 (penaliza coeficientes grandes para evitar overfitting). Inversa de λ: a menor C, más regularización.
+- **`class_weight="balanced"`**: como la clase minoritaria (default) es ~17%, sklearn pondera más sus errores para que no la ignore.
+
+##### b) Gradient Boosting Classifier — modelo PRECISO
+
+Conjunto de árboles de decisión que se entrenan en serie: cada árbol corrige los errores del anterior. Más potente que la regresión logística porque captura **interacciones no lineales** entre features.
+
+```python
+GradientBoostingClassifier(n_estimators=300, learning_rate=0.04, max_depth=4, subsample=0.8, min_samples_leaf=20)
+```
+
+- **`n_estimators=300`**: 300 árboles encadenados.
+- **`learning_rate=0.04`**: cuánto contribuye cada árbol nuevo. Bajo = más estable pero requiere más árboles.
+- **`max_depth=4`**: profundidad máxima de cada árbol (evita memorizar).
+- **`subsample=0.8`**: cada árbol se entrena con un 80% aleatorio de los datos (stochastic gradient boosting).
+
+**Calibración con sigmoid (Platt scaling):** los gradient boosters tienden a devolver probabilidades extremas (cerca de 0 o 1). Para que `P(default)=0.7` realmente signifique "70% de los casos con esa puntuación impagaron", se ajusta una sigmoide encima del output. Lo hace `CalibratedClassifierCV(method="sigmoid", cv=3)`.
+
+#### PASO 4: Métricas — qué significa cada una
+
+##### Validación cruzada estratificada (5-fold)
+
+Se parte el train set en 5 trozos. El modelo se entrena 5 veces, cada una dejando un trozo fuera para evaluar. Las métricas finales son la media ± desviación. Garantiza que las métricas no dependen de un split afortunado.
+
+##### Métricas en el held-out test set
+
+| Métrica | Definición | ¿Qué significa? | Buena en credit scoring |
+|---------|------------|------------------|--------------------------|
+| **AUC-ROC** | Área bajo la curva ROC | Probabilidad de que un default cualquiera tenga score más alto que un no-default cualquiera. 0.5 = aleatorio, 1.0 = perfecto | > 0.70 |
+| **GINI** | 2·AUC − 1 | Equivalente a AUC pero en escala 0–1. La banca europea reporta GINI más que AUC | > 0.40 |
+| **KS** (Kolmogorov-Smirnov) | max(TPR − FPR) | Máxima separación entre la distribución de scores de buenos vs malos. Métrica reina en credit scoring | > 0.30 |
+| **Average Precision** | Área bajo la curva Precision-Recall | Útil cuando hay desbalance de clases (pocos defaults) | -- |
+| **F1 Score** | 2·P·R/(P+R) | Media armónica de precisión y recall (al threshold 0.5) | > 0.40 |
+| **Brier Score** | Media de (p − y)² | Mide calidad de calibración (qué tan bien las probabilidades reflejan la realidad). Menor = mejor | < 0.20 |
+
+##### Curva ROC
+
+Cada punto de la curva es un threshold distinto. Eje X = FPR (% no-defaults clasificados como default = falsos rechazos). Eje Y = TPR (% defaults detectados). La diagonal es el clasificador aleatorio.
+
+##### Permutation Feature Importance
+
+Para cada feature, se mezcla aleatoriamente sus valores y se mide cuánto cae el AUC. Cuanto más cae → más importante era esa feature. Es **model-agnostic** (sirve para LR, GBM, redes neuronales…).
+
+#### PASO 5: Scorecard PDO 300–850
+
+PDO = "Points to Double the Odds". Es la fórmula estándar de la industria:
+
+```
+factor = PDO / ln(2)
+offset = base_score − factor · ln(base_odds)
+score  = offset + factor · ln((1 − p) / p)
+score  = clip(score, 300, 850)
+```
+
+Con PDO=50, base_score=600, base_odds=50: cada vez que las odds de pagar se duplican, el score sube 50 puntos. Si tu probabilidad de default es 0.5 (50/50), te dan ~458; si es 0.02 (1 entre 50 impaga), te dan ~706.
+
+Los rangos comerciales (FICO):
+
+| Score | Banda | Riesgo |
+|-------|-------|--------|
+| <580 | Poor | Muy alto |
+| 580-669 | Fair | Alto |
+| 670-739 | Good | Moderado |
+| 740-799 | Very Good | Bajo |
+| 800-850 | Exceptional | Muy bajo |
+
+#### PASO 6: Inferencia en el navegador (client-side)
+
+Esta es la parte poco habitual. En lugar de servir el modelo desde un endpoint, **se exportan los coeficientes** de la regresión logística y el navegador ejecuta la predicción:
+
+```js
+// frontend/src/components/ModelosScoring.jsx
+function predictWithLR(weights, applicant) {
+  let z = weights.intercept;
+  for (const f of weights.numerical) {
+    z += ((applicant[f.feature] - f.mean) / f.std) * f.coef;
+  }
+  for (const c of weights.categorical) {
+    if (applicant[c.feature] === c.level) z += c.coef;
+  }
+  return 1 / (1 + Math.exp(-z));   // sigmoide
+}
+```
+
+El JSON exportado contiene: `intercept`, `coefs[]`, `mean[]`, `std[]` (para reaplicar el StandardScaler), y la lista de niveles del OHE. El usuario mueve sliders → se reconstruye el vector → dot-product + sigmoide → score. Sin red, sin servidor, latencia 0.
+
+#### Pipeline de datos resumido
+
+```
+[ Local / GitHub Actions ]
+         │
+         ▼
+generate_credit_dataset(n=5000)        ← seed=42 (determinista)
+         │
+         ▼
+   train_test_split(75/25, stratified)
+         │
+         ├─▶ Logistic Regression  ──▶ exporta coefs (browser-friendly)
+         └─▶ Gradient Boosting   ──▶ Calibración sigmoid
+                                      ROC, KS, AUC, importance
+         │
+         ▼
+   credit_scoring.json   (20 KB, en frontend/public/data/)
+         │
+         ▼
+   npm run build
+         │
+         ▼
+   Azure Static Web Apps  ──▶ domingoberbel.com
+```
+
+**¿Dónde se ejecuta?** El script Python se ejecuta una sola vez (en local o como parte del build) porque el dataset es sintético y determinista. No hay re-entrenamiento periódico — el JSON se commitea al repo. **No usa el backend ni la base de datos.** Toda la inferencia sucede en el navegador del visitante.
+
+---
+
+### `scripts/recommendation_engine.py` — Recomendador de productos (Content-Based + MMR)
+
+Este script entrena un sistema de recomendación content-based y exporta el catálogo + la matriz de features para que el frontend de **`modelo_recomendation`** ejecute la inferencia en el navegador.
+
+#### ¿Qué problema resuelve?
+
+Un e-commerce con 32 productos quiere sugerir productos similares a los que le interesan a un usuario, sin obligarle a buscar. Mejora conversión (más clicks → más ventas) y descubrimiento (productos de la cola larga que el usuario nunca habría buscado).
+
+#### ¿Qué tipos de recomendadores existen?
+
+| Tipo | Cómo funciona | Pros | Contras |
+|------|----------------|------|---------|
+| **Content-Based** (este) | Usa atributos del ítem (descripción, categoría, precio) para encontrar similares | Funciona desde el día 1 (no necesita histórico de usuarios). No tiene "cold-start" para ítems nuevos | No descubre gustos sorpresa |
+| **Collaborative Filtering** | "Usuarios parecidos a ti compraron X" | Encuentra patrones latentes | Necesita muchos usuarios e histórico |
+| **Hybrid** | Combina ambos | Mejor cobertura | Más complejo |
+
+Aquí elegimos content-based porque es el adecuado para una demo sin usuarios reales.
+
+#### PASO 1: Catálogo (32 productos en 4 categorías)
+
+```python
+CATALOG = [
+    {"id": 1, "name": "Pro Laptop 15\"", "category": "electronics",
+     "price": 1299, "rating": 4.7,
+     "description": "high performance laptop professional productivity portable computing developer workstation"},
+    ...
+]
+```
+
+Cada producto tiene: id, nombre, categoría, precio, rating y una **descripción rica en tags** (palabras clave que describen al producto desde múltiples ángulos: uso, público, atributo).
+
+#### PASO 2: Feature engineering — convertir cada producto en un vector
+
+Tres bloques de features se concatenan en un único vector:
+
+##### a) TF-IDF (sobre la descripción)
+
+**TF-IDF = Term Frequency × Inverse Document Frequency.** Es el clásico para representar texto como números.
+
+- **TF** (term frequency): cuántas veces aparece un término en el documento.
+- **IDF** (inverse document frequency): logaritmo del inverso de en cuántos documentos aparece. Términos comunes (`the`, `and`) → IDF bajo. Términos raros y discriminativos (`bluetooth`, `lidar`) → IDF alto.
+- **TF-IDF = TF · IDF.** Premia palabras frecuentes en este documento pero raras en el corpus general.
+
+Configuración:
+
+```python
+TfidfVectorizer(max_features=120, ngram_range=(1, 2), stop_words="english")
+```
+
+- **`max_features=120`**: solo conserva los 120 términos más informativos del vocabulario. Mantiene el JSON pequeño.
+- **`ngram_range=(1, 2)`**: indexa palabras sueltas (`laptop`) y bigramas (`noise canceling`). Captura frases.
+- **`stop_words="english"`**: filtra `the`, `a`, `is`, etc.
+
+Resultado: cada producto pasa a ser un vector de 120 dimensiones, mayoritariamente ceros (sparse) excepto en los términos que contiene.
+
+##### b) One-Hot de categoría
+
+`category` se convierte en un vector binario de 4 dimensiones (`[electronics, books, sports, home]`). Multiplicado por **0.6** para que la categoría tenga peso significativo pero no aplaste al TF-IDF.
+
+##### c) MinMax-scaled price + rating
+
+`MinMaxScaler` lleva precio y rating a [0, 1]. Multiplicado por **0.4** para que dos productos con precios similares se parezcan, pero sin dominar la similitud.
+
+```
+Vector final por producto = [120 dims TF-IDF | 4 dims OHE×0.6 | 2 dims num×0.4]
+                          = 126 dimensiones
+```
+
+#### PASO 3: Perfil del usuario y similitud
+
+El "perfil del usuario" es la **media de los vectores de los productos que ha seleccionado**:
+
+```
+u = (1/|S|) · Σ v_i  para i ∈ S
+```
+
+Esto representa al usuario como un punto en el mismo espacio que los productos. La similitud entre el perfil y cada producto candidato se calcula con **cosine similarity**:
+
+$$\cos(\theta) = \frac{u \cdot v}{\|u\| \cdot \|v\|}$$
+
+Devuelve un valor entre -1 y 1. Cuanto más cerca de 1, más parecido. Se prefiere a la distancia euclidiana porque es **invariante a la magnitud del vector** (un producto con descripción larga no se penaliza).
+
+#### PASO 4: top_N — cuántas recomendaciones devolver
+
+`top_N` es simplemente el **número de items que devolvemos al usuario**, ordenados por similaridad descendente. En el frontend hay un slider entre 3 y 10 para que el usuario lo cambie en vivo.
+
+#### PASO 5: MMR — re-ranking para diversidad (Maximal Marginal Relevance)
+
+El problema con el ranking puro por similaridad es que las top-6 recomendaciones suelen ser **casi idénticas**. Si seleccionas un libro de Python, te recomienda 6 libros de Python parecidos. Es redundante.
+
+**MMR** equilibra relevancia y diversidad:
+
+$$\text{MMR}(i) = \lambda \cdot \text{sim}(u, i) - (1 - \lambda) \cdot \max_{j \in S} \text{sim}(i, j)$$
+
+donde:
+- `sim(u, i)` = similaridad del item al perfil del usuario (relevancia)
+- `max_{j ∈ S} sim(i, j)` = similaridad del item al item más parecido ya seleccionado (redundancia)
+- `λ` = peso entre los dos términos (aquí 0.7: 70% relevancia, 30% diversidad)
+
+El algoritmo es greedy: empieza con el más relevante y, en cada paso, elige el item que maximiza MMR (alta relevancia + poca redundancia con lo ya elegido). Resultado: lista variada.
+
+#### PASO 6: Métricas de evaluación
+
+Como no hay usuarios reales, evaluamos con **personas sintéticas** (Tech Enthusiast, Data Scientist, Fitness Fan, Home Professional). Cada una tiene un historial fijo y se mide:
+
+| Métrica | Fórmula | Qué mide |
+|---------|---------|----------|
+| **Intra-list diversity** | 1 − media(cosine entre pares de la lista) | Cuán variada es una lista de recomendaciones (1 = todas distintas, 0 = todas iguales) |
+| **Catalog coverage** | items únicos recomendados / tamaño catálogo | Qué % del catálogo aparece al menos una vez |
+
+#### PASO 7: Inferencia client-side
+
+Se exporta:
+- `catalog`: lista de productos con metadata
+- `featureMatrix`: 32×126 (la matriz completa)
+- `tfidfVocab`: 120 términos del vocabulario (para explicabilidad)
+- `personas`: resultados pre-computados como demo
+
+El navegador implementa cosine similarity, `meanVec`, MMR en JS puro:
+
+```js
+function cosine(a, b) { return dot(a, b) / (norm(a) * norm(b)); }
+function meanVec(matrix, indices) { /* media columna a columna */ }
+function mmr(candidates, matrix, k, lambda) { /* greedy */ }
+```
+
+**Explicabilidad ("¿por qué este producto?"):** al hacer click en una recomendación, se descomponen los productos punto a punto:
+
+```
+contribución_total = Σ profile[i] · item[i]
+contribución_tfidf = Σ sobre dims 0..119 (palabras clave que coinciden)
+contribución_categoría = Σ sobre dims 120..123 (mismo segmento)
+contribución_num = Σ sobre dims 124..125 (precio/rating similares)
+```
+
+Y se muestran los 5 términos TF-IDF que más contribuyen (los más "responsables" de la recomendación).
+
+#### Pipeline resumido
+
+```
+[ Local / GitHub Actions ]
+         │
+         ▼
+   CATALOG (32 productos hardcodeados)
+         │
+         ▼
+   TfidfVectorizer + OneHotEncoder + MinMaxScaler
+         │
+         ▼
+   feature_matrix [32 × 126]
+         │
+         ▼
+   product_recommendations.json   (66 KB, en frontend/public/data/)
+         │
+         ▼
+   npm run build → Azure Static Web Apps
+         │
+         ▼
+   Browser: cosine + MMR sobre la matriz exportada
+```
+
+**Diferencias con el scoring:**
+- El scoring exporta **coeficientes** (un modelo aprendido). El recomendador exporta la **matriz de features** (los datos crudos transformados); el "modelo" es la operación de cosine similarity, que es trivial de reimplementar en JS.
+- Ambos comparten el mismo principio de portfolio: **cero coste de servidor por inferencia, latencia inmediata**, y todo se mantiene en versión bajo control.
+
+---
+
 ### `scripts/index_documents.py` — Indexación de documentos del CV
 
 **¿Qué hace?** Prepara los documentos del CV para que el chatbot pueda buscar en ellos.
@@ -945,6 +1295,31 @@ Instrucciones paso a paso para:
 | **GHCR** | GitHub Container Registry. Almacén de imágenes Docker en GitHub |
 | **Azure SWA** | Azure Static Web Apps. Servicio para hospedar webs estáticas (HTML/JS/CSS) gratis |
 | **Azure Container Apps** | Servicio para ejecutar contenedores Docker en la nube |
+| **TF-IDF** | Term Frequency × Inverse Document Frequency. Convierte texto en vectores premiando palabras frecuentes en un documento pero raras en el corpus general |
+| **n-gram** | Secuencia de n palabras consecutivas. Unigrama = una palabra, bigrama = dos palabras seguidas |
+| **Cosine similarity** | Mide el ángulo entre dos vectores. Va de −1 a 1; 1 = idénticos. Insensible a la magnitud, perfecta para comparar textos |
+| **OneHotEncoder** | Convierte una variable categórica con N valores en N columnas binarias. Necesario porque los modelos lineales no entienden texto |
+| **StandardScaler** | Centra (resta media) y escala (divide por std) cada feature numérica. Pone todas a la misma escala |
+| **MinMaxScaler** | Reescala cada feature al rango [0, 1] |
+| **Logistic Regression** | Regresión clásica para clasificación binaria. Output = sigmoide de combinación lineal de features. Modelo interpretable: cada coeficiente tiene un significado directo |
+| **Gradient Boosting** | Conjunto de árboles entrenados en serie, cada uno corrigiendo el error del anterior. Captura no-linealidades. XGBoost, LightGBM, sklearn.GBM son implementaciones |
+| **Calibration (Platt scaling)** | Ajusta una sigmoide encima de un clasificador para que sus probabilidades reflejen la realidad (P=0.7 → realmente 70% de positivos) |
+| **AUC-ROC** | Área bajo la curva ROC. Probabilidad de que un positivo cualquiera tenga score más alto que un negativo cualquiera. 0.5 = aleatorio, 1.0 = perfecto |
+| **GINI** | 2·AUC − 1. Misma información que AUC pero en escala 0-1. Métrica estándar en banca europea |
+| **KS** (Kolmogorov-Smirnov) | Máxima separación vertical entre la curva acumulada de positivos y la de negativos. Métrica reina en credit scoring |
+| **Brier Score** | Media de (probabilidad − etiqueta_real)². Mide calidad de calibración. Menor = mejor |
+| **PDO** | Points to Double the Odds. Fórmula estándar para mapear P(default) a un score 300-850 estilo FICO |
+| **Permutation Importance** | Medida model-agnostic de importancia de features: mezcla aleatoriamente una feature y mide cuánto cae el AUC |
+| **Stratified K-Fold** | Validación cruzada que mantiene la proporción de clases en cada fold. Imprescindible con clases desbalanceadas |
+| **Held-out test set** | Trozo de datos que el modelo NUNCA ve durante entrenamiento. Sirve para estimar rendimiento en producción sin sesgo |
+| **Content-based recommender** | Recomienda items por sus atributos. Funciona desde el día 1 sin necesitar histórico de usuarios |
+| **Collaborative filtering** | Recomienda según patrones de "usuarios similares". Necesita histórico amplio |
+| **MMR** | Maximal Marginal Relevance. Re-ranking que equilibra relevancia y diversidad para evitar listas redundantes. Fórmula: λ·rel − (1-λ)·max_redundancia |
+| **top_N** | Número de items a devolver en una recomendación, ordenados por similaridad descendente |
+| **Cold start** | Problema cuando no hay datos de un usuario (o item) nuevo. El content-based no lo sufre para items |
+| **Intra-list diversity** | 1 − media de similitud entre pares de items recomendados. Mide cuán variada es una lista |
+| **Catalog coverage** | % del catálogo que aparece al menos una vez en alguna recomendación |
+| **Client-side inference** | Ejecutar el modelo en el navegador (JS) en vez de en un servidor. Cero latencia de red, cero coste de cómputo en backend |
 
 ---
 

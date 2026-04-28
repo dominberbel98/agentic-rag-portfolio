@@ -1,19 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chat from "./components/Chat";
 import Visualizaciones from "./components/Visualizaciones";
 import ModelosPredictivos from "./components/ModelosPredictivos";
+import ModelosScoring from "./components/ModelosScoring";
+import ModelosRecomendacion from "./components/ModelosRecomendacion";
 import Certificaciones from "./components/Certificaciones";
 
 const NAV_ITEMS = [
   { id: "chat_cv", icon: "chat", label: "chat_cv" },
   { id: "visualizaciones", icon: "monitoring", label: "visualizaciones" },
-  { id: "modelos_predictivos", icon: "functions", label: "modelos_predictivos" },
+  {
+    id: "modelos",
+    icon: "functions",
+    label: "modelos",
+    children: [
+      { id: "prediccion_la_liga",  icon: "sports_soccer", label: "prediccion_la_liga" },
+      { id: "modelo_scoring",      icon: "credit_score",  label: "modelo_scoring" },
+      { id: "modelo_recomendation", icon: "recommend",    label: "modelo_recomendation" },
+    ],
+  },
   { id: "certificaciones", icon: "workspace_premium", label: "certificaciones" },
 ];
+
+const MODEL_IDS = ["prediccion_la_liga", "modelo_scoring", "modelo_recomendation"];
+
+function NavList({ activeSection, modelsOpen, onToggleModels, onSelect, hover }) {
+  const baseRow = "flex items-center gap-3 px-6 py-4 cursor-pointer active:scale-95";
+  const subRow  = "flex items-center gap-3 pl-12 pr-6 py-3 cursor-pointer active:scale-95 text-[0.7rem]";
+  const transition = hover ? " transition-colors" : "";
+  const activeCls   = "bg-[#00FF41]/10 text-[#00FF41] border-l-4 border-[#00FF41]";
+  const inactiveCls = (sub) =>
+    `${sub ? "text-[#00FF41]/35" : "text-[#00FF41]/40"} ${
+      hover ? "hover:bg-[#00FF41]/5 hover:text-[#00FF41]" : ""
+    } border-l-4 border-transparent`;
+
+  return NAV_ITEMS.map((item) => {
+    if (item.children) {
+      const isActive = MODEL_IDS.includes(activeSection);
+      return (
+        <div key={item.id}>
+          <div
+            onClick={onToggleModels}
+            className={`${baseRow}${transition} ${isActive ? activeCls : inactiveCls(false)}`}
+          >
+            <span className="material-symbols-outlined text-[1.2rem]">{item.icon}</span>
+            <span className="flex-1">{item.label}</span>
+            <span className={`material-symbols-outlined text-[1rem] transition-transform ${modelsOpen ? "rotate-180" : ""}`}>
+              expand_more
+            </span>
+          </div>
+          {modelsOpen && item.children.map((c) => (
+            <div
+              key={c.id}
+              onClick={() => onSelect(c.id)}
+              className={`${subRow}${transition} ${activeSection === c.id ? activeCls : inactiveCls(true)}`}
+            >
+              <span className="material-symbols-outlined text-[1rem]">{c.icon}</span>
+              <span>{c.label}</span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return (
+      <div
+        key={item.id}
+        onClick={() => onSelect(item.id)}
+        className={`${baseRow}${transition} ${activeSection === item.id ? activeCls : inactiveCls(false)}`}
+      >
+        <span className="material-symbols-outlined text-[1.2rem]">{item.icon}</span>
+        <span>{item.label}</span>
+      </div>
+    );
+  });
+}
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("chat_cv");
+  const [modelsOpen, setModelsOpen] = useState(false);
+
+  useEffect(() => {
+    if (MODEL_IDS.includes(activeSection)) setModelsOpen(true);
+  }, [activeSection]);
 
   return (
     <>
@@ -56,25 +125,18 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
 
       {/* Menú móvil desplegable */}
       {menuOpen && (
-        <div className="md:hidden fixed top-14 left-0 w-full z-[45] bg-[#0e0e0e]/95 backdrop-blur-xl border-b border-[#00FF41]/15 font-headline text-[0.75rem] uppercase">
+        <div className="md:hidden fixed top-14 left-0 w-full z-[45] bg-[#0e0e0e]/95 backdrop-blur-xl border-b border-[#00FF41]/15 font-headline text-[0.75rem] uppercase max-h-[calc(100vh-56px)] overflow-y-auto scrollbar-hide">
           <div className="px-4 py-3 border-b border-[#00FF41]/10">
             <div className="text-[#00FF41] font-bold">DS_WORKSPACE</div>
             <div className="text-[#00FF41]/40 tracking-widest text-[0.65rem] mt-0.5">SESSION: DATA_EXPLORER</div>
           </div>
-          {NAV_ITEMS.map(({ id, icon, label }) => (
-            <div
-              key={id}
-              onClick={() => { setActiveSection(id); setMenuOpen(false); }}
-              className={`flex items-center gap-3 px-6 py-4 cursor-pointer active:scale-95 ${
-                activeSection === id
-                  ? "bg-[#00FF41]/10 text-[#00FF41] border-l-4 border-[#00FF41]"
-                  : "text-[#00FF41]/40 border-l-4 border-transparent"
-              }`}
-            >
-              <span className="material-symbols-outlined text-[1.2rem]">{icon}</span>
-              <span>{label}</span>
-            </div>
-          ))}
+          <NavList
+            activeSection={activeSection}
+            modelsOpen={modelsOpen}
+            onToggleModels={() => setModelsOpen((o) => !o)}
+            onSelect={(id) => { setActiveSection(id); setMenuOpen(false); }}
+            hover={false}
+          />
         </div>
       )}
 
@@ -92,21 +154,14 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
           <div className="text-[#00FF41] font-bold text-lg">DS_WORKSPACE</div>
           <div className="text-[#00FF41]/40 tracking-widest mt-1">SESSION: DATA_EXPLORER</div>
         </div>
-        <div className="flex-1 py-4">
-          {NAV_ITEMS.map(({ id, icon, label }) => (
-            <div
-              key={id}
-              onClick={() => setActiveSection(id)}
-              className={`flex items-center gap-3 px-6 py-4 cursor-pointer active:scale-95 transition-colors ${
-                activeSection === id
-                  ? "bg-[#00FF41]/10 text-[#00FF41] border-l-4 border-[#00FF41]"
-                  : "text-[#00FF41]/40 hover:bg-[#00FF41]/5 hover:text-[#00FF41] border-l-4 border-transparent"
-              }`}
-            >
-              <span className="material-symbols-outlined text-[1.2rem]">{icon}</span>
-              <span>{label}</span>
-            </div>
-          ))}
+        <div className="flex-1 py-4 overflow-y-auto scrollbar-hide">
+          <NavList
+            activeSection={activeSection}
+            modelsOpen={modelsOpen}
+            onToggleModels={() => setModelsOpen((o) => !o)}
+            onSelect={setActiveSection}
+            hover
+          />
         </div>
       </aside>
 
@@ -114,7 +169,9 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       <main className="fixed md:left-64 top-14 sm:top-16 right-0 bottom-8 overflow-hidden flex flex-col items-center justify-center p-2 sm:p-6 md:p-8 bg-surface">
         {activeSection === "chat_cv" && <Chat />}
         {activeSection === "visualizaciones" && <Visualizaciones />}
-        {activeSection === "modelos_predictivos" && <ModelosPredictivos />}
+        {activeSection === "prediccion_la_liga" && <ModelosPredictivos />}
+        {activeSection === "modelo_scoring" && <ModelosScoring />}
+        {activeSection === "modelo_recomendation" && <ModelosRecomendacion />}
         {activeSection === "certificaciones" && <Certificaciones />}
         {/* Radial glow behind chat */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] z-[-2] pointer-events-none opacity-20">
@@ -144,7 +201,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
         <div className="flex flex-col items-start gap-2">
           <div className="bg-[#00FF41]/10 border border-[#00FF41]/30 p-3 rounded-lg backdrop-blur-md max-w-[220px] shadow-[0_0_15px_rgba(0,255,65,0.1)]">
             <p className="text-[#00FF41] text-[0.7rem] font-headline uppercase leading-tight">
-              Hola! Prueba el asistente de IA, o explora en el menú: visualizaciones de La Liga, modelo predictivo de estadísticas, y mis certificaciones
+              Hola! Prueba el asistente de IA, o explora en el menú: visualizaciones de La Liga, modelos (predicción La Liga, credit scoring, recomendador de productos) y mis certificaciones
             </p>
           </div>
           <div className="flex items-center gap-2">

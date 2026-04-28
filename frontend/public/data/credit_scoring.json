@@ -1,0 +1,1095 @@
+{
+  "generatedAt": "2026-04-28T16:58:25+00:00",
+  "dataset": {
+    "n": 5000,
+    "defaultRate": 0.1712,
+    "trainSize": 3750,
+    "testSize": 1250,
+    "numericalFeatures": [
+      "age",
+      "annual_income",
+      "employment_years",
+      "loan_amount",
+      "payment_history_pct",
+      "credit_utilization",
+      "credit_age_years",
+      "num_credit_accounts",
+      "recent_inquiries",
+      "derogatory_marks",
+      "debt_to_income",
+      "loan_to_income"
+    ],
+    "categoricalFeatures": [
+      "loan_purpose",
+      "home_ownership"
+    ]
+  },
+  "models": {
+    "logistic": {
+      "name": "Logistic Regression",
+      "cv": {
+        "auc_mean": 0.7561214630636497,
+        "auc_std": 0.011549636168733928,
+        "ap_mean": 0.44281443431181716,
+        "ap_std": 0.025494687800866275,
+        "f1_mean": 0.41994747353420847,
+        "f1_std": 0.011118827331286964
+      },
+      "test": {
+        "auc": 0.7455706708043157,
+        "gini": 0.49114134160863143,
+        "ks": 0.3882834770685238,
+        "average_precision": 0.4015578798118303,
+        "f1": 0.40353460972017674,
+        "precision": 0.2946236559139785,
+        "recall": 0.6401869158878505,
+        "brier": 0.20216734562273025
+      },
+      "weights": {
+        "intercept": -0.21679534969821884,
+        "numerical": [
+          {
+            "feature": "age",
+            "coef": -0.010857814454558018,
+            "mean": 44.9032,
+            "std": 14.22585310013662
+          },
+          {
+            "feature": "annual_income",
+            "coef": -0.043403194568211026,
+            "mean": 59329.8592,
+            "std": 38272.55382032284
+          },
+          {
+            "feature": "employment_years",
+            "coef": -0.193587991291892,
+            "mean": 5.637333333333333,
+            "std": 6.076594952950396
+          },
+          {
+            "feature": "loan_amount",
+            "coef": 0.06253894672347594,
+            "mean": 17304.5056,
+            "std": 13418.43167659949
+          },
+          {
+            "feature": "payment_history_pct",
+            "coef": -0.5509726570335154,
+            "mean": 79.79957866666668,
+            "std": 12.102178397123863
+          },
+          {
+            "feature": "credit_utilization",
+            "coef": 0.516768443784414,
+            "mean": 33.258749333333334,
+            "std": 17.525414635394498
+          },
+          {
+            "feature": "credit_age_years",
+            "coef": -0.39162072781114965,
+            "mean": 6.9042666666666666,
+            "std": 6.586993076932414
+          },
+          {
+            "feature": "num_credit_accounts",
+            "coef": -0.037266533110843054,
+            "mean": 4.040533333333333,
+            "std": 1.998121713565573
+          },
+          {
+            "feature": "recent_inquiries",
+            "coef": 0.25468024967800523,
+            "mean": 2.0090666666666666,
+            "std": 1.4353342684623056
+          },
+          {
+            "feature": "derogatory_marks",
+            "coef": 0.29219428158859756,
+            "mean": 0.30693333333333334,
+            "std": 0.5493559218656779
+          },
+          {
+            "feature": "debt_to_income",
+            "coef": 0.16459717780123334,
+            "mean": 0.2440365333333333,
+            "std": 0.2566928395287168
+          },
+          {
+            "feature": "loan_to_income",
+            "coef": 0.16441938144833607,
+            "mean": 0.4067261333333333,
+            "std": 0.42781753423281854
+          }
+        ],
+        "categorical": [
+          {
+            "feature": "loan_purpose",
+            "level": "auto",
+            "coef": -0.10183140030724473
+          },
+          {
+            "feature": "loan_purpose",
+            "level": "business",
+            "coef": 0.25805264199371236
+          },
+          {
+            "feature": "loan_purpose",
+            "level": "education",
+            "coef": -0.25605798615724734
+          },
+          {
+            "feature": "loan_purpose",
+            "level": "mortgage",
+            "coef": -0.09074881150745634
+          },
+          {
+            "feature": "loan_purpose",
+            "level": "personal",
+            "coef": -0.013900481715252717
+          },
+          {
+            "feature": "home_ownership",
+            "level": "mortgage",
+            "coef": 0.030557856333681025
+          },
+          {
+            "feature": "home_ownership",
+            "level": "own",
+            "coef": -0.293325378652263
+          },
+          {
+            "feature": "home_ownership",
+            "level": "rent",
+            "coef": 0.058281484625092465
+          }
+        ],
+        "categorical_features": [
+          "loan_purpose",
+          "home_ownership"
+        ],
+        "categorical_levels": {
+          "loan_purpose": [
+            "auto",
+            "business",
+            "education",
+            "mortgage",
+            "personal"
+          ],
+          "home_ownership": [
+            "mortgage",
+            "own",
+            "rent"
+          ]
+        }
+      }
+    },
+    "gbm": {
+      "name": "Gradient Boosting (sigmoid-calibrated)",
+      "cv": {
+        "auc_mean": 0.7251444454132812,
+        "auc_std": 0.013355385642460024,
+        "ap_mean": 0.3851904873786446,
+        "ap_std": 0.017104640894218703,
+        "f1_mean": 0.24814763530479533,
+        "f1_std": 0.02649596810768496
+      },
+      "test": {
+        "auc": 0.7236179771226501,
+        "gini": 0.44723595424530016,
+        "ks": 0.34236639844116484,
+        "average_precision": 0.3566872592782181,
+        "f1": 0.10084033613445378,
+        "precision": 0.5,
+        "recall": 0.056074766355140186,
+        "brier": 0.1281870071069613
+      }
+    }
+  },
+  "rocCurve": [
+    {
+      "fpr": 0.0,
+      "tpr": 0.0
+    },
+    {
+      "fpr": 0.0019,
+      "tpr": 0.028
+    },
+    {
+      "fpr": 0.0077,
+      "tpr": 0.0374
+    },
+    {
+      "fpr": 0.0183,
+      "tpr": 0.0748
+    },
+    {
+      "fpr": 0.0212,
+      "tpr": 0.1028
+    },
+    {
+      "fpr": 0.0251,
+      "tpr": 0.1449
+    },
+    {
+      "fpr": 0.0386,
+      "tpr": 0.1542
+    },
+    {
+      "fpr": 0.0444,
+      "tpr": 0.1869
+    },
+    {
+      "fpr": 0.0473,
+      "tpr": 0.2009
+    },
+    {
+      "fpr": 0.0531,
+      "tpr": 0.215
+    },
+    {
+      "fpr": 0.056,
+      "tpr": 0.2336
+    },
+    {
+      "fpr": 0.0656,
+      "tpr": 0.285
+    },
+    {
+      "fpr": 0.0695,
+      "tpr": 0.2991
+    },
+    {
+      "fpr": 0.0792,
+      "tpr": 0.3084
+    },
+    {
+      "fpr": 0.0946,
+      "tpr": 0.3271
+    },
+    {
+      "fpr": 0.1023,
+      "tpr": 0.3458
+    },
+    {
+      "fpr": 0.1071,
+      "tpr": 0.3645
+    },
+    {
+      "fpr": 0.1207,
+      "tpr": 0.3738
+    },
+    {
+      "fpr": 0.1467,
+      "tpr": 0.3972
+    },
+    {
+      "fpr": 0.1554,
+      "tpr": 0.4159
+    },
+    {
+      "fpr": 0.1737,
+      "tpr": 0.4346
+    },
+    {
+      "fpr": 0.1969,
+      "tpr": 0.4439
+    },
+    {
+      "fpr": 0.2124,
+      "tpr": 0.4579
+    },
+    {
+      "fpr": 0.222,
+      "tpr": 0.472
+    },
+    {
+      "fpr": 0.2317,
+      "tpr": 0.4813
+    },
+    {
+      "fpr": 0.2413,
+      "tpr": 0.4953
+    },
+    {
+      "fpr": 0.2461,
+      "tpr": 0.514
+    },
+    {
+      "fpr": 0.2616,
+      "tpr": 0.5327
+    },
+    {
+      "fpr": 0.2703,
+      "tpr": 0.5421
+    },
+    {
+      "fpr": 0.277,
+      "tpr": 0.5607
+    },
+    {
+      "fpr": 0.2886,
+      "tpr": 0.5794
+    },
+    {
+      "fpr": 0.3166,
+      "tpr": 0.5981
+    },
+    {
+      "fpr": 0.334,
+      "tpr": 0.6121
+    },
+    {
+      "fpr": 0.3407,
+      "tpr": 0.6308
+    },
+    {
+      "fpr": 0.3465,
+      "tpr": 0.6449
+    },
+    {
+      "fpr": 0.3552,
+      "tpr": 0.6636
+    },
+    {
+      "fpr": 0.36,
+      "tpr": 0.6729
+    },
+    {
+      "fpr": 0.3668,
+      "tpr": 0.6916
+    },
+    {
+      "fpr": 0.3726,
+      "tpr": 0.715
+    },
+    {
+      "fpr": 0.39,
+      "tpr": 0.7243
+    },
+    {
+      "fpr": 0.4102,
+      "tpr": 0.7383
+    },
+    {
+      "fpr": 0.4411,
+      "tpr": 0.757
+    },
+    {
+      "fpr": 0.4488,
+      "tpr": 0.7757
+    },
+    {
+      "fpr": 0.4672,
+      "tpr": 0.785
+    },
+    {
+      "fpr": 0.4759,
+      "tpr": 0.7991
+    },
+    {
+      "fpr": 0.4836,
+      "tpr": 0.8131
+    },
+    {
+      "fpr": 0.4961,
+      "tpr": 0.8318
+    },
+    {
+      "fpr": 0.5125,
+      "tpr": 0.8411
+    },
+    {
+      "fpr": 0.5299,
+      "tpr": 0.8598
+    },
+    {
+      "fpr": 0.5434,
+      "tpr": 0.8738
+    },
+    {
+      "fpr": 0.5598,
+      "tpr": 0.8832
+    },
+    {
+      "fpr": 0.5927,
+      "tpr": 0.8972
+    },
+    {
+      "fpr": 0.61,
+      "tpr": 0.9112
+    },
+    {
+      "fpr": 0.6573,
+      "tpr": 0.9252
+    },
+    {
+      "fpr": 0.7423,
+      "tpr": 0.9346
+    },
+    {
+      "fpr": 0.8041,
+      "tpr": 0.9486
+    },
+    {
+      "fpr": 0.8514,
+      "tpr": 0.9626
+    },
+    {
+      "fpr": 0.8736,
+      "tpr": 0.9766
+    },
+    {
+      "fpr": 0.9479,
+      "tpr": 0.986
+    },
+    {
+      "fpr": 1.0,
+      "tpr": 1.0
+    }
+  ],
+  "prCurve": [
+    {
+      "precision": 0.1712,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.1741,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.1763,
+      "recall": 0.9953
+    },
+    {
+      "precision": 0.1769,
+      "recall": 0.9813
+    },
+    {
+      "precision": 0.1801,
+      "recall": 0.9813
+    },
+    {
+      "precision": 0.1834,
+      "recall": 0.9813
+    },
+    {
+      "precision": 0.1861,
+      "recall": 0.9766
+    },
+    {
+      "precision": 0.1887,
+      "recall": 0.972
+    },
+    {
+      "precision": 0.1896,
+      "recall": 0.9579
+    },
+    {
+      "precision": 0.1934,
+      "recall": 0.9579
+    },
+    {
+      "precision": 0.1963,
+      "recall": 0.9533
+    },
+    {
+      "precision": 0.1986,
+      "recall": 0.9439
+    },
+    {
+      "precision": 0.2018,
+      "recall": 0.9393
+    },
+    {
+      "precision": 0.2062,
+      "recall": 0.9393
+    },
+    {
+      "precision": 0.2096,
+      "recall": 0.9346
+    },
+    {
+      "precision": 0.2133,
+      "recall": 0.9299
+    },
+    {
+      "precision": 0.2171,
+      "recall": 0.9252
+    },
+    {
+      "precision": 0.2225,
+      "recall": 0.9252
+    },
+    {
+      "precision": 0.2267,
+      "recall": 0.9206
+    },
+    {
+      "precision": 0.23,
+      "recall": 0.9112
+    },
+    {
+      "precision": 0.2358,
+      "recall": 0.9112
+    },
+    {
+      "precision": 0.2382,
+      "recall": 0.8972
+    },
+    {
+      "precision": 0.2436,
+      "recall": 0.8925
+    },
+    {
+      "precision": 0.2477,
+      "recall": 0.8832
+    },
+    {
+      "precision": 0.248,
+      "recall": 0.8598
+    },
+    {
+      "precision": 0.2524,
+      "recall": 0.8505
+    },
+    {
+      "precision": 0.2557,
+      "recall": 0.8364
+    },
+    {
+      "precision": 0.2566,
+      "recall": 0.8131
+    },
+    {
+      "precision": 0.2588,
+      "recall": 0.7944
+    },
+    {
+      "precision": 0.261,
+      "recall": 0.7757
+    },
+    {
+      "precision": 0.2618,
+      "recall": 0.7523
+    },
+    {
+      "precision": 0.2677,
+      "recall": 0.743
+    },
+    {
+      "precision": 0.2757,
+      "recall": 0.7383
+    },
+    {
+      "precision": 0.2795,
+      "recall": 0.7196
+    },
+    {
+      "precision": 0.2792,
+      "recall": 0.6916
+    },
+    {
+      "precision": 0.277,
+      "recall": 0.6589
+    },
+    {
+      "precision": 0.2766,
+      "recall": 0.6308
+    },
+    {
+      "precision": 0.2805,
+      "recall": 0.6121
+    },
+    {
+      "precision": 0.2809,
+      "recall": 0.5841
+    },
+    {
+      "precision": 0.2925,
+      "recall": 0.5794
+    },
+    {
+      "precision": 0.2953,
+      "recall": 0.5561
+    },
+    {
+      "precision": 0.2958,
+      "recall": 0.528
+    },
+    {
+      "precision": 0.3019,
+      "recall": 0.5093
+    },
+    {
+      "precision": 0.3009,
+      "recall": 0.4766
+    },
+    {
+      "precision": 0.3082,
+      "recall": 0.4579
+    },
+    {
+      "precision": 0.3199,
+      "recall": 0.4439
+    },
+    {
+      "precision": 0.337,
+      "recall": 0.4346
+    },
+    {
+      "precision": 0.349,
+      "recall": 0.4159
+    },
+    {
+      "precision": 0.3547,
+      "recall": 0.3879
+    },
+    {
+      "precision": 0.3821,
+      "recall": 0.3785
+    },
+    {
+      "precision": 0.4084,
+      "recall": 0.3645
+    },
+    {
+      "precision": 0.4176,
+      "recall": 0.3318
+    },
+    {
+      "precision": 0.4497,
+      "recall": 0.3131
+    },
+    {
+      "precision": 0.4766,
+      "recall": 0.285
+    },
+    {
+      "precision": 0.4623,
+      "recall": 0.229
+    },
+    {
+      "precision": 0.4706,
+      "recall": 0.1869
+    },
+    {
+      "precision": 0.5,
+      "recall": 0.1495
+    },
+    {
+      "precision": 0.4884,
+      "recall": 0.0981
+    },
+    {
+      "precision": 0.4545,
+      "recall": 0.0467
+    },
+    {
+      "precision": 1.0,
+      "recall": 0.0
+    }
+  ],
+  "featureImportance": [
+    {
+      "feature": "payment_history_pct",
+      "importance": 0.06796,
+      "std": 0.00928
+    },
+    {
+      "feature": "credit_utilization",
+      "importance": 0.05787,
+      "std": 0.00715
+    },
+    {
+      "feature": "credit_age_years",
+      "importance": 0.0457,
+      "std": 0.01212
+    },
+    {
+      "feature": "recent_inquiries",
+      "importance": 0.01598,
+      "std": 0.00472
+    },
+    {
+      "feature": "derogatory_marks",
+      "importance": 0.01068,
+      "std": 0.00539
+    },
+    {
+      "feature": "employment_years",
+      "importance": 0.00875,
+      "std": 0.00399
+    },
+    {
+      "feature": "home_ownership",
+      "importance": 0.00662,
+      "std": 0.00351
+    },
+    {
+      "feature": "loan_purpose",
+      "importance": 0.00585,
+      "std": 0.00276
+    },
+    {
+      "feature": "loan_to_income",
+      "importance": 0.00561,
+      "std": 0.0032
+    },
+    {
+      "feature": "debt_to_income",
+      "importance": 0.00368,
+      "std": 0.0033
+    },
+    {
+      "feature": "loan_amount",
+      "importance": 0.00238,
+      "std": 0.00293
+    },
+    {
+      "feature": "annual_income",
+      "importance": 0.00168,
+      "std": 0.00295
+    },
+    {
+      "feature": "num_credit_accounts",
+      "importance": 0.00115,
+      "std": 0.00148
+    },
+    {
+      "feature": "age",
+      "importance": 0.00053,
+      "std": 0.00298
+    }
+  ],
+  "scoreHistogram": [
+    {
+      "bin": 312,
+      "from": 300,
+      "to": 325,
+      "count": 198
+    },
+    {
+      "bin": 338,
+      "from": 325,
+      "to": 350,
+      "count": 145
+    },
+    {
+      "bin": 362,
+      "from": 350,
+      "to": 375,
+      "count": 259
+    },
+    {
+      "bin": 388,
+      "from": 375,
+      "to": 400,
+      "count": 441
+    },
+    {
+      "bin": 412,
+      "from": 400,
+      "to": 425,
+      "count": 585
+    },
+    {
+      "bin": 438,
+      "from": 425,
+      "to": 450,
+      "count": 805
+    },
+    {
+      "bin": 462,
+      "from": 450,
+      "to": 475,
+      "count": 881
+    },
+    {
+      "bin": 488,
+      "from": 475,
+      "to": 500,
+      "count": 793
+    },
+    {
+      "bin": 512,
+      "from": 500,
+      "to": 525,
+      "count": 554
+    },
+    {
+      "bin": 538,
+      "from": 525,
+      "to": 550,
+      "count": 271
+    },
+    {
+      "bin": 562,
+      "from": 550,
+      "to": 575,
+      "count": 56
+    },
+    {
+      "bin": 588,
+      "from": 575,
+      "to": 600,
+      "count": 11
+    },
+    {
+      "bin": 612,
+      "from": 600,
+      "to": 625,
+      "count": 1
+    },
+    {
+      "bin": 638,
+      "from": 625,
+      "to": 650,
+      "count": 0
+    },
+    {
+      "bin": 662,
+      "from": 650,
+      "to": 675,
+      "count": 0
+    },
+    {
+      "bin": 688,
+      "from": 675,
+      "to": 700,
+      "count": 0
+    },
+    {
+      "bin": 712,
+      "from": 700,
+      "to": 725,
+      "count": 0
+    },
+    {
+      "bin": 738,
+      "from": 725,
+      "to": 750,
+      "count": 0
+    },
+    {
+      "bin": 762,
+      "from": 750,
+      "to": 775,
+      "count": 0
+    },
+    {
+      "bin": 788,
+      "from": 775,
+      "to": 800,
+      "count": 0
+    },
+    {
+      "bin": 812,
+      "from": 800,
+      "to": 825,
+      "count": 0
+    },
+    {
+      "bin": 838,
+      "from": 825,
+      "to": 850,
+      "count": 0
+    }
+  ],
+  "bandDistribution": [
+    {
+      "band": "Poor",
+      "count": 4995
+    },
+    {
+      "band": "Fair",
+      "count": 5
+    },
+    {
+      "band": "Good",
+      "count": 0
+    },
+    {
+      "band": "Very Good",
+      "count": 0
+    },
+    {
+      "band": "Exceptional",
+      "count": 0
+    }
+  ],
+  "sampleApplicants": [
+    {
+      "age": 42,
+      "annual_income": 128517,
+      "employment_years": 11,
+      "loan_amount": 22589,
+      "payment_history_pct": 81.53,
+      "credit_utilization": 37.07,
+      "credit_age_years": 10.5,
+      "num_credit_accounts": 4,
+      "recent_inquiries": 2,
+      "derogatory_marks": 0,
+      "debt_to_income": 0.105,
+      "loan_to_income": 0.176,
+      "loan_purpose": "business",
+      "home_ownership": "rent",
+      "prob_default_lr": 0.3441,
+      "prob_default_gbm": 0.1006,
+      "score": 476,
+      "band": "Poor"
+    },
+    {
+      "age": 65,
+      "annual_income": 62021,
+      "employment_years": 6,
+      "loan_amount": 17906,
+      "payment_history_pct": 94.41,
+      "credit_utilization": 39.75,
+      "credit_age_years": 8.6,
+      "num_credit_accounts": 7,
+      "recent_inquiries": 2,
+      "derogatory_marks": 0,
+      "debt_to_income": 0.173,
+      "loan_to_income": 0.289,
+      "loan_purpose": "personal",
+      "home_ownership": "rent",
+      "prob_default_lr": 0.2526,
+      "prob_default_gbm": 0.1255,
+      "score": 458,
+      "band": "Poor"
+    },
+    {
+      "age": 49,
+      "annual_income": 42452,
+      "employment_years": 0,
+      "loan_amount": 4720,
+      "payment_history_pct": 90.5,
+      "credit_utilization": 31.32,
+      "credit_age_years": 0.4,
+      "num_credit_accounts": 4,
+      "recent_inquiries": 0,
+      "derogatory_marks": 0,
+      "debt_to_income": 0.067,
+      "loan_to_income": 0.111,
+      "loan_purpose": "personal",
+      "home_ownership": "rent",
+      "prob_default_lr": 0.2811,
+      "prob_default_gbm": 0.0864,
+      "score": 488,
+      "band": "Poor"
+    },
+    {
+      "age": 34,
+      "annual_income": 15000,
+      "employment_years": 4,
+      "loan_amount": 22300,
+      "payment_history_pct": 71.48,
+      "credit_utilization": 56.67,
+      "credit_age_years": 4.3,
+      "num_credit_accounts": 1,
+      "recent_inquiries": 2,
+      "derogatory_marks": 0,
+      "debt_to_income": 0.892,
+      "loan_to_income": 1.487,
+      "loan_purpose": "mortgage",
+      "home_ownership": "mortgage",
+      "prob_default_lr": 0.8586,
+      "prob_default_gbm": 0.5471,
+      "score": 304,
+      "band": "Poor"
+    },
+    {
+      "age": 45,
+      "annual_income": 41180,
+      "employment_years": 7,
+      "loan_amount": 25673,
+      "payment_history_pct": 65.98,
+      "credit_utilization": 23.39,
+      "credit_age_years": 16.5,
+      "num_credit_accounts": 4,
+      "recent_inquiries": 6,
+      "derogatory_marks": 0,
+      "debt_to_income": 0.374,
+      "loan_to_income": 0.623,
+      "loan_purpose": "mortgage",
+      "home_ownership": "own",
+      "prob_default_lr": 0.4738,
+      "prob_default_gbm": 0.2349,
+      "score": 403,
+      "band": "Poor"
+    },
+    {
+      "age": 30,
+      "annual_income": 105032,
+      "employment_years": 0,
+      "loan_amount": 12288,
+      "payment_history_pct": 91.98,
+      "credit_utilization": 9.46,
+      "credit_age_years": 5.0,
+      "num_credit_accounts": 5,
+      "recent_inquiries": 2,
+      "derogatory_marks": 0,
+      "debt_to_income": 0.07,
+      "loan_to_income": 0.117,
+      "loan_purpose": "auto",
+      "home_ownership": "mortgage",
+      "prob_default_lr": 0.1517,
+      "prob_default_gbm": 0.0588,
+      "score": 518,
+      "band": "Poor"
+    },
+    {
+      "age": 51,
+      "annual_income": 137907,
+      "employment_years": 0,
+      "loan_amount": 33629,
+      "payment_history_pct": 78.73,
+      "credit_utilization": 11.03,
+      "credit_age_years": 23.4,
+      "num_credit_accounts": 3,
+      "recent_inquiries": 1,
+      "derogatory_marks": 0,
+      "debt_to_income": 0.146,
+      "loan_to_income": 0.244,
+      "loan_purpose": "mortgage",
+      "home_ownership": "mortgage",
+      "prob_default_lr": 0.1043,
+      "prob_default_gbm": 0.0767,
+      "score": 497,
+      "band": "Poor"
+    },
+    {
+      "age": 65,
+      "annual_income": 77803,
+      "employment_years": 3,
+      "loan_amount": 14125,
+      "payment_history_pct": 93.89,
+      "credit_utilization": 17.16,
+      "credit_age_years": 6.3,
+      "num_credit_accounts": 2,
+      "recent_inquiries": 4,
+      "derogatory_marks": 2,
+      "debt_to_income": 0.109,
+      "loan_to_income": 0.182,
+      "loan_purpose": "personal",
+      "home_ownership": "own",
+      "prob_default_lr": 0.3888,
+      "prob_default_gbm": 0.123,
+      "score": 459,
+      "band": "Poor"
+    }
+  ],
+  "scorecard": {
+    "pdo": 50,
+    "baseScore": 600,
+    "baseOdds": 50.0,
+    "minScore": 300,
+    "maxScore": 850
+  },
+  "thresholds": {
+    "poor": 580,
+    "fair": 670,
+    "good": 740,
+    "veryGood": 800
+  }
+}
