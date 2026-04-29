@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-29T22:33:45.258499+00:00",
+  "updatedAt": "2026-04-29T23:59:29.978709+00:00",
   "season": "2025",
   "matchday": 32,
   "standings": [
@@ -428,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544533,
@@ -503,7 +503,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544539,
@@ -578,7 +578,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544535,
@@ -653,7 +653,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544522,
@@ -728,7 +728,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544521,
@@ -803,7 +803,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544527,
@@ -878,7 +878,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544530,
@@ -953,7 +953,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544526,
@@ -1028,7 +1028,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544525,
@@ -1103,7 +1103,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544529,
@@ -1178,7 +1178,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544524,
@@ -1253,7 +1253,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544528,
@@ -1328,7 +1328,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 31,
             "winner": null
           },
           "id": 544523,
@@ -1386,7 +1386,7 @@
           ]
         }
       ],
-      "last_updated": "2026-04-29T22:25:07+00:00"
+      "last_updated": "2026-04-29T23:55:08+00:00"
     }
   }
 }
