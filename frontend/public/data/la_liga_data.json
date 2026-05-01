@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-01T18:40:27.052503+00:00",
+  "updatedAt": "2026-05-01T20:08:11.918716+00:00",
   "season": "2025",
   "matchday": 34,
   "standings": [
@@ -265,6 +265,26 @@
     },
     {
       "position": 14,
+      "playedGames": 34,
+      "form": "",
+      "won": 9,
+      "draw": 12,
+      "lost": 13,
+      "points": 39,
+      "goalsFor": 36,
+      "goalsAgainst": 50,
+      "goalDifference": -14,
+      "teamId": 298,
+      "teamName": "Girona FC",
+      "teamShortName": "Girona",
+      "teamCrest": "https://sportsrc.org/img/score/298.png",
+      "zone": "mid",
+      "winRate": 26.5,
+      "drawRate": 35.3,
+      "lossRate": 38.2
+    },
+    {
+      "position": 15,
       "playedGames": 33,
       "form": "",
       "won": 9,
@@ -284,27 +304,27 @@
       "lossRate": 39.4
     },
     {
-      "position": 15,
-      "playedGames": 33,
+      "position": 16,
+      "playedGames": 34,
       "form": "",
       "won": 9,
-      "draw": 11,
-      "lost": 13,
-      "points": 38,
-      "goalsFor": 36,
-      "goalsAgainst": 50,
-      "goalDifference": -14,
-      "teamId": 298,
-      "teamName": "Girona FC",
-      "teamShortName": "Girona",
-      "teamCrest": "https://sportsrc.org/img/score/298.png",
+      "draw": 9,
+      "lost": 16,
+      "points": 36,
+      "goalsFor": 41,
+      "goalsAgainst": 51,
+      "goalDifference": -10,
+      "teamId": 89,
+      "teamName": "RCD Mallorca",
+      "teamShortName": "Mallorca",
+      "teamCrest": "https://sportsrc.org/img/score/89.png",
       "zone": "mid",
-      "winRate": 27.3,
-      "drawRate": 33.3,
-      "lossRate": 39.4
+      "winRate": 26.5,
+      "drawRate": 26.5,
+      "lossRate": 47.1
     },
     {
-      "position": 16,
+      "position": 17,
       "playedGames": 33,
       "form": "",
       "won": 9,
@@ -322,26 +342,6 @@
       "winRate": 27.3,
       "drawRate": 27.3,
       "lossRate": 45.5
-    },
-    {
-      "position": 17,
-      "playedGames": 33,
-      "form": "",
-      "won": 9,
-      "draw": 8,
-      "lost": 16,
-      "points": 35,
-      "goalsFor": 41,
-      "goalsAgainst": 51,
-      "goalDifference": -10,
-      "teamId": 89,
-      "teamName": "RCD Mallorca",
-      "teamShortName": "Mallorca",
-      "teamCrest": "https://sportsrc.org/img/score/89.png",
-      "zone": "mid",
-      "winRate": 27.3,
-      "drawRate": 24.2,
-      "lossRate": 48.5
     },
     {
       "position": 18,
@@ -408,7 +408,83 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [],
+      "live": [
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 33,
+            "winner": null
+          },
+          "id": 544546,
+          "utcDate": "2026-05-01T19:00:00Z",
+          "status": "PAUSED",
+          "matchday": 34,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-01T19:54:34Z",
+          "homeTeam": {
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
+          },
+          "awayTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 0,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 214213,
+              "name": "Francisco Hernández Maeso",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        }
+      ],
       "finished": [
         {
           "area": {
@@ -978,7 +1054,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-01T18:40:16+00:00"
+      "last_updated": "2026-05-01T20:05:13+00:00"
     }
   }
 }
