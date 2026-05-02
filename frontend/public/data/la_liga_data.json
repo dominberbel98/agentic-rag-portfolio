@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-02T13:54:43.071547+00:00",
+  "updatedAt": "2026-05-02T14:54:21.420736+00:00",
   "season": "2025",
   "matchday": 34,
   "standings": [
@@ -51,9 +51,9 @@
       "draw": 5,
       "lost": 8,
       "points": 68,
-      "goalsFor": 61,
+      "goalsFor": 64,
       "goalsAgainst": 39,
-      "goalDifference": 22,
+      "goalDifference": 25,
       "teamId": 94,
       "teamName": "Villarreal CF",
       "teamShortName": "Villarreal",
@@ -65,12 +65,12 @@
     },
     {
       "position": 4,
-      "playedGames": 33,
+      "playedGames": 34,
       "form": "",
       "won": 18,
-      "draw": 6,
+      "draw": 7,
       "lost": 9,
-      "points": 60,
+      "points": 61,
       "goalsFor": 56,
       "goalsAgainst": 37,
       "goalDifference": 19,
@@ -79,9 +79,9 @@
       "teamShortName": "Atleti",
       "teamCrest": "https://sportsrc.org/img/score/78.png",
       "zone": "champions",
-      "winRate": 54.5,
-      "drawRate": 18.2,
-      "lossRate": 27.3
+      "winRate": 52.9,
+      "drawRate": 20.6,
+      "lossRate": 26.5
     },
     {
       "position": 5,
@@ -205,6 +205,26 @@
     },
     {
       "position": 11,
+      "playedGames": 34,
+      "form": "",
+      "won": 10,
+      "draw": 10,
+      "lost": 14,
+      "points": 40,
+      "goalsFor": 37,
+      "goalsAgainst": 48,
+      "goalDifference": -11,
+      "teamId": 95,
+      "teamName": "Valencia CF",
+      "teamShortName": "Valencia",
+      "teamCrest": "https://sportsrc.org/img/score/95.png",
+      "zone": "mid",
+      "winRate": 29.4,
+      "drawRate": 29.4,
+      "lossRate": 41.2
+    },
+    {
+      "position": 12,
       "playedGames": 33,
       "form": "",
       "won": 9,
@@ -222,26 +242,6 @@
       "winRate": 27.3,
       "drawRate": 36.4,
       "lossRate": 36.4
-    },
-    {
-      "position": 12,
-      "playedGames": 33,
-      "form": "",
-      "won": 10,
-      "draw": 9,
-      "lost": 14,
-      "points": 39,
-      "goalsFor": 37,
-      "goalsAgainst": 48,
-      "goalDifference": -11,
-      "teamId": 95,
-      "teamName": "Valencia CF",
-      "teamShortName": "Valencia",
-      "teamCrest": "https://sportsrc.org/img/score/95.png",
-      "zone": "mid",
-      "winRate": 30.3,
-      "drawRate": 27.3,
-      "lossRate": 42.4
     },
     {
       "position": 13,
@@ -372,8 +372,8 @@
       "lost": 17,
       "points": 33,
       "goalsFor": 38,
-      "goalsAgainst": 52,
-      "goalDifference": -14,
+      "goalsAgainst": 55,
+      "goalDifference": -17,
       "teamId": 88,
       "teamName": "Levante UD",
       "teamShortName": "Levante",
@@ -408,83 +408,7 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 31,
-            "winner": null
-          },
-          "id": 544549,
-          "utcDate": "2026-05-02T12:00:00Z",
-          "status": "IN_PLAY",
-          "matchday": 34,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-02T13:36:45Z",
-          "homeTeam": {
-            "id": 94,
-            "name": "Villarreal CF",
-            "shortName": "Villarreal",
-            "tla": "VIL",
-            "crest": "https://sportsrc.org/img/score/94.png"
-          },
-          "awayTeam": {
-            "id": 88,
-            "name": "Levante UD",
-            "shortName": "Levante",
-            "tla": "LEV",
-            "crest": "https://sportsrc.org/img/score/88.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 3,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 206208,
-              "name": "Alejandro Hernández Hernández",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        }
-      ],
+      "live": [],
       "finished": [
         {
           "area": {
@@ -504,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544525,
@@ -579,7 +503,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544529,
@@ -654,7 +578,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544524,
@@ -729,7 +653,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544528,
@@ -804,7 +728,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544523,
@@ -879,7 +803,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544546,
@@ -937,7 +861,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-02T13:50:13+00:00"
+      "last_updated": "2026-05-02T14:50:17+00:00"
     }
   }
 }
