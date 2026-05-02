@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-02T12:09:38.941600+00:00",
+  "updatedAt": "2026-05-02T13:54:43.071547+00:00",
   "season": "2025",
   "matchday": 34,
   "standings": [
@@ -47,20 +47,20 @@
       "position": 3,
       "playedGames": 34,
       "form": "",
-      "won": 20,
-      "draw": 6,
+      "won": 21,
+      "draw": 5,
       "lost": 8,
-      "points": 66,
-      "goalsFor": 59,
-      "goalsAgainst": 38,
-      "goalDifference": 21,
+      "points": 68,
+      "goalsFor": 61,
+      "goalsAgainst": 39,
+      "goalDifference": 22,
       "teamId": 94,
       "teamName": "Villarreal CF",
       "teamShortName": "Villarreal",
       "teamCrest": "https://sportsrc.org/img/score/94.png",
       "zone": "champions",
-      "winRate": 58.8,
-      "drawRate": 17.6,
+      "winRate": 61.8,
+      "drawRate": 14.7,
       "lossRate": 23.5
     },
     {
@@ -345,26 +345,6 @@
     },
     {
       "position": 18,
-      "playedGames": 34,
-      "form": "",
-      "won": 8,
-      "draw": 10,
-      "lost": 16,
-      "points": 34,
-      "goalsFor": 37,
-      "goalsAgainst": 50,
-      "goalDifference": -13,
-      "teamId": 88,
-      "teamName": "Levante UD",
-      "teamShortName": "Levante",
-      "teamCrest": "https://sportsrc.org/img/score/88.png",
-      "zone": "relegation",
-      "winRate": 23.5,
-      "drawRate": 29.4,
-      "lossRate": 47.1
-    },
-    {
-      "position": 19,
       "playedGames": 33,
       "form": "",
       "won": 9,
@@ -382,6 +362,26 @@
       "winRate": 27.3,
       "drawRate": 21.2,
       "lossRate": 51.5
+    },
+    {
+      "position": 19,
+      "playedGames": 34,
+      "form": "",
+      "won": 8,
+      "draw": 9,
+      "lost": 17,
+      "points": 33,
+      "goalsFor": 38,
+      "goalsAgainst": 52,
+      "goalDifference": -14,
+      "teamId": 88,
+      "teamName": "Levante UD",
+      "teamShortName": "Levante",
+      "teamCrest": "https://sportsrc.org/img/score/88.png",
+      "zone": "relegation",
+      "winRate": 23.5,
+      "drawRate": 26.5,
+      "lossRate": 50.0
     },
     {
       "position": 20,
@@ -436,7 +436,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-02T12:05:01Z",
+          "lastUpdated": "2026-05-02T13:36:45Z",
           "homeTeam": {
             "id": 94,
             "name": "Villarreal CF",
@@ -452,14 +452,14 @@
             "crest": "https://sportsrc.org/img/score/88.png"
           },
           "score": {
-            "winner": "DRAW",
+            "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 0,
-              "away": 0
+              "home": 3,
+              "away": 1
             },
             "halfTime": {
-              "home": 0,
+              "home": 1,
               "away": 0
             },
             "regularTime": {
@@ -937,7 +937,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-02T12:05:10+00:00"
+      "last_updated": "2026-05-02T13:50:13+00:00"
     }
   }
 }
