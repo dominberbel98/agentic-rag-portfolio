@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-03T00:10:08.445573+00:00",
+  "updatedAt": "2026-05-03T04:29:28.659118+00:00",
   "season": "2025",
   "matchday": 34,
   "standings": [
@@ -428,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 34,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544523,
@@ -437,7 +437,7 @@
           "matchday": 32,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-02T00:21:11Z",
+          "lastUpdated": "2026-04-27T21:04:40Z",
           "homeTeam": {
             "id": 80,
             "name": "RCD Espanyol de Barcelona",
@@ -460,6 +460,18 @@
               "away": 0
             },
             "halfTime": {
+              "home": 0,
+              "away": 0
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -491,7 +503,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 34,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544546,
@@ -500,7 +512,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-02T00:21:11Z",
+          "lastUpdated": "2026-05-01T21:00:33Z",
           "homeTeam": {
             "id": 298,
             "name": "Girona FC",
@@ -525,6 +537,18 @@
             "halfTime": {
               "home": 0,
               "away": 1
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
             }
           },
           "referees": [
@@ -554,7 +578,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 34,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544549,
@@ -629,7 +653,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 34,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544547,
@@ -704,7 +728,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 34,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544541,
@@ -779,7 +803,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 34,
+            "currentMatchday": 33,
             "winner": null
           },
           "id": 544548,
@@ -837,7 +861,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-03T00:05:11+00:00"
+      "last_updated": "2026-05-03T04:25:07+00:00"
     }
   }
 }
