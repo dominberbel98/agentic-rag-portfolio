@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-03T18:31:28.697245+00:00",
+  "updatedAt": "2026-05-03T19:37:58.831442+00:00",
   "season": "2025",
   "matchday": 34,
   "standings": [
@@ -25,12 +25,12 @@
     },
     {
       "position": 2,
-      "playedGames": 33,
+      "playedGames": 34,
       "form": "",
       "won": 23,
-      "draw": 5,
+      "draw": 6,
       "lost": 5,
-      "points": 74,
+      "points": 75,
       "goalsFor": 68,
       "goalsAgainst": 31,
       "goalDifference": 37,
@@ -39,9 +39,9 @@
       "teamShortName": "Real Madrid",
       "teamCrest": "https://sportsrc.org/img/score/86.png",
       "zone": "champions",
-      "winRate": 69.7,
-      "drawRate": 15.2,
-      "lossRate": 15.2
+      "winRate": 67.6,
+      "drawRate": 17.6,
+      "lossRate": 14.7
     },
     {
       "position": 3,
@@ -225,12 +225,12 @@
     },
     {
       "position": 12,
-      "playedGames": 33,
+      "playedGames": 34,
       "form": "",
       "won": 10,
-      "draw": 9,
+      "draw": 10,
       "lost": 14,
-      "points": 39,
+      "points": 40,
       "goalsFor": 37,
       "goalsAgainst": 49,
       "goalDifference": -12,
@@ -239,9 +239,9 @@
       "teamShortName": "Espanyol",
       "teamCrest": "https://sportsrc.org/img/score/80.png",
       "zone": "mid",
-      "winRate": 30.3,
-      "drawRate": 27.3,
-      "lossRate": 42.4
+      "winRate": 29.4,
+      "drawRate": 29.4,
+      "lossRate": 41.2
     },
     {
       "position": 13,
@@ -789,7 +789,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-03T18:25:15+00:00"
+      "last_updated": "2026-05-03T19:35:14+00:00"
     }
   }
 }
