@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-03T15:26:17.117135+00:00",
+  "updatedAt": "2026-05-03T16:11:46.355477+00:00",
   "season": "2025",
   "matchday": 34,
   "standings": [
@@ -427,16 +427,16 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 34,
             "winner": null
           },
           "id": 544545,
           "utcDate": "2026-05-03T14:15:00Z",
-          "status": "PAUSED",
+          "status": "IN_PLAY",
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T15:12:19Z",
+          "lastUpdated": "2026-05-03T15:58:39Z",
           "homeTeam": {
             "id": 82,
             "name": "Getafe CF",
@@ -456,7 +456,7 @@
             "duration": "REGULAR",
             "fullTime": {
               "home": 0,
-              "away": 1
+              "away": 2
             },
             "halfTime": {
               "home": 0,
@@ -865,7 +865,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-03T15:25:11+00:00"
+      "last_updated": "2026-05-03T16:10:19+00:00"
     }
   }
 }
