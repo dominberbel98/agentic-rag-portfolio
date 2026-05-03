@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-03T14:30:42.596128+00:00",
+  "updatedAt": "2026-05-03T15:26:17.117135+00:00",
   "season": "2025",
   "matchday": 34,
   "standings": [
@@ -111,9 +111,9 @@
       "draw": 11,
       "lost": 11,
       "points": 47,
-      "goalsFor": 46,
-      "goalsAgainst": 43,
-      "goalDifference": 3,
+      "goalsFor": 48,
+      "goalsAgainst": 44,
+      "goalDifference": 4,
       "teamId": 558,
       "teamName": "RC Celta de Vigo",
       "teamShortName": "Celta",
@@ -125,23 +125,23 @@
     },
     {
       "position": 7,
-      "playedGames": 33,
+      "playedGames": 34,
       "form": "",
       "won": 13,
       "draw": 5,
-      "lost": 15,
+      "lost": 16,
       "points": 44,
       "goalsFor": 28,
-      "goalsAgainst": 34,
-      "goalDifference": -6,
+      "goalsAgainst": 35,
+      "goalDifference": -7,
       "teamId": 82,
       "teamName": "Getafe CF",
       "teamShortName": "Getafe",
       "teamCrest": "https://sportsrc.org/img/score/82.png",
       "zone": "mid",
-      "winRate": 39.4,
-      "drawRate": 15.2,
-      "lossRate": 45.5
+      "winRate": 38.2,
+      "drawRate": 14.7,
+      "lossRate": 47.1
     },
     {
       "position": 8,
@@ -205,23 +205,23 @@
     },
     {
       "position": 11,
-      "playedGames": 33,
+      "playedGames": 34,
       "form": "",
-      "won": 9,
+      "won": 10,
       "draw": 12,
       "lost": 12,
-      "points": 39,
-      "goalsFor": 33,
+      "points": 42,
+      "goalsFor": 34,
       "goalsAgainst": 41,
-      "goalDifference": -8,
+      "goalDifference": -7,
       "teamId": 87,
       "teamName": "Rayo Vallecano de Madrid",
       "teamShortName": "Rayo Vallecano",
       "teamCrest": "https://sportsrc.org/img/score/87.png",
       "zone": "mid",
-      "winRate": 27.3,
-      "drawRate": 36.4,
-      "lossRate": 36.4
+      "winRate": 29.4,
+      "drawRate": 35.3,
+      "lossRate": 35.3
     },
     {
       "position": 12,
@@ -271,9 +271,9 @@
       "draw": 11,
       "lost": 14,
       "points": 38,
-      "goalsFor": 44,
-      "goalsAgainst": 51,
-      "goalDifference": -7,
+      "goalsFor": 45,
+      "goalsAgainst": 53,
+      "goalDifference": -8,
       "teamId": 285,
       "teamName": "Elche CF",
       "teamShortName": "Elche",
@@ -408,7 +408,83 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [],
+      "live": [
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 33,
+            "winner": null
+          },
+          "id": 544545,
+          "utcDate": "2026-05-03T14:15:00Z",
+          "status": "PAUSED",
+          "matchday": 34,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-03T15:12:19Z",
+          "homeTeam": {
+            "id": 82,
+            "name": "Getafe CF",
+            "shortName": "Getafe",
+            "tla": "GET",
+            "crest": "https://sportsrc.org/img/score/82.png"
+          },
+          "awayTeam": {
+            "id": 87,
+            "name": "Rayo Vallecano de Madrid",
+            "shortName": "Rayo Vallecano",
+            "tla": "RAY",
+            "crest": "https://sportsrc.org/img/score/87.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 0,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 214573,
+              "name": "Miguel Sesma Espinosa",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        }
+      ],
       "finished": [
         {
           "area": {
@@ -789,7 +865,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-03T14:25:15+00:00"
+      "last_updated": "2026-05-03T15:25:11+00:00"
     }
   }
 }
