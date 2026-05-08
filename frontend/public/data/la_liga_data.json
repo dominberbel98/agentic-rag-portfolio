@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-08T06:55:13.422233+00:00",
+  "updatedAt": "2026-05-08T08:23:53.870217+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
@@ -428,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544549,
@@ -437,7 +437,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-02T14:07:44Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 94,
             "name": "Villarreal CF",
@@ -461,18 +461,6 @@
             },
             "halfTime": {
               "home": 1,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
               "away": 0
             }
           },
@@ -503,7 +491,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544547,
@@ -512,7 +500,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-02T16:22:38Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 95,
             "name": "Valencia CF",
@@ -535,18 +523,6 @@
               "away": 2
             },
             "halfTime": {
-              "home": 0,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -578,7 +554,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544541,
@@ -587,7 +563,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-02T18:35:36Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 263,
             "name": "Deportivo Alavés",
@@ -611,18 +587,6 @@
             },
             "halfTime": {
               "home": 1,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
               "away": 0
             }
           },
@@ -653,7 +617,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544548,
@@ -662,7 +626,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-02T21:01:38Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 79,
             "name": "CA Osasuna",
@@ -685,18 +649,6 @@
               "away": 2
             },
             "halfTime": {
-              "home": 0,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -728,7 +680,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544543,
@@ -737,7 +689,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T14:03:21Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 558,
             "name": "RC Celta de Vigo",
@@ -761,18 +713,6 @@
             },
             "halfTime": {
               "home": 2,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
               "away": 0
             }
           },
@@ -803,7 +743,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544545,
@@ -812,7 +752,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T16:22:39Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 82,
             "name": "Getafe CF",
@@ -837,18 +777,6 @@
             "halfTime": {
               "home": 0,
               "away": 1
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
             }
           },
           "referees": [
@@ -878,7 +806,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544542,
@@ -887,7 +815,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T18:31:44Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 90,
             "name": "Real Betis Balompié",
@@ -911,18 +839,6 @@
             },
             "halfTime": {
               "home": 2,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
               "away": 0
             }
           },
@@ -953,7 +869,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544544,
@@ -962,7 +878,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T21:03:19Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 80,
             "name": "RCD Espanyol de Barcelona",
@@ -985,18 +901,6 @@
               "away": 2
             },
             "halfTime": {
-              "home": 0,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -1028,7 +932,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 33,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544550,
@@ -1037,7 +941,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-04T21:06:23Z",
+          "lastUpdated": "2026-05-08T00:21:18Z",
           "homeTeam": {
             "id": 559,
             "name": "Sevilla FC",
@@ -1062,18 +966,6 @@
             "halfTime": {
               "home": 0,
               "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
             }
           },
           "referees": [
@@ -1086,7 +978,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-08T06:50:14+00:00"
+      "last_updated": "2026-05-08T08:20:15+00:00"
     }
   }
 }
