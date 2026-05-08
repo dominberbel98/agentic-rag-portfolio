@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-08T18:53:53.559287+00:00",
+  "updatedAt": "2026-05-08T20:09:17.301003+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
@@ -125,6 +125,26 @@
     },
     {
       "position": 7,
+      "playedGames": 35,
+      "form": "",
+      "won": 12,
+      "draw": 9,
+      "lost": 14,
+      "points": 45,
+      "goalsFor": 42,
+      "goalsAgainst": 42,
+      "goalDifference": 0,
+      "teamId": 79,
+      "teamName": "CA Osasuna",
+      "teamShortName": "Osasuna",
+      "teamCrest": "https://sportsrc.org/img/score/79.png",
+      "zone": "mid",
+      "winRate": 34.3,
+      "drawRate": 25.7,
+      "lossRate": 40.0
+    },
+    {
+      "position": 8,
       "playedGames": 34,
       "form": "",
       "won": 13,
@@ -144,7 +164,7 @@
       "lossRate": 47.1
     },
     {
-      "position": 8,
+      "position": 9,
       "playedGames": 34,
       "form": "",
       "won": 13,
@@ -164,7 +184,7 @@
       "lossRate": 47.1
     },
     {
-      "position": 9,
+      "position": 10,
       "playedGames": 34,
       "form": "",
       "won": 11,
@@ -182,26 +202,6 @@
       "winRate": 32.4,
       "drawRate": 29.4,
       "lossRate": 38.2
-    },
-    {
-      "position": 10,
-      "playedGames": 34,
-      "form": "",
-      "won": 11,
-      "draw": 9,
-      "lost": 14,
-      "points": 42,
-      "goalsFor": 40,
-      "goalsAgainst": 42,
-      "goalDifference": -2,
-      "teamId": 79,
-      "teamName": "CA Osasuna",
-      "teamShortName": "Osasuna",
-      "teamCrest": "https://sportsrc.org/img/score/79.png",
-      "zone": "mid",
-      "winRate": 32.4,
-      "drawRate": 26.5,
-      "lossRate": 41.2
     },
     {
       "position": 11,
@@ -365,23 +365,23 @@
     },
     {
       "position": 19,
-      "playedGames": 34,
+      "playedGames": 35,
       "form": "",
       "won": 8,
       "draw": 9,
-      "lost": 17,
+      "lost": 18,
       "points": 33,
       "goalsFor": 38,
-      "goalsAgainst": 55,
-      "goalDifference": -17,
+      "goalsAgainst": 57,
+      "goalDifference": -19,
       "teamId": 88,
       "teamName": "Levante UD",
       "teamShortName": "Levante",
       "teamCrest": "https://sportsrc.org/img/score/88.png",
       "zone": "relegation",
-      "winRate": 23.5,
-      "drawRate": 26.5,
-      "lossRate": 50.0
+      "winRate": 22.9,
+      "drawRate": 25.7,
+      "lossRate": 51.4
     },
     {
       "position": 20,
@@ -978,7 +978,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-08T18:50:17+00:00"
+      "last_updated": "2026-05-08T20:05:14+00:00"
     }
   }
 }

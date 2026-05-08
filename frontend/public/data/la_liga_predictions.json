@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-05-08T18:53:55.222204+00:00",
+  "updatedAt": "2026-05-08T20:09:19.064120+00:00",
   "season": "2025",
   "matchday": 35,
   "totalMatches": 38,
   "nSimulations": 1000,
   "model": "XGBoost + Monte Carlo Poisson",
   "xgbFeatureImportance": {
-    "ppg": 0.498,
+    "ppg": 0.557,
     "winRate": 0.024,
-    "drawRate": 0.39,
+    "drawRate": 0.35,
     "lossRate": 0.011,
-    "gfPerGame": 0.06,
-    "gaPerGame": 0.004,
-    "gdPerGame": 0.014,
+    "gfPerGame": 0.018,
+    "gaPerGame": 0.006,
+    "gdPerGame": 0.034,
     "points": 0.0,
     "goalDifference": 0.0
   },
@@ -30,21 +30,21 @@
       "projectedGA": 34.6,
       "mc": {
         "pointsMean": 97.5,
-        "pointsStd": 2.1,
-        "pointsMin": 90,
+        "pointsStd": 2.2,
+        "pointsMin": 89,
         "pointsMax": 100,
         "pointsP10": 95,
         "pointsP90": 100,
         "gfMean": 99.5,
-        "gaMean": 34.5
+        "gaMean": 34.6
       },
       "championProb": 100.0,
       "mostGoalsProb": 100.0,
       "mostConcededProb": 0.0,
-      "leastConcededProb": 57.1,
+      "leastConcededProb": 57.3,
       "xgbZone": {
         "champions": 87.9,
-        "europa": 5.4,
+        "europa": 5.3,
         "mid": 3.3,
         "relegation": 3.4
       }
@@ -63,20 +63,20 @@
       "mc": {
         "pointsMean": 85.5,
         "pointsStd": 2.4,
-        "pointsMin": 78,
+        "pointsMin": 77,
         "pointsMax": 89,
         "pointsP10": 82,
         "pointsP90": 89,
-        "gfMean": 78.3,
+        "gfMean": 78.1,
         "gaMean": 34.6
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
       "mostConcededProb": 0.0,
-      "leastConcededProb": 42.8,
+      "leastConcededProb": 42.5,
       "xgbZone": {
         "champions": 87.9,
-        "europa": 5.4,
+        "europa": 5.3,
         "mid": 3.3,
         "relegation": 3.4
       }
@@ -93,14 +93,14 @@
       "projectedGF": 71.5,
       "projectedGA": 43.6,
       "mc": {
-        "pointsMean": 75.3,
-        "pointsStd": 2.7,
+        "pointsMean": 75.6,
+        "pointsStd": 2.6,
         "pointsMin": 68,
         "pointsMax": 80,
         "pointsP10": 72,
         "pointsP90": 78,
-        "gfMean": 71.5,
-        "gaMean": 43.7
+        "gfMean": 71.7,
+        "gaMean": 43.6
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
@@ -108,7 +108,7 @@
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 87.9,
-        "europa": 5.4,
+        "europa": 5.3,
         "mid": 3.3,
         "relegation": 3.4
       }
@@ -126,21 +126,21 @@
       "projectedGA": 41.4,
       "mc": {
         "pointsMean": 70.0,
-        "pointsStd": 2.7,
+        "pointsStd": 2.6,
         "pointsMin": 63,
         "pointsMax": 75,
-        "pointsP10": 66,
+        "pointsP10": 67,
         "pointsP90": 73,
-        "gfMean": 64.7,
-        "gaMean": 41.3
+        "gfMean": 64.6,
+        "gaMean": 41.4
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
       "mostConcededProb": 0.0,
-      "leastConcededProb": 0.0,
+      "leastConcededProb": 0.1,
       "xgbZone": {
         "champions": 87.9,
-        "europa": 5.4,
+        "europa": 5.3,
         "mid": 3.3,
         "relegation": 3.4
       }
@@ -157,24 +157,24 @@
       "projectedGF": 58.1,
       "projectedGA": 45.8,
       "mc": {
-        "pointsMean": 59.5,
+        "pointsMean": 59.2,
         "pointsStd": 2.6,
         "pointsMin": 53,
         "pointsMax": 65,
         "pointsP10": 56,
         "pointsP90": 63,
-        "gfMean": 58.2,
-        "gaMean": 45.9
+        "gfMean": 57.9,
+        "gaMean": 45.8
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
       "mostConcededProb": 0.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 9.7,
-        "europa": 70.3,
-        "mid": 9.8,
-        "relegation": 10.2
+        "champions": 9.8,
+        "europa": 70.0,
+        "mid": 9.9,
+        "relegation": 10.3
       }
     },
     {
@@ -189,14 +189,14 @@
       "projectedGF": 53.6,
       "projectedGA": 49.2,
       "mc": {
-        "pointsMean": 52.7,
-        "pointsStd": 2.6,
+        "pointsMean": 53.0,
+        "pointsStd": 2.7,
         "pointsMin": 47,
         "pointsMax": 59,
-        "pointsP10": 49,
-        "pointsP90": 56,
-        "gfMean": 53.6,
-        "gaMean": 49.3
+        "pointsP10": 50,
+        "pointsP90": 57,
+        "gfMean": 53.7,
+        "gaMean": 49.1
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
@@ -205,15 +205,47 @@
       "xgbZone": {
         "champions": 9.8,
         "europa": 69.8,
-        "mid": 9.9,
+        "mid": 10.0,
         "relegation": 10.4
+      }
+    },
+    {
+      "teamName": "CA Osasuna",
+      "teamShortName": "Osasuna",
+      "teamCrest": "https://sportsrc.org/img/score/79.png",
+      "currentPosition": 7,
+      "currentPoints": 45,
+      "played": 35,
+      "remaining": 3,
+      "projectedPoints": 48.9,
+      "projectedGF": 45.6,
+      "projectedGA": 45.6,
+      "mc": {
+        "pointsMean": 49.2,
+        "pointsStd": 2.3,
+        "pointsMin": 45,
+        "pointsMax": 54,
+        "pointsP10": 46,
+        "pointsP90": 52,
+        "gfMean": 45.7,
+        "gaMean": 45.5
+      },
+      "championProb": 0.0,
+      "mostGoalsProb": 0.0,
+      "mostConcededProb": 0.0,
+      "leastConcededProb": 0.0,
+      "xgbZone": {
+        "champions": 1.8,
+        "europa": 1.5,
+        "mid": 94.8,
+        "relegation": 1.9
       }
     },
     {
       "teamName": "Athletic Club",
       "teamShortName": "Athletic",
       "teamCrest": "https://sportsrc.org/img/score/77.png",
-      "currentPosition": 8,
+      "currentPosition": 9,
       "currentPoints": 44,
       "played": 34,
       "remaining": 4,
@@ -221,31 +253,31 @@
       "projectedGF": 44.7,
       "projectedGA": 55.9,
       "mc": {
-        "pointsMean": 48.7,
+        "pointsMean": 48.9,
         "pointsStd": 2.5,
         "pointsMin": 44,
         "pointsMax": 56,
         "pointsP10": 45,
         "pointsP90": 52,
-        "gfMean": 44.7,
-        "gaMean": 55.9
+        "gfMean": 44.9,
+        "gaMean": 55.8
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 0.3,
+      "mostConcededProb": 1.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 2.2,
-        "europa": 1.8,
-        "mid": 93.6,
-        "relegation": 2.4
+        "champions": 1.6,
+        "europa": 1.3,
+        "mid": 95.3,
+        "relegation": 1.7
       }
     },
     {
       "teamName": "Getafe CF",
       "teamShortName": "Getafe",
       "teamCrest": "https://sportsrc.org/img/score/82.png",
-      "currentPosition": 7,
+      "currentPosition": 8,
       "currentPoints": 44,
       "played": 34,
       "remaining": 4,
@@ -253,31 +285,31 @@
       "projectedGF": 31.3,
       "projectedGA": 40.2,
       "mc": {
-        "pointsMean": 48.6,
-        "pointsStd": 2.4,
+        "pointsMean": 48.7,
+        "pointsStd": 2.5,
         "pointsMin": 44,
         "pointsMax": 56,
         "pointsP10": 45,
         "pointsP90": 52,
-        "gfMean": 31.4,
-        "gaMean": 40.3
+        "gfMean": 31.3,
+        "gaMean": 40.1
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
       "mostConcededProb": 0.0,
       "leastConcededProb": 0.1,
       "xgbZone": {
-        "champions": 2.3,
-        "europa": 1.9,
-        "mid": 93.3,
-        "relegation": 2.5
+        "champions": 2.1,
+        "europa": 1.7,
+        "mid": 94.1,
+        "relegation": 2.2
       }
     },
     {
       "teamName": "Real Sociedad de Fútbol",
       "teamShortName": "Real Sociedad",
       "teamCrest": "https://sportsrc.org/img/score/92.png",
-      "currentPosition": 9,
+      "currentPosition": 10,
       "currentPoints": 43,
       "played": 34,
       "remaining": 4,
@@ -285,56 +317,24 @@
       "projectedGF": 58.1,
       "projectedGA": 59.2,
       "mc": {
-        "pointsMean": 48.4,
-        "pointsStd": 2.7,
+        "pointsMean": 48.6,
+        "pointsStd": 2.6,
         "pointsMin": 43,
         "pointsMax": 55,
         "pointsP10": 45,
         "pointsP90": 52,
-        "gfMean": 58.1,
+        "gfMean": 58.2,
         "gaMean": 59.2
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 10.0,
+      "mostConcededProb": 8.7,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 2.7,
-        "europa": 2.9,
-        "mid": 91.5,
-        "relegation": 2.9
-      }
-    },
-    {
-      "teamName": "CA Osasuna",
-      "teamShortName": "Osasuna",
-      "teamCrest": "https://sportsrc.org/img/score/79.png",
-      "currentPosition": 10,
-      "currentPoints": 42,
-      "played": 34,
-      "remaining": 4,
-      "projectedPoints": 46.9,
-      "projectedGF": 44.7,
-      "projectedGA": 46.9,
-      "mc": {
-        "pointsMean": 47.3,
-        "pointsStd": 2.6,
-        "pointsMin": 42,
-        "pointsMax": 54,
-        "pointsP10": 44,
-        "pointsP90": 51,
-        "gfMean": 44.8,
-        "gaMean": 47.0
-      },
-      "championProb": 0.0,
-      "mostGoalsProb": 0.0,
-      "mostConcededProb": 0.0,
-      "leastConcededProb": 0.0,
-      "xgbZone": {
-        "champions": 1.1,
-        "europa": 0.9,
-        "mid": 96.9,
-        "relegation": 1.2
+        "champions": 1.7,
+        "europa": 1.8,
+        "mid": 94.7,
+        "relegation": 1.8
       }
     },
     {
@@ -349,24 +349,24 @@
       "projectedGF": 39.1,
       "projectedGA": 45.8,
       "mc": {
-        "pointsMean": 46.9,
+        "pointsMean": 47.0,
         "pointsStd": 2.5,
         "pointsMin": 42,
         "pointsMax": 54,
         "pointsP10": 44,
         "pointsP90": 50,
-        "gfMean": 39.1,
-        "gaMean": 45.9
+        "gfMean": 39.3,
+        "gaMean": 45.8
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
       "mostConcededProb": 0.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 1.1,
-        "europa": 4.1,
-        "mid": 93.5,
-        "relegation": 1.2
+        "champions": 1.7,
+        "europa": 6.0,
+        "mid": 90.5,
+        "relegation": 1.8
       }
     },
     {
@@ -381,23 +381,23 @@
       "projectedGF": 41.4,
       "projectedGA": 55.9,
       "mc": {
-        "pointsMean": 43.4,
+        "pointsMean": 43.5,
         "pointsStd": 2.5,
         "pointsMin": 39,
         "pointsMax": 51,
         "pointsP10": 40,
-        "pointsP90": 46,
-        "gfMean": 41.3,
-        "gaMean": 55.8
+        "pointsP90": 47,
+        "gfMean": 41.6,
+        "gaMean": 56.1
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 0.7,
+      "mostConcededProb": 1.2,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.0,
         "europa": 0.8,
-        "mid": 97.0,
+        "mid": 97.1,
         "relegation": 1.1
       }
     },
@@ -413,23 +413,23 @@
       "projectedGF": 41.4,
       "projectedGA": 57.0,
       "mc": {
-        "pointsMean": 43.3,
-        "pointsStd": 2.7,
+        "pointsMean": 43.2,
+        "pointsStd": 2.5,
         "pointsMin": 39,
         "pointsMax": 51,
         "pointsP10": 40,
-        "pointsP90": 47,
-        "gfMean": 41.4,
-        "gaMean": 57.2
+        "pointsP90": 46,
+        "gfMean": 41.3,
+        "gaMean": 57.1
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 2.8,
+      "mostConcededProb": 2.1,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.0,
         "europa": 0.8,
-        "mid": 97.0,
+        "mid": 97.1,
         "relegation": 1.1
       }
     },
@@ -445,24 +445,24 @@
       "projectedGF": 50.3,
       "projectedGA": 59.2,
       "mc": {
-        "pointsMean": 42.8,
+        "pointsMean": 43.0,
         "pointsStd": 2.6,
         "pointsMin": 38,
         "pointsMax": 50,
-        "pointsP10": 39,
-        "pointsP90": 46,
-        "gfMean": 50.2,
-        "gaMean": 59.2
+        "pointsP10": 40,
+        "pointsP90": 47,
+        "gfMean": 50.5,
+        "gaMean": 59.3
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 8.6,
+      "mostConcededProb": 8.8,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 1.7,
-        "europa": 5.9,
-        "mid": 90.6,
-        "relegation": 1.8
+        "champions": 1.8,
+        "europa": 6.4,
+        "mid": 89.9,
+        "relegation": 1.9
       }
     },
     {
@@ -477,24 +477,24 @@
       "projectedGF": 46.9,
       "projectedGA": 57.0,
       "mc": {
-        "pointsMean": 42.8,
+        "pointsMean": 42.7,
         "pointsStd": 2.6,
         "pointsMin": 38,
         "pointsMax": 50,
         "pointsP10": 39,
-        "pointsP90": 47,
-        "gfMean": 47.0,
+        "pointsP90": 46,
+        "gfMean": 46.9,
         "gaMean": 57.0
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 1.2,
+      "mostConcededProb": 1.8,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 1.2,
-        "europa": 1.0,
-        "mid": 96.5,
-        "relegation": 1.3
+        "champions": 1.5,
+        "europa": 1.2,
+        "mid": 95.8,
+        "relegation": 1.5
       }
     },
     {
@@ -509,24 +509,24 @@
       "projectedGF": 40.2,
       "projectedGA": 57.0,
       "mc": {
-        "pointsMean": 42.3,
-        "pointsStd": 2.5,
+        "pointsMean": 42.2,
+        "pointsStd": 2.4,
         "pointsMin": 38,
         "pointsMax": 50,
         "pointsP10": 39,
-        "pointsP90": 46,
-        "gfMean": 40.3,
+        "pointsP90": 45,
+        "gfMean": 40.1,
         "gaMean": 57.0
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 2.5,
+      "mostConcededProb": 2.2,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 1.8,
-        "europa": 6.3,
-        "mid": 90.0,
-        "relegation": 1.9
+        "champions": 1.6,
+        "europa": 5.6,
+        "mid": 91.1,
+        "relegation": 1.7
       }
     },
     {
@@ -541,24 +541,24 @@
       "projectedGF": 45.8,
       "projectedGA": 61.5,
       "mc": {
-        "pointsMean": 41.3,
-        "pointsStd": 2.5,
+        "pointsMean": 41.4,
+        "pointsStd": 2.6,
         "pointsMin": 37,
         "pointsMax": 49,
         "pointsP10": 38,
         "pointsP90": 45,
         "gfMean": 45.9,
-        "gaMean": 61.6
+        "gaMean": 61.5
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 29.2,
+      "mostConcededProb": 30.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
-        "champions": 1.8,
-        "europa": 1.4,
-        "mid": 93.7,
-        "relegation": 3.1
+        "champions": 1.9,
+        "europa": 1.5,
+        "mid": 93.2,
+        "relegation": 3.3
       }
     },
     {
@@ -573,18 +573,18 @@
       "projectedGF": 44.7,
       "projectedGA": 59.2,
       "mc": {
-        "pointsMean": 40.4,
+        "pointsMean": 40.5,
         "pointsStd": 2.5,
         "pointsMin": 36,
         "pointsMax": 48,
         "pointsP10": 37,
-        "pointsP90": 43,
-        "gfMean": 44.6,
+        "pointsP90": 44,
+        "gfMean": 44.7,
         "gaMean": 59.2
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 7.2,
+      "mostConcededProb": 5.6,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 3.5,
@@ -599,24 +599,24 @@
       "teamCrest": "https://sportsrc.org/img/score/88.png",
       "currentPosition": 19,
       "currentPoints": 33,
-      "played": 34,
-      "remaining": 4,
-      "projectedPoints": 36.9,
-      "projectedGF": 42.5,
-      "projectedGA": 61.5,
+      "played": 35,
+      "remaining": 3,
+      "projectedPoints": 35.8,
+      "projectedGF": 41.3,
+      "projectedGA": 61.9,
       "mc": {
-        "pointsMean": 37.0,
-        "pointsStd": 2.4,
+        "pointsMean": 36.0,
+        "pointsStd": 2.1,
         "pointsMin": 33,
-        "pointsMax": 45,
-        "pointsP10": 34,
-        "pointsP90": 40,
-        "gfMean": 42.5,
-        "gaMean": 61.6
+        "pointsMax": 42,
+        "pointsP10": 33,
+        "pointsP90": 39,
+        "gfMean": 41.2,
+        "gaMean": 61.9
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 26.7,
+      "mostConcededProb": 26.6,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 3.5,
@@ -637,18 +637,18 @@
       "projectedGF": 29.1,
       "projectedGA": 60.4,
       "mc": {
-        "pointsMean": 31.3,
+        "pointsMean": 31.2,
         "pointsStd": 2.3,
         "pointsMin": 28,
         "pointsMax": 40,
         "pointsP10": 28,
         "pointsP90": 34,
         "gfMean": 29.1,
-        "gaMean": 60.3
+        "gaMean": 60.4
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 10.8,
+      "mostConcededProb": 12.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 3.5,
