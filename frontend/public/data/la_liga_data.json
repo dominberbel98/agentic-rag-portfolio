@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-09T12:12:42.390681+00:00",
+  "updatedAt": "2026-05-09T14:00:25.458452+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
@@ -225,6 +225,26 @@
     },
     {
       "position": 12,
+      "playedGames": 35,
+      "form": "",
+      "won": 10,
+      "draw": 9,
+      "lost": 16,
+      "points": 39,
+      "goalsFor": 41,
+      "goalsAgainst": 53,
+      "goalDifference": -12,
+      "teamId": 263,
+      "teamName": "Deportivo Alavés",
+      "teamShortName": "Alavés",
+      "teamCrest": "https://sportsrc.org/img/score/263.png",
+      "zone": "mid",
+      "winRate": 28.6,
+      "drawRate": 25.7,
+      "lossRate": 45.7
+    },
+    {
+      "position": 13,
       "playedGames": 34,
       "form": "",
       "won": 10,
@@ -244,7 +264,7 @@
       "lossRate": 44.1
     },
     {
-      "position": 13,
+      "position": 14,
       "playedGames": 34,
       "form": "",
       "won": 10,
@@ -264,27 +284,27 @@
       "lossRate": 44.1
     },
     {
-      "position": 14,
-      "playedGames": 34,
+      "position": 15,
+      "playedGames": 35,
       "form": "",
       "won": 9,
       "draw": 11,
-      "lost": 14,
+      "lost": 15,
       "points": 38,
       "goalsFor": 45,
-      "goalsAgainst": 53,
-      "goalDifference": -8,
+      "goalsAgainst": 54,
+      "goalDifference": -9,
       "teamId": 285,
       "teamName": "Elche CF",
       "teamShortName": "Elche",
       "teamCrest": "https://sportsrc.org/img/score/285.png",
       "zone": "mid",
-      "winRate": 26.5,
-      "drawRate": 32.4,
-      "lossRate": 41.2
+      "winRate": 25.7,
+      "drawRate": 31.4,
+      "lossRate": 42.9
     },
     {
-      "position": 15,
+      "position": 16,
       "playedGames": 34,
       "form": "",
       "won": 10,
@@ -304,7 +324,7 @@
       "lossRate": 47.1
     },
     {
-      "position": 16,
+      "position": 17,
       "playedGames": 34,
       "form": "",
       "won": 9,
@@ -324,7 +344,7 @@
       "lossRate": 41.2
     },
     {
-      "position": 17,
+      "position": 18,
       "playedGames": 34,
       "form": "",
       "won": 10,
@@ -338,30 +358,10 @@
       "teamName": "Sevilla FC",
       "teamShortName": "Sevilla FC",
       "teamCrest": "https://sportsrc.org/img/score/559.png",
-      "zone": "mid",
+      "zone": "relegation",
       "winRate": 29.4,
       "drawRate": 20.6,
       "lossRate": 50.0
-    },
-    {
-      "position": 18,
-      "playedGames": 34,
-      "form": "",
-      "won": 9,
-      "draw": 9,
-      "lost": 16,
-      "points": 36,
-      "goalsFor": 40,
-      "goalsAgainst": 53,
-      "goalDifference": -13,
-      "teamId": 263,
-      "teamName": "Deportivo Alavés",
-      "teamShortName": "Alavés",
-      "teamCrest": "https://sportsrc.org/img/score/263.png",
-      "zone": "relegation",
-      "winRate": 26.5,
-      "drawRate": 26.5,
-      "lossRate": 47.1
     },
     {
       "position": 19,
@@ -408,7 +408,83 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [],
+      "live": [
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544556,
+          "utcDate": "2026-05-09T12:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 35,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-09T13:36:50Z",
+          "homeTeam": {
+            "id": 285,
+            "name": "Elche CF",
+            "shortName": "Elche",
+            "tla": "ELC",
+            "crest": "https://sportsrc.org/img/score/285.png"
+          },
+          "awayTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "score": {
+            "winner": "DRAW",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 0
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 217698,
+              "name": "Mateo Busquets Ferrer",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        }
+      ],
       "finished": [
         {
           "area": {
@@ -428,7 +504,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544543,
@@ -437,7 +513,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T14:03:21Z",
+          "lastUpdated": "2026-05-09T00:21:14Z",
           "homeTeam": {
             "id": 558,
             "name": "RC Celta de Vigo",
@@ -461,18 +537,6 @@
             },
             "halfTime": {
               "home": 2,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
               "away": 0
             }
           },
@@ -503,7 +567,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544545,
@@ -512,7 +576,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T16:22:39Z",
+          "lastUpdated": "2026-05-09T00:21:14Z",
           "homeTeam": {
             "id": 82,
             "name": "Getafe CF",
@@ -537,18 +601,6 @@
             "halfTime": {
               "home": 0,
               "away": 1
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
             }
           },
           "referees": [
@@ -578,7 +630,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544542,
@@ -587,7 +639,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T18:31:44Z",
+          "lastUpdated": "2026-05-09T00:21:14Z",
           "homeTeam": {
             "id": 90,
             "name": "Real Betis Balompié",
@@ -611,18 +663,6 @@
             },
             "halfTime": {
               "home": 2,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
               "away": 0
             }
           },
@@ -653,7 +693,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544544,
@@ -662,7 +702,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-03T21:03:19Z",
+          "lastUpdated": "2026-05-09T00:21:14Z",
           "homeTeam": {
             "id": 80,
             "name": "RCD Espanyol de Barcelona",
@@ -685,18 +725,6 @@
               "away": 2
             },
             "halfTime": {
-              "home": 0,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -728,7 +756,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544550,
@@ -737,7 +765,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-04T21:06:23Z",
+          "lastUpdated": "2026-05-09T00:21:14Z",
           "homeTeam": {
             "id": 559,
             "name": "Sevilla FC",
@@ -760,18 +788,6 @@
               "away": 0
             },
             "halfTime": {
-              "home": 0,
-              "away": 0
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
               "home": 0,
               "away": 0
             }
@@ -803,7 +819,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 31,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544554,
@@ -812,7 +828,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-08T21:07:27Z",
+          "lastUpdated": "2026-05-09T00:21:14Z",
           "homeTeam": {
             "id": 88,
             "name": "Levante UD",
@@ -837,18 +853,6 @@
             "halfTime": {
               "home": 2,
               "away": 2
-            },
-            "regularTime": {
-              "home": 0,
-              "away": 0
-            },
-            "extraTime": {
-              "home": 0,
-              "away": 0
-            },
-            "penalties": {
-              "home": 0,
-              "away": 0
             }
           },
           "referees": [
@@ -861,7 +865,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-09T12:10:17+00:00"
+      "last_updated": "2026-05-09T13:55:11+00:00"
     }
   }
 }
