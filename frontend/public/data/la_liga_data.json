@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-09T21:12:28.471551+00:00",
+  "updatedAt": "2026-05-09T22:09:59.347117+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
@@ -87,20 +87,20 @@
       "position": 5,
       "playedGames": 35,
       "form": "",
-      "won": 14,
-      "draw": 14,
+      "won": 13,
+      "draw": 15,
       "lost": 7,
-      "points": 56,
+      "points": 54,
       "goalsFor": 54,
-      "goalsAgainst": 41,
-      "goalDifference": 13,
+      "goalsAgainst": 43,
+      "goalDifference": 11,
       "teamId": 90,
       "teamName": "Real Betis Balompié",
       "teamShortName": "Real Betis",
       "teamCrest": "https://sportsrc.org/img/score/90.png",
       "zone": "europa",
-      "winRate": 40.0,
-      "drawRate": 40.0,
+      "winRate": 37.1,
+      "drawRate": 42.9,
       "lossRate": 20.0
     },
     {
@@ -145,6 +145,26 @@
     },
     {
       "position": 8,
+      "playedGames": 35,
+      "form": "",
+      "won": 11,
+      "draw": 11,
+      "lost": 13,
+      "points": 44,
+      "goalsFor": 54,
+      "goalsAgainst": 55,
+      "goalDifference": -1,
+      "teamId": 92,
+      "teamName": "Real Sociedad de Fútbol",
+      "teamShortName": "Real Sociedad",
+      "teamCrest": "https://sportsrc.org/img/score/92.png",
+      "zone": "mid",
+      "winRate": 31.4,
+      "drawRate": 31.4,
+      "lossRate": 37.1
+    },
+    {
+      "position": 9,
       "playedGames": 34,
       "form": "",
       "won": 13,
@@ -162,26 +182,6 @@
       "winRate": 38.2,
       "drawRate": 14.7,
       "lossRate": 47.1
-    },
-    {
-      "position": 9,
-      "playedGames": 35,
-      "form": "",
-      "won": 11,
-      "draw": 10,
-      "lost": 14,
-      "points": 43,
-      "goalsFor": 52,
-      "goalsAgainst": 55,
-      "goalDifference": -3,
-      "teamId": 92,
-      "teamName": "Real Sociedad de Fútbol",
-      "teamShortName": "Real Sociedad",
-      "teamCrest": "https://sportsrc.org/img/score/92.png",
-      "zone": "mid",
-      "winRate": 31.4,
-      "drawRate": 28.6,
-      "lossRate": 40.0
     },
     {
       "position": 10,
@@ -789,7 +789,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-09T21:10:16+00:00"
+      "last_updated": "2026-05-09T22:05:12+00:00"
     }
   }
 }
