@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-10T11:56:57.554270+00:00",
+  "updatedAt": "2026-05-10T13:41:50.018407+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
@@ -45,12 +45,12 @@
     },
     {
       "position": 3,
-      "playedGames": 34,
+      "playedGames": 35,
       "form": "",
       "won": 21,
-      "draw": 5,
+      "draw": 6,
       "lost": 8,
-      "points": 68,
+      "points": 69,
       "goalsFor": 64,
       "goalsAgainst": 39,
       "goalDifference": 25,
@@ -59,9 +59,9 @@
       "teamShortName": "Villarreal",
       "teamCrest": "https://sportsrc.org/img/score/94.png",
       "zone": "champions",
-      "winRate": 61.8,
-      "drawRate": 14.7,
-      "lossRate": 23.5
+      "winRate": 60.0,
+      "drawRate": 17.1,
+      "lossRate": 22.9
     },
     {
       "position": 4,
@@ -265,6 +265,26 @@
     },
     {
       "position": 14,
+      "playedGames": 35,
+      "form": "",
+      "won": 10,
+      "draw": 9,
+      "lost": 16,
+      "points": 39,
+      "goalsFor": 42,
+      "goalsAgainst": 51,
+      "goalDifference": -9,
+      "teamId": 89,
+      "teamName": "RCD Mallorca",
+      "teamShortName": "Mallorca",
+      "teamCrest": "https://sportsrc.org/img/score/89.png",
+      "zone": "mid",
+      "winRate": 28.6,
+      "drawRate": 25.7,
+      "lossRate": 45.7
+    },
+    {
+      "position": 15,
       "playedGames": 34,
       "form": "",
       "won": 10,
@@ -284,7 +304,7 @@
       "lossRate": 44.1
     },
     {
-      "position": 15,
+      "position": 16,
       "playedGames": 35,
       "form": "",
       "won": 10,
@@ -302,26 +322,6 @@
       "winRate": 28.6,
       "drawRate": 25.7,
       "lossRate": 45.7
-    },
-    {
-      "position": 16,
-      "playedGames": 34,
-      "form": "",
-      "won": 10,
-      "draw": 8,
-      "lost": 16,
-      "points": 38,
-      "goalsFor": 42,
-      "goalsAgainst": 51,
-      "goalDifference": -9,
-      "teamId": 89,
-      "teamName": "RCD Mallorca",
-      "teamShortName": "Mallorca",
-      "teamCrest": "https://sportsrc.org/img/score/89.png",
-      "zone": "mid",
-      "winRate": 29.4,
-      "drawRate": 23.5,
-      "lossRate": 47.1
     },
     {
       "position": 17,
@@ -410,7 +410,7 @@
     "data": {
       "live": [],
       "finished": [],
-      "last_updated": "2026-05-10T11:55:20+00:00"
+      "last_updated": "2026-05-10T13:40:21+00:00"
     }
   }
 }
