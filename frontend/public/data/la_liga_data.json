@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-10T00:13:39.836873+00:00",
+  "updatedAt": "2026-05-10T04:33:44.918713+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
@@ -437,7 +437,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-09T10:21:17Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 559,
             "name": "Sevilla FC",
@@ -500,7 +500,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-09T10:21:17Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 88,
             "name": "Levante UD",
@@ -563,7 +563,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-09T16:00:16Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 285,
             "name": "Elche CF",
@@ -626,7 +626,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-09T18:32:37Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 559,
             "name": "Sevilla FC",
@@ -689,7 +689,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-09T20:25:17Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 78,
             "name": "Club Atlético de Madrid",
@@ -724,9 +724,72 @@
               "nationality": "Spain"
             }
           ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544557,
+          "utcDate": "2026-05-09T19:00:00Z",
+          "status": "FINISHED",
+          "matchday": 35,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-10T00:21:10Z",
+          "homeTeam": {
+            "id": 92,
+            "name": "Real Sociedad de Fútbol",
+            "shortName": "Real Sociedad",
+            "tla": "RSO",
+            "crest": "https://sportsrc.org/img/score/92.png"
+          },
+          "awayTeam": {
+            "id": 90,
+            "name": "Real Betis Balompié",
+            "shortName": "Real Betis",
+            "tla": "BET",
+            "crest": "https://sportsrc.org/img/score/90.png"
+          },
+          "score": {
+            "winner": "DRAW",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 2
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 215569,
+              "name": "Alejandro Muñiz Ruiz",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
         }
       ],
-      "last_updated": "2026-05-10T00:10:15+00:00"
+      "last_updated": "2026-05-10T04:25:07+00:00"
     }
   }
 }
