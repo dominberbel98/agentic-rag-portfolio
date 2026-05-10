@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-10T14:58:24.805811+00:00",
+  "updatedAt": "2026-05-10T16:02:09.455439+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
@@ -51,8 +51,8 @@
       "draw": 6,
       "lost": 8,
       "points": 69,
-      "goalsFor": 64,
-      "goalsAgainst": 39,
+      "goalsFor": 65,
+      "goalsAgainst": 40,
       "goalDifference": 25,
       "teamId": 94,
       "teamName": "Villarreal CF",
@@ -165,23 +165,23 @@
     },
     {
       "position": 9,
-      "playedGames": 34,
+      "playedGames": 35,
       "form": "",
       "won": 13,
       "draw": 5,
-      "lost": 16,
+      "lost": 17,
       "points": 44,
       "goalsFor": 40,
-      "goalsAgainst": 50,
-      "goalDifference": -10,
+      "goalsAgainst": 51,
+      "goalDifference": -11,
       "teamId": 77,
       "teamName": "Athletic Club",
       "teamShortName": "Athletic",
       "teamCrest": "https://sportsrc.org/img/score/77.png",
       "zone": "mid",
-      "winRate": 38.2,
-      "drawRate": 14.7,
-      "lossRate": 47.1
+      "winRate": 37.1,
+      "drawRate": 14.3,
+      "lossRate": 48.6
     },
     {
       "position": 10,
@@ -228,6 +228,26 @@
       "playedGames": 35,
       "form": "",
       "won": 11,
+      "draw": 9,
+      "lost": 15,
+      "points": 42,
+      "goalsFor": 38,
+      "goalsAgainst": 50,
+      "goalDifference": -12,
+      "teamId": 95,
+      "teamName": "Valencia CF",
+      "teamShortName": "Valencia",
+      "teamCrest": "https://sportsrc.org/img/score/95.png",
+      "zone": "mid",
+      "winRate": 31.4,
+      "drawRate": 25.7,
+      "lossRate": 42.9
+    },
+    {
+      "position": 13,
+      "playedGames": 35,
+      "form": "",
+      "won": 11,
       "draw": 7,
       "lost": 17,
       "points": 40,
@@ -244,7 +264,7 @@
       "lossRate": 48.6
     },
     {
-      "position": 13,
+      "position": 14,
       "playedGames": 35,
       "form": "",
       "won": 9,
@@ -264,15 +284,15 @@
       "lossRate": 40.0
     },
     {
-      "position": 14,
+      "position": 15,
       "playedGames": 35,
       "form": "",
       "won": 10,
       "draw": 9,
       "lost": 16,
       "points": 39,
-      "goalsFor": 42,
-      "goalsAgainst": 51,
+      "goalsFor": 43,
+      "goalsAgainst": 52,
       "goalDifference": -9,
       "teamId": 89,
       "teamName": "RCD Mallorca",
@@ -282,26 +302,6 @@
       "winRate": 28.6,
       "drawRate": 25.7,
       "lossRate": 45.7
-    },
-    {
-      "position": 15,
-      "playedGames": 34,
-      "form": "",
-      "won": 10,
-      "draw": 9,
-      "lost": 15,
-      "points": 39,
-      "goalsFor": 37,
-      "goalsAgainst": 50,
-      "goalDifference": -13,
-      "teamId": 95,
-      "teamName": "Valencia CF",
-      "teamShortName": "Valencia",
-      "teamCrest": "https://sportsrc.org/img/score/95.png",
-      "zone": "mid",
-      "winRate": 29.4,
-      "drawRate": 26.5,
-      "lossRate": 44.1
     },
     {
       "position": 16,
@@ -408,7 +408,71 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [],
+      "live": [
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544551,
+          "utcDate": "2026-05-10T14:15:00Z",
+          "status": "IN_PLAY",
+          "matchday": 35,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-10T15:53:58Z",
+          "homeTeam": {
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
+          },
+          "awayTeam": {
+            "id": 95,
+            "name": "Valencia CF",
+            "shortName": "Valencia",
+            "tla": "VAL",
+            "crest": "https://sportsrc.org/img/score/95.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 0,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 207048,
+              "name": "Miguel Ortiz Arias",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        }
+      ],
       "finished": [
         {
           "area": {
@@ -437,7 +501,7 @@
           "matchday": 34,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-10T05:21:16Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 559,
             "name": "Sevilla FC",
@@ -500,7 +564,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-10T05:21:16Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 88,
             "name": "Levante UD",
@@ -563,7 +627,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-10T05:21:16Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 285,
             "name": "Elche CF",
@@ -626,7 +690,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-10T05:21:16Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 559,
             "name": "Sevilla FC",
@@ -689,7 +753,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-10T05:21:16Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 78,
             "name": "Club Atlético de Madrid",
@@ -752,7 +816,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-10T05:21:16Z",
+          "lastUpdated": "2026-05-10T00:21:10Z",
           "homeTeam": {
             "id": 92,
             "name": "Real Sociedad de Fútbol",
@@ -789,7 +853,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-10T14:55:15+00:00"
+      "last_updated": "2026-05-10T15:55:10+00:00"
     }
   }
 }
