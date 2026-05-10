@@ -1,47 +1,47 @@
 {
-  "updatedAt": "2026-05-10T18:36:23.110180+00:00",
+  "updatedAt": "2026-05-10T20:01:21.719776+00:00",
   "season": "2025",
   "matchday": 35,
   "standings": [
     {
       "position": 1,
-      "playedGames": 34,
+      "playedGames": 35,
       "form": "",
-      "won": 29,
+      "won": 30,
       "draw": 1,
       "lost": 4,
-      "points": 88,
-      "goalsFor": 89,
+      "points": 91,
+      "goalsFor": 91,
       "goalsAgainst": 31,
-      "goalDifference": 58,
+      "goalDifference": 60,
       "teamId": 81,
       "teamName": "FC Barcelona",
       "teamShortName": "Barça",
       "teamCrest": "https://sportsrc.org/img/score/81.png",
       "zone": "champions",
-      "winRate": 85.3,
+      "winRate": 85.7,
       "drawRate": 2.9,
-      "lossRate": 11.8
+      "lossRate": 11.4
     },
     {
       "position": 2,
-      "playedGames": 34,
+      "playedGames": 35,
       "form": "",
       "won": 24,
       "draw": 5,
-      "lost": 5,
+      "lost": 6,
       "points": 77,
       "goalsFor": 70,
-      "goalsAgainst": 31,
-      "goalDifference": 39,
+      "goalsAgainst": 33,
+      "goalDifference": 37,
       "teamId": 86,
       "teamName": "Real Madrid CF",
       "teamShortName": "Real Madrid",
       "teamCrest": "https://sportsrc.org/img/score/86.png",
       "zone": "champions",
-      "winRate": 70.6,
-      "drawRate": 14.7,
-      "lossRate": 14.7
+      "winRate": 68.6,
+      "drawRate": 14.3,
+      "lossRate": 17.1
     },
     {
       "position": 3,
@@ -408,7 +408,71 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [],
+      "live": [
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544553,
+          "utcDate": "2026-05-10T19:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 35,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-10T19:53:48Z",
+          "homeTeam": {
+            "id": 81,
+            "name": "FC Barcelona",
+            "shortName": "Barça",
+            "tla": "FCB",
+            "crest": "https://sportsrc.org/img/score/81.png"
+          },
+          "awayTeam": {
+            "id": 86,
+            "name": "Real Madrid CF",
+            "shortName": "Real Madrid",
+            "tla": "RMA",
+            "crest": "https://sportsrc.org/img/score/86.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 0
+            },
+            "halfTime": {
+              "home": null,
+              "away": null
+            }
+          },
+          "referees": [
+            {
+              "id": 206208,
+              "name": "Alejandro Hernández Hernández",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        }
+      ],
       "finished": [
         {
           "area": {
@@ -789,7 +853,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-10T18:35:14+00:00"
+      "last_updated": "2026-05-10T19:55:11+00:00"
     }
   }
 }

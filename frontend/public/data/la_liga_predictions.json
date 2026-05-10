@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-10T18:36:24.731182+00:00",
+  "updatedAt": "2026-05-10T20:01:23.628191+00:00",
   "season": "2025",
   "matchday": 35,
   "totalMatches": 38,
@@ -22,26 +22,26 @@
       "teamShortName": "Barça",
       "teamCrest": "https://sportsrc.org/img/score/81.png",
       "currentPosition": 1,
-      "currentPoints": 88,
-      "played": 34,
-      "remaining": 4,
-      "projectedPoints": 98.4,
-      "projectedGF": 99.5,
-      "projectedGA": 34.6,
+      "currentPoints": 91,
+      "played": 35,
+      "remaining": 3,
+      "projectedPoints": 98.8,
+      "projectedGF": 98.8,
+      "projectedGA": 33.7,
       "mc": {
-        "pointsMean": 97.6,
-        "pointsStd": 2.2,
-        "pointsMin": 91,
+        "pointsMean": 98.3,
+        "pointsStd": 1.8,
+        "pointsMin": 92,
         "pointsMax": 100,
         "pointsP10": 95,
         "pointsP90": 100,
-        "gfMean": 99.5,
-        "gaMean": 34.5
+        "gfMean": 99.0,
+        "gaMean": 33.6
       },
       "championProb": 100.0,
       "mostGoalsProb": 100.0,
       "mostConcededProb": 0.0,
-      "leastConcededProb": 59.5,
+      "leastConcededProb": 89.0,
       "xgbZone": {
         "champions": 88.1,
         "europa": 6.2,
@@ -55,25 +55,25 @@
       "teamCrest": "https://sportsrc.org/img/score/86.png",
       "currentPosition": 2,
       "currentPoints": 77,
-      "played": 34,
-      "remaining": 4,
-      "projectedPoints": 86.1,
-      "projectedGF": 78.2,
-      "projectedGA": 34.6,
+      "played": 35,
+      "remaining": 3,
+      "projectedPoints": 83.6,
+      "projectedGF": 76.0,
+      "projectedGA": 35.8,
       "mc": {
-        "pointsMean": 85.5,
-        "pointsStd": 2.4,
-        "pointsMin": 78,
-        "pointsMax": 89,
-        "pointsP10": 82,
-        "pointsP90": 89,
-        "gfMean": 78.2,
-        "gaMean": 34.6
+        "pointsMean": 83.2,
+        "pointsStd": 2.1,
+        "pointsMin": 77,
+        "pointsMax": 86,
+        "pointsP10": 80,
+        "pointsP90": 86,
+        "gfMean": 76.0,
+        "gaMean": 35.9
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
       "mostConcededProb": 0.0,
-      "leastConcededProb": 40.3,
+      "leastConcededProb": 10.9,
       "xgbZone": {
         "champions": 88.1,
         "europa": 6.2,
@@ -93,14 +93,14 @@
       "projectedGF": 70.6,
       "projectedGA": 43.4,
       "mc": {
-        "pointsMean": 74.6,
-        "pointsStd": 2.2,
+        "pointsMean": 74.4,
+        "pointsStd": 2.3,
         "pointsMin": 69,
         "pointsMax": 78,
         "pointsP10": 72,
         "pointsP90": 78,
-        "gfMean": 70.6,
-        "gaMean": 43.4
+        "gfMean": 70.5,
+        "gaMean": 43.5
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
@@ -125,8 +125,8 @@
       "projectedGF": 63.0,
       "projectedGA": 41.3,
       "mc": {
-        "pointsMean": 68.2,
-        "pointsStd": 2.3,
+        "pointsMean": 68.3,
+        "pointsStd": 2.2,
         "pointsMin": 63,
         "pointsMax": 72,
         "pointsP10": 65,
@@ -157,14 +157,14 @@
       "projectedGF": 58.6,
       "projectedGA": 46.7,
       "mc": {
-        "pointsMean": 58.6,
+        "pointsMean": 58.8,
         "pointsStd": 2.3,
         "pointsMin": 54,
         "pointsMax": 63,
-        "pointsP10": 55,
+        "pointsP10": 56,
         "pointsP90": 61,
-        "gfMean": 58.5,
-        "gaMean": 46.7
+        "gfMean": 58.6,
+        "gaMean": 46.6
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
@@ -189,14 +189,14 @@
       "projectedGF": 53.2,
       "projectedGA": 47.8,
       "mc": {
-        "pointsMean": 54.5,
-        "pointsStd": 2.3,
+        "pointsMean": 54.3,
+        "pointsStd": 2.2,
         "pointsMin": 50,
         "pointsMax": 59,
         "pointsP10": 51,
         "pointsP90": 57,
-        "gfMean": 53.3,
-        "gaMean": 47.7
+        "gfMean": 53.1,
+        "gaMean": 47.9
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
@@ -221,19 +221,19 @@
       "projectedGF": 30.4,
       "projectedGA": 39.1,
       "mc": {
-        "pointsMean": 48.5,
+        "pointsMean": 48.4,
         "pointsStd": 2.1,
         "pointsMin": 45,
         "pointsMax": 54,
         "pointsP10": 46,
-        "pointsP90": 52,
+        "pointsP90": 51,
         "gfMean": 30.4,
-        "gaMean": 39.0
+        "gaMean": 39.1
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
       "mostConcededProb": 0.0,
-      "leastConcededProb": 0.2,
+      "leastConcededProb": 0.1,
       "xgbZone": {
         "champions": 2.1,
         "europa": 1.5,
@@ -253,18 +253,18 @@
       "projectedGF": 58.6,
       "projectedGA": 59.7,
       "mc": {
-        "pointsMean": 48.1,
+        "pointsMean": 48.0,
         "pointsStd": 2.3,
         "pointsMin": 44,
         "pointsMax": 53,
         "pointsP10": 45,
         "pointsP90": 51,
         "gfMean": 58.6,
-        "gaMean": 59.7
+        "gaMean": 59.8
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 16.2,
+      "mostConcededProb": 14.8,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.7,
@@ -285,18 +285,18 @@
       "projectedGF": 43.4,
       "projectedGA": 55.4,
       "mc": {
-        "pointsMean": 47.3,
+        "pointsMean": 47.5,
         "pointsStd": 2.2,
         "pointsMin": 44,
         "pointsMax": 53,
-        "pointsP10": 44,
-        "pointsP90": 50,
-        "gfMean": 43.4,
-        "gaMean": 55.5
+        "pointsP10": 45,
+        "pointsP90": 51,
+        "gfMean": 43.5,
+        "gaMean": 55.4
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 0.3,
+      "mostConcededProb": 0.5,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.2,
@@ -323,8 +323,8 @@
         "pointsMax": 54,
         "pointsP10": 44,
         "pointsP90": 50,
-        "gfMean": 39.2,
-        "gaMean": 45.9
+        "gfMean": 39.1,
+        "gaMean": 45.8
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
@@ -350,7 +350,7 @@
       "projectedGA": 48.9,
       "mc": {
         "pointsMean": 46.0,
-        "pointsStd": 2.3,
+        "pointsStd": 2.2,
         "pointsMin": 42,
         "pointsMax": 51,
         "pointsP10": 43,
@@ -381,8 +381,8 @@
       "projectedGF": 41.3,
       "projectedGA": 54.3,
       "mc": {
-        "pointsMean": 45.4,
-        "pointsStd": 2.2,
+        "pointsMean": 45.3,
+        "pointsStd": 2.1,
         "pointsMin": 42,
         "pointsMax": 51,
         "pointsP10": 43,
@@ -392,7 +392,7 @@
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 0.1,
+      "mostConcededProb": 0.2,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.3,
@@ -413,18 +413,18 @@
       "projectedGF": 46.7,
       "projectedGA": 60.8,
       "mc": {
-        "pointsMean": 43.3,
-        "pointsStd": 2.2,
+        "pointsMean": 43.5,
+        "pointsStd": 2.1,
         "pointsMin": 40,
         "pointsMax": 49,
-        "pointsP10": 40,
+        "pointsP10": 41,
         "pointsP90": 46,
-        "gfMean": 46.6,
-        "gaMean": 60.8
+        "gfMean": 46.7,
+        "gaMean": 60.7
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 26.2,
+      "mostConcededProb": 26.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.7,
@@ -445,18 +445,18 @@
       "projectedGF": 49.9,
       "projectedGA": 58.6,
       "mc": {
-        "pointsMean": 42.8,
+        "pointsMean": 42.6,
         "pointsStd": 2.2,
         "pointsMin": 39,
         "pointsMax": 48,
         "pointsP10": 40,
-        "pointsP90": 46,
-        "gfMean": 50.1,
-        "gaMean": 58.5
+        "pointsP90": 45,
+        "gfMean": 49.8,
+        "gaMean": 58.6
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 4.6,
+      "mostConcededProb": 5.5,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.7,
@@ -478,23 +478,55 @@
       "projectedGA": 56.5,
       "mc": {
         "pointsMean": 42.5,
-        "pointsStd": 2.3,
+        "pointsStd": 2.2,
         "pointsMin": 39,
         "pointsMax": 48,
         "pointsP10": 40,
-        "pointsP90": 45,
+        "pointsP90": 46,
         "gfMean": 46.7,
         "gaMean": 56.6
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 0.6,
+      "mostConcededProb": 0.8,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.1,
         "europa": 0.9,
         "mid": 96.7,
         "relegation": 1.2
+      }
+    },
+    {
+      "teamName": "RCD Espanyol de Barcelona",
+      "teamShortName": "Espanyol",
+      "teamCrest": "https://sportsrc.org/img/score/80.png",
+      "currentPosition": 16,
+      "currentPoints": 39,
+      "played": 35,
+      "remaining": 3,
+      "projectedPoints": 42.3,
+      "projectedGF": 41.3,
+      "projectedGA": 57.5,
+      "mc": {
+        "pointsMean": 42.4,
+        "pointsStd": 2.2,
+        "pointsMin": 39,
+        "pointsMax": 48,
+        "pointsP10": 39,
+        "pointsP90": 45,
+        "gfMean": 41.4,
+        "gaMean": 57.5
+      },
+      "championProb": 0.0,
+      "mostGoalsProb": 0.0,
+      "mostConcededProb": 1.9,
+      "leastConcededProb": 0.0,
+      "xgbZone": {
+        "champions": 1.7,
+        "europa": 1.4,
+        "mid": 95.1,
+        "relegation": 1.8
       }
     },
     {
@@ -515,50 +547,18 @@
         "pointsMax": 50,
         "pointsP10": 39,
         "pointsP90": 45,
-        "gfMean": 40.2,
-        "gaMean": 57.0
+        "gfMean": 40.3,
+        "gaMean": 56.9
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 2.9,
+      "mostConcededProb": 2.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 1.9,
         "europa": 4.8,
         "mid": 91.2,
         "relegation": 2.1
-      }
-    },
-    {
-      "teamName": "RCD Espanyol de Barcelona",
-      "teamShortName": "Espanyol",
-      "teamCrest": "https://sportsrc.org/img/score/80.png",
-      "currentPosition": 16,
-      "currentPoints": 39,
-      "played": 35,
-      "remaining": 3,
-      "projectedPoints": 42.3,
-      "projectedGF": 41.3,
-      "projectedGA": 57.5,
-      "mc": {
-        "pointsMean": 42.2,
-        "pointsStd": 2.2,
-        "pointsMin": 39,
-        "pointsMax": 48,
-        "pointsP10": 39,
-        "pointsP90": 45,
-        "gfMean": 41.2,
-        "gaMean": 57.5
-      },
-      "championProb": 0.0,
-      "mostGoalsProb": 0.0,
-      "mostConcededProb": 2.2,
-      "leastConcededProb": 0.0,
-      "xgbZone": {
-        "champions": 1.7,
-        "europa": 1.4,
-        "mid": 95.1,
-        "relegation": 1.8
       }
     },
     {
@@ -573,18 +573,18 @@
       "projectedGF": 44.5,
       "projectedGA": 58.6,
       "mc": {
-        "pointsMean": 40.2,
-        "pointsStd": 2.1,
+        "pointsMean": 40.4,
+        "pointsStd": 2.2,
         "pointsMin": 37,
         "pointsMax": 46,
-        "pointsP10": 37,
+        "pointsP10": 38,
         "pointsP90": 43,
         "gfMean": 44.5,
-        "gaMean": 58.8
+        "gaMean": 58.6
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 7.2,
+      "mostConcededProb": 5.1,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 2.9,
@@ -612,11 +612,11 @@
         "pointsP10": 36,
         "pointsP90": 42,
         "gfMean": 44.5,
-        "gaMean": 61.8
+        "gaMean": 61.7
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 35.3,
+      "mostConcededProb": 38.2,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 2.9,
@@ -637,8 +637,8 @@
       "projectedGF": 28.2,
       "projectedGA": 58.6,
       "mc": {
-        "pointsMean": 31.4,
-        "pointsStd": 1.9,
+        "pointsMean": 31.3,
+        "pointsStd": 2.0,
         "pointsMin": 29,
         "pointsMax": 38,
         "pointsP10": 29,
@@ -648,7 +648,7 @@
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
-      "mostConcededProb": 4.4,
+      "mostConcededProb": 5.0,
       "leastConcededProb": 0.0,
       "xgbZone": {
         "champions": 2.8,
