@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-11T21:50:57.219088+00:00",
+  "updatedAt": "2026-05-11T22:59:49.603981+00:00",
   "season": "2025",
   "matchday": 36,
   "standings": [
@@ -267,21 +267,21 @@
       "position": 14,
       "playedGames": 35,
       "form": "",
-      "won": 10,
-      "draw": 9,
-      "lost": 16,
+      "won": 9,
+      "draw": 12,
+      "lost": 14,
       "points": 39,
-      "goalsFor": 38,
-      "goalsAgainst": 53,
-      "goalDifference": -15,
-      "teamId": 80,
-      "teamName": "RCD Espanyol de Barcelona",
-      "teamShortName": "Espanyol",
-      "teamCrest": "https://sportsrc.org/img/score/80.png",
+      "goalsFor": 46,
+      "goalsAgainst": 54,
+      "goalDifference": -8,
+      "teamId": 285,
+      "teamName": "Elche CF",
+      "teamShortName": "Elche",
+      "teamCrest": "https://sportsrc.org/img/score/285.png",
       "zone": "mid",
-      "winRate": 28.6,
-      "drawRate": 25.7,
-      "lossRate": 45.7
+      "winRate": 25.7,
+      "drawRate": 34.3,
+      "lossRate": 40.0
     },
     {
       "position": 15,
@@ -311,26 +311,6 @@
       "draw": 12,
       "lost": 14,
       "points": 39,
-      "goalsFor": 46,
-      "goalsAgainst": 54,
-      "goalDifference": -8,
-      "teamId": 285,
-      "teamName": "Elche CF",
-      "teamShortName": "Elche",
-      "teamCrest": "https://sportsrc.org/img/score/285.png",
-      "zone": "mid",
-      "winRate": 25.7,
-      "drawRate": 34.3,
-      "lossRate": 40.0
-    },
-    {
-      "position": 17,
-      "playedGames": 35,
-      "form": "",
-      "won": 9,
-      "draw": 12,
-      "lost": 14,
-      "points": 39,
       "goalsFor": 37,
       "goalsAgainst": 52,
       "goalDifference": -15,
@@ -342,6 +322,26 @@
       "winRate": 25.7,
       "drawRate": 34.3,
       "lossRate": 40.0
+    },
+    {
+      "position": 17,
+      "playedGames": 35,
+      "form": "",
+      "won": 10,
+      "draw": 9,
+      "lost": 16,
+      "points": 39,
+      "goalsFor": 38,
+      "goalsAgainst": 53,
+      "goalDifference": -15,
+      "teamId": 80,
+      "teamName": "RCD Espanyol de Barcelona",
+      "teamShortName": "Espanyol",
+      "teamCrest": "https://sportsrc.org/img/score/80.png",
+      "zone": "mid",
+      "winRate": 28.6,
+      "drawRate": 25.7,
+      "lossRate": 45.7
     },
     {
       "position": 18,
@@ -437,7 +437,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 88,
             "name": "Levante UD",
@@ -500,7 +500,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 285,
             "name": "Elche CF",
@@ -563,7 +563,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 559,
             "name": "Sevilla FC",
@@ -626,7 +626,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 78,
             "name": "Club Atlético de Madrid",
@@ -689,7 +689,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 92,
             "name": "Real Sociedad de Fútbol",
@@ -752,7 +752,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 89,
             "name": "RCD Mallorca",
@@ -815,7 +815,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 77,
             "name": "Athletic Club",
@@ -878,7 +878,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 1048,
             "name": "Real Oviedo",
@@ -941,7 +941,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-11T00:21:01Z",
           "homeTeam": {
             "id": 81,
             "name": "FC Barcelona",
@@ -978,7 +978,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-11T21:50:14+00:00"
+      "last_updated": "2026-05-11T22:55:09+00:00"
     }
   }
 }
