@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-12T20:00:00.758521+00:00",
+  "updatedAt": "2026-05-12T21:26:24.088091+00:00",
   "season": "2025",
   "matchday": 36,
   "standings": [
@@ -65,23 +65,23 @@
     },
     {
       "position": 4,
-      "playedGames": 35,
+      "playedGames": 36,
       "form": "",
-      "won": 19,
+      "won": 20,
       "draw": 6,
       "lost": 10,
-      "points": 63,
-      "goalsFor": 58,
+      "points": 66,
+      "goalsFor": 59,
       "goalsAgainst": 38,
-      "goalDifference": 20,
+      "goalDifference": 21,
       "teamId": 78,
       "teamName": "Club Atlético de Madrid",
       "teamShortName": "Atleti",
       "teamCrest": "https://sportsrc.org/img/score/78.png",
       "zone": "champions",
-      "winRate": 54.3,
-      "drawRate": 17.1,
-      "lossRate": 28.6
+      "winRate": 55.6,
+      "drawRate": 16.7,
+      "lossRate": 27.8
     },
     {
       "position": 5,
@@ -91,8 +91,8 @@
       "draw": 15,
       "lost": 7,
       "points": 57,
-      "goalsFor": 55,
-      "goalsAgainst": 43,
+      "goalsFor": 56,
+      "goalsAgainst": 44,
       "goalDifference": 12,
       "teamId": 90,
       "teamName": "Real Betis Balompié",
@@ -205,23 +205,23 @@
     },
     {
       "position": 11,
-      "playedGames": 35,
+      "playedGames": 36,
       "form": "",
       "won": 11,
       "draw": 9,
-      "lost": 15,
+      "lost": 16,
       "points": 42,
       "goalsFor": 42,
-      "goalsAgainst": 45,
-      "goalDifference": -3,
+      "goalsAgainst": 46,
+      "goalDifference": -4,
       "teamId": 79,
       "teamName": "CA Osasuna",
       "teamShortName": "Osasuna",
       "teamCrest": "https://sportsrc.org/img/score/79.png",
       "zone": "mid",
-      "winRate": 31.4,
-      "drawRate": 25.7,
-      "lossRate": 42.9
+      "winRate": 30.6,
+      "drawRate": 25.0,
+      "lossRate": 44.4
     },
     {
       "position": 12,
@@ -271,8 +271,8 @@
       "draw": 12,
       "lost": 15,
       "points": 39,
-      "goalsFor": 46,
-      "goalsAgainst": 55,
+      "goalsFor": 47,
+      "goalsAgainst": 56,
       "goalDifference": -9,
       "teamId": 285,
       "teamName": "Elche CF",
@@ -430,69 +430,13 @@
             "currentMatchday": 36,
             "winner": null
           },
-          "id": 544562,
-          "utcDate": "2026-05-12T18:00:00Z",
-          "status": "IN_PLAY",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-12T19:54:34Z",
-          "homeTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
-          },
-          "awayTeam": {
-            "id": 285,
-            "name": "Elche CF",
-            "shortName": "Elche",
-            "tla": "ELC",
-            "crest": "https://sportsrc.org/img/score/285.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 1
-            }
-          },
-          "referees": []
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 36,
-            "winner": null
-          },
           "id": 544567,
           "utcDate": "2026-05-12T19:30:00Z",
           "status": "IN_PLAY",
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T19:53:59Z",
+          "lastUpdated": "2026-05-12T21:12:54Z",
           "homeTeam": {
             "id": 79,
             "name": "CA Osasuna",
@@ -512,11 +456,23 @@
             "duration": "REGULAR",
             "fullTime": {
               "home": 0,
-              "away": 1
+              "away": 2
             },
             "halfTime": {
-              "home": null,
-              "away": null
+              "home": 0,
+              "away": 1
+            },
+            "regularTime": {
+              "home": 0,
+              "away": 0
+            },
+            "extraTime": {
+              "home": 0,
+              "away": 0
+            },
+            "penalties": {
+              "home": 0,
+              "away": 0
             }
           },
           "referees": []
@@ -1154,7 +1110,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-12T19:55:11+00:00"
+      "last_updated": "2026-05-12T21:25:07+00:00"
     }
   }
 }
