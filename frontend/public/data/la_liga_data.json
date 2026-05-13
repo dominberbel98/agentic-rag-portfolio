@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-13T20:19:00.758213+00:00",
+  "updatedAt": "2026-05-13T21:54:36.513509+00:00",
   "season": "2025",
   "matchday": 36,
   "standings": [
@@ -8,20 +8,20 @@
       "playedGames": 36,
       "form": "",
       "won": 30,
-      "draw": 2,
-      "lost": 4,
-      "points": 92,
+      "draw": 1,
+      "lost": 5,
+      "points": 91,
       "goalsFor": 91,
-      "goalsAgainst": 31,
-      "goalDifference": 60,
+      "goalsAgainst": 32,
+      "goalDifference": 59,
       "teamId": 81,
       "teamName": "FC Barcelona",
       "teamShortName": "Barça",
       "teamCrest": "https://sportsrc.org/img/score/81.png",
       "zone": "champions",
       "winRate": 83.3,
-      "drawRate": 5.6,
-      "lossRate": 11.1
+      "drawRate": 2.8,
+      "lossRate": 13.9
     },
     {
       "position": 2,
@@ -131,9 +131,9 @@
       "draw": 6,
       "lost": 16,
       "points": 48,
-      "goalsFor": 29,
-      "goalsAgainst": 36,
-      "goalDifference": -7,
+      "goalsFor": 31,
+      "goalsAgainst": 37,
+      "goalDifference": -6,
       "teamId": 82,
       "teamName": "Getafe CF",
       "teamShortName": "Getafe",
@@ -288,12 +288,32 @@
       "playedGames": 36,
       "form": "",
       "won": 10,
+      "draw": 10,
+      "lost": 16,
+      "points": 40,
+      "goalsFor": 42,
+      "goalsAgainst": 54,
+      "goalDifference": -12,
+      "teamId": 263,
+      "teamName": "Deportivo Alavés",
+      "teamShortName": "Alavés",
+      "teamCrest": "https://sportsrc.org/img/score/263.png",
+      "zone": "mid",
+      "winRate": 27.8,
+      "drawRate": 27.8,
+      "lossRate": 44.4
+    },
+    {
+      "position": 16,
+      "playedGames": 36,
+      "form": "",
+      "won": 10,
       "draw": 9,
       "lost": 17,
       "points": 39,
-      "goalsFor": 43,
-      "goalsAgainst": 53,
-      "goalDifference": -10,
+      "goalsFor": 44,
+      "goalsAgainst": 55,
+      "goalDifference": -11,
       "teamId": 89,
       "teamName": "RCD Mallorca",
       "teamShortName": "Mallorca",
@@ -304,7 +324,7 @@
       "lossRate": 47.2
     },
     {
-      "position": 16,
+      "position": 17,
       "playedGames": 36,
       "form": "",
       "won": 9,
@@ -324,7 +344,7 @@
       "lossRate": 41.7
     },
     {
-      "position": 17,
+      "position": 18,
       "playedGames": 36,
       "form": "",
       "won": 10,
@@ -338,13 +358,13 @@
       "teamName": "Levante UD",
       "teamShortName": "Levante",
       "teamCrest": "https://sportsrc.org/img/score/88.png",
-      "zone": "mid",
+      "zone": "relegation",
       "winRate": 27.8,
       "drawRate": 25.0,
       "lossRate": 47.2
     },
     {
-      "position": 18,
+      "position": 19,
       "playedGames": 35,
       "form": "",
       "won": 9,
@@ -362,26 +382,6 @@
       "winRate": 25.7,
       "drawRate": 34.3,
       "lossRate": 40.0
-    },
-    {
-      "position": 19,
-      "playedGames": 36,
-      "form": "",
-      "won": 9,
-      "draw": 11,
-      "lost": 16,
-      "points": 38,
-      "goalsFor": 41,
-      "goalsAgainst": 54,
-      "goalDifference": -13,
-      "teamId": 263,
-      "teamName": "Deportivo Alavés",
-      "teamShortName": "Alavés",
-      "teamCrest": "https://sportsrc.org/img/score/263.png",
-      "zone": "relegation",
-      "winRate": 25.0,
-      "drawRate": 30.6,
-      "lossRate": 44.4
     },
     {
       "position": 20,
@@ -408,134 +408,7 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 35,
-            "winner": null
-          },
-          "id": 544561,
-          "utcDate": "2026-05-13T19:30:00Z",
-          "status": "IN_PLAY",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-13T20:13:10Z",
-          "homeTeam": {
-            "id": 263,
-            "name": "Deportivo Alavés",
-            "shortName": "Alavés",
-            "tla": "ALA",
-            "crest": "https://sportsrc.org/img/score/263.png"
-          },
-          "awayTeam": {
-            "id": 81,
-            "name": "FC Barcelona",
-            "shortName": "Barça",
-            "tla": "FCB",
-            "crest": "https://sportsrc.org/img/score/81.png"
-          },
-          "score": {
-            "winner": "DRAW",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 0,
-              "away": 0
-            },
-            "halfTime": {
-              "home": null,
-              "away": null
-            }
-          },
-          "referees": [
-            {
-              "id": 207080,
-              "name": "José Sánchez Martínez",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 35,
-            "winner": null
-          },
-          "id": 544564,
-          "utcDate": "2026-05-13T19:30:00Z",
-          "status": "IN_PLAY",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-13T20:14:15Z",
-          "homeTeam": {
-            "id": 82,
-            "name": "Getafe CF",
-            "shortName": "Getafe",
-            "tla": "GET",
-            "crest": "https://sportsrc.org/img/score/82.png"
-          },
-          "awayTeam": {
-            "id": 89,
-            "name": "RCD Mallorca",
-            "shortName": "Mallorca",
-            "tla": "MAL",
-            "crest": "https://sportsrc.org/img/score/89.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 0
-            },
-            "halfTime": {
-              "home": null,
-              "away": null
-            }
-          },
-          "referees": [
-            {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        }
-      ],
+      "live": [],
       "finished": [
         {
           "area": {
@@ -1336,7 +1209,7 @@
           "referees": []
         }
       ],
-      "last_updated": "2026-05-13T20:15:10+00:00"
+      "last_updated": "2026-05-13T21:50:13+00:00"
     }
   }
 }
