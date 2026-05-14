@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-14T13:00:10.102816+00:00",
+  "updatedAt": "2026-05-14T15:28:37.879721+00:00",
   "season": "2025",
   "matchday": 36,
   "standings": [
@@ -1355,69 +1355,6 @@
             "currentMatchday": 35,
             "winner": null
           },
-          "id": 544561,
-          "utcDate": "2026-05-13T19:30:00Z",
-          "status": "FINISHED",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-13T21:27:45Z",
-          "homeTeam": {
-            "id": 263,
-            "name": "Deportivo Alavés",
-            "shortName": "Alavés",
-            "tla": "ALA",
-            "crest": "https://sportsrc.org/img/score/263.png"
-          },
-          "awayTeam": {
-            "id": 81,
-            "name": "FC Barcelona",
-            "shortName": "Barça",
-            "tla": "FCB",
-            "crest": "https://sportsrc.org/img/score/81.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 0
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 207080,
-              "name": "José Sánchez Martínez",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 35,
-            "winner": null
-          },
           "id": 544564,
           "utcDate": "2026-05-13T19:30:00Z",
           "status": "FINISHED",
@@ -1459,9 +1396,72 @@
               "nationality": "Spain"
             }
           ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544561,
+          "utcDate": "2026-05-13T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 36,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-13T21:27:45Z",
+          "homeTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "awayTeam": {
+            "id": 81,
+            "name": "FC Barcelona",
+            "shortName": "Barça",
+            "tla": "FCB",
+            "crest": "https://sportsrc.org/img/score/81.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 207080,
+              "name": "José Sánchez Martínez",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
         }
       ],
-      "last_updated": "2026-05-14T12:55:10+00:00"
+      "last_updated": "2026-05-14T15:25:07+00:00"
     }
   }
 }
