@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-16T12:39:04.781752+00:00",
+  "updatedAt": "2026-05-16T14:24:26.420548+00:00",
   "season": "2025",
   "matchday": 37,
   "standings": [
@@ -428,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544555,
@@ -437,7 +437,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 89,
             "name": "RCD Mallorca",
@@ -491,7 +491,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544551,
@@ -500,7 +500,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 77,
             "name": "Athletic Club",
@@ -554,7 +554,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544559,
@@ -563,7 +563,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 1048,
             "name": "Real Oviedo",
@@ -617,7 +617,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544553,
@@ -626,7 +626,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T05:21:09Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 81,
             "name": "FC Barcelona",
@@ -680,7 +680,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544560,
@@ -689,7 +689,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T21:03:00Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 87,
             "name": "Rayo Vallecano de Madrid",
@@ -743,7 +743,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544563,
@@ -752,7 +752,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T19:03:34Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 558,
             "name": "RC Celta de Vigo",
@@ -799,7 +799,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544562,
@@ -808,7 +808,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T20:08:49Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 90,
             "name": "Real Betis Balompié",
@@ -855,7 +855,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544567,
@@ -864,7 +864,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T21:37:39Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 79,
             "name": "CA Osasuna",
@@ -911,7 +911,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544566,
@@ -920,7 +920,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T19:00:05Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 80,
             "name": "RCD Espanyol de Barcelona",
@@ -974,7 +974,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544569,
@@ -983,7 +983,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T19:01:20Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 94,
             "name": "Villarreal CF",
@@ -1037,7 +1037,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544564,
@@ -1046,7 +1046,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T21:33:30Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 82,
             "name": "Getafe CF",
@@ -1100,7 +1100,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544561,
@@ -1109,7 +1109,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T21:27:45Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 263,
             "name": "Deportivo Alavés",
@@ -1163,7 +1163,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544568,
@@ -1172,7 +1172,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T19:06:46Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 95,
             "name": "Valencia CF",
@@ -1226,7 +1226,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544565,
@@ -1235,7 +1235,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T20:02:56Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 298,
             "name": "Girona FC",
@@ -1289,7 +1289,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 36,
             "winner": null
           },
           "id": 544570,
@@ -1298,7 +1298,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T21:28:16Z",
+          "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
             "id": 86,
             "name": "Real Madrid CF",
@@ -1335,7 +1335,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-16T12:35:10+00:00"
+      "last_updated": "2026-05-16T14:20:12+00:00"
     }
   }
 }
