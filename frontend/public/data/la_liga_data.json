@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-16T14:24:26.420548+00:00",
+  "updatedAt": "2026-05-16T15:35:50.213456+00:00",
   "season": "2025",
   "matchday": 37,
   "standings": [
@@ -914,69 +914,6 @@
             "currentMatchday": 36,
             "winner": null
           },
-          "id": 544566,
-          "utcDate": "2026-05-13T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-16T00:20:53Z",
-          "homeTeam": {
-            "id": 80,
-            "name": "RCD Espanyol de Barcelona",
-            "shortName": "Espanyol",
-            "tla": "ESP",
-            "crest": "https://sportsrc.org/img/score/80.png"
-          },
-          "awayTeam": {
-            "id": 77,
-            "name": "Athletic Club",
-            "shortName": "Athletic",
-            "tla": "ATH",
-            "crest": "https://sportsrc.org/img/score/77.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 0
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 214213,
-              "name": "Francisco Hernández Maeso",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 36,
-            "winner": null
-          },
           "id": 544569,
           "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
@@ -1040,43 +977,43 @@
             "currentMatchday": 36,
             "winner": null
           },
-          "id": 544564,
-          "utcDate": "2026-05-13T19:30:00Z",
+          "id": 544566,
+          "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
           "lastUpdated": "2026-05-16T00:20:53Z",
           "homeTeam": {
-            "id": 82,
-            "name": "Getafe CF",
-            "shortName": "Getafe",
-            "tla": "GET",
-            "crest": "https://sportsrc.org/img/score/82.png"
+            "id": 80,
+            "name": "RCD Espanyol de Barcelona",
+            "shortName": "Espanyol",
+            "tla": "ESP",
+            "crest": "https://sportsrc.org/img/score/80.png"
           },
           "awayTeam": {
-            "id": 89,
-            "name": "RCD Mallorca",
-            "shortName": "Mallorca",
-            "tla": "MAL",
-            "crest": "https://sportsrc.org/img/score/89.png"
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 3,
-              "away": 1
+              "home": 2,
+              "away": 0
             },
             "halfTime": {
-              "home": 2,
+              "home": 0,
               "away": 0
             }
           },
           "referees": [
             {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
+              "id": 214213,
+              "name": "Francisco Hernández Maeso",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1140,6 +1077,69 @@
             {
               "id": 207080,
               "name": "José Sánchez Martínez",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 36,
+            "winner": null
+          },
+          "id": 544564,
+          "utcDate": "2026-05-13T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 36,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-16T00:20:53Z",
+          "homeTeam": {
+            "id": 82,
+            "name": "Getafe CF",
+            "shortName": "Getafe",
+            "tla": "GET",
+            "crest": "https://sportsrc.org/img/score/82.png"
+          },
+          "awayTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 3,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 2,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 206203,
+              "name": "Juan Martínez Munuera",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1335,7 +1335,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-16T14:20:12+00:00"
+      "last_updated": "2026-05-16T15:35:13+00:00"
     }
   }
 }
