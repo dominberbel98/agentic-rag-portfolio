@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-17T07:58:35.890176+00:00",
+  "updatedAt": "2026-05-17T09:56:28.159546+00:00",
   "season": "2025",
   "matchday": 37,
   "standings": [
@@ -428,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544560,
@@ -437,7 +437,7 @@
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T21:03:00Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 87,
             "name": "Rayo Vallecano de Madrid",
@@ -491,7 +491,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544563,
@@ -500,7 +500,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T19:03:34Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 558,
             "name": "RC Celta de Vigo",
@@ -547,7 +547,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544562,
@@ -556,7 +556,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T20:08:49Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 90,
             "name": "Real Betis Balompié",
@@ -603,7 +603,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544567,
@@ -612,7 +612,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T21:37:39Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 79,
             "name": "CA Osasuna",
@@ -659,70 +659,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
-            "winner": null
-          },
-          "id": 544569,
-          "utcDate": "2026-05-13T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-13T19:01:20Z",
-          "homeTeam": {
-            "id": 94,
-            "name": "Villarreal CF",
-            "shortName": "Villarreal",
-            "tla": "VIL",
-            "crest": "https://sportsrc.org/img/score/94.png"
-          },
-          "awayTeam": {
-            "id": 559,
-            "name": "Sevilla FC",
-            "shortName": "Sevilla FC",
-            "tla": "SEV",
-            "crest": "https://sportsrc.org/img/score/559.png"
-          },
-          "score": {
-            "winner": "AWAY_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 3
-            },
-            "halfTime": {
-              "home": 2,
-              "away": 2
-            }
-          },
-          "referees": [
-            {
-              "id": 217698,
-              "name": "Mateo Busquets Ferrer",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544566,
@@ -731,7 +668,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T19:00:05Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 80,
             "name": "RCD Espanyol de Barcelona",
@@ -785,46 +722,46 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
-          "id": 544561,
-          "utcDate": "2026-05-13T19:30:00Z",
+          "id": 544569,
+          "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T21:27:45Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
-            "id": 263,
-            "name": "Deportivo Alavés",
-            "shortName": "Alavés",
-            "tla": "ALA",
-            "crest": "https://sportsrc.org/img/score/263.png"
+            "id": 94,
+            "name": "Villarreal CF",
+            "shortName": "Villarreal",
+            "tla": "VIL",
+            "crest": "https://sportsrc.org/img/score/94.png"
           },
           "awayTeam": {
-            "id": 81,
-            "name": "FC Barcelona",
-            "shortName": "Barça",
-            "tla": "FCB",
-            "crest": "https://sportsrc.org/img/score/81.png"
+            "id": 559,
+            "name": "Sevilla FC",
+            "shortName": "Sevilla FC",
+            "tla": "SEV",
+            "crest": "https://sportsrc.org/img/score/559.png"
           },
           "score": {
-            "winner": "HOME_TEAM",
+            "winner": "AWAY_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 1,
-              "away": 0
+              "home": 2,
+              "away": 3
             },
             "halfTime": {
-              "home": 1,
-              "away": 0
+              "home": 2,
+              "away": 2
             }
           },
           "referees": [
             {
-              "id": 207080,
-              "name": "José Sánchez Martínez",
+              "id": 217698,
+              "name": "Mateo Busquets Ferrer",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -848,7 +785,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544564,
@@ -857,7 +794,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T21:33:30Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 82,
             "name": "Getafe CF",
@@ -911,7 +848,70 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
+            "winner": null
+          },
+          "id": 544561,
+          "utcDate": "2026-05-13T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 36,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T00:20:56Z",
+          "homeTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "awayTeam": {
+            "id": 81,
+            "name": "FC Barcelona",
+            "shortName": "Barça",
+            "tla": "FCB",
+            "crest": "https://sportsrc.org/img/score/81.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 207080,
+              "name": "José Sánchez Martínez",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544568,
@@ -920,7 +920,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T19:06:46Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 95,
             "name": "Valencia CF",
@@ -974,7 +974,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544565,
@@ -983,7 +983,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T20:02:56Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 298,
             "name": "Girona FC",
@@ -1037,7 +1037,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544570,
@@ -1046,7 +1046,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T21:28:16Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 86,
             "name": "Real Madrid CF",
@@ -1083,7 +1083,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-17T07:55:07+00:00"
+      "last_updated": "2026-05-17T09:55:10+00:00"
     }
   }
 }
