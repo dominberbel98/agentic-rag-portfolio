@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-17T20:07:05.099141+00:00",
+  "updatedAt": "2026-05-17T21:29:20.730652+00:00",
   "season": "2025",
   "matchday": 37,
   "standings": [
@@ -11,9 +11,9 @@
       "draw": 1,
       "lost": 5,
       "points": 94,
-      "goalsFor": 92,
-      "goalsAgainst": 32,
-      "goalDifference": 60,
+      "goalsFor": 94,
+      "goalsAgainst": 33,
+      "goalDifference": 61,
       "teamId": 81,
       "teamName": "FC Barcelona",
       "teamShortName": "Barça",
@@ -91,9 +91,9 @@
       "draw": 15,
       "lost": 8,
       "points": 57,
-      "goalsFor": 56,
-      "goalsAgainst": 45,
-      "goalDifference": 11,
+      "goalsFor": 57,
+      "goalsAgainst": 47,
+      "goalDifference": 10,
       "teamId": 90,
       "teamName": "Real Betis Balompié",
       "teamShortName": "Real Betis",
@@ -408,71 +408,7 @@
   "scores": {
     "success": true,
     "data": {
-      "live": [
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 37,
-            "winner": null
-          },
-          "id": 544573,
-          "utcDate": "2026-05-17T19:15:00Z",
-          "status": "IN_PLAY",
-          "matchday": 37,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-17T20:04:03Z",
-          "homeTeam": {
-            "id": 81,
-            "name": "FC Barcelona",
-            "shortName": "Barça",
-            "tla": "FCB",
-            "crest": "https://sportsrc.org/img/score/81.png"
-          },
-          "awayTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 0
-            },
-            "halfTime": {
-              "home": null,
-              "away": null
-            }
-          },
-          "referees": [
-            {
-              "id": 206215,
-              "name": "Guillermo Cuadra Fernández",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        }
-      ],
+      "live": [],
       "finished": [
         {
           "area": {
@@ -726,69 +662,6 @@
             "currentMatchday": 37,
             "winner": null
           },
-          "id": 544566,
-          "utcDate": "2026-05-13T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-17T00:20:56Z",
-          "homeTeam": {
-            "id": 80,
-            "name": "RCD Espanyol de Barcelona",
-            "shortName": "Espanyol",
-            "tla": "ESP",
-            "crest": "https://sportsrc.org/img/score/80.png"
-          },
-          "awayTeam": {
-            "id": 77,
-            "name": "Athletic Club",
-            "shortName": "Athletic",
-            "tla": "ATH",
-            "crest": "https://sportsrc.org/img/score/77.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 0
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 214213,
-              "name": "Francisco Hernández Maeso",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 37,
-            "winner": null
-          },
           "id": 544569,
           "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
@@ -852,43 +725,43 @@
             "currentMatchday": 37,
             "winner": null
           },
-          "id": 544564,
-          "utcDate": "2026-05-13T19:30:00Z",
+          "id": 544566,
+          "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
           "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
-            "id": 82,
-            "name": "Getafe CF",
-            "shortName": "Getafe",
-            "tla": "GET",
-            "crest": "https://sportsrc.org/img/score/82.png"
+            "id": 80,
+            "name": "RCD Espanyol de Barcelona",
+            "shortName": "Espanyol",
+            "tla": "ESP",
+            "crest": "https://sportsrc.org/img/score/80.png"
           },
           "awayTeam": {
-            "id": 89,
-            "name": "RCD Mallorca",
-            "shortName": "Mallorca",
-            "tla": "MAL",
-            "crest": "https://sportsrc.org/img/score/89.png"
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 3,
-              "away": 1
+              "home": 2,
+              "away": 0
             },
             "halfTime": {
-              "home": 2,
+              "home": 0,
               "away": 0
             }
           },
           "referees": [
             {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
+              "id": 214213,
+              "name": "Francisco Hernández Maeso",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -952,6 +825,69 @@
             {
               "id": 207080,
               "name": "José Sánchez Martínez",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 37,
+            "winner": null
+          },
+          "id": 544564,
+          "utcDate": "2026-05-13T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 36,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T00:20:56Z",
+          "homeTeam": {
+            "id": 82,
+            "name": "Getafe CF",
+            "shortName": "Getafe",
+            "tla": "GET",
+            "crest": "https://sportsrc.org/img/score/82.png"
+          },
+          "awayTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 3,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 2,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 206203,
+              "name": "Juan Martínez Munuera",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1147,7 +1083,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-17T20:05:11+00:00"
+      "last_updated": "2026-05-17T21:25:12+00:00"
     }
   }
 }
