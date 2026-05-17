@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-17T21:29:20.730652+00:00",
+  "updatedAt": "2026-05-17T22:29:33.715225+00:00",
   "season": "2025",
   "matchday": 37,
   "standings": [
@@ -291,6 +291,26 @@
       "draw": 9,
       "lost": 17,
       "points": 42,
+      "goalsFor": 46,
+      "goalsAgainst": 59,
+      "goalDifference": -13,
+      "teamId": 88,
+      "teamName": "Levante UD",
+      "teamShortName": "Levante",
+      "teamCrest": "https://sportsrc.org/img/score/88.png",
+      "zone": "mid",
+      "winRate": 29.7,
+      "drawRate": 24.3,
+      "lossRate": 45.9
+    },
+    {
+      "position": 16,
+      "playedGames": 37,
+      "form": "",
+      "won": 11,
+      "draw": 9,
+      "lost": 17,
+      "points": 42,
       "goalsFor": 44,
       "goalsAgainst": 49,
       "goalDifference": -5,
@@ -304,7 +324,7 @@
       "lossRate": 45.9
     },
     {
-      "position": 16,
+      "position": 17,
       "playedGames": 37,
       "form": "",
       "won": 10,
@@ -322,26 +342,6 @@
       "winRate": 27.0,
       "drawRate": 32.4,
       "lossRate": 40.5
-    },
-    {
-      "position": 17,
-      "playedGames": 37,
-      "form": "",
-      "won": 11,
-      "draw": 9,
-      "lost": 17,
-      "points": 42,
-      "goalsFor": 46,
-      "goalsAgainst": 59,
-      "goalDifference": -13,
-      "teamId": 88,
-      "teamName": "Levante UD",
-      "teamShortName": "Levante",
-      "teamCrest": "https://sportsrc.org/img/score/88.png",
-      "zone": "mid",
-      "winRate": 29.7,
-      "drawRate": 24.3,
-      "lossRate": 45.9
     },
     {
       "position": 18,
@@ -662,69 +662,6 @@
             "currentMatchday": 37,
             "winner": null
           },
-          "id": 544569,
-          "utcDate": "2026-05-13T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-17T00:20:56Z",
-          "homeTeam": {
-            "id": 94,
-            "name": "Villarreal CF",
-            "shortName": "Villarreal",
-            "tla": "VIL",
-            "crest": "https://sportsrc.org/img/score/94.png"
-          },
-          "awayTeam": {
-            "id": 559,
-            "name": "Sevilla FC",
-            "shortName": "Sevilla FC",
-            "tla": "SEV",
-            "crest": "https://sportsrc.org/img/score/559.png"
-          },
-          "score": {
-            "winner": "AWAY_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 3
-            },
-            "halfTime": {
-              "home": 2,
-              "away": 2
-            }
-          },
-          "referees": [
-            {
-              "id": 217698,
-              "name": "Mateo Busquets Ferrer",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 37,
-            "winner": null
-          },
           "id": 544566,
           "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
@@ -788,43 +725,43 @@
             "currentMatchday": 37,
             "winner": null
           },
-          "id": 544561,
-          "utcDate": "2026-05-13T19:30:00Z",
+          "id": 544569,
+          "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
           "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
-            "id": 263,
-            "name": "Deportivo Alavés",
-            "shortName": "Alavés",
-            "tla": "ALA",
-            "crest": "https://sportsrc.org/img/score/263.png"
+            "id": 94,
+            "name": "Villarreal CF",
+            "shortName": "Villarreal",
+            "tla": "VIL",
+            "crest": "https://sportsrc.org/img/score/94.png"
           },
           "awayTeam": {
-            "id": 81,
-            "name": "FC Barcelona",
-            "shortName": "Barça",
-            "tla": "FCB",
-            "crest": "https://sportsrc.org/img/score/81.png"
+            "id": 559,
+            "name": "Sevilla FC",
+            "shortName": "Sevilla FC",
+            "tla": "SEV",
+            "crest": "https://sportsrc.org/img/score/559.png"
           },
           "score": {
-            "winner": "HOME_TEAM",
+            "winner": "AWAY_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 1,
-              "away": 0
+              "home": 2,
+              "away": 3
             },
             "halfTime": {
-              "home": 1,
-              "away": 0
+              "home": 2,
+              "away": 2
             }
           },
           "referees": [
             {
-              "id": 207080,
-              "name": "José Sánchez Martínez",
+              "id": 217698,
+              "name": "Mateo Busquets Ferrer",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -888,6 +825,69 @@
             {
               "id": 206203,
               "name": "Juan Martínez Munuera",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 37,
+            "winner": null
+          },
+          "id": 544561,
+          "utcDate": "2026-05-13T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 36,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T00:20:56Z",
+          "homeTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "awayTeam": {
+            "id": 81,
+            "name": "FC Barcelona",
+            "shortName": "Barça",
+            "tla": "FCB",
+            "crest": "https://sportsrc.org/img/score/81.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 207080,
+              "name": "José Sánchez Martínez",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1083,7 +1083,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-17T21:25:12+00:00"
+      "last_updated": "2026-05-17T22:25:07+00:00"
     }
   }
 }
