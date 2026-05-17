@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-17T17:03:01.066923+00:00",
+  "updatedAt": "2026-05-17T18:36:37.568741+00:00",
   "season": "2025",
   "matchday": 37,
   "standings": [
@@ -27,20 +27,20 @@
       "position": 2,
       "playedGames": 37,
       "form": "",
-      "won": 25,
-      "draw": 6,
+      "won": 26,
+      "draw": 5,
       "lost": 6,
-      "points": 81,
-      "goalsFor": 72,
+      "points": 83,
+      "goalsFor": 73,
       "goalsAgainst": 33,
-      "goalDifference": 39,
+      "goalDifference": 40,
       "teamId": 86,
       "teamName": "Real Madrid CF",
       "teamShortName": "Real Madrid",
       "teamCrest": "https://sportsrc.org/img/score/86.png",
       "zone": "champions",
-      "winRate": 67.6,
-      "drawRate": 16.2,
+      "winRate": 70.3,
+      "drawRate": 13.5,
       "lossRate": 16.2
     },
     {
@@ -48,39 +48,39 @@
       "playedGames": 37,
       "form": "",
       "won": 21,
-      "draw": 7,
-      "lost": 9,
-      "points": 70,
+      "draw": 6,
+      "lost": 10,
+      "points": 69,
       "goalsFor": 67,
-      "goalsAgainst": 43,
-      "goalDifference": 24,
+      "goalsAgainst": 45,
+      "goalDifference": 22,
       "teamId": 94,
       "teamName": "Villarreal CF",
       "teamShortName": "Villarreal",
       "teamCrest": "https://sportsrc.org/img/score/94.png",
       "zone": "champions",
       "winRate": 56.8,
-      "drawRate": 18.9,
-      "lossRate": 24.3
+      "drawRate": 16.2,
+      "lossRate": 27.0
     },
     {
       "position": 4,
       "playedGames": 37,
       "form": "",
-      "won": 20,
-      "draw": 7,
+      "won": 21,
+      "draw": 6,
       "lost": 10,
-      "points": 67,
-      "goalsFor": 60,
+      "points": 69,
+      "goalsFor": 61,
       "goalsAgainst": 39,
-      "goalDifference": 21,
+      "goalDifference": 22,
       "teamId": 78,
       "teamName": "Club Atlético de Madrid",
       "teamShortName": "Atleti",
       "teamCrest": "https://sportsrc.org/img/score/78.png",
       "zone": "champions",
-      "winRate": 54.1,
-      "drawRate": 18.9,
+      "winRate": 56.8,
+      "drawRate": 16.2,
       "lossRate": 27.0
     },
     {
@@ -111,8 +111,8 @@
       "draw": 12,
       "lost": 12,
       "points": 51,
-      "goalsFor": 51,
-      "goalsAgainst": 47,
+      "goalsFor": 52,
+      "goalsAgainst": 48,
       "goalDifference": 4,
       "teamId": 558,
       "teamName": "RC Celta de Vigo",
@@ -127,52 +127,92 @@
       "position": 7,
       "playedGames": 37,
       "form": "",
+      "won": 12,
+      "draw": 12,
+      "lost": 13,
+      "points": 48,
+      "goalsFor": 58,
+      "goalsAgainst": 58,
+      "goalDifference": 0,
+      "teamId": 92,
+      "teamName": "Real Sociedad de Fútbol",
+      "teamShortName": "Real Sociedad",
+      "teamCrest": "https://sportsrc.org/img/score/92.png",
+      "zone": "mid",
+      "winRate": 32.4,
+      "drawRate": 32.4,
+      "lossRate": 35.1
+    },
+    {
+      "position": 8,
+      "playedGames": 37,
+      "form": "",
       "won": 14,
-      "draw": 7,
-      "lost": 16,
-      "points": 49,
+      "draw": 6,
+      "lost": 17,
+      "points": 48,
       "goalsFor": 31,
-      "goalsAgainst": 37,
-      "goalDifference": -6,
+      "goalsAgainst": 38,
+      "goalDifference": -7,
       "teamId": 82,
       "teamName": "Getafe CF",
       "teamShortName": "Getafe",
       "teamCrest": "https://sportsrc.org/img/score/82.png",
       "zone": "mid",
       "winRate": 37.8,
-      "drawRate": 18.9,
-      "lossRate": 43.2
-    },
-    {
-      "position": 8,
-      "playedGames": 37,
-      "form": "",
-      "won": 11,
-      "draw": 13,
-      "lost": 13,
-      "points": 46,
-      "goalsFor": 55,
-      "goalsAgainst": 56,
-      "goalDifference": -1,
-      "teamId": 92,
-      "teamName": "Real Sociedad de Fútbol",
-      "teamShortName": "Real Sociedad",
-      "teamCrest": "https://sportsrc.org/img/score/92.png",
-      "zone": "mid",
-      "winRate": 29.7,
-      "drawRate": 35.1,
-      "lossRate": 35.1
+      "drawRate": 16.2,
+      "lossRate": 45.9
     },
     {
       "position": 9,
+      "playedGames": 37,
+      "form": "",
+      "won": 11,
+      "draw": 14,
+      "lost": 12,
+      "points": 47,
+      "goalsFor": 39,
+      "goalsAgainst": 43,
+      "goalDifference": -4,
+      "teamId": 87,
+      "teamName": "Rayo Vallecano de Madrid",
+      "teamShortName": "Rayo Vallecano",
+      "teamCrest": "https://sportsrc.org/img/score/87.png",
+      "zone": "mid",
+      "winRate": 29.7,
+      "drawRate": 37.8,
+      "lossRate": 32.4
+    },
+    {
+      "position": 10,
+      "playedGames": 37,
+      "form": "",
+      "won": 12,
+      "draw": 9,
+      "lost": 16,
+      "points": 45,
+      "goalsFor": 42,
+      "goalsAgainst": 54,
+      "goalDifference": -12,
+      "teamId": 80,
+      "teamName": "RCD Espanyol de Barcelona",
+      "teamShortName": "Espanyol",
+      "teamCrest": "https://sportsrc.org/img/score/80.png",
+      "zone": "mid",
+      "winRate": 32.4,
+      "drawRate": 24.3,
+      "lossRate": 43.2
+    },
+    {
+      "position": 11,
       "playedGames": 37,
       "form": "",
       "won": 13,
       "draw": 6,
       "lost": 18,
       "points": 45,
-      "goalsFor": 40,
-      "goalsAgainst": 53,
+      "goalsFor": 41,
+      "goalsAgainst": 54,
       "goalDifference": -13,
       "teamId": 77,
       "teamName": "Athletic Club",
@@ -184,84 +224,44 @@
       "lossRate": 48.6
     },
     {
-      "position": 10,
-      "playedGames": 37,
-      "form": "",
-      "won": 10,
-      "draw": 15,
-      "lost": 12,
-      "points": 45,
-      "goalsFor": 37,
-      "goalsAgainst": 43,
-      "goalDifference": -6,
-      "teamId": 87,
-      "teamName": "Rayo Vallecano de Madrid",
-      "teamShortName": "Rayo Vallecano",
-      "teamCrest": "https://sportsrc.org/img/score/87.png",
-      "zone": "mid",
-      "winRate": 27.0,
-      "drawRate": 40.5,
-      "lossRate": 32.4
-    },
-    {
-      "position": 11,
-      "playedGames": 37,
-      "form": "",
-      "won": 11,
-      "draw": 11,
-      "lost": 15,
-      "points": 44,
-      "goalsFor": 39,
-      "goalsAgainst": 51,
-      "goalDifference": -12,
-      "teamId": 95,
-      "teamName": "Valencia CF",
-      "teamShortName": "Valencia",
-      "teamCrest": "https://sportsrc.org/img/score/95.png",
-      "zone": "mid",
-      "winRate": 29.7,
-      "drawRate": 29.7,
-      "lossRate": 40.5
-    },
-    {
       "position": 12,
-      "playedGames": 37,
-      "form": "",
-      "won": 12,
-      "draw": 8,
-      "lost": 17,
-      "points": 44,
-      "goalsFor": 46,
-      "goalsAgainst": 58,
-      "goalDifference": -12,
-      "teamId": 559,
-      "teamName": "Sevilla FC",
-      "teamShortName": "Sevilla FC",
-      "teamCrest": "https://sportsrc.org/img/score/559.png",
-      "zone": "mid",
-      "winRate": 32.4,
-      "drawRate": 21.6,
-      "lossRate": 45.9
-    },
-    {
-      "position": 13,
       "playedGames": 37,
       "form": "",
       "won": 11,
       "draw": 10,
       "lost": 16,
       "points": 43,
-      "goalsFor": 43,
-      "goalsAgainst": 47,
-      "goalDifference": -4,
-      "teamId": 79,
-      "teamName": "CA Osasuna",
-      "teamShortName": "Osasuna",
-      "teamCrest": "https://sportsrc.org/img/score/79.png",
+      "goalsFor": 41,
+      "goalsAgainst": 54,
+      "goalDifference": -13,
+      "teamId": 95,
+      "teamName": "Valencia CF",
+      "teamShortName": "Valencia",
+      "teamCrest": "https://sportsrc.org/img/score/95.png",
       "zone": "mid",
       "winRate": 29.7,
       "drawRate": 27.0,
       "lossRate": 43.2
+    },
+    {
+      "position": 13,
+      "playedGames": 37,
+      "form": "",
+      "won": 12,
+      "draw": 7,
+      "lost": 18,
+      "points": 43,
+      "goalsFor": 46,
+      "goalsAgainst": 59,
+      "goalDifference": -13,
+      "teamId": 559,
+      "teamName": "Sevilla FC",
+      "teamShortName": "Sevilla FC",
+      "teamCrest": "https://sportsrc.org/img/score/559.png",
+      "zone": "mid",
+      "winRate": 32.4,
+      "drawRate": 18.9,
+      "lossRate": 48.6
     },
     {
       "position": 14,
@@ -271,13 +271,13 @@
       "draw": 10,
       "lost": 16,
       "points": 43,
-      "goalsFor": 40,
-      "goalsAgainst": 53,
-      "goalDifference": -13,
-      "teamId": 80,
-      "teamName": "RCD Espanyol de Barcelona",
-      "teamShortName": "Espanyol",
-      "teamCrest": "https://sportsrc.org/img/score/80.png",
+      "goalsFor": 43,
+      "goalsAgainst": 54,
+      "goalDifference": -11,
+      "teamId": 263,
+      "teamName": "Deportivo Alavés",
+      "teamShortName": "Alavés",
+      "teamCrest": "https://sportsrc.org/img/score/263.png",
       "zone": "mid",
       "winRate": 29.7,
       "drawRate": 27.0,
@@ -287,129 +287,128 @@
       "position": 15,
       "playedGames": 37,
       "form": "",
-      "won": 9,
-      "draw": 14,
-      "lost": 14,
-      "points": 41,
-      "goalsFor": 38,
-      "goalsAgainst": 53,
-      "goalDifference": -15,
-      "teamId": 298,
-      "teamName": "Girona FC",
-      "teamShortName": "Girona",
-      "teamCrest": "https://sportsrc.org/img/score/298.png",
+      "won": 11,
+      "draw": 9,
+      "lost": 17,
+      "points": 42,
+      "goalsFor": 44,
+      "goalsAgainst": 49,
+      "goalDifference": -5,
+      "teamId": 79,
+      "teamName": "CA Osasuna",
+      "teamShortName": "Osasuna",
+      "teamCrest": "https://sportsrc.org/img/score/79.png",
       "zone": "mid",
-      "winRate": 24.3,
-      "drawRate": 37.8,
-      "lossRate": 37.8
+      "winRate": 29.7,
+      "drawRate": 24.3,
+      "lossRate": 45.9
     },
     {
       "position": 16,
       "playedGames": 37,
       "form": "",
       "won": 10,
-      "draw": 11,
-      "lost": 16,
-      "points": 41,
-      "goalsFor": 42,
-      "goalsAgainst": 54,
-      "goalDifference": -12,
-      "teamId": 263,
-      "teamName": "Deportivo Alavés",
-      "teamShortName": "Alavés",
-      "teamCrest": "https://sportsrc.org/img/score/263.png",
+      "draw": 12,
+      "lost": 15,
+      "points": 42,
+      "goalsFor": 48,
+      "goalsAgainst": 56,
+      "goalDifference": -8,
+      "teamId": 285,
+      "teamName": "Elche CF",
+      "teamShortName": "Elche",
+      "teamCrest": "https://sportsrc.org/img/score/285.png",
       "zone": "mid",
       "winRate": 27.0,
-      "drawRate": 29.7,
-      "lossRate": 43.2
+      "drawRate": 32.4,
+      "lossRate": 40.5
     },
     {
       "position": 17,
+      "playedGames": 37,
+      "form": "",
+      "won": 11,
+      "draw": 9,
+      "lost": 17,
+      "points": 42,
+      "goalsFor": 45,
+      "goalsAgainst": 59,
+      "goalDifference": -14,
+      "teamId": 88,
+      "teamName": "Levante UD",
+      "teamShortName": "Levante",
+      "teamCrest": "https://sportsrc.org/img/score/88.png",
+      "zone": "mid",
+      "winRate": 29.7,
+      "drawRate": 24.3,
+      "lossRate": 45.9
+    },
+    {
+      "position": 18,
       "playedGames": 37,
       "form": "",
       "won": 9,
       "draw": 13,
       "lost": 15,
       "points": 40,
-      "goalsFor": 47,
-      "goalsAgainst": 56,
-      "goalDifference": -9,
-      "teamId": 285,
-      "teamName": "Elche CF",
-      "teamShortName": "Elche",
-      "teamCrest": "https://sportsrc.org/img/score/285.png",
-      "zone": "mid",
+      "goalsFor": 38,
+      "goalsAgainst": 54,
+      "goalDifference": -16,
+      "teamId": 298,
+      "teamName": "Girona FC",
+      "teamShortName": "Girona",
+      "teamCrest": "https://sportsrc.org/img/score/298.png",
+      "zone": "relegation",
       "winRate": 24.3,
       "drawRate": 35.1,
       "lossRate": 40.5
-    },
-    {
-      "position": 18,
-      "playedGames": 37,
-      "form": "",
-      "won": 10,
-      "draw": 10,
-      "lost": 17,
-      "points": 40,
-      "goalsFor": 44,
-      "goalsAgainst": 55,
-      "goalDifference": -11,
-      "teamId": 89,
-      "teamName": "RCD Mallorca",
-      "teamShortName": "Mallorca",
-      "teamCrest": "https://sportsrc.org/img/score/89.png",
-      "zone": "relegation",
-      "winRate": 27.0,
-      "drawRate": 27.0,
-      "lossRate": 45.9
     },
     {
       "position": 19,
       "playedGames": 37,
       "form": "",
       "won": 10,
-      "draw": 10,
-      "lost": 17,
-      "points": 40,
+      "draw": 9,
+      "lost": 18,
+      "points": 39,
       "goalsFor": 44,
-      "goalsAgainst": 59,
-      "goalDifference": -15,
-      "teamId": 88,
-      "teamName": "Levante UD",
-      "teamShortName": "Levante",
-      "teamCrest": "https://sportsrc.org/img/score/88.png",
+      "goalsAgainst": 56,
+      "goalDifference": -12,
+      "teamId": 89,
+      "teamName": "RCD Mallorca",
+      "teamShortName": "Mallorca",
+      "teamCrest": "https://sportsrc.org/img/score/89.png",
       "zone": "relegation",
       "winRate": 27.0,
-      "drawRate": 27.0,
-      "lossRate": 45.9
+      "drawRate": 24.3,
+      "lossRate": 48.6
     },
     {
       "position": 20,
       "playedGames": 37,
       "form": "",
       "won": 6,
-      "draw": 12,
-      "lost": 19,
-      "points": 30,
+      "draw": 11,
+      "lost": 20,
+      "points": 29,
       "goalsFor": 26,
-      "goalsAgainst": 56,
-      "goalDifference": -30,
+      "goalsAgainst": 57,
+      "goalDifference": -31,
       "teamId": 1048,
       "teamName": "Real Oviedo",
       "teamShortName": "Real Oviedo",
       "teamCrest": "https://sportsrc.org/img/score/1048.png",
       "zone": "relegation",
       "winRate": 16.2,
-      "drawRate": 32.4,
-      "lossRate": 51.4
+      "drawRate": 29.7,
+      "lossRate": 54.1
     }
   ],
   "matches": [],
   "scores": {
     "success": true,
     "data": {
-      "live": [],
-      "finished": [
+      "live": [
         {
           "area": {
             "id": 2224,
@@ -431,13 +430,582 @@
             "currentMatchday": 35,
             "winner": null
           },
+          "id": 544580,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:33:33Z",
+          "homeTeam": {
+            "id": 559,
+            "name": "Sevilla FC",
+            "shortName": "Sevilla FC",
+            "tla": "SEV",
+            "crest": "https://sportsrc.org/img/score/559.png"
+          },
+          "awayTeam": {
+            "id": 86,
+            "name": "Real Madrid CF",
+            "shortName": "Real Madrid",
+            "tla": "RMA",
+            "crest": "https://sportsrc.org/img/score/86.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 0,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 207080,
+              "name": "José Sánchez Martínez",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544576,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:37Z",
+          "homeTeam": {
+            "id": 87,
+            "name": "Rayo Vallecano de Madrid",
+            "shortName": "Rayo Vallecano",
+            "tla": "RAY",
+            "crest": "https://sportsrc.org/img/score/87.png"
+          },
+          "awayTeam": {
+            "id": 94,
+            "name": "Villarreal CF",
+            "shortName": "Villarreal",
+            "tla": "VIL",
+            "crest": "https://sportsrc.org/img/score/94.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 15628,
+              "name": "Ricardo de Burgos",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544572,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:57Z",
+          "homeTeam": {
+            "id": 78,
+            "name": "Club Atlético de Madrid",
+            "shortName": "Atleti",
+            "tla": "ATL",
+            "crest": "https://sportsrc.org/img/score/78.png"
+          },
+          "awayTeam": {
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 215569,
+              "name": "Alejandro Muñiz Ruiz",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544578,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:52Z",
+          "homeTeam": {
+            "id": 1048,
+            "name": "Real Oviedo",
+            "shortName": "Real Oviedo",
+            "tla": "OVI",
+            "crest": "https://sportsrc.org/img/score/1048.png"
+          },
+          "awayTeam": {
+            "id": 263,
+            "name": "Deportivo Alavés",
+            "shortName": "Alavés",
+            "tla": "ALA",
+            "crest": "https://sportsrc.org/img/score/263.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 0,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 206223,
+              "name": "José Munuera Montero",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544574,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:57Z",
+          "homeTeam": {
+            "id": 285,
+            "name": "Elche CF",
+            "shortName": "Elche",
+            "tla": "ELC",
+            "crest": "https://sportsrc.org/img/score/285.png"
+          },
+          "awayTeam": {
+            "id": 82,
+            "name": "Getafe CF",
+            "shortName": "Getafe",
+            "tla": "GET",
+            "crest": "https://sportsrc.org/img/score/82.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 56995,
+              "name": "Víctor García Verdura",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544575,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:37Z",
+          "homeTeam": {
+            "id": 88,
+            "name": "Levante UD",
+            "shortName": "Levante",
+            "tla": "LEV",
+            "crest": "https://sportsrc.org/img/score/88.png"
+          },
+          "awayTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 80747,
+              "name": "Javier Alberola Rojas",
+              "type": "REFEREE",
+              "nationality": null
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544571,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:52Z",
+          "homeTeam": {
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
+          },
+          "awayTeam": {
+            "id": 558,
+            "name": "RC Celta de Vigo",
+            "shortName": "Celta",
+            "tla": "CEL",
+            "crest": "https://sportsrc.org/img/score/558.png"
+          },
+          "score": {
+            "winner": "DRAW",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 57930,
+              "name": "Isidro Díaz de Mera",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544577,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:52Z",
+          "homeTeam": {
+            "id": 92,
+            "name": "Real Sociedad de Fútbol",
+            "shortName": "Real Sociedad",
+            "tla": "RSO",
+            "crest": "https://sportsrc.org/img/score/92.png"
+          },
+          "awayTeam": {
+            "id": 95,
+            "name": "Valencia CF",
+            "shortName": "Valencia",
+            "tla": "VAL",
+            "crest": "https://sportsrc.org/img/score/95.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 3,
+              "away": 2
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 2
+            }
+          },
+          "referees": [
+            {
+              "id": 215593,
+              "name": "Iosu Galech Apezteguía",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544579,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "IN_PLAY",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T18:34:57Z",
+          "homeTeam": {
+            "id": 79,
+            "name": "CA Osasuna",
+            "shortName": "Osasuna",
+            "tla": "OSA",
+            "crest": "https://sportsrc.org/img/score/79.png"
+          },
+          "awayTeam": {
+            "id": 80,
+            "name": "RCD Espanyol de Barcelona",
+            "shortName": "Espanyol",
+            "tla": "ESP",
+            "crest": "https://sportsrc.org/img/score/80.png"
+          },
+          "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 2
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 207048,
+              "name": "Miguel Ortiz Arias",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        }
+      ],
+      "finished": [
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 37,
+            "winner": null
+          },
           "id": 544560,
           "utcDate": "2026-05-11T19:00:00Z",
           "status": "FINISHED",
           "matchday": 35,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-11T21:03:00Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 87,
             "name": "Rayo Vallecano de Madrid",
@@ -491,7 +1059,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544563,
@@ -500,7 +1068,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T19:03:34Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 558,
             "name": "RC Celta de Vigo",
@@ -547,7 +1115,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544562,
@@ -556,7 +1124,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T20:08:49Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 90,
             "name": "Real Betis Balompié",
@@ -603,7 +1171,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544567,
@@ -612,7 +1180,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-12T21:37:39Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 79,
             "name": "CA Osasuna",
@@ -659,70 +1227,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
-            "winner": null
-          },
-          "id": 544566,
-          "utcDate": "2026-05-13T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 36,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-13T19:00:05Z",
-          "homeTeam": {
-            "id": 80,
-            "name": "RCD Espanyol de Barcelona",
-            "shortName": "Espanyol",
-            "tla": "ESP",
-            "crest": "https://sportsrc.org/img/score/80.png"
-          },
-          "awayTeam": {
-            "id": 77,
-            "name": "Athletic Club",
-            "shortName": "Athletic",
-            "tla": "ATH",
-            "crest": "https://sportsrc.org/img/score/77.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 0
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 0
-            }
-          },
-          "referees": [
-            {
-              "id": 214213,
-              "name": "Francisco Hernández Maeso",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544569,
@@ -731,7 +1236,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T19:01:20Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 94,
             "name": "Villarreal CF",
@@ -785,46 +1290,46 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
-          "id": 544564,
-          "utcDate": "2026-05-13T19:30:00Z",
+          "id": 544566,
+          "utcDate": "2026-05-13T17:00:00Z",
           "status": "FINISHED",
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T21:33:30Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
-            "id": 82,
-            "name": "Getafe CF",
-            "shortName": "Getafe",
-            "tla": "GET",
-            "crest": "https://sportsrc.org/img/score/82.png"
+            "id": 80,
+            "name": "RCD Espanyol de Barcelona",
+            "shortName": "Espanyol",
+            "tla": "ESP",
+            "crest": "https://sportsrc.org/img/score/80.png"
           },
           "awayTeam": {
-            "id": 89,
-            "name": "RCD Mallorca",
-            "shortName": "Mallorca",
-            "tla": "MAL",
-            "crest": "https://sportsrc.org/img/score/89.png"
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 3,
-              "away": 1
+              "home": 2,
+              "away": 0
             },
             "halfTime": {
-              "home": 2,
+              "home": 0,
               "away": 0
             }
           },
           "referees": [
             {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
+              "id": 214213,
+              "name": "Francisco Hernández Maeso",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -848,7 +1353,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544561,
@@ -857,7 +1362,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-13T21:27:45Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 263,
             "name": "Deportivo Alavés",
@@ -911,7 +1416,70 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
+            "winner": null
+          },
+          "id": 544564,
+          "utcDate": "2026-05-13T19:30:00Z",
+          "status": "FINISHED",
+          "matchday": 36,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-17T00:20:56Z",
+          "homeTeam": {
+            "id": 82,
+            "name": "Getafe CF",
+            "shortName": "Getafe",
+            "tla": "GET",
+            "crest": "https://sportsrc.org/img/score/82.png"
+          },
+          "awayTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 3,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 2,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 206203,
+              "name": "Juan Martínez Munuera",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544568,
@@ -920,7 +1488,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T19:06:46Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 95,
             "name": "Valencia CF",
@@ -974,7 +1542,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544565,
@@ -983,7 +1551,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T20:02:56Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 298,
             "name": "Girona FC",
@@ -1037,7 +1605,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 35,
+            "currentMatchday": 37,
             "winner": null
           },
           "id": 544570,
@@ -1046,7 +1614,7 @@
           "matchday": 36,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-14T21:28:16Z",
+          "lastUpdated": "2026-05-17T00:20:56Z",
           "homeTeam": {
             "id": 86,
             "name": "Real Madrid CF",
@@ -1083,7 +1651,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-17T16:55:08+00:00"
+      "last_updated": "2026-05-17T18:35:08+00:00"
     }
   }
 }
