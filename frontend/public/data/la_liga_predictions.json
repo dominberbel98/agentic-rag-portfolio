@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-05-20T04:48:34.815725+00:00",
+  "updatedAt": "2026-05-20T08:29:25.279031+00:00",
   "season": "2025",
-  "matchday": 37,
+  "matchday": 38,
   "totalMatches": 38,
   "nSimulations": 1000,
   "model": "XGBoost + Monte Carlo Poisson",
