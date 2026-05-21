@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-21T18:04:09.971409+00:00",
+  "updatedAt": "2026-05-21T20:21:58.497512+00:00",
   "season": "2025",
   "matchday": 38,
   "standings": [
@@ -431,69 +431,6 @@
             "currentMatchday": 38,
             "winner": null
           },
-          "id": 544571,
-          "utcDate": "2026-05-17T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 37,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-21T00:20:49Z",
-          "homeTeam": {
-            "id": 77,
-            "name": "Athletic Club",
-            "shortName": "Athletic",
-            "tla": "ATH",
-            "crest": "https://sportsrc.org/img/score/77.png"
-          },
-          "awayTeam": {
-            "id": 558,
-            "name": "RC Celta de Vigo",
-            "shortName": "Celta",
-            "tla": "CEL",
-            "crest": "https://sportsrc.org/img/score/558.png"
-          },
-          "score": {
-            "winner": "DRAW",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 57930,
-              "name": "Isidro Díaz de Mera",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 38,
-            "winner": null
-          },
           "id": 544580,
           "utcDate": "2026-05-17T17:00:00Z",
           "status": "FINISHED",
@@ -594,6 +531,69 @@
             {
               "id": 15628,
               "name": "Ricardo de Burgos",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 38,
+            "winner": null
+          },
+          "id": 544572,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "FINISHED",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-21T00:20:49Z",
+          "homeTeam": {
+            "id": 78,
+            "name": "Club Atlético de Madrid",
+            "shortName": "Atleti",
+            "tla": "ATL",
+            "crest": "https://sportsrc.org/img/score/78.png"
+          },
+          "awayTeam": {
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 0
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 0
+            }
+          },
+          "referees": [
+            {
+              "id": 215569,
+              "name": "Alejandro Muñiz Ruiz",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -746,7 +746,7 @@
             "currentMatchday": 38,
             "winner": null
           },
-          "id": 544572,
+          "id": 544579,
           "utcDate": "2026-05-17T17:00:00Z",
           "status": "FINISHED",
           "matchday": 37,
@@ -754,35 +754,35 @@
           "group": null,
           "lastUpdated": "2026-05-21T00:20:49Z",
           "homeTeam": {
-            "id": 78,
-            "name": "Club Atlético de Madrid",
-            "shortName": "Atleti",
-            "tla": "ATL",
-            "crest": "https://sportsrc.org/img/score/78.png"
+            "id": 79,
+            "name": "CA Osasuna",
+            "shortName": "Osasuna",
+            "tla": "OSA",
+            "crest": "https://sportsrc.org/img/score/79.png"
           },
           "awayTeam": {
-            "id": 298,
-            "name": "Girona FC",
-            "shortName": "Girona",
-            "tla": "GIR",
-            "crest": "https://sportsrc.org/img/score/298.png"
+            "id": 80,
+            "name": "RCD Espanyol de Barcelona",
+            "shortName": "Espanyol",
+            "tla": "ESP",
+            "crest": "https://sportsrc.org/img/score/80.png"
           },
           "score": {
-            "winner": "HOME_TEAM",
+            "winner": "AWAY_TEAM",
             "duration": "REGULAR",
             "fullTime": {
               "home": 1,
-              "away": 0
+              "away": 2
             },
             "halfTime": {
-              "home": 1,
-              "away": 0
+              "home": 0,
+              "away": 1
             }
           },
           "referees": [
             {
-              "id": 215569,
-              "name": "Alejandro Muñiz Ruiz",
+              "id": 207048,
+              "name": "Miguel Ortiz Arias",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -872,6 +872,69 @@
             "currentMatchday": 38,
             "winner": null
           },
+          "id": 544571,
+          "utcDate": "2026-05-17T17:00:00Z",
+          "status": "FINISHED",
+          "matchday": 37,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-21T00:20:49Z",
+          "homeTeam": {
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
+          },
+          "awayTeam": {
+            "id": 558,
+            "name": "RC Celta de Vigo",
+            "shortName": "Celta",
+            "tla": "CEL",
+            "crest": "https://sportsrc.org/img/score/558.png"
+          },
+          "score": {
+            "winner": "DRAW",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 57930,
+              "name": "Isidro Díaz de Mera",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 38,
+            "winner": null
+          },
           "id": 544577,
           "utcDate": "2026-05-17T17:00:00Z",
           "status": "FINISHED",
@@ -909,69 +972,6 @@
             {
               "id": 215593,
               "name": "Iosu Galech Apezteguía",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 38,
-            "winner": null
-          },
-          "id": 544579,
-          "utcDate": "2026-05-17T17:00:00Z",
-          "status": "FINISHED",
-          "matchday": 37,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-21T00:20:49Z",
-          "homeTeam": {
-            "id": 79,
-            "name": "CA Osasuna",
-            "shortName": "Osasuna",
-            "tla": "OSA",
-            "crest": "https://sportsrc.org/img/score/79.png"
-          },
-          "awayTeam": {
-            "id": 80,
-            "name": "RCD Espanyol de Barcelona",
-            "shortName": "Espanyol",
-            "tla": "ESP",
-            "crest": "https://sportsrc.org/img/score/80.png"
-          },
-          "score": {
-            "winner": "AWAY_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 2
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 207048,
-              "name": "Miguel Ortiz Arias",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1041,7 +1041,7 @@
           ]
         }
       ],
-      "last_updated": "2026-05-21T17:55:11+00:00"
+      "last_updated": "2026-05-21T20:20:14+00:00"
     }
   }
 }
