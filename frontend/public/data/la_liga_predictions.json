@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-24T20:09:57.795653+00:00",
+  "updatedAt": "2026-05-24T21:31:27.007012+00:00",
   "season": "2025",
   "matchday": 38,
   "totalMatches": 38,
@@ -90,8 +90,8 @@
       "played": 38,
       "remaining": 0,
       "projectedPoints": 72.0,
-      "projectedGF": 68.0,
-      "projectedGA": 45.0,
+      "projectedGF": 72.0,
+      "projectedGA": 46.0,
       "mc": {
         "pointsMean": 72.0,
         "pointsStd": 0.0,
@@ -99,8 +99,8 @@
         "pointsMax": 72,
         "pointsP10": 72,
         "pointsP90": 72,
-        "gfMean": 68.0,
-        "gaMean": 45.0
+        "gfMean": 72.0,
+        "gaMean": 46.0
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
@@ -122,8 +122,8 @@
       "played": 38,
       "remaining": 0,
       "projectedPoints": 69.0,
-      "projectedGF": 61.0,
-      "projectedGA": 40.0,
+      "projectedGF": 62.0,
+      "projectedGA": 44.0,
       "mc": {
         "pointsMean": 69.0,
         "pointsStd": 0.0,
@@ -131,8 +131,8 @@
         "pointsMax": 69,
         "pointsP10": 69,
         "pointsP90": 69,
-        "gfMean": 61.0,
-        "gaMean": 40.0
+        "gfMean": 62.0,
+        "gaMean": 44.0
       },
       "championProb": 0.0,
       "mostGoalsProb": 0.0,
