@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-26T01:26:41.564696+00:00",
+  "updatedAt": "2026-05-26T05:44:13.711787+00:00",
   "season": "2025",
   "matchday": 38,
   "standings": [
@@ -431,7 +431,7 @@
             "currentMatchday": 38,
             "winner": null
           },
-          "id": 544584,
+          "id": 544583,
           "utcDate": "2026-05-23T19:00:00Z",
           "status": "FINISHED",
           "matchday": 38,
@@ -439,224 +439,35 @@
           "group": null,
           "lastUpdated": "2026-05-26T00:20:43Z",
           "homeTeam": {
-            "id": 80,
-            "name": "RCD Espanyol de Barcelona",
-            "shortName": "Espanyol",
-            "tla": "ESP",
-            "crest": "https://sportsrc.org/img/score/80.png"
+            "id": 558,
+            "name": "RC Celta de Vigo",
+            "shortName": "Celta",
+            "tla": "CEL",
+            "crest": "https://sportsrc.org/img/score/558.png"
           },
           "awayTeam": {
-            "id": 92,
-            "name": "Real Sociedad de Fútbol",
-            "shortName": "Real Sociedad",
-            "tla": "RSO",
-            "crest": "https://sportsrc.org/img/score/92.png"
-          },
-          "score": {
-            "winner": "DRAW",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 206223,
-              "name": "José Munuera Montero",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 38,
-            "winner": null
-          },
-          "id": 544590,
-          "utcDate": "2026-05-23T19:00:00Z",
-          "status": "FINISHED",
-          "matchday": 38,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-26T00:20:43Z",
-          "homeTeam": {
-            "id": 298,
-            "name": "Girona FC",
-            "shortName": "Girona",
-            "tla": "GIR",
-            "crest": "https://sportsrc.org/img/score/298.png"
-          },
-          "awayTeam": {
-            "id": 285,
-            "name": "Elche CF",
-            "shortName": "Elche",
-            "tla": "ELC",
-            "crest": "https://sportsrc.org/img/score/285.png"
-          },
-          "score": {
-            "winner": "DRAW",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 1,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 0,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 206208,
-              "name": "Alejandro Hernández Hernández",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 38,
-            "winner": null
-          },
-          "id": 544586,
-          "utcDate": "2026-05-23T19:00:00Z",
-          "status": "FINISHED",
-          "matchday": 38,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-26T00:20:43Z",
-          "homeTeam": {
-            "id": 89,
-            "name": "RCD Mallorca",
-            "shortName": "Mallorca",
-            "tla": "MAL",
-            "crest": "https://sportsrc.org/img/score/89.png"
-          },
-          "awayTeam": {
-            "id": 1048,
-            "name": "Real Oviedo",
-            "shortName": "Real Oviedo",
-            "tla": "OVI",
-            "crest": "https://sportsrc.org/img/score/1048.png"
+            "id": 559,
+            "name": "Sevilla FC",
+            "shortName": "Sevilla FC",
+            "tla": "SEV",
+            "crest": "https://sportsrc.org/img/score/559.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 3,
+              "home": 1,
               "away": 0
             },
             "halfTime": {
-              "home": 1,
+              "home": 0,
               "away": 0
             }
           },
           "referees": [
             {
-              "id": 207080,
-              "name": "José Sánchez Martínez",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 38,
-            "winner": null
-          },
-          "id": 544582,
-          "utcDate": "2026-05-23T19:00:00Z",
-          "status": "FINISHED",
-          "matchday": 38,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-26T00:20:43Z",
-          "homeTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
-          },
-          "awayTeam": {
-            "id": 88,
-            "name": "Levante UD",
-            "shortName": "Levante",
-            "tla": "LEV",
-            "crest": "https://sportsrc.org/img/score/88.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 217698,
-              "name": "Mateo Busquets Ferrer",
+              "id": 214213,
+              "name": "Francisco Hernández Maeso",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -935,7 +746,7 @@
             "currentMatchday": 38,
             "winner": null
           },
-          "id": 544583,
+          "id": 544584,
           "utcDate": "2026-05-23T19:00:00Z",
           "status": "FINISHED",
           "matchday": 38,
@@ -943,35 +754,224 @@
           "group": null,
           "lastUpdated": "2026-05-26T00:20:43Z",
           "homeTeam": {
-            "id": 558,
-            "name": "RC Celta de Vigo",
-            "shortName": "Celta",
-            "tla": "CEL",
-            "crest": "https://sportsrc.org/img/score/558.png"
+            "id": 80,
+            "name": "RCD Espanyol de Barcelona",
+            "shortName": "Espanyol",
+            "tla": "ESP",
+            "crest": "https://sportsrc.org/img/score/80.png"
           },
           "awayTeam": {
-            "id": 559,
-            "name": "Sevilla FC",
-            "shortName": "Sevilla FC",
-            "tla": "SEV",
-            "crest": "https://sportsrc.org/img/score/559.png"
+            "id": 92,
+            "name": "Real Sociedad de Fútbol",
+            "shortName": "Real Sociedad",
+            "tla": "RSO",
+            "crest": "https://sportsrc.org/img/score/92.png"
+          },
+          "score": {
+            "winner": "DRAW",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 206223,
+              "name": "José Munuera Montero",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 38,
+            "winner": null
+          },
+          "id": 544590,
+          "utcDate": "2026-05-23T19:00:00Z",
+          "status": "FINISHED",
+          "matchday": 38,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-26T00:20:43Z",
+          "homeTeam": {
+            "id": 298,
+            "name": "Girona FC",
+            "shortName": "Girona",
+            "tla": "GIR",
+            "crest": "https://sportsrc.org/img/score/298.png"
+          },
+          "awayTeam": {
+            "id": 285,
+            "name": "Elche CF",
+            "shortName": "Elche",
+            "tla": "ELC",
+            "crest": "https://sportsrc.org/img/score/285.png"
+          },
+          "score": {
+            "winner": "DRAW",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 1,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 0,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 206208,
+              "name": "Alejandro Hernández Hernández",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 38,
+            "winner": null
+          },
+          "id": 544586,
+          "utcDate": "2026-05-23T19:00:00Z",
+          "status": "FINISHED",
+          "matchday": 38,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-26T00:20:43Z",
+          "homeTeam": {
+            "id": 89,
+            "name": "RCD Mallorca",
+            "shortName": "Mallorca",
+            "tla": "MAL",
+            "crest": "https://sportsrc.org/img/score/89.png"
+          },
+          "awayTeam": {
+            "id": 1048,
+            "name": "Real Oviedo",
+            "shortName": "Real Oviedo",
+            "tla": "OVI",
+            "crest": "https://sportsrc.org/img/score/1048.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 1,
+              "home": 3,
               "away": 0
             },
             "halfTime": {
-              "home": 0,
+              "home": 1,
               "away": 0
             }
           },
           "referees": [
             {
-              "id": 214213,
-              "name": "Francisco Hernández Maeso",
+              "id": 207080,
+              "name": "José Sánchez Martínez",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 38,
+            "winner": null
+          },
+          "id": 544582,
+          "utcDate": "2026-05-23T19:00:00Z",
+          "status": "FINISHED",
+          "matchday": 38,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-26T00:20:43Z",
+          "homeTeam": {
+            "id": 90,
+            "name": "Real Betis Balompié",
+            "shortName": "Real Betis",
+            "tla": "BET",
+            "crest": "https://sportsrc.org/img/score/90.png"
+          },
+          "awayTeam": {
+            "id": 88,
+            "name": "Levante UD",
+            "shortName": "Levante",
+            "tla": "LEV",
+            "crest": "https://sportsrc.org/img/score/88.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 2,
+              "away": 1
+            },
+            "halfTime": {
+              "home": 1,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 217698,
+              "name": "Mateo Busquets Ferrer",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1034,7 +1034,7 @@
           "referees": []
         }
       ],
-      "last_updated": "2026-05-26T01:25:06+00:00"
+      "last_updated": "2026-05-26T05:40:11+00:00"
     }
   }
 }
