@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T21:03:42.630988+00:00",
+  "updatedAt": "2026-05-27T22:58:13.806630+00:00",
   "season": "2025",
   "matchday": 38,
   "standings": [
@@ -431,69 +431,6 @@
             "currentMatchday": 35,
             "winner": null
           },
-          "id": 544582,
-          "utcDate": "2026-05-23T19:00:00Z",
-          "status": "FINISHED",
-          "matchday": 38,
-          "stage": "REGULAR_SEASON",
-          "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
-          "homeTeam": {
-            "id": 90,
-            "name": "Real Betis Balompié",
-            "shortName": "Real Betis",
-            "tla": "BET",
-            "crest": "https://sportsrc.org/img/score/90.png"
-          },
-          "awayTeam": {
-            "id": 88,
-            "name": "Levante UD",
-            "shortName": "Levante",
-            "tla": "LEV",
-            "crest": "https://sportsrc.org/img/score/88.png"
-          },
-          "score": {
-            "winner": "HOME_TEAM",
-            "duration": "REGULAR",
-            "fullTime": {
-              "home": 2,
-              "away": 1
-            },
-            "halfTime": {
-              "home": 1,
-              "away": 1
-            }
-          },
-          "referees": [
-            {
-              "id": 217698,
-              "name": "Mateo Busquets Ferrer",
-              "type": "REFEREE",
-              "nationality": "Spain"
-            }
-          ]
-        },
-        {
-          "area": {
-            "id": 2224,
-            "name": "Spain",
-            "code": "ESP",
-            "flag": "https://sportsrc.org/img/score/760.svg"
-          },
-          "competition": {
-            "id": 2014,
-            "name": "Primera Division",
-            "code": "PD",
-            "type": "LEAGUE",
-            "emblem": "https://sportsrc.org/img/score/laliga.png"
-          },
-          "season": {
-            "id": 2429,
-            "startDate": "2025-08-17",
-            "endDate": "2026-05-24",
-            "currentMatchday": 35,
-            "winner": null
-          },
           "id": 544584,
           "utcDate": "2026-05-23T19:00:00Z",
           "status": "FINISHED",
@@ -563,7 +500,7 @@
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
+          "lastUpdated": "2026-05-27T22:25:30Z",
           "homeTeam": {
             "id": 298,
             "name": "Girona FC",
@@ -626,7 +563,7 @@
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
+          "lastUpdated": "2026-05-27T22:25:30Z",
           "homeTeam": {
             "id": 89,
             "name": "RCD Mallorca",
@@ -683,43 +620,43 @@
             "currentMatchday": 35,
             "winner": null
           },
-          "id": 544587,
+          "id": 544582,
           "utcDate": "2026-05-23T19:00:00Z",
           "status": "FINISHED",
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
+          "lastUpdated": "2026-05-27T22:25:30Z",
           "homeTeam": {
-            "id": 86,
-            "name": "Real Madrid CF",
-            "shortName": "Real Madrid",
-            "tla": "RMA",
-            "crest": "https://sportsrc.org/img/score/86.png"
+            "id": 90,
+            "name": "Real Betis Balompié",
+            "shortName": "Real Betis",
+            "tla": "BET",
+            "crest": "https://sportsrc.org/img/score/90.png"
           },
           "awayTeam": {
-            "id": 77,
-            "name": "Athletic Club",
-            "shortName": "Athletic",
-            "tla": "ATH",
-            "crest": "https://sportsrc.org/img/score/77.png"
+            "id": 88,
+            "name": "Levante UD",
+            "shortName": "Levante",
+            "tla": "LEV",
+            "crest": "https://sportsrc.org/img/score/88.png"
           },
           "score": {
             "winner": "HOME_TEAM",
             "duration": "REGULAR",
             "fullTime": {
-              "home": 4,
-              "away": 2
+              "home": 2,
+              "away": 1
             },
             "halfTime": {
-              "home": 2,
+              "home": 1,
               "away": 1
             }
           },
           "referees": [
             {
-              "id": 206203,
-              "name": "Juan Martínez Munuera",
+              "id": 217698,
+              "name": "Mateo Busquets Ferrer",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -752,7 +689,7 @@
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
+          "lastUpdated": "2026-05-27T22:25:30Z",
           "homeTeam": {
             "id": 558,
             "name": "RC Celta de Vigo",
@@ -815,7 +752,7 @@
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
+          "lastUpdated": "2026-05-27T22:25:30Z",
           "homeTeam": {
             "id": 95,
             "name": "Valencia CF",
@@ -878,7 +815,7 @@
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
+          "lastUpdated": "2026-05-27T22:25:30Z",
           "homeTeam": {
             "id": 82,
             "name": "Getafe CF",
@@ -941,7 +878,7 @@
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-27T18:25:30Z",
+          "lastUpdated": "2026-05-27T22:25:30Z",
           "homeTeam": {
             "id": 263,
             "name": "Deportivo Alavés",
@@ -972,6 +909,69 @@
             {
               "id": 206211,
               "name": "Jesús Gil Manzano",
+              "type": "REFEREE",
+              "nationality": "Spain"
+            }
+          ]
+        },
+        {
+          "area": {
+            "id": 2224,
+            "name": "Spain",
+            "code": "ESP",
+            "flag": "https://sportsrc.org/img/score/760.svg"
+          },
+          "competition": {
+            "id": 2014,
+            "name": "Primera Division",
+            "code": "PD",
+            "type": "LEAGUE",
+            "emblem": "https://sportsrc.org/img/score/laliga.png"
+          },
+          "season": {
+            "id": 2429,
+            "startDate": "2025-08-17",
+            "endDate": "2026-05-24",
+            "currentMatchday": 35,
+            "winner": null
+          },
+          "id": 544587,
+          "utcDate": "2026-05-23T19:00:00Z",
+          "status": "FINISHED",
+          "matchday": 38,
+          "stage": "REGULAR_SEASON",
+          "group": null,
+          "lastUpdated": "2026-05-27T22:25:30Z",
+          "homeTeam": {
+            "id": 86,
+            "name": "Real Madrid CF",
+            "shortName": "Real Madrid",
+            "tla": "RMA",
+            "crest": "https://sportsrc.org/img/score/86.png"
+          },
+          "awayTeam": {
+            "id": 77,
+            "name": "Athletic Club",
+            "shortName": "Athletic",
+            "tla": "ATH",
+            "crest": "https://sportsrc.org/img/score/77.png"
+          },
+          "score": {
+            "winner": "HOME_TEAM",
+            "duration": "REGULAR",
+            "fullTime": {
+              "home": 4,
+              "away": 2
+            },
+            "halfTime": {
+              "home": 2,
+              "away": 1
+            }
+          },
+          "referees": [
+            {
+              "id": 206203,
+              "name": "Juan Martínez Munuera",
               "type": "REFEREE",
               "nationality": "Spain"
             }
@@ -1034,7 +1034,7 @@
           "referees": []
         }
       ],
-      "last_updated": "2026-05-27T20:55:08+00:00"
+      "last_updated": "2026-05-27T22:55:08+00:00"
     }
   }
 }
