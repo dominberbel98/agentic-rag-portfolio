@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-30T04:35:45.634779+00:00",
+  "updatedAt": "2026-05-30T07:43:49.361306+00:00",
   "season": "2025",
   "matchday": 38,
   "standings": [
@@ -428,7 +428,7 @@
             "id": 2429,
             "startDate": "2025-08-17",
             "endDate": "2026-05-24",
-            "currentMatchday": 38,
+            "currentMatchday": 35,
             "winner": null
           },
           "id": 544588,
@@ -437,7 +437,7 @@
           "matchday": 38,
           "stage": "REGULAR_SEASON",
           "group": null,
-          "lastUpdated": "2026-05-30T00:20:45Z",
+          "lastUpdated": "2026-05-24T20:58:41Z",
           "homeTeam": {
             "id": 94,
             "name": "Villarreal CF",
@@ -467,7 +467,7 @@
           "referees": []
         }
       ],
-      "last_updated": "2026-05-30T04:35:13+00:00"
+      "last_updated": "2026-05-30T07:40:11+00:00"
     }
   }
 }
