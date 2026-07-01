@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-07-01T10:47:35.845150+00:00",
-  "season": "2025",
-  "matchday": 38,
+  "updatedAt": "2026-07-01T12:05:09.900564+00:00",
+  "season": "2026",
+  "matchday": 1,
   "standings": [
     {
       "position": 1,
@@ -410,7 +410,7 @@
     "data": {
       "live": [],
       "finished": [],
-      "last_updated": "2026-07-01T10:45:06+00:00"
+      "last_updated": "2026-07-01T12:00:09+00:00"
     }
   }
 }
