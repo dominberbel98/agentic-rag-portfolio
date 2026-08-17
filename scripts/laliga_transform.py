@@ -284,6 +284,64 @@ def derive_form(table: list[dict], results: Iterable[dict]) -> list[dict]:
 TOTAL_MATCHES = 38
 
 
+def league_priors(table: list[dict]) -> dict[str, float]:
+    """League-average per-game rates, used as the prior for shrinkage.
+
+    Derived from the table itself where matches have been played, which keeps the
+    prior honest without needing an external dataset. Before kickoff there is
+    nothing to derive from, so these fall back to long-run La Liga averages:
+    roughly 2.7 goals per match — about 1.35 per team per game — and about 1.37
+    points per team per game, since a decided match distributes 3 points and a
+    draw 2.
+    """
+    total_played = sum(row.get("playedGames") or 0 for row in table)
+    if total_played == 0:
+        return {
+            "ppg": 1.37,
+            "gfPerGame": 1.35,
+            "gaPerGame": 1.35,
+            "winRate": 0.37,
+            "drawRate": 0.26,
+            "lossRate": 0.37,
+        }
+
+    totals = {key: 0.0 for key in ("points", "goalsFor", "goalsAgainst", "won", "draw", "lost")}
+    for row in table:
+        for key in totals:
+            totals[key] += row.get(key) or 0
+
+    return {
+        "ppg": totals["points"] / total_played,
+        "gfPerGame": totals["goalsFor"] / total_played,
+        "gaPerGame": totals["goalsAgainst"] / total_played,
+        "winRate": totals["won"] / total_played,
+        "drawRate": totals["draw"] / total_played,
+        "lossRate": totals["lost"] / total_played,
+    }
+
+
+# Matches of observed data at which the prior and the observation carry equal
+# weight. Five keeps the prior dominant through the opening month, which is the
+# window where a naive projection produced 114-point seasons off one result.
+SHRINKAGE_K = 5.0
+
+
+def shrink(observed: float, prior: float, played: int, k: float = SHRINKAGE_K) -> float:
+    """Blend an observed rate toward a prior, weighted by sample size.
+
+        rate = (played · observed + k · prior) / (played + k)
+
+    With no matches played the result is the prior; as matches accumulate the
+    observation takes over. This is what stops one 3-0 win becoming a 114-point
+    projected season — the failure the predictive panel shipped with, where
+    Espanyol and Alavés were given a combined 100% title probability on matchday
+    one while Real Madrid and Barcelona projected zero points.
+    """
+    if played <= 0:
+        return prior
+    return (played * observed + k * prior) / (played + k)
+
+
 def season_state(table: list[dict], matchday: Any) -> dict:
     """A summary the frontend can render without recomputing anything.
 

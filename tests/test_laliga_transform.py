@@ -12,6 +12,7 @@ import pytest
 
 from scripts.laliga_transform import (
     FORM_LENGTH,
+    SHRINKAGE_K,
     ZONES,
     add_rates,
     assign_ranks,
@@ -19,9 +20,11 @@ from scripts.laliga_transform import (
     derive_form,
     extract_fixtures,
     extract_results,
+    league_priors,
     match_team,
     merge_results,
     season_state,
+    shrink,
     zone_for_position,
 )
 
@@ -327,3 +330,67 @@ def test_low_confidence_holds_through_the_opening_matchdays():
     """The condition under which the projection is not worth showing."""
     table = [_team(1, "FC Barcelona", "Barça", played=2, won=2, gf=6, ga=0)]
     assert season_state(table, matchday=2)["lowConfidence"] is True
+
+
+# --- shrinkage ---------------------------------------------------------------
+
+
+def test_league_priors_fall_back_before_kickoff(preseason_table):
+    priors = league_priors(preseason_table)
+    assert 1.0 < priors["gfPerGame"] < 2.0
+    assert 1.0 < priors["ppg"] < 2.0
+    assert priors["gfPerGame"] == priors["gaPerGame"], "goals scored and conceded must balance"
+
+
+def test_league_priors_are_derived_once_matches_exist(midseason_table):
+    priors = league_priors(midseason_table)
+    # 30 games played across the table, 56 goals scored.
+    assert priors["gfPerGame"] == pytest.approx(56 / 30)
+
+
+def test_league_priors_balance_goals_over_a_closed_table():
+    """Every goal scored is a goal conceded, so over a table whose members only
+    played each other the two averages must agree.
+
+    The midseason fixture cannot show this — its three teams also played opponents
+    outside the fixture, so its totals do not balance. The invariant is a property
+    of a complete table, and this uses one.
+    """
+    closed = [
+        _team(1, "A", "A", played=2, won=1, lost=1, gf=3, ga=2),
+        _team(2, "B", "B", played=2, won=1, lost=1, gf=2, ga=3),
+    ]
+    priors = league_priors(closed)
+    assert priors["gfPerGame"] == pytest.approx(priors["gaPerGame"])
+
+
+def test_shrink_returns_the_prior_with_no_data():
+    assert shrink(observed=3.0, prior=1.35, played=0) == 1.35
+
+
+def test_shrink_barely_moves_off_one_match():
+    """One 3-0 win is not a 3-goals-per-game team. The projection that shipped
+    turned exactly this into a 114-point season."""
+    result = shrink(observed=3.0, prior=1.35, played=1)
+    assert result < 1.7
+
+
+def test_shrink_approaches_the_observation_as_matches_accumulate():
+    early = shrink(observed=3.0, prior=1.35, played=1)
+    later = shrink(observed=3.0, prior=1.35, played=20)
+    assert early < later < 3.0
+    assert later > 2.6
+
+
+def test_shrink_is_exactly_halfway_at_k_matches():
+    result = shrink(observed=3.0, prior=1.0, played=int(SHRINKAGE_K))
+    assert result == pytest.approx(2.0)
+
+
+def test_shrink_leaves_an_observation_equal_to_the_prior_untouched():
+    assert shrink(observed=1.35, prior=1.35, played=7) == pytest.approx(1.35)
+
+
+def test_shrink_is_monotonic_in_matches_played():
+    values = [shrink(observed=2.5, prior=1.0, played=n) for n in range(0, 25)]
+    assert values == sorted(values)

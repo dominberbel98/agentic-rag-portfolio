@@ -16,12 +16,23 @@ Usage:
 """
 
 import json
-import math
 import os
 import sys
 from datetime import datetime, timezone
+from pathlib import Path
 
 import numpy as np
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from scripts.laliga_transform import (  # noqa: E402
+    SHRINKAGE_K,
+    league_priors,
+    shrink,
+    zone_for_position,
+)
 
 try:
     import xgboost as xgb
@@ -48,10 +59,37 @@ def load_data():
 
 # ── Feature engineering ─────────────────────────────────────────────
 def engineer_features(teams):
-    """Create per-team feature vectors from current standings."""
+    """Per-team feature vectors, with every rate shrunk toward the league prior.
+
+    Without shrinkage this model was not a forecast. On matchday one of the
+    2026-27 season it projected Espanyol and Alaves to 114 points with a combined
+    100% title probability, and Real Madrid and Barcelona to zero points, purely
+    because the first pair had played a match and the second pair had not.
+    Multiplying a one-game sample by 38 is not a projection.
+
+    Each rate is now blended toward the league average, weighted by matches
+    played, so early in the season a team looks like an average team and only
+    earns its own numbers as evidence accumulates. See laliga_transform.shrink.
+    """
+    priors = league_priors(teams)
     features = []
     for t in teams:
-        played = t["playedGames"] or 1
+        played = t["playedGames"] or 0
+        # Divisor for observed rates. `remaining` uses the true count: coercing
+        # played to 1 before subtracting left 37 matches remaining at kickoff.
+        divisor = played if played > 0 else 1
+        observed = {
+            "ppg": t["points"] / divisor,
+            "winRate": t["won"] / divisor,
+            "drawRate": t["draw"] / divisor,
+            "lossRate": t["lost"] / divisor,
+            "gfPerGame": t["goalsFor"] / divisor,
+            "gaPerGame": t["goalsAgainst"] / divisor,
+        }
+        shrunk = {
+            key: shrink(value, priors[key], played, SHRINKAGE_K)
+            for key, value in observed.items()
+        }
         features.append(
             {
                 "teamName": t["teamName"],
@@ -61,19 +99,23 @@ def engineer_features(teams):
                 "played": played,
                 "remaining": TOTAL_MATCHES - played,
                 "points": t["points"],
-                "ppg": t["points"] / played,                    # points per game
                 "won": t["won"],
                 "draw": t["draw"],
                 "lost": t["lost"],
-                "winRate": t["won"] / played,
-                "drawRate": t["draw"] / played,
-                "lossRate": t["lost"] / played,
                 "goalsFor": t["goalsFor"],
                 "goalsAgainst": t["goalsAgainst"],
                 "goalDifference": t["goalDifference"],
-                "gfPerGame": t["goalsFor"] / played,
-                "gaPerGame": t["goalsAgainst"] / played,
-                "gdPerGame": t["goalDifference"] / played,
+                # Shrunk rates drive the projection and the classifier.
+                "ppg": shrunk["ppg"],
+                "winRate": shrunk["winRate"],
+                "drawRate": shrunk["drawRate"],
+                "lossRate": shrunk["lossRate"],
+                "gfPerGame": shrunk["gfPerGame"],
+                "gaPerGame": shrunk["gaPerGame"],
+                "gdPerGame": shrunk["gfPerGame"] - shrunk["gaPerGame"],
+                # Raw rates kept for display, so the UI can show what actually
+                # happened alongside what the model expects.
+                "observed": observed,
             }
         )
     return features
@@ -139,17 +181,8 @@ def train_xgb_zone_model(features):
     X = np.array([[t[c] for c in feature_cols] for t in features])
 
     # Labels from current position
-    labels = []
-    for t in features:
-        pos = t["position"]
-        if pos <= 4:
-            labels.append("champions")
-        elif pos <= 6:
-            labels.append("europa")
-        elif pos >= 18:
-            labels.append("relegation")
-        else:
-            labels.append("mid")
+    # Shared zone definition, so the classifier knows about Conference League.
+    labels = [zone_for_position(t["position"]) for t in features]
 
     le = LabelEncoder()
     y = le.fit_transform(labels)
@@ -300,12 +333,20 @@ def main():
     print("[predict] Building predictions …")
     predictions, xgb_importance = build_predictions(features, sim_results, xgb_results)
 
+    # Carried through so the UI can gate the projection honestly instead of
+    # presenting an opening-weekend extrapolation as a forecast.
+    state = raw.get("state") or {}
+    max_played = max((f["played"] for f in features), default=0)
+
     payload = {
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "season": raw.get("season", ""),
         "matchday": raw.get("matchday", ""),
         "totalMatches": TOTAL_MATCHES,
         "nSimulations": N_SIMULATIONS,
+        "shrinkageK": SHRINKAGE_K,
+        "maxGamesPlayed": max_played,
+        "lowConfidence": bool(state.get("lowConfidence", max_played < 5)),
         "model": "XGBoost + Monte Carlo Poisson" if HAS_XGB else "Monte Carlo Poisson",
         "xgbFeatureImportance": xgb_importance,
         "predictions": predictions,

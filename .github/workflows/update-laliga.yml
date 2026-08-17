@@ -3,10 +3,17 @@ name: Update La Liga Data
 on:
   schedule:
     - cron: "*/30 * * * *"   # every 30 minutes
-  workflow_dispatch:          # manual trigger
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  # The job commits to main. Two overlapping runs would race on the push, and the
+  # pipeline now folds new results into its own previous output, so a lost run
+  # loses match history rather than just a refresh.
+  group: update-laliga
+  cancel-in-progress: false
 
 jobs:
   update-data:
@@ -19,7 +26,13 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install requests pyspark xgboost scikit-learn numpy
+        run: pip install requests pyspark xgboost scikit-learn numpy pytest PyYAML
+
+      # The two faults that broke this for two days were arithmetic on a season
+      # boundary, and both are covered by fixtures. Running them first means a
+      # regression fails in seconds instead of after a full fetch.
+      - name: Test the transforms
+        run: python -m pytest tests/test_laliga_transform.py -q
 
       - name: Run La Liga pipeline
         run: python scripts/pipeline_laliga.py
@@ -27,12 +40,68 @@ jobs:
       - name: Run predictive model
         run: python scripts/predict_laliga.py
 
+      # The pipeline verifies before writing, but the data is what gets deployed,
+      # so it is re-checked from disk here. Previously the workflow committed and
+      # deployed whatever the transform produced: a wrong-but-not-raising result
+      # published a finished season's final table as the current standings.
+      - name: Verify the published data
+        run: |
+          python scripts/pipeline_laliga.py --verify
+          python - <<'PY'
+          import json, sys
+          data = json.load(open("frontend/public/data/la_liga_data.json"))
+          preds = json.load(open("frontend/public/data/la_liga_predictions.json"))
+          errors = []
+
+          state = data.get("state") or {}
+          if state.get("phase") not in {"preseason", "in_progress", "finished"}:
+              errors.append(f"unknown season phase: {state.get('phase')!r}")
+
+          zones = {t["zone"] for t in data["standings"]}
+          if not zones <= {"champions", "europa", "conference", "mid", "relegation"}:
+              errors.append(f"unexpected zones: {zones}")
+
+          if len(preds["predictions"]) != len(data["standings"]):
+              errors.append("predictions and standings disagree on team count")
+
+          # Shrinkage keeps projections inside a plausible band. Without it, one
+          # match extrapolated across 38 gave 114-point seasons and 0-point ones.
+          for p in preds["predictions"]:
+              projected = p["projectedPoints"]
+              if not 0 <= projected <= 114:
+                  errors.append(f"{p['teamShortName']} projected {projected} points")
+          if not preds.get("lowConfidence"):
+              spread = max(p["projectedPoints"] for p in preds["predictions"]) - min(
+                  p["projectedPoints"] for p in preds["predictions"]
+              )
+              if spread > 70:
+                  errors.append(f"projection spread of {spread} points is implausible")
+
+          total = sum(p["championProb"] for p in preds["predictions"])
+          if not 95 <= total <= 105:
+              errors.append(f"champion probabilities sum to {total}, not ~100")
+
+          print(f"phase={state.get('phase')} matchday={data.get('matchday')} "
+                f"results={len(data.get('results') or [])} "
+                f"fixtures={len(data.get('fixtures') or [])} "
+                f"lowConfidence={preds.get('lowConfidence')}")
+          if errors:
+              print("\nVERIFICATION FAILED:")
+              for e in errors:
+                  print(" -", e)
+              sys.exit(1)
+          print("verification passed")
+          PY
+
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add frontend/public/data/la_liga_data.json frontend/public/data/la_liga_predictions.json
           git diff --cached --quiet || git commit -m "chore: update La Liga data [skip ci]"
+          # Rebase before pushing: a concurrent commit to main would otherwise
+          # reject the push and lose the run.
+          git pull --rebase --autostash origin main
           git push
 
       - uses: actions/setup-node@v4

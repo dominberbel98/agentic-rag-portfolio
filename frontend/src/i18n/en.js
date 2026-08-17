@@ -173,6 +173,12 @@ export const t = {
     error: "ERROR_LOADING_PREDICTIONS",
     lowConfidence:
       "Too few matches played for a meaningful projection. Extrapolating one matchday across a 38-game season is not a forecast, so the numbers below are withheld until the sample supports them.",
+    subtitle: (season, matchday, total, sims) =>
+      `Season ${season} · Matchday ${matchday} · ${total} matchdays total · ${sims} simulations`,
+    modelLine: (model, sims) =>
+      `Model: ${model} · Poisson(λ=GF/game) + ${sims} Monte Carlo seasons`,
+    shrinkageNote: (k) =>
+      `Rates shrunk toward the league average with k=${k}, so a team looks average until it has earned otherwise`,
     championProb: { title: "CHAMPION_PROBABILITY", label: "P(Champion)" },
     projectedPoints: {
       title: "PROJECTED_POINTS (80% CI)",
@@ -199,7 +205,16 @@ export const t = {
       points: "Points",
       goalDifference: "Goal difference",
     },
-    projectedTable: { title: "PROJECTED_TABLE (MD38)" },
+    importanceCaption: "XGBoost multi:softprob · Features normalised per game",
+    projectedTable: {
+      title: "PROJECTED_TABLE (MD38)",
+      team: "Team",
+      current: "Now",
+      projected: "Proj.",
+      interval: "80% CI",
+      goalsFor: "GF",
+      goalsAgainst: "GA",
+    },
     methodology: {
       title: "METHODOLOGY",
       steps: (simulations) => [

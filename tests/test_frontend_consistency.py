@@ -189,6 +189,45 @@ def test_no_spanish_characters_remain_in_any_component(component_sources):
     assert not offenders, "Spanish text left in components:\n" + "\n".join(offenders)
 
 
+# Searching for accents alone is not enough, and missed real strings: "Temporada
+# {season} · Jornada {matchday} · {n} simulaciones" carries no accented character,
+# so an accent sweep reported the file clean while it was still Spanish.
+_SPANISH_WORDS = re.compile(
+    r"\b(temporada|jornadas?|simulaciones|modelo|partidos?|puntos|equipos?|goles"
+    r"|clasificacion|descenso|victorias|empates|derrotas|selecciona|seleccionados"
+    r"|cargando|productos|categorias|catalogo|prestamo|ingresos|vivienda|nombre"
+    r"|mensaje|enviar|contacto|normalizadas|media|rango|mayor|menor|ninguno"
+    r"|siguiente|anterior|buscar|ver|mas|menos)\b",
+    re.IGNORECASE,
+)
+
+# Lines that legitimately contain one of those substrings for non-Spanish reasons.
+_ALLOWED = re.compile(r"className|^\s*(//|\*|/\*)|import |activeSection|data-|aria-")
+
+
+def test_no_unaccented_spanish_words_remain_in_any_component(component_sources):
+    offenders = []
+    for name, source in component_sources.items():
+        for number, line in enumerate(source.splitlines(), start=1):
+            if _ALLOWED.search(line):
+                continue
+            match = _SPANISH_WORDS.search(line)
+            if match:
+                offenders.append(f"{name}:{number}: [{match.group(0)}] {line.strip()}")
+    assert not offenders, "Spanish words left in components:\n" + "\n".join(offenders)
+
+
+def test_the_dictionary_has_no_unaccented_spanish_either(dictionary_js):
+    offenders = []
+    for number, line in enumerate(dictionary_js.splitlines(), start=1):
+        if _ALLOWED.search(line):
+            continue
+        match = _SPANISH_WORDS.search(line)
+        if match:
+            offenders.append(f"{number}: [{match.group(0)}] {line.strip()}")
+    assert not offenders, "Spanish words in the dictionary:\n" + "\n".join(offenders)
+
+
 def test_components_do_not_hardcode_zone_colours(component_sources):
     """They must come from lib/laliga.js, or they drift again."""
     offenders = [

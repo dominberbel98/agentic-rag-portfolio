@@ -178,7 +178,7 @@ function FeatureImportance({ importance }) {
         </BarChart>
       </ResponsiveContainer>
       <p className="text-[0.55rem] text-[#00FF41]/25 font-headline mt-1 uppercase">
-        XGBoost multi:softprob · Features normalizadas por partido
+        {tr.predictions.importanceCaption}
       </p>
     </div>
   );
@@ -197,12 +197,12 @@ function ProjectedTable({ data }) {
           <thead>
             <tr className="text-[#00FF41]/50 border-b border-[#00FF41]/10">
               <th className="py-1.5 px-1 text-left">#</th>
-              <th className="py-1.5 px-2 text-left">Equipo</th>
-              <th className="py-1.5 px-1 text-center">Actual</th>
-              <th className="py-1.5 px-1 text-center">Proy.</th>
-              <th className="py-1.5 px-1 text-center">IC 80%</th>
-              <th className="py-1.5 px-1 text-center">GF</th>
-              <th className="py-1.5 px-1 text-center">GC</th>
+              <th className="py-1.5 px-2 text-left">{tr.predictions.projectedTable.team}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.current}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.projected}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.interval}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.goalsFor}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.goalsAgainst}</th>
             </tr>
           </thead>
           <tbody>
@@ -275,12 +275,25 @@ export default function ModelosPredictivos() {
           {tr.predictions.title}
         </h2>
         <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
-          Temporada {data.season} · Jornada {data.matchday} · {data.totalMatches} jornadas totales · {data.nSimulations.toLocaleString()} simulaciones
+          {tr.predictions.subtitle(data.season, data.matchday, data.totalMatches, data.nSimulations.toLocaleString())}
         </p>
         <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
-          Modelo: {data.model} · Poisson(λ=GF/partido) + {data.nSimulations.toLocaleString()} Monte Carlo seasons
+          {tr.predictions.modelLine(data.model, data.nSimulations.toLocaleString())}
         </p>
+        {data.shrinkageK != null && (
+          <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
+            {tr.predictions.shrinkageNote(data.shrinkageK)}
+          </p>
+        )}
       </div>
+
+      {/* Too few matches for the projection to mean anything. Shown rather than
+          hidden, because the point is that the model knows its own limits. */}
+      {data.lowConfidence && (
+        <div className="mb-4 border border-[#FFD700]/30 bg-[#FFD700]/5 px-4 py-3 text-[0.7rem] text-[#FFD700]/80 font-headline uppercase leading-relaxed">
+          {tr.predictions.lowConfidence}
+        </div>
+      )}
 
       {/* Method explanation */}
       <div className="viz-panel col-span-12 mb-4">
