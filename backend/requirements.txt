@@ -9,4 +9,4 @@ numpy==1.26.4
 rank-bm25==0.2.2
 python-dotenv==1.2.2
 httpx==0.28.1
-python-docx==1.2.0
+PyYAML==6.0.3  # profile_schema; python-docx dropped — the .docx corpus is gone

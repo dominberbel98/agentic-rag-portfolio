@@ -412,14 +412,26 @@ projects:
       A scoring model is only trustworthy if you can see how it discriminates and
       what drives it. Most demos show a number and hide the evidence.
     approach: >-
-      A classification pipeline over applicant features — income, employment
-      history, payment history, credit utilisation, credit age, recent enquiries,
-      derogatory marks, loan-to-income — surfacing the ROC curve and AUC, feature
-      importances, and the score distribution. The interface lets a visitor move
-      the inputs and watch the score respond.
+      Binary default/no-default classification over a calibrated synthetic
+      dataset of 5,000 applicants at roughly a 17% default rate. Features cover
+      income, employment history, on-time payment history, credit utilisation,
+      credit age, number of accounts, recent enquiries, derogatory marks,
+      loan-to-income, loan purpose and home ownership, preprocessed through a
+      ColumnTransformer with StandardScaler and OneHotEncoder. Two models are
+      trained side by side: logistic regression for interpretability and gradient
+      boosting for capacity, the latter calibrated with Platt scaling so the
+      probabilities mean something rather than only ranking correctly. Validation
+      is a stratified 75/25 split plus 5-fold stratified cross-validation, scored
+      on a held-out test set with AUC-ROC, GINI, the KS statistic, average
+      precision, F1 and the Brier score. Results are turned into a FICO-style PDO
+      scorecard on the 300-850 range with Poor to Exceptional bands, and driver
+      attribution uses model-agnostic permutation importance. For the live demo
+      the logistic coefficients and scaler parameters are exported to JSON and the
+      sigmoid is evaluated in the browser, so moving a slider recomputes the score
+      with no network round trip and no backend cost.
     outcome: >-
-      Live on the site as an explorable model rather than a static chart, with
-      its discrimination and its drivers both on screen.
+      Live on the site as an explorable model rather than a static chart, with its
+      discrimination, its calibration and its drivers all on screen.
     stack:
       - Python
       - scikit-learn
@@ -440,15 +452,29 @@ projects:
       Recommenders are usually presented as a black box. The interesting part is
       why a given item ranked where it did.
     approach: >-
-      Similarity-based recommendation over a product catalogue, driven by demo
-      personas so a visitor can see how the ranking shifts with the profile, and
-      showing the similarity scores behind the top-N rather than only the result.
+      Content-based recommendation over a catalogue of 32 products across four
+      categories. Each product is vectorised by combining TF-IDF over its
+      description (1-2 grams, 120 features, English stop-words) with a one-hot
+      category encoding and MinMax-scaled price and rating. A user profile is the
+      mean of the vectors of the products they picked, and the score is cosine
+      similarity against every product. The top-N is then re-ranked with Maximal
+      Marginal Relevance at lambda 0.7, so the list balances relevance against
+      diversity instead of returning six near-identical items. Quality is measured
+      with intra-list diversity and catalogue coverage across four demo personas.
+      As with the scoring model, inference runs client-side: the feature matrix,
+      TF-IDF vocabulary and catalogue metadata are exported to JSON and the
+      similarity, mean vector and MMR re-ranking are implemented in the browser.
+      That also makes it explainable — selecting a recommendation decomposes the
+      similarity into the TF-IDF terms, category and price/rating contributions
+      that produced it.
     outcome: >-
-      Live on the site, with the ranking and its similarity scores both visible.
+      Live on the site, with the ranking, its similarity scores and the terms
+      responsible for each recommendation all visible.
     stack:
       - Python
       - scikit-learn
       - NumPy
+      - TF-IDF
       - React
       - Recharts
     repo: https://github.com/dominberbel98/agentic-rag-portfolio
@@ -643,6 +669,7 @@ skills:
     - embeddings
     - FAISS
     - BM25
+    - TF-IDF
     - OCR
     - AI agents
     - OpenAI API

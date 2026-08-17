@@ -141,6 +141,7 @@
       "embeddings",
       "FAISS",
       "BM25",
+      "TF-IDF",
       "OCR",
       "AI agents",
       "OpenAI API",
