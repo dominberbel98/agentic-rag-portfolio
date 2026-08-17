@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "*.{css,js,png,jpg,jpeg,gif,ico,svg,woff,woff2,webm,webp,json,txt,xml,html}"]
+    "exclude": ["/assets/*", "*.{css,js,png,jpg,jpeg,gif,ico,svg,woff,woff2,webm,webp,json,txt,xml,html,webmanifest}"]
   },
   "globalHeaders": {
     "X-Content-Type-Options": "nosniff",
@@ -11,6 +11,8 @@
     "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://sportsrc.org; connect-src 'self' https://api.domingoberbel.com; font-src 'self' https://fonts.gstatic.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self';"
   },
   "mimeTypes": {
-    ".json": "application/json"
+    ".json": "application/json",
+    ".webmanifest": "application/manifest+json",
+    ".ico": "image/x-icon"
   }
 }
