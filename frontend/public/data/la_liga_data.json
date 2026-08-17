@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T21:30:19.001637+00:00",
+  "updatedAt": "2026-08-17T21:54:26.900164+00:00",
   "season": "2026",
   "matchday": 1,
   "seasonStart": "2026-08-16",
@@ -517,13 +517,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "deportivo-de-a-coru-a-vs-elche-2506177",
-      "homeName": "Deportivo",
-      "awayName": "Elche",
-      "kickoff": 1786993200000,
-      "title": "Deportivo de A Coruña vs Elche"
-    },
     {
       "id": "ppv-atl-tico-madrid-vs-m-laga",
       "homeName": "Atleti",
