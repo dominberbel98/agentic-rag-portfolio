@@ -96,6 +96,21 @@ def transform_with_spark(standings_raw, matches_raw, scores_raw):
 
     df = spark.createDataFrame(table, schema=schema)
 
+    # The upstream `position` is a rank *with ties* — on matchday 1 twelve teams all
+    # come back as position 6, which collapses the zone split and gives the frontend
+    # duplicate row keys. Recompute a unique 1-20 rank on the league tiebreak
+    # (points, goal difference, goals for; name last so the order is deterministic).
+    from pyspark.sql.window import Window
+
+    league_order = Window.orderBy(
+        F.col("points").desc(),
+        F.col("goalDifference").desc(),
+        F.col("goalsFor").desc(),
+        F.col("teamName").asc(),
+    )
+    df = df.withColumn("apiPosition", F.col("position"))
+    df = df.withColumn("position", F.row_number().over(league_order))
+
     # Zone classification
     df = df.withColumn(
         "zone",
@@ -105,10 +120,15 @@ def transform_with_spark(standings_raw, matches_raw, scores_raw):
         .otherwise("mid"),
     )
 
-    # Win / draw / loss rates
-    df = df.withColumn("winRate", F.round(F.col("won") / F.col("playedGames") * 100, 1))
-    df = df.withColumn("drawRate", F.round(F.col("draw") / F.col("playedGames") * 100, 1))
-    df = df.withColumn("lossRate", F.round(F.col("lost") / F.col("playedGames") * 100, 1))
+    # Win / draw / loss rates.
+    # On the opening matchday every team still sits at playedGames = 0, and Spark
+    # under ANSI mode raises DIVIDE_BY_ZERO rather than returning null. Clamp the
+    # divisor to 1 — won/draw/lost are 0 there too, so every rate lands on 0.0,
+    # matching _transform_plain_inner.
+    safe_played = F.when(F.col("playedGames") > 0, F.col("playedGames")).otherwise(F.lit(1))
+    df = df.withColumn("winRate", F.round(F.col("won") / safe_played * 100, 1))
+    df = df.withColumn("drawRate", F.round(F.col("draw") / safe_played * 100, 1))
+    df = df.withColumn("lossRate", F.round(F.col("lost") / safe_played * 100, 1))
 
     standings_out = [row.asDict() for row in df.collect()]
     spark.stop()
@@ -149,12 +169,36 @@ def _extract_table(standings_raw):
     return [], standings_raw
 
 
+def _league_sort_key(row):
+    """La Liga tiebreak order, minus head-to-head (absent from this feed)."""
+    return (
+        -(row.get("points") or 0),
+        -(row.get("goalDifference") or 0),
+        -(row.get("goalsFor") or 0),
+        row.get("teamName") or "",
+    )
+
+
+def _assign_ranks(table):
+    """Replace the upstream tied `position` with a unique 1-N rank.
+
+    Keeps the original value as `apiPosition`. Mirrors the Spark window in
+    transform_with_spark — both paths must agree on the ordering.
+    """
+    ordered = sorted(table, key=_league_sort_key)
+    for rank, row in enumerate(ordered, start=1):
+        row["apiPosition"] = row.get("position")
+        row["position"] = rank
+    return ordered
+
+
 def transform_plain(standings_raw, matches_raw, scores_raw):
     table, _ = _extract_table(standings_raw)
     return _transform_plain_inner(table, matches_raw, scores_raw)
 
 
 def _transform_plain_inner(table, matches_raw, scores_raw):
+    table = _assign_ranks(table)
     for t in table:
         pos = t.get("position", 0)
         if pos <= 4:
