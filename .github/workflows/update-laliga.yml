@@ -97,12 +97,38 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add frontend/public/data/la_liga_data.json frontend/public/data/la_liga_predictions.json
-          git diff --cached --quiet || git commit -m "chore: update La Liga data [skip ci]"
-          # Rebase before pushing: a concurrent commit to main would otherwise
-          # reject the push and lose the run.
-          git pull --rebase --autostash origin main
-          git push
+
+          DATA="frontend/public/data/la_liga_data.json frontend/public/data/la_liga_predictions.json"
+
+          # Replay our freshly generated data on top of whatever main is now,
+          # rather than merging into it.
+          #
+          # These two files are generated from scratch every run, so the correct
+          # conflict resolution is always "this run wins" — there is no useful
+          # content merge between two full regenerations. A `git pull --rebase`
+          # here therefore conflicted every single time two runs overlapped, and
+          # a rebase conflict cannot resolve itself: the job just failed and the
+          # refresh was lost.
+          #
+          # Set the tree to the remote tip exactly, then drop our generated files
+          # back on top. `reset --soft` would be wrong here: it keeps an index
+          # built against the old HEAD, so if main had moved on in any other file
+          # the commit would silently revert it.
+          mkdir -p /tmp/laliga-out
+          cp $DATA /tmp/laliga-out/
+
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/laliga-out/la_liga_data.json /tmp/laliga-out/la_liga_predictions.json \
+             frontend/public/data/
+
+          git add $DATA
+          if git diff --cached --quiet; then
+            echo "No data changes to publish."
+          else
+            git commit -m "chore: update La Liga data [skip ci]"
+            git push origin HEAD:main
+          fi
 
       - uses: actions/setup-node@v4
         with:
