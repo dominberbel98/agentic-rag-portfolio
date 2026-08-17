@@ -1,3 +1,4 @@
+import { t as tr } from "../i18n/en";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
@@ -130,7 +131,7 @@ function PersonaSummary({ personas, onApply }) {
     <div className="viz-panel col-span-12 lg:col-span-6">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">groups</span>
-        PERSONAS_DEMO
+        {tr.recommender.personas.title}
       </h3>
       <div className="space-y-2">
         {personas.map((p) => (
@@ -138,7 +139,7 @@ function PersonaSummary({ personas, onApply }) {
             <div>
               <div className="text-[0.7rem] font-headline uppercase text-[#00FF41] font-bold">{p.persona}</div>
               <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/40">
-                {p.history.length} ítems · diversidad intra-list {p.diversity.toFixed(2)}
+                {tr.recommender.personaItems(p.history.length, p.diversity.toFixed(2))}
               </div>
             </div>
             <button
@@ -161,14 +162,14 @@ function SimilarityBars({ recs }) {
     <div className="viz-panel col-span-12 lg:col-span-6">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">leaderboard</span>
-        RANKING_SIMILARIDAD
+        {tr.recommender.similarity.title}
       </h3>
       <ResponsiveContainer width="100%" height={Math.max(180, data.length * 38)}>
         <BarChart data={data} layout="vertical" margin={{ left: 80, right: 20, top: 5, bottom: 5 }}>
           <XAxis type="number" domain={[0, 1]} tick={{ fill: DIM, fontSize: 10 }} axisLine={{ stroke: DIM }} />
           <YAxis type="category" dataKey="name" tick={{ fill: GREEN, fontSize: 9, fontFamily: "Space Grotesk" }} width={75} axisLine={false} tickLine={false} />
           <Tooltip content={<CrtTooltip />} cursor={{ fill: "rgba(0,255,65,0.05)" }} />
-          <Bar dataKey="sim" name="Similarity" radius={[0, 4, 4, 0]}>
+          <Bar dataKey="sim" name={tr.recommender.similarity.label} radius={[0, 4, 4, 0]}>
             {data.map((d, i) => (
               <Cell key={i} fill={CATEGORY_COLOR[d.cat] || GREEN} fillOpacity={0.7} />
             ))}
@@ -202,7 +203,7 @@ function ExplainPanel({ profile, item, vocab, breakdown }) {
   return (
     <div className="border border-[#00FF41]/15 rounded p-3 bg-black/20 mt-3">
       <div className="text-[0.6rem] font-headline uppercase text-[#00FF41]/60 mb-2">
-        ¿Por qué? (descomposición de la similaridad)
+        {tr.recommender.explain.title}
       </div>
       <div className="flex gap-1 mb-2 h-2 rounded overflow-hidden bg-[#00FF41]/5">
         <div style={{ width: `${(tfidfContrib.reduce((a, b) => a + b, 0) / total) * 100}%`, background: GREEN, opacity: 0.65 }} />
@@ -210,9 +211,9 @@ function ExplainPanel({ profile, item, vocab, breakdown }) {
         <div style={{ width: `${(numContrib / total) * 100}%`, background: "#FFD700", opacity: 0.65 }} />
       </div>
       <div className="flex flex-wrap gap-3 text-[0.55rem] font-headline uppercase">
-        <span className="text-[#00FF41]">■ TF-IDF</span>
-        <span className="text-[#00BFFF]">■ Categoría</span>
-        <span className="text-[#FFD700]">■ Precio/Rating</span>
+        <span className="text-[#00FF41]">■ {tr.recommender.explain.tfidf}</span>
+        <span className="text-[#00BFFF]">■ {tr.recommender.explain.category}</span>
+        <span className="text-[#FFD700]">■ {tr.recommender.explain.priceRating}</span>
       </div>
       {topTerms.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-1.5">
@@ -276,7 +277,7 @@ export default function ModelosRecomendacion() {
   if (error) {
     return (
       <div className="flex items-center justify-center h-full text-[#FF4136] font-headline text-sm uppercase">
-        ERROR_LOADING_RECOMMENDATION_MODEL: {error}
+        {tr.recommender.error}: {error}
       </div>
     );
   }
@@ -284,7 +285,7 @@ export default function ModelosRecomendacion() {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-[#00FF41] font-headline text-sm uppercase flicker">
-          CARGANDO_CATÁLOGO<span className="cursor-blink">_</span>
+          {tr.recommender.loadingCatalog}<span className="cursor-blink">_</span>
         </div>
       </div>
     );
@@ -301,52 +302,43 @@ export default function ModelosRecomendacion() {
     <div className="w-full h-full overflow-y-auto scrollbar-hide p-3 sm:p-6">
       <div className="mb-6">
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
-          PRODUCT_RECOMMENDATION_ENGINE
+          {tr.recommender.title}
         </h2>
         <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
-          Content-Based · TF-IDF + categoría + precio/rating · MMR re-ranking
+          {tr.recommender.subtitle}
         </p>
         <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
-          Catálogo: {data.catalog.length} productos · {data.categories.length} categorías · feature dim {data.featureMatrix[0].length} · cobertura demo {(data.metrics.catalogCoverage * 100).toFixed(0)}%
+          {tr.recommender.stats(data.catalog.length, data.categories.length, data.featureMatrix[0].length, (data.metrics.catalogCoverage * 100).toFixed(0))}
         </p>
       </div>
 
       <div className="viz-panel col-span-12 mb-4">
         <h3 className="viz-title">
           <span className="material-symbols-outlined text-sm mr-2">help</span>
-          ¿QUÉ HACE ESTE MODELO?
+          {tr.recommender.explainer.title}
         </h3>
         <div className="text-[0.7rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2">
           <p>
-            <span className="text-[#00FF41] font-bold">PROBLEMA:</span> Un e-commerce con 32 productos quiere sugerir
-            artículos parecidos a los que le gustan a cada usuario, sin obligarle a buscar.
+            <span className="text-[#00FF41] font-bold">{tr.recommender.explainer.problemLabel}</span>{" "}
+            {tr.recommender.explainer.problem}
           </p>
           <p>
-            <span className="text-[#00FF41] font-bold">SOLUCIÓN:</span> cada producto se convierte en un vector numérico
-            (descripción → TF-IDF, categoría → one-hot, precio y rating → escalados). El "perfil" del usuario es la media
-            de los vectores de los productos que ha marcado. Las recomendaciones son los productos más cercanos a ese
-            perfil por <span className="text-[#00FF41]">cosine similarity</span>, con un re-rank
-            <span className="text-[#00FF41]"> MMR</span> que evita devolver 6 ítems casi idénticos.
+            <span className="text-[#00FF41] font-bold">{tr.recommender.explainer.solutionLabel}</span>{" "}
+            {tr.recommender.explainer.solution}
           </p>
           <p>
-            <span className="text-[#00FF41] font-bold">CÓMO PROBARLO:</span> haz click en productos del catálogo (o pulsa
-            <span className="text-[#00FF41]"> "cargar"</span> en una persona del panel inferior). El listado de la derecha
-            recalcula las recomendaciones al instante, en el navegador. Activa/desactiva
-            <span className="text-[#00FF41]"> MMR diversity</span> para ver cómo cambia la diversidad del resultado, mueve
-            <span className="text-[#00FF41]"> top_N</span>, y haz click en una recomendación para ver
-            <span className="text-[#00FF41]"> por qué</span> se ha elegido (qué términos TF-IDF y qué peso de categoría/precio).
+            <span className="text-[#00FF41] font-bold">{tr.recommender.explainer.tryItLabel}</span>{" "}
+            {tr.recommender.explainer.tryIt}
           </p>
         </div>
         <details className="mt-3">
           <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/50 cursor-pointer hover:text-[#00FF41]">
-            ▸ ver detalle técnico (pipeline ML)
+            {tr.recommender.explainer.detailsSummary}
           </summary>
           <div className="text-[0.6rem] text-[#00FF41]/50 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
-            <p>1. Feature engineering por ítem: TF-IDF (1-2 grams, stop-words EN, max 120) + OHE categoría · 0.6 + MinMax(precio, rating) · 0.4</p>
-            <p>2. Perfil de usuario u = mean(v_i) sobre los items seleccionados</p>
-            <p>3. score(i) = cosine_similarity(u, v_i) para cada item no visto</p>
-            <p>4. MMR re-ranking (λ=0.7): argmax_i [λ·score(i) − (1−λ)·max sim(i, j) con j∈S]</p>
-            <p>5. Inferencia client-side: la matriz de features se exporta a JSON y todo el cómputo se hace en JS</p>
+            {tr.recommender.explainer.steps.map((step) => (
+              <p key={step}>{step}</p>
+            ))}
           </div>
         </details>
       </div>
@@ -355,7 +347,7 @@ export default function ModelosRecomendacion() {
       <div className="viz-panel col-span-12 mb-4">
         <div className="flex flex-wrap items-center gap-3">
           <div className="text-[0.65rem] font-headline uppercase text-[#00FF41]/70">
-            Seleccionados: <span className="text-[#00FF41] font-bold">{selected.size}</span>
+            {tr.recommender.selectedCount} <span className="text-[#00FF41] font-bold">{selected.size}</span>
           </div>
           <button
             onClick={clearAll}
@@ -385,7 +377,7 @@ export default function ModelosRecomendacion() {
         <div className="viz-panel col-span-12 lg:col-span-7">
           <h3 className="viz-title">
             <span className="material-symbols-outlined text-sm mr-2">grid_view</span>
-            CATÁLOGO ({data.catalog.length})
+            {tr.recommender.catalog(data.catalog.length)}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[520px] overflow-y-auto scrollbar-hide pr-1">
             {data.catalog.map((p) => (
@@ -403,11 +395,11 @@ export default function ModelosRecomendacion() {
         <div className="viz-panel col-span-12 lg:col-span-5">
           <h3 className="viz-title">
             <span className="material-symbols-outlined text-sm mr-2">recommend</span>
-            RECOMENDACIONES (top-{topN})
+            {tr.recommender.recommendations(topN)}
           </h3>
           {selected.size === 0 && (
             <div className="text-[0.7rem] font-headline uppercase text-[#00FF41]/40 py-8 text-center">
-              selecciona algún producto del catálogo
+              {tr.recommender.emptySelection}
             </div>
           )}
           {recommendations && recommendations.length > 0 && (
@@ -442,7 +434,7 @@ export default function ModelosRecomendacion() {
       </div>
 
       <p className="text-[0.55rem] text-[#00FF41]/25 font-headline mt-4 uppercase">
-        Click en una recomendación para ver la descomposición de su similaridad (TF-IDF términos, categoría, precio/rating)
+        {tr.recommender.explainCaption}
       </p>
 
       <div className="h-8" />

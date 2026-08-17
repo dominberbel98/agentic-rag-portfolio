@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
+import { t as tr } from "../i18n/en";
 
 const API_URL =
   import.meta.env.VITE_API_URL ||
@@ -128,7 +129,7 @@ export default function Chat() {
         const updated = [...prev];
         updated[assistantIdx] = {
           role: "assistant",
-          text: updated[assistantIdx]?.text || "No se pudo conectar con el backend.",
+          text: updated[assistantIdx]?.text || tr.chat.connectionError,
           meta: String(error),
         };
         return updated;
@@ -141,9 +142,9 @@ export default function Chat() {
   const sendContact = (event) => {
     event.preventDefault();
     const to = contactEmails.join(",");
-    const subject = encodeURIComponent(`Contacto recruiter - ${contactData.name}`);
+    const subject = encodeURIComponent(tr.chat.contact.subject(contactData.name));
     const body = encodeURIComponent(
-      `Nombre: ${contactData.name}\nEmail: ${contactData.email}\n\nMensaje:\n${contactData.message}`
+      tr.chat.contact.body(contactData.name, contactData.email, contactData.message)
     );
     window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
   };
@@ -165,11 +166,11 @@ export default function Chat() {
           <div className="w-2.5 h-2.5 rounded-full bg-secondary-dim shadow-[0_0_5px_rgba(252,175,0,0.5)]" />
           <div className="w-2.5 h-2.5 rounded-full bg-primary-dim shadow-[0_0_5px_rgba(0,252,64,0.5)]" />
           <span className="ml-2 sm:ml-4 font-headline text-[0.58rem] sm:text-[0.7rem] uppercase tracking-wider sm:tracking-widest text-on-surface-variant truncate max-w-[170px] sm:max-w-none">
-            terminal — zsh — jupyter-kernel
+            {tr.chat.windowTitle}
           </span>
         </div>
         <div className={`hidden sm:block text-primary-dim font-headline text-[0.7rem] tracking-tighter ${loading ? "flicker" : ""}`}>
-          KERNEL: {loading ? "BUSY (PYTHON 3.11)" : "IDLE (PYTHON 3.11)"}
+          {loading ? tr.chat.kernelBusy : tr.chat.kernelIdle}
         </div>
       </div>
 
@@ -180,9 +181,9 @@ export default function Chat() {
       >
         {/* Boot log */}
         <div className="space-y-1 hidden sm:block">
-          <div className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">[0.00104] IMPORTING PANDAS AS PD...</div>
-          <div className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">[0.00255] LOADING PRETRAINED_MODELS/BERBEL_CV.PKL...</div>
-          <div className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">[0.00389] INITIALIZING INFERENCE ENGINE...</div>
+          {tr.chat.boot.map((line) => (
+            <div key={line} className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">{line}</div>
+          ))}
         </div>
 
         {/* Initial greeting — visible when no messages yet */}
@@ -190,7 +191,7 @@ export default function Chat() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2 text-tertiary">
               <span className="material-symbols-outlined text-sm">psychology</span>
-              <span className="text-[0.65rem] font-bold tracking-widest">DS_ASSISTANT</span>
+              <span className="text-[0.65rem] font-bold tracking-widest">{tr.chat.assistant}</span>
             </div>
             <div className="bg-surface-container px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-primary/30 max-w-[95%] sm:max-w-[90%]">
               <p className="text-on-surface leading-relaxed crt-glow">
@@ -211,7 +212,7 @@ export default function Chat() {
             <div key={idx} className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-tertiary">
                 <span className="material-symbols-outlined text-sm">psychology</span>
-                <span className="text-[0.65rem] font-bold tracking-widest">DS_ASSISTANT</span>
+                <span className="text-[0.65rem] font-bold tracking-widest">{tr.chat.assistant}</span>
               </div>
               <div className="bg-surface-container px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-primary/30 max-w-[95%] sm:max-w-[90%]">
                 <p className="text-on-surface leading-relaxed crt-glow whitespace-pre-wrap">
@@ -228,7 +229,7 @@ export default function Chat() {
           ) : (
             <div key={idx} className="flex flex-col gap-2 items-end">
               <div className="flex items-center gap-2 text-secondary">
-                <span className="text-[0.65rem] font-bold tracking-widest">USER_INPUT</span>
+                <span className="text-[0.65rem] font-bold tracking-widest">{tr.chat.userInput}</span>
                 <span className="material-symbols-outlined text-sm">person</span>
               </div>
               <div className="bg-surface-container-high px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-secondary/40 max-w-[95%] sm:max-w-[90%]">
@@ -242,7 +243,7 @@ export default function Chat() {
         {loading && messages[messages.length - 1]?.role !== "assistant" && (
           <div className="flex items-center gap-2 text-primary/60">
             <span className="material-symbols-outlined text-sm flicker">pending</span>
-            <span className="text-[0.65rem] font-bold tracking-widest flicker">PROCESSING...</span>
+            <span className="text-[0.65rem] font-bold tracking-widest flicker">{tr.chat.processing}</span>
           </div>
         )}
       </div>
@@ -262,7 +263,7 @@ export default function Chat() {
             onKeyDown={handleComposerKeyDown}
             disabled={loading}
             className="flex-1 bg-transparent border-none focus:ring-0 text-primary-dim font-headline text-base sm:text-lg placeholder:text-primary-dim/20 outline-none disabled:opacity-50"
-            placeholder="ASK ABOUT MODELS, TOOLS, OR EXPERIENCE..."
+            placeholder={tr.chat.placeholder}
             type="text"
           />
           <button
@@ -270,7 +271,7 @@ export default function Chat() {
             disabled={loading || !question.trim()}
             className="px-3 py-2 text-[0.65rem] sm:text-xs font-headline uppercase tracking-widest border border-[#00FF41]/35 text-primary bg-[#00FF41]/5 hover:bg-[#00FF41]/10 disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Send
+            {tr.chat.send}
           </button>
         </div>
         {TURNSTILE_SITE_KEY ? <div ref={turnstileRef} className="captcha-slot mt-3" /> : null}
@@ -283,7 +284,7 @@ export default function Chat() {
           className="p-3 sm:p-6 bg-surface-container border-t border-[#00FF41]/10 space-y-3 shrink-0"
         >
           <p className="text-[0.65rem] font-bold tracking-widest text-tertiary uppercase">
-            — Contacto directo
+            {tr.chat.contact.heading}
           </p>
           {contactLinkedin && (
             <a
@@ -292,13 +293,13 @@ export default function Chat() {
               rel="noreferrer"
               className="block text-primary text-sm underline"
             >
-              Ver perfil de LinkedIn
+              {tr.chat.contact.viewLinkedin}
             </a>
           )}
           <input
             value={contactData.name}
             onChange={(e) => setContactData((p) => ({ ...p, name: e.target.value }))}
-            placeholder="Tu nombre"
+            placeholder={tr.chat.contact.name}
             required
             className="w-full bg-surface-container-high border border-[#00FF41]/20 text-on-surface px-4 py-2 text-sm font-headline placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50"
           />
@@ -306,14 +307,14 @@ export default function Chat() {
             type="email"
             value={contactData.email}
             onChange={(e) => setContactData((p) => ({ ...p, email: e.target.value }))}
-            placeholder="Tu email"
+            placeholder={tr.chat.contact.email}
             required
             className="w-full bg-surface-container-high border border-[#00FF41]/20 text-on-surface px-4 py-2 text-sm font-headline placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50"
           />
           <textarea
             value={contactData.message}
             onChange={(e) => setContactData((p) => ({ ...p, message: e.target.value }))}
-            placeholder="Cuéntame brevemente la oportunidad o necesidad"
+            placeholder={tr.chat.contact.message}
             rows={3}
             required
             className="w-full bg-surface-container-high border border-[#00FF41]/20 text-on-surface px-4 py-2 text-sm font-headline placeholder:text-on-surface-variant/40 outline-none focus:border-primary/50 resize-none"
@@ -322,7 +323,7 @@ export default function Chat() {
             type="submit"
             className="w-full border border-[#00FF41]/40 bg-[#00FF41]/5 text-primary font-headline text-sm uppercase tracking-widest py-2 hover:bg-[#00FF41]/10 transition-colors"
           >
-            Enviar contacto
+            {tr.chat.contact.submit}
           </button>
         </form>
       )}
