@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "name": "Domingo Berbel",
+    "headline": "Data Scientist — applied AI and generative AI with a business focus",
+    "location": "Madrid, Spain",
+    "linkedin": "https://www.linkedin.com/in/domingo-berbel",
+    "github": "https://github.com/dominberbel98"
+  },
+  "certifications": [
+    {
+      "id": "snowflake-snowpro",
+      "title": "SnowPro Associate: Platform",
+      "issuer": "Snowflake",
+      "date": "Oct 2025",
+      "expires": "Oct 2027",
+      "image": "/certs/snowflake-snowpro.png",
+      "skills": [
+        "Snowflake",
+        "Data Warehousing",
+        "Cloud",
+        "SQL"
+      ]
+    },
+    {
+      "id": "databricks-fundamentals",
+      "title": "Databricks Fundamentals Accreditation",
+      "issuer": "Databricks Academy",
+      "date": "Nov 2025",
+      "expires": null,
+      "image": "/certs/databricks-fundamentals.png",
+      "skills": [
+        "Databricks",
+        "Apache Spark",
+        "Lakehouse",
+        "Delta Lake"
+      ]
+    },
+    {
+      "id": "databricks-genai",
+      "title": "Generative AI Fundamentals",
+      "issuer": "Databricks Academy",
+      "date": "May 2025",
+      "expires": "May 2027",
+      "image": "/certs/databricks-genai-fundamentals.png",
+      "skills": [
+        "GenAI",
+        "LLMs",
+        "RAG",
+        "Prompt Engineering"
+      ]
+    },
+    {
+      "id": "kaggle-advanced-sql",
+      "title": "Advanced SQL",
+      "issuer": "Kaggle",
+      "date": "Aug 2025",
+      "expires": null,
+      "image": "/certs/kaggle-advanced-sql.png",
+      "skills": [
+        "SQL",
+        "Window Functions",
+        "CTEs",
+        "Analytics"
+      ]
+    },
+    {
+      "id": "ibm-data-analysis-python",
+      "title": "Data Analysis Using Python",
+      "issuer": "IBM Skills Network",
+      "date": "2025",
+      "expires": null,
+      "image": "/certs/ibm-data-analysis-python.png",
+      "skills": [
+        "Python",
+        "pandas",
+        "NumPy",
+        "scikit-learn"
+      ]
+    },
+    {
+      "id": "linkedin-powerbi",
+      "title": "Power BI Avanzado",
+      "issuer": "LinkedIn Learning",
+      "date": "May 2024",
+      "expires": null,
+      "image": "/certs/linkedin-powerbi-avanzado.png",
+      "skills": [
+        "Power BI",
+        "DAX",
+        "Data Modeling",
+        "Dashboards"
+      ]
+    }
+  ],
+  "skills": {
+    "programming": [
+      "Python",
+      "SQL",
+      "R",
+      "Bash"
+    ],
+    "data": [
+      "pandas",
+      "NumPy",
+      "PySpark",
+      "Apache Spark",
+      "Databricks",
+      "Snowflake",
+      "Delta Lake",
+      "Lakehouse",
+      "ETL pipelines",
+      "Data Warehousing",
+      "Window Functions",
+      "CTEs",
+      "Analytics",
+      "SQLite"
+    ],
+    "cloud": [
+      "Azure",
+      "Azure Container Apps",
+      "Azure Static Web Apps",
+      "Azure CLI",
+      "Docker",
+      "Docker Compose",
+      "Git",
+      "GitHub Actions",
+      "Linux",
+      "Nginx"
+    ],
+    "ml": [
+      "scikit-learn",
+      "TensorFlow",
+      "XGBoost",
+      "deep learning",
+      "neural networks",
+      "Monte Carlo simulation",
+      "RAG",
+      "LLMs",
+      "GenAI",
+      "Prompt Engineering",
+      "embeddings",
+      "FAISS",
+      "BM25",
+      "OCR",
+      "AI agents",
+      "OpenAI API",
+      "Google Gemini"
+    ],
+    "bi": [
+      "Power BI",
+      "DAX",
+      "Data Modeling",
+      "Dashboards",
+      "data visualisation"
+    ],
+    "web": [
+      "FastAPI",
+      "Pydantic",
+      "Uvicorn",
+      "httpx",
+      "React",
+      "Vite",
+      "Recharts",
+      "Tailwind CSS",
+      "Server-Sent Events"
+    ]
+  },
+  "languages": [
+    {
+      "language": "Spanish",
+      "level": "Native"
+    },
+    {
+      "language": "English",
+      "level": "Professional working proficiency"
+    }
+  ]
+}

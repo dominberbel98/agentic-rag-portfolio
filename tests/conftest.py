@@ -94,3 +94,24 @@ _MINIMAL = {
 def minimal_profile() -> dict:
     """A schema-valid profile, deep-copied so tests can mutate it freely."""
     return copy.deepcopy(_MINIMAL)
+
+
+@pytest.fixture
+def small_profile(minimal_profile):
+    """The minimal profile, validated. Fast: no file I/O."""
+    from backend.app.profile_schema import Profile
+
+    return Profile.from_mapping(minimal_profile)
+
+
+@pytest.fixture(scope="session")
+def real_profile(repo_root):
+    """The actual authored profile. Session-scoped — parsing it is not free."""
+    from backend.app.profile_schema import load_profile
+
+    return load_profile(repo_root / "data" / "profile.yml")
+
+
+@pytest.fixture
+def sample_role(small_profile):
+    return small_profile.roles[0]
