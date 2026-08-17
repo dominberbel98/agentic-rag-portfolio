@@ -191,12 +191,15 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
           anything here at any viewport width.
         */}
         {mascotVisible && (
-          <div className="mascot-dock shrink-0 border-t border-[#00FF41]/10 p-4">
-            <div className="flex items-start gap-2">
-              <span className="material-symbols-outlined text-[#00FF41] text-3xl mascot-bob drop-shadow-[0_0_8px_rgba(0,255,65,0.6)] shrink-0">
+          <div className="mascot-dock shrink-0 border-t border-[#00FF41]/10 px-4 py-3 overflow-y-auto scrollbar-hide">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-[#00FF41] text-2xl mascot-bob drop-shadow-[0_0_8px_rgba(0,255,65,0.6)] shrink-0">
                 smart_toy
               </span>
-              <span className="mascot-antenna h-1.5 w-1.5 bg-[#00FF41] rounded-full mt-1 shrink-0" />
+              <span className="mascot-antenna h-1.5 w-1.5 bg-[#00FF41] rounded-full shrink-0" />
+              <span className="text-[#00FF41] text-[0.7rem] font-bold tracking-wide normal-case">
+                {tr.app.mascotTitle}
+              </span>
               <button
                 type="button"
                 onClick={() => setMascotVisible(false)}
@@ -207,9 +210,23 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
                 ✕
               </button>
             </div>
-            <p className="mt-2 text-[#00FF41]/75 text-[0.65rem] font-headline uppercase leading-snug normal-case">
-              {tr.app.mascot}
+
+            <p className="mt-2 text-[#00FF41]/75 text-[0.63rem] leading-snug normal-case">
+              {tr.app.mascotLead}
             </p>
+
+            <dl className="mt-2.5 space-y-1.5">
+              {tr.app.mascotSections.map((section) => (
+                <div key={section.label}>
+                  <dt className="text-[#00FF41]/90 text-[0.6rem] font-bold tracking-wide">
+                    {section.label}
+                  </dt>
+                  <dd className="text-[#00FF41]/65 text-[0.6rem] leading-snug normal-case">
+                    {section.text}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         )}
       </aside>

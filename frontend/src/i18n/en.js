@@ -18,9 +18,30 @@ export const t = {
     workspace: "DS_WORKSPACE",
     session: "SESSION: DATA_EXPLORER",
     menuLabel: "Menu",
-    // Kept short: the sidebar column is 256px wide.
-    mascot:
-      "Ask the assistant anything about my work — or explore the La Liga dashboard, the models and my certifications.",
+    /*
+      What the site is, for someone who just landed on it.
+      Structured rather than one paragraph: the sidebar column is 256px wide, and
+      a labelled list survives that width where prose does not. The point it has
+      to land is that these are working models, not screenshots — a visitor who
+      assumes the charts are static images never clicks them.
+    */
+    mascotTitle: "What is this?",
+    mascotLead:
+      "A CV you can interrogate. The assistant searches my real career documents and answers from them — actual dates, grades, employers and tech, with nothing invented.",
+    mascotSections: [
+      {
+        label: "Visualisations",
+        text: "The live La Liga table, rebuilt every 30 minutes by a PySpark job on a schedule.",
+      },
+      {
+        label: "Models",
+        text: "Three that run in your browser: a season forecast, a credit scorecard and a product recommender. Move the inputs and watch them respond.",
+      },
+      {
+        label: "Certifications",
+        text: "The verified ones, with what each covers.",
+      },
+    ],
     mascotDismiss: "Dismiss",
   },
 
