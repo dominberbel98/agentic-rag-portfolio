@@ -73,7 +73,15 @@ on 20 rows whose feature vectors are nearly all zeros; and the Monte Carlo
 falling back to `max(gfPerGame, 0.3)`, which makes unplayed teams identical and
 the simulated champion arbitrary.
 
-Proposed fix — **shrinkage toward a prior**. Blend the current-season rate with a
+Implemented — **shrinkage toward a prior**, with k=5. Measured on the same
+matchday-one data: Alavés from 114.0 to 62.5 projected points, Real Madrid from
+0.0 to 52.2, the spread from 0-114 down to 43.5-62.5, and the title probability
+spread across the field instead of split between the two clubs that kicked off
+first.
+
+Original proposal follows.
+
+**Shrinkage toward a prior**. Blend the current-season rate with a
 prior, weighting the observed data by matches played:
 
 ```

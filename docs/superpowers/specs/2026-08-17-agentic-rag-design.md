@@ -86,8 +86,18 @@ The owner's constraint is that logging and Azure keep working:
 
 ### Retrieval
 
-Hybrid stays — vector plus BM25 fused with RRF — but now over ~50 entity
-documents with `top_k` in the 5-8 range, where fusion actually discriminates.
+Hybrid stays — vector plus BM25 — but now over 32 entity documents with `top_k`
+in the 5-8 range, where the ranking actually discriminates.
+
+**Amended during implementation: RRF was replaced.** Measured over 18 golden
+questions from the production logs, Reciprocal Rank Fusion was worse than not
+fusing at all — 13/18 recall@6 at 0.562 MRR against dense-alone's 18/18 at 0.659.
+RRF discards score magnitude and keeps only rank, so a decisive dense win
+(0.731 against a 0.695 runner-up) became "rank 1 versus rank 2" and weak keyword
+noise displaced it entirely. Normalised weighted score fusion scores 18/18 at
+0.696, beating dense alone. Two further defects surfaced in the same measurement:
+BM25 ran without stopword removal, and the subject's own name matched every
+document in his own corpus, making the lexical ranking arbitrary.
 
 `search_profile` accepts an optional `category` filter (`role`, `project`,
 `education`, `certification`, `narrative`), which replaces hand-written query
@@ -130,7 +140,11 @@ The hallucination is a design requirement, not a tuning problem. Two mechanisms:
    retrieved documents must not be named, and that the correct response to a gap
    is to say the profile does not cover it.
 2. **A post-generation check**, implemented as a closed-vocabulary test rather
-   than open-ended NLI. Block A already knows every technology, employer,
+   than open-ended NLI, and **language-aware** (added during implementation:
+   the corpus is English and answers are not, so a Spanish answer flagged ten
+   translated terms and forced a regeneration on every Spanish question;
+   technology names do not translate, which is the class that matters, so
+   multiword phrases are skipped for non-English). Block A already knows every technology, employer,
    institution and credential in the profile, because they are structured fields
    in `profile.yml`. The generator emits that set as a vocabulary file. After
    generation, `grounding.py` extracts candidate entity tokens from the answer —

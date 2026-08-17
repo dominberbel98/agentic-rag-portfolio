@@ -57,9 +57,13 @@ otherwise the config and the code keep disagreeing about the architecture.
 neither matches production. They should describe the real shape after the
 cleanup.
 
-**Document the secret convention** in `DEPLOYMENT.md` so future deploys do not
-reintroduce plaintext values. `scripts/deploy_azure.sh` must be checked for
-`--set-env-vars` calls that would overwrite a `secretRef` with a literal.
+**Done.** `scripts/deploy_azure.sh` did exactly that — it passed
+`OPENAI_API_KEY`, `GOOGLE_API_KEY` and `ADMIN_READ_KEY` to `--set-env-vars` as
+plaintext literals, so running it would have silently undone this migration. It
+now sets them as secrets and references them with `secretref:`, and asserts
+afterwards that no variable whose name contains KEY or SECRET carries a plain
+value. The dead `AZURE_OPENAI_*` and `AZURE_SEARCH_*` variables and the two
+orphaned secrets were removed from the Container App.
 
 ## Verification
 
