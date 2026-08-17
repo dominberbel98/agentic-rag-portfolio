@@ -1,0 +1,761 @@
+# Single source of truth for Domingo Berbel's professional profile.
+#
+# Everything downstream is GENERATED from this file — do not edit the outputs:
+#   data/kb/*.md                        RAG corpus (one document per entity)
+#   data/kb/vocabulary.json             groundedness vocabulary
+#   frontend/public/data/profile.json   certifications + skills for the UI
+#
+# Regenerate with:  python scripts/build_kb.py
+# Validate only:    python scripts/build_kb.py --check
+#
+# Authored in English. The assistant answers in whatever language it is asked in.
+#
+# Rules the schema enforces (backend/app/profile_schema.py):
+#   - every `id` is globally unique; they are retrieval addresses, keep them stable
+#   - exactly one role has `end: null`
+#   - every `stack:` entry must appear in `skills:` — a typo is a hard error
+
+meta:
+  name: Domingo Berbel
+  headline: Data Scientist — applied AI and generative AI with a business focus
+  location: Madrid, Spain
+  emails:
+    - info@domingoberbel.com
+    - dominberbel@gmail.com
+  linkedin: https://www.linkedin.com/in/domingo-berbel
+  github: https://github.com/dominberbel98
+
+# ── Professional experience ─────────────────────────────────────────────────
+# Most recent first.
+
+roles:
+  - id: data-equity
+    company: Data Equity
+    title: Data Scientist
+    location: Madrid, Spain
+    start: 2025-10
+    end: null
+    summary: >-
+      Builds and ships data science for international clients, spanning strategic
+      BI, customer scoring models and generative AI. Works across the full
+      lifecycle rather than handing models over a wall: ingestion, modelling,
+      deployment and the conversation with the business that decides what gets
+      built.
+    achievements:
+      - Develops strategic Power BI dashboards for international pharmaceutical
+        companies, covering the ETL connections as well as the visual layer.
+      - Builds customer scoring models with machine learning to target and
+        optimise digital marketing campaigns.
+      - Leads the implementation of generative AI solutions for the tourism
+        sector, including a RAG system for TUI that turns corporate knowledge
+        into answers the business can act on.
+      - Works on the orchestration and execution of AI agents for companies, and
+        on productionising models of all kinds.
+    stack:
+      - Python
+      - SQL
+      - PySpark
+      - Power BI
+      - DAX
+      - scikit-learn
+      - Azure
+      - RAG
+      - LLMs
+
+  - id: suministros-medina
+    company: Suministros Medina
+    title: International Sales Representative
+    location: Madrid, Spain
+    start: 2024-05
+    end: 2025-09
+    summary: >-
+      The role that consolidated a hybrid data-and-business profile. Ran
+      international sales, pricing, KPIs and the commercial pipeline for a leading
+      company in the beef sector, while independently driving several data science
+      projects that were not in the job description.
+    achievements:
+      - Built an automatic delivery-note classifier with OCR that extracts number
+        and date and files documents in seconds.
+      - Created Python and R visualisations to analyse the global meat market.
+      - Wrote a Python notebook to extract and clean export data — freezing
+        dates, batch numbers, slaughter dates — improving traceability and
+        regulatory compliance.
+      - Produced export sales documentation — traceability reports, CMR, sales
+        delivery notes, Intrastat — and handled customs procedures.
+      - Ran trade marketing activity including pricing actions and import
+        management with foreign suppliers.
+      - Coordinated international distributor relationships and managed the CRM
+        and sales pipeline end to end.
+      - Handled accounting and administration in the A3 Wolters Kluwer ERP, and
+        coordinated stock with the production team against sales needs.
+    stack:
+      - Python
+      - R
+      - SQL
+      - pandas
+      - OCR
+
+  - id: myes-sevilla
+    company: My English School Sevilla
+    title: Commercial and Academic Consultant
+    location: Seville, Spain
+    start: 2023-05
+    end: 2024-05
+    summary: >-
+      Managed service quality and customer success at a leading English-language
+      school, and ran B2C and B2B commercial activity, marketing and market
+      analysis to drive growth.
+    achievements:
+      - Together with the team, generated more than 50% of the school's total
+        revenue since MyES Sevilla opened its doors — achieved within this
+        single tenure.
+      - Managed customer service quality and customer success.
+      - Ran marketing actions and social media, and carried out market analysis.
+    stack: []
+
+  - id: lijar-council
+    company: Líjar Town Council
+    title: Marketing and Public Relations Specialist
+    location: Líjar, Almería, Spain
+    start: 2022-07
+    end: 2022-09
+    summary: >-
+      Institutional work on rural development and depopulation risk, running
+      awareness campaigns and building local economic partnerships.
+    achievements:
+      - Ran and directed social media awareness campaigns promoting local
+        attachment, belonging and civic participation.
+      - Partnered with local businesses and promoted sustainable tourism to
+        address depopulation risk and build alliances for local economic
+        development.
+    stack: []
+
+  - id: camara-comercio-almeria
+    company: Almería Chamber of Commerce
+    title: International Marketing Technician (internship)
+    location: Almería, Spain
+    start: 2022-04
+    end: 2022-06
+    summary: >-
+      Advised companies on their web presence with a specific focus on
+      international trade.
+    achievements:
+      - Advised on web design strategy, user experience optimisation and feature
+        integration to increase visibility and accessibility in international
+        markets.
+      - Applied e-commerce tooling knowledge and communication skills to deliver
+        practical solutions to companies' needs.
+    stack: []
+
+  - id: traineeland-berlin
+    company: TraineeLand
+    title: International Sales and Marketing Specialist (internship)
+    location: Berlin, Germany
+    start: 2022-02
+    end: 2022-04
+    summary: >-
+      International internship in Berlin covering sales and marketing, and his
+      first sustained period working in a fully English-speaking environment.
+    achievements: []
+    stack: []
+
+  - id: family-accounting-firm
+    company: Family accounting firm
+    title: Accounting and Grants Assistant
+    location: Almería, Spain
+    start: 2019
+    end: 2022-01
+    summary: >-
+      Worked across several periods in the family accounting practice, handling
+      bookkeeping, account management and grant administration.
+    achievements:
+      - Maintained accounting records, prepared financial reports and tracked
+        payments and collections.
+      - Managed grant documentation and accounts accurately and efficiently.
+      - Organised and administered financial data to guarantee compliance with
+        accounting, financial and reporting obligations.
+    stack: []
+
+# ── Education ───────────────────────────────────────────────────────────────
+
+education:
+  - id: master-ucm-data-science
+    institution: Universidad Complutense de Madrid
+    degree: Master's in Data Science, Big Data & Business Analytics
+    location: Madrid, Spain
+    start: 2024
+    end: 2025
+    grades:
+      - subject: Advanced Python
+        score: 10.0
+      - subject: Deep Learning
+        score: 9.75
+      - subject: Statistics
+        score: 9.5
+      - subject: Apache Spark
+        score: 9.2
+    honours:
+      - Top possible grade on the master's thesis, a neural-network tourism
+        recommender with generative AI support.
+      - Third place in the university's scholarship competition with that thesis.
+      - >-
+        Ranked 2,907 of more than 18,000 participants in DataDriven's
+        international "Pump it Up: Data Mining the Water Table" competition.
+    notes: >-
+      A demanding conversion master's taken as a deliberate career change into
+      data science, covering statistics, machine learning, deep learning and
+      distributed processing.
+
+  - id: master-us-international-business
+    institution: Universidad de Sevilla
+    degree: Official Master's in Strategic Management and International Business
+    location: Seville, Spain
+    start: 2022
+    end: 2023
+    grades: []
+    honours: []
+    notes: >-
+      Strategic and international business grounding that underpins the business
+      orientation he brings to data work.
+
+  - id: erasmus-comenius
+    institution: Comenius University Bratislava
+    degree: Erasmus exchange year
+    location: Bratislava, Slovakia
+    start: 2020
+    end: 2021
+    grades: []
+    honours: []
+    notes: >-
+      A full academic year abroad during the undergraduate degree, and a
+      formative period for both his English and his adaptability.
+
+  - id: degree-ual-marketing
+    institution: Universidad de Almería
+    degree: Bachelor's in Marketing and Market Research
+    location: Almería, Spain
+    start: 2016
+    end: 2021
+    grades:
+      - subject: Advanced Statistics
+        score: 10.0
+        distinction: Matrícula de Honor (highest distinction)
+      - subject: Market Research
+        score: 10.0
+        distinction: Matrícula de Honor (highest distinction)
+      - subject: Statistics
+        score: 9.2
+    honours:
+      - Matrícula de Honor in Advanced Statistics — the highest distinction
+        awarded in the Spanish system.
+      - Matrícula de Honor in Market Research.
+    notes: >-
+      The statistical foundation of the profile. The two highest distinctions
+      were both in quantitative subjects, which is what made the later move into
+      data science a continuation rather than a leap.
+
+  - id: foreign-trade-training
+    institution: Almería Chamber of Commerce
+    degree: Foreign trade training programme
+    location: Almería, Spain
+    start: 2019
+    end: 2019
+    grades: []
+    honours: []
+    notes: Completed.
+
+  - id: commercial-skills-english
+    institution: Commercial skills certification programme
+    degree: Commercial skills certification, delivered 100% in English
+    location: Spain
+    start: 2019
+    end: 2019
+    grades: []
+    honours: []
+    notes: Completed. Delivered entirely in English.
+
+# ── Projects ────────────────────────────────────────────────────────────────
+
+projects:
+  - id: portfolio-chatbot
+    name: Portfolio RAG assistant
+    year: 2026
+    summary: >-
+      This site, and the assistant answering in it. A web portfolio designed to
+      present a professional profile in a clearer, more useful and interactive
+      way than a static CV can.
+    problem: >-
+      A static CV forces every reader down the same path, when a recruiter, a
+      hiring manager and an engineer each want to know something different.
+      Information should adapt to whoever is asking.
+    approach: >-
+      A retrieval-augmented assistant over a structured profile. The knowledge
+      base is a single validated YAML file generated into one document per entity
+      — role, project, degree, certification — embedded with Google's
+      gemini-embedding-2 using the asymmetric query and document task types.
+      Retrieval is hybrid: dense cosine similarity combined with BM25 keyword
+      scores, each min-max normalised and then weighted, with the lexical half
+      deliberately kept light. That choice was measured rather than assumed —
+      Reciprocal Rank Fusion was tried first and scored worse on a golden set of
+      real questions taken from the site's own logs, because discarding score
+      magnitude let a weak keyword match displace a confident semantic one.
+      Generation runs on the OpenAI API. The model is given search tools
+      rather than a fixed context, so it decides what to look up and can search
+      again when the first pass is thin. A groundedness check compares named
+      entities in the answer against the profile vocabulary before the answer is
+      returned, so the assistant cannot attribute a technology he has never used.
+      React, Vite and Tailwind CSS on the frontend with a CRT/retro theme,
+      streaming answers over Server-Sent Events; Python 3.11 with FastAPI,
+      Pydantic and Uvicorn on the backend. Cloudflare Turnstile for CAPTCHA,
+      per-IP rate limiting, a daily token budget, pre-LLM content guardrails,
+      Nginx serving security headers (CSP, HSTS, X-Frame-Options), and
+      SQLite-backed question analytics with protected admin endpoints. Deployed
+      as a Docker container on Azure Container Apps behind a custom domain, with
+      the frontend on Azure Static Web Apps and secrets held as Container Apps
+      secrets rather than plain environment variables.
+    outcome: >-
+      Live and serving real traffic at domingoberbel.com. It demonstrates the
+      whole path from architecture to production rather than a notebook: the
+      same person chose the retrieval strategy, wrote the guardrails, and owns
+      the deployment.
+    stack:
+      - Python
+      - FastAPI
+      - Pydantic
+      - Uvicorn
+      - React
+      - Vite
+      - Tailwind CSS
+      - Server-Sent Events
+      - Docker
+      - Azure
+      - Azure Container Apps
+      - Azure Static Web Apps
+      - RAG
+      - LLMs
+      - OpenAI API
+      - Google Gemini
+      - embeddings
+      - BM25
+      - SQLite
+      - Nginx
+    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    live_url: https://domingoberbel.com
+
+  - id: tfm-tourism-recommender
+    name: Neural tourism recommender with generative AI
+    year: 2025
+    summary: >-
+      Master's thesis: a tourism recommendation system built on neural networks
+      with retrieval-augmented generative AI support.
+    problem: >-
+      Tourism recommendations need to combine behavioural signal with
+      unstructured destination knowledge, which a collaborative-filtering model
+      alone cannot use.
+    approach: >-
+      Neural network recommender combined with a RAG layer over destination
+      knowledge, including embedding generation and semantic indexing with FAISS.
+      Built collaboratively with other technical profiles, coordinating the
+      analytical work and the framing of business impact.
+    outcome: >-
+      Awarded the top possible grade, and took third place in the university's
+      scholarship competition.
+    stack:
+      - Python
+      - TensorFlow
+      - deep learning
+      - neural networks
+      - RAG
+      - embeddings
+      - FAISS
+    repo: null
+    live_url: null
+
+  - id: laliga-dashboard
+    name: La Liga live dashboard and predictive model
+    year: 2026
+    summary: >-
+      A live football analytics section of the portfolio: a PySpark pipeline that
+      pulls La Liga standings on a schedule, and a predictive model projecting
+      how the season ends.
+    problem: >-
+      Demonstrating a data pipeline needs something that actually moves. A static
+      dataset cannot show scheduling, incremental updates, or how a model behaves
+      when the data underneath it changes.
+    approach: >-
+      A PySpark transformation over the SportsRC API computing zone
+      classification, win/draw/loss rates and a deterministic league ranking on
+      the official tiebreak, orchestrated by GitHub Actions on a 30-minute cron
+      that commits the output and redeploys the frontend. On top of it, an
+      end-of-season projection combining a pace model, a Poisson Monte Carlo
+      simulation over the remaining fixtures, and an XGBoost classifier for zone
+      probabilities. Visualised with Recharts.
+    outcome: >-
+      Runs unattended and updates the live site every 30 minutes. The season
+      rollover exposed a real lesson worth keeping: at matchday one there is not
+      enough signal to extrapolate, so the projection shrinks toward a prior
+      rather than multiplying a single result by 38.
+    stack:
+      - Python
+      - PySpark
+      - Apache Spark
+      - XGBoost
+      - Monte Carlo simulation
+      - GitHub Actions
+      - React
+      - Recharts
+    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    live_url: https://domingoberbel.com
+
+  - id: credit-scoring
+    name: Credit scoring model
+    year: 2026
+    summary: >-
+      An interactive credit scoring model on the portfolio, with the full
+      evaluation surface exposed rather than just a score.
+    problem: >-
+      A scoring model is only trustworthy if you can see how it discriminates and
+      what drives it. Most demos show a number and hide the evidence.
+    approach: >-
+      Binary default/no-default classification over a calibrated synthetic
+      dataset of 5,000 applicants at roughly a 17% default rate. Features cover
+      income, employment history, on-time payment history, credit utilisation,
+      credit age, number of accounts, recent enquiries, derogatory marks,
+      loan-to-income, loan purpose and home ownership, preprocessed through a
+      ColumnTransformer with StandardScaler and OneHotEncoder. Two models are
+      trained side by side: logistic regression for interpretability and gradient
+      boosting for capacity, the latter calibrated with Platt scaling so the
+      probabilities mean something rather than only ranking correctly. Validation
+      is a stratified 75/25 split plus 5-fold stratified cross-validation, scored
+      on a held-out test set with AUC-ROC, GINI, the KS statistic, average
+      precision, F1 and the Brier score. Results are turned into a FICO-style PDO
+      scorecard on the 300-850 range with Poor to Exceptional bands, and driver
+      attribution uses model-agnostic permutation importance. For the live demo
+      the logistic coefficients and scaler parameters are exported to JSON and the
+      sigmoid is evaluated in the browser, so moving a slider recomputes the score
+      with no network round trip and no backend cost.
+    outcome: >-
+      Live on the site as an explorable model rather than a static chart, with its
+      discrimination, its calibration and its drivers all on screen.
+    stack:
+      - Python
+      - scikit-learn
+      - pandas
+      - NumPy
+      - React
+      - Recharts
+    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    live_url: https://domingoberbel.com
+
+  - id: product-recommender
+    name: Product recommendation engine
+    year: 2026
+    summary: >-
+      A content-based product recommender on the portfolio, with demo personas
+      and a visible similarity ranking.
+    problem: >-
+      Recommenders are usually presented as a black box. The interesting part is
+      why a given item ranked where it did.
+    approach: >-
+      Content-based recommendation over a catalogue of 32 products across four
+      categories. Each product is vectorised by combining TF-IDF over its
+      description (1-2 grams, 120 features, English stop-words) with a one-hot
+      category encoding and MinMax-scaled price and rating. A user profile is the
+      mean of the vectors of the products they picked, and the score is cosine
+      similarity against every product. The top-N is then re-ranked with Maximal
+      Marginal Relevance at lambda 0.7, so the list balances relevance against
+      diversity instead of returning six near-identical items. Quality is measured
+      with intra-list diversity and catalogue coverage across four demo personas.
+      As with the scoring model, inference runs client-side: the feature matrix,
+      TF-IDF vocabulary and catalogue metadata are exported to JSON and the
+      similarity, mean vector and MMR re-ranking are implemented in the browser.
+      That also makes it explainable — selecting a recommendation decomposes the
+      similarity into the TF-IDF terms, category and price/rating contributions
+      that produced it.
+    outcome: >-
+      Live on the site, with the ranking, its similarity scores and the terms
+      responsible for each recommendation all visible.
+    stack:
+      - Python
+      - scikit-learn
+      - NumPy
+      - TF-IDF
+      - React
+      - Recharts
+    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    live_url: https://domingoberbel.com
+
+  - id: ocr-suministros
+    name: OCR delivery-note classifier
+    year: 2025
+    summary: >-
+      Automatic classifier that reads delivery notes with OCR, extracts the
+      number and date, and files the documents in seconds.
+    problem: >-
+      Delivery notes and logistics paperwork arrived as scans and were filed by
+      hand, which was slow and made traceability unreliable.
+    approach: >-
+      OCR extraction with automatic classification, turning scanned documents
+      into structured, searchable records.
+    outcome: >-
+      Reduced filing of logistics documentation from a manual task to seconds,
+      improving traceability of the underlying paperwork.
+    stack:
+      - Python
+      - OCR
+    repo: https://github.com/dominberbel98/OCR_suministros
+    live_url: null
+
+  - id: global-meat-market-analysis
+    name: Global meat market visualisation
+    year: 2025
+    summary: >-
+      Python and R visualisations used to carry out market research on the global
+      meat market, with a focus on beef.
+    problem: >-
+      Commercial decisions on pricing and export targets needed a view of the
+      global market that the company did not have.
+    approach: >-
+      Data preparation and advanced visualisation in Python and R to compare
+      markets and surface the patterns relevant to export strategy.
+    outcome: >-
+      Used as the analytical basis for real market research in the beef sector.
+    stack:
+      - Python
+      - R
+      - pandas
+      - data visualisation
+    repo: https://github.com/dominberbel98/visualizacion_vacuno
+    live_url: null
+
+  - id: export-batch-traceability
+    name: Export batch and traceability data pipeline
+    year: 2025
+    summary: >-
+      A Python notebook that extracts and cleans critical export data — freezing
+      dates, batch numbers, slaughter dates — from Excel sources.
+    problem: >-
+      Export traceability data was scattered across spreadsheets in inconsistent
+      formats, which put regulatory compliance at risk.
+    approach: >-
+      Extraction and cleaning in Python, grouping batches and dates into a
+      consistent structure suitable for compliance reporting.
+    outcome: >-
+      Improved traceability and regulatory compliance for export documentation.
+    stack:
+      - Python
+      - pandas
+    repo: https://github.com/dominberbel98/lotes_suministros
+    live_url: null
+
+# ── Certifications ──────────────────────────────────────────────────────────
+# Consumed by frontend/public/data/profile.json; `image` paths are relative to
+# frontend/public/.
+
+certifications:
+  - id: snowflake-snowpro
+    title: "SnowPro Associate: Platform"
+    issuer: Snowflake
+    date: 2025-10
+    expires: 2027-10
+    image: /certs/snowflake-snowpro.png
+    skills:
+      - Snowflake
+      - Data Warehousing
+      - Cloud
+      - SQL
+
+  - id: databricks-fundamentals
+    title: Databricks Fundamentals Accreditation
+    issuer: Databricks Academy
+    date: 2025-11
+    expires: null
+    image: /certs/databricks-fundamentals.png
+    skills:
+      - Databricks
+      - Apache Spark
+      - Lakehouse
+      - Delta Lake
+
+  - id: databricks-genai
+    title: Generative AI Fundamentals
+    issuer: Databricks Academy
+    date: 2025-05
+    expires: 2027-05
+    image: /certs/databricks-genai-fundamentals.png
+    skills:
+      - GenAI
+      - LLMs
+      - RAG
+      - Prompt Engineering
+
+  - id: kaggle-advanced-sql
+    title: Advanced SQL
+    issuer: Kaggle
+    date: 2025-08
+    expires: null
+    image: /certs/kaggle-advanced-sql.png
+    skills:
+      - SQL
+      - Window Functions
+      - CTEs
+      - Analytics
+
+  - id: ibm-data-analysis-python
+    title: Data Analysis Using Python
+    issuer: IBM Skills Network
+    date: 2025
+    expires: null
+    image: /certs/ibm-data-analysis-python.png
+    skills:
+      - Python
+      - pandas
+      - NumPy
+      - scikit-learn
+
+  - id: linkedin-powerbi
+    title: Power BI Avanzado
+    issuer: LinkedIn Learning
+    date: 2024-05
+    expires: null
+    image: /certs/linkedin-powerbi-avanzado.png
+    skills:
+      - Power BI
+      - DAX
+      - Data Modeling
+      - Dashboards
+
+# ── Skills ──────────────────────────────────────────────────────────────────
+# Every `stack:` entry above must appear here. The schema enforces it.
+
+skills:
+  programming:
+    - Python
+    - SQL
+    - R
+    - Bash
+  data:
+    - pandas
+    - NumPy
+    - PySpark
+    - Apache Spark
+    - Databricks
+    - Snowflake
+    - Delta Lake
+    - Lakehouse
+    - ETL pipelines
+    - Data Warehousing
+    - Window Functions
+    - CTEs
+    - Analytics
+    - SQLite
+  cloud:
+    - Azure
+    - Azure Container Apps
+    - Azure Static Web Apps
+    - Azure CLI
+    - Docker
+    - Docker Compose
+    - Git
+    - GitHub Actions
+    - Linux
+    - Nginx
+  ml:
+    - scikit-learn
+    - TensorFlow
+    - XGBoost
+    - deep learning
+    - neural networks
+    - Monte Carlo simulation
+    - RAG
+    - LLMs
+    - GenAI
+    - Prompt Engineering
+    - embeddings
+    - FAISS
+    - BM25
+    - TF-IDF
+    - OCR
+    - AI agents
+    - OpenAI API
+    - Google Gemini
+  bi:
+    - Power BI
+    - DAX
+    - Data Modeling
+    - Dashboards
+    - data visualisation
+  web:
+    - FastAPI
+    - Pydantic
+    - Uvicorn
+    - httpx
+    - React
+    - Vite
+    - Recharts
+    - Tailwind CSS
+    - Server-Sent Events
+
+# ── Spoken languages ────────────────────────────────────────────────────────
+
+languages:
+  - language: Spanish
+    level: Native
+    evidence: null
+  - language: English
+    level: Professional working proficiency
+    evidence: >-
+      Reinforced through international experience: an Erasmus year in Bratislava,
+      an internship in Berlin, a commercial skills certification delivered
+      entirely in English, and a year managing international sales and foreign
+      distributors.
+
+# ── Narrative ───────────────────────────────────────────────────────────────
+# Prose, deliberately. These answer the "what is he like to work with" questions
+# that structured fields cannot.
+
+narrative:
+  adaptability: >-
+    Domingo has lived independently since he was eighteen, studying and working
+    away from his family environment across several cities and countries: Almería,
+    Seville, Bratislava on an Erasmus programme, Berlin on an international
+    internship, and now Madrid. Moving continuously through different cultural and
+    professional contexts has built autonomy, maturity and the ability to
+    integrate quickly into a new team — reading its internal dynamics, adjusting
+    to different leadership styles, and contributing from a collaborative
+    position. He does not merely tolerate change; he has a demonstrated habit of
+    turning uncertainty into learning.
+
+  resilience: >-
+    His trajectory is a deliberate career change, not a drift. After starting out
+    in marketing, international sales and logistics, he moved into data science
+    through sustained effort rather than opportunism: a demanding master's
+    degree, a series of technical certifications, and advanced practical projects
+    in statistics, machine learning and deep learning. He acquired complex
+    competencies from scratch and established himself as a Data Scientist while
+    keeping a pragmatic, results-oriented approach. He changes direction when he
+    identifies a real opportunity for impact and development, not by inertia.
+
+  teamwork: >-
+    Teamwork is central to how he operates. The clearest example is the
+    neural-network tourism recommender with generative AI support that he built as
+    his master's thesis, working closely with other technical profiles —
+    coordinating effort, aligning objectives, and contributing to both the
+    analytical work and the framing of business impact. His ability to explain
+    complex ideas, listen, and build consensus was decisive to that project, which
+    earned the top grade and competitive academic recognition. Earlier, at MyES
+    Sevilla, he and his team generated more than half of the school's total revenue
+    since opening.
+
+  career_change: >-
+    What makes the profile unusual is that the business years were not wasted
+    time. Having sold, priced, negotiated and reported to stakeholders, he
+    understands what an organisation is actually trying to decide when it asks for
+    a model — and he can present the result to people who will never read the
+    code. He combines statistical rigour with commercial judgement, and works
+    across the full data lifecycle: ingestion, ETL pipeline design, cleaning and
+    transformation, statistical and machine learning modelling, validation,
+    deployment, and the communication of results to non-technical stakeholders.
+    His statistical grounding is what lets him design sound analyses and validate
+    models with judgement, instead of producing exploratory work with no bearing
+    on a decision.

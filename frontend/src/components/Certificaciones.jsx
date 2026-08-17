@@ -1,76 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { t as tr } from "../i18n/en";
 
-const CERTS = [
-  {
-    id: "snowflake",
-    title: "SnowPro Associate: Platform",
-    issuer: "Snowflake",
-    date: "Oct 2025",
-    expires: "Oct 2027",
-    image: "/certs/snowflake-snowpro.png",
-    skills: ["Snowflake", "Data Warehousing", "Cloud", "SQL"],
-  },
-  {
-    id: "databricks-fundamentals",
-    title: "Databricks Fundamentals Accreditation",
-    issuer: "Databricks Academy",
-    date: "Nov 2025",
-    image: "/certs/databricks-fundamentals.png",
-    skills: ["Databricks", "Spark", "Lakehouse", "Delta Lake"],
-  },
-  {
-    id: "databricks-genai",
-    title: "Generative AI Fundamentals",
-    issuer: "Databricks Academy",
-    date: "May 2025",
-    expires: "May 2027",
-    image: "/certs/databricks-genai-fundamentals.png",
-    skills: ["GenAI", "LLMs", "RAG", "Prompt Engineering"],
-  },
-  {
-    id: "kaggle-sql",
-    title: "Advanced SQL",
-    issuer: "Kaggle",
-    date: "Aug 2025",
-    image: "/certs/kaggle-advanced-sql.png",
-    skills: ["SQL", "Window Functions", "CTEs", "Analytics"],
-  },
-  {
-    id: "ibm-python",
-    title: "Data Analysis Using Python",
-    issuer: "IBM Skills Network",
-    date: "2025",
-    image: "/certs/ibm-data-analysis-python.png",
-    skills: ["Python", "Pandas", "NumPy", "scikit-learn"],
-  },
-  {
-    id: "linkedin-powerbi",
-    title: "Power BI Avanzado",
-    issuer: "LinkedIn Learning",
-    date: "May 2024",
-    image: "/certs/linkedin-powerbi-avanzado.png",
-    skills: ["Power BI", "DAX", "Data Modeling", "Dashboards"],
-  },
-];
-
+/**
+ * Certifications, read from /data/profile.json.
+ *
+ * They used to be a hardcoded array here *and* a list in the RAG source
+ * documents — two places to edit, already drifting apart. Both are now generated
+ * from data/profile.yml by scripts/build_kb.py.
+ */
 export default function Certificaciones() {
+  const [certs, setCerts] = useState(null);
+  const [error, setError] = useState(null);
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    fetch("/data/profile.json")
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => setCerts(data.certifications || []))
+      .catch((e) => setError(e.message));
+  }, []);
+
+  const C = tr.certifications;
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-full text-[#FF4136] font-headline text-sm uppercase">
+        {C.error}: {error}
+      </div>
+    );
+  }
+
+  if (!certs) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-[#00FF41] font-headline text-sm uppercase flicker">
+          {tr.common.loading}<span className="cursor-blink">_</span>
+        </div>
+      </div>
+    );
+  }
+
+  const selectedCert = certs.find((c) => c.id === selected);
 
   return (
     <div className="w-full h-full overflow-y-auto scrollbar-hide p-3 sm:p-6">
       {/* Header */}
       <div className="mb-6">
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
-          CERTIFICACIONES_DS
+          {C.title}
         </h2>
         <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
-          {CERTS.length} certificaciones verificadas · Data Engineering &amp; Analytics
+          {certs.length} verified certifications · Data Engineering &amp; Analytics
         </p>
       </div>
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {CERTS.map((cert) => (
+        {certs.map((cert) => (
           <div
             key={cert.id}
             onClick={() => setSelected(selected === cert.id ? null : cert.id)}
@@ -105,12 +94,12 @@ export default function Certificaciones() {
 
             {/* Skills tags */}
             <div className="flex flex-wrap gap-1.5 mt-2">
-              {cert.skills.map((s) => (
+              {(cert.skills || []).map((skill) => (
                 <span
-                  key={s}
+                  key={skill}
                   className="text-[0.55rem] px-1.5 py-0.5 rounded border border-[#00FF41]/15 text-[#00FF41]/50 font-headline uppercase"
                 >
-                  {s}
+                  {skill}
                 </span>
               ))}
             </div>
@@ -119,18 +108,19 @@ export default function Certificaciones() {
       </div>
 
       {/* Lightbox */}
-      {selected && (
+      {selectedCert && (
         <div
           className="fixed inset-0 z-[200] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setSelected(null)}
         >
           <div className="relative max-w-3xl w-full max-h-[85vh]">
             <img
-              src={CERTS.find((c) => c.id === selected)?.image}
-              alt=""
+              src={selectedCert.image}
+              alt={selectedCert.title}
               className="w-full h-auto object-contain rounded-lg border border-[#00FF41]/20 shadow-[0_0_30px_rgba(0,255,65,0.1)]"
             />
             <button
+              aria-label={C.close}
               className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-[#0e0e0e] border border-[#00FF41]/30 text-[#00FF41] flex items-center justify-center text-sm hover:bg-[#00FF41]/10"
               onClick={() => setSelected(null)}
             >

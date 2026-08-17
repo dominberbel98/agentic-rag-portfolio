@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chat from "./components/Chat";
+import { t as tr } from "./i18n/en";
 import Visualizaciones from "./components/Visualizaciones";
 import ModelosPredictivos from "./components/ModelosPredictivos";
 import ModelosScoring from "./components/ModelosScoring";
@@ -7,19 +8,19 @@ import ModelosRecomendacion from "./components/ModelosRecomendacion";
 import Certificaciones from "./components/Certificaciones";
 
 const NAV_ITEMS = [
-  { id: "chat_cv", icon: "chat", label: "chat_cv" },
-  { id: "visualizaciones", icon: "monitoring", label: "visualizaciones" },
+  { id: "chat_cv", icon: "chat", label: tr.nav.chat_cv },
+  { id: "visualizaciones", icon: "monitoring", label: tr.nav.visualizaciones },
   {
     id: "modelos",
     icon: "functions",
-    label: "modelos",
+    label: tr.nav.modelos,
     children: [
-      { id: "prediccion_la_liga",  icon: "sports_soccer", label: "prediccion_la_liga" },
-      { id: "modelo_scoring",      icon: "credit_score",  label: "modelo_scoring" },
-      { id: "modelo_recomendation", icon: "recommend",    label: "modelo_recomendation" },
+      { id: "prediccion_la_liga",  icon: "sports_soccer", label: tr.nav.prediccion_la_liga },
+      { id: "modelo_scoring",      icon: "credit_score",  label: tr.nav.modelo_scoring },
+      { id: "modelo_recomendation", icon: "recommend",    label: tr.nav.modelo_recomendation },
     ],
   },
-  { id: "certificaciones", icon: "workspace_premium", label: "certificaciones" },
+  { id: "certificaciones", icon: "workspace_premium", label: tr.nav.certificaciones },
 ];
 
 const MODEL_IDS = ["prediccion_la_liga", "modelo_scoring", "modelo_recomendation"];
@@ -104,13 +105,13 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       {/* Top App Bar */}
       <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-3 sm:px-6 h-14 sm:h-16 bg-[#0e0e0e]/80 backdrop-blur-xl border-b border-[#00FF41]/15 shadow-[0_0_15px_0_rgba(0,255,65,0.15)]">
         <div className="text-sm sm:text-xl font-bold text-[#00FF41] drop-shadow-[0_0_8px_rgba(0,255,65,0.4)] font-headline tracking-tighter">
-          NEURAL_LINK_DS_V1.0
+          {tr.app.brand}
         </div>
-        {/* Hamburger — solo móvil */}
+        {/* Hamburger — mobile only */}
         <button
           className="md:hidden flex flex-col gap-[5px] p-2 pointer-events-auto"
           onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Menú"
+          aria-label={tr.app.menuLabel}
         >
           <span className={`block w-5 h-[2px] bg-[#00FF41] transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
           <span className={`block w-5 h-[2px] bg-[#00FF41] transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
@@ -118,17 +119,17 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
         </button>
         <nav className="hidden md:flex items-center">
           <div className="font-headline uppercase tracking-[0.25em] text-[0.85rem] text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.6)] font-bold">
-            DOMINGO BERBEL
+            {tr.app.owner}
           </div>
         </nav>
       </header>
 
-      {/* Menú móvil desplegable */}
+      {/* Mobile dropdown menu */}
       {menuOpen && (
         <div className="md:hidden fixed top-14 left-0 w-full z-[45] bg-[#0e0e0e]/95 backdrop-blur-xl border-b border-[#00FF41]/15 font-headline text-[0.75rem] uppercase max-h-[calc(100vh-56px)] overflow-y-auto scrollbar-hide">
           <div className="px-4 py-3 border-b border-[#00FF41]/10">
-            <div className="text-[#00FF41] font-bold">DS_WORKSPACE</div>
-            <div className="text-[#00FF41]/40 tracking-widest text-[0.65rem] mt-0.5">SESSION: DATA_EXPLORER</div>
+            <div className="text-[#00FF41] font-bold">{tr.app.workspace}</div>
+            <div className="text-[#00FF41]/40 tracking-widest text-[0.65rem] mt-0.5">{tr.app.session}</div>
           </div>
           <NavList
             activeSection={activeSection}
@@ -140,7 +141,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
         </div>
       )}
 
-      {/* Overlay para cerrar menú tocando fuera */}
+      {/* Tap-outside overlay to close the menu */}
       {menuOpen && (
         <div
           className="md:hidden fixed inset-0 z-[44]"
@@ -151,8 +152,8 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       {/* Side Nav — desktop */}
       <aside className="fixed left-0 top-16 h-[calc(100vh-64px)] hidden md:flex flex-col z-40 bg-[#0e0e0e] w-64 border-r border-[#00FF41]/15 font-headline text-[0.75rem] uppercase">
         <div className="p-6 border-b border-[#00FF41]/10">
-          <div className="text-[#00FF41] font-bold text-lg">DS_WORKSPACE</div>
-          <div className="text-[#00FF41]/40 tracking-widest mt-1">SESSION: DATA_EXPLORER</div>
+          <div className="text-[#00FF41] font-bold text-lg">{tr.app.workspace}</div>
+          <div className="text-[#00FF41]/40 tracking-widest mt-1">{tr.app.session}</div>
         </div>
         <div className="flex-1 py-4 overflow-y-auto scrollbar-hide">
           <NavList
@@ -182,26 +183,26 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       {/* Footer Stats */}
       <footer className="fixed bottom-0 left-0 w-full h-8 bg-surface-container border-t border-[#00FF41]/10 px-3 sm:px-6 flex items-center justify-between z-50 text-[0.55rem] sm:text-[0.6rem] font-headline uppercase text-[#00FF41]/40">
         <div className="flex gap-2 sm:gap-4">
-          <span>TRAINING_SET: 100%</span>
-          <span className="hidden md:inline">OPTIMIZER: ADAM</span>
-          <span className="hidden sm:inline">LEARNING_RATE: 0.001</span>
+          <span>{tr.footer.trainingSet}</span>
+          <span className="hidden md:inline">{tr.footer.optimizer}</span>
+          <span className="hidden sm:inline">{tr.footer.learningRate}</span>
         </div>
         <div className="flex gap-2 sm:gap-4 items-center">
           <span className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-primary flicker" />
-            RUNNING_INFERENCE
+            {tr.footer.running}
           </span>
-          <span className="hidden sm:inline">domingoberbel.com</span>
+          <span className="hidden sm:inline">{tr.footer.domain}</span>
         </div>
       </footer>
 
-      {/* Mascota — desktop: lateral izquierdo | móvil: esquina inferior izquierda */}
+      {/* Mascot — desktop: left rail | mobile: bottom-left corner */}
       {/* Desktop */}
       <div className="fixed top-[72%] left-[20px] z-[60] hidden md:flex items-end gap-4 pointer-events-none -translate-y-1/2">
         <div className="flex flex-col items-start gap-2">
           <div className="bg-[#00FF41]/10 border border-[#00FF41]/30 p-3 rounded-lg backdrop-blur-md max-w-[220px] shadow-[0_0_15px_rgba(0,255,65,0.1)]">
             <p className="text-[#00FF41] text-[0.7rem] font-headline uppercase leading-tight">
-              Hola! Prueba el asistente de IA, o explora en el menú: visualizaciones de La Liga, modelos (predicción La Liga, credit scoring, recomendador de productos) y mis certificaciones
+              {tr.app.mascot}
             </p>
           </div>
           <div className="flex items-center gap-2">

@@ -90,8 +90,17 @@ fi
 BACKEND_IMAGE="ghcr.io/${GHCR_USERNAME}/rag-backend:${IMAGE_TAG}"
 BACKEND_IMAGE_LATEST="ghcr.io/${GHCR_USERNAME}/rag-backend:latest"
 
+# Both files must be inside backend/ — that is the Docker build context. The
+# Dockerfile globs them so a missing file does not fail the build, which means an
+# image without them starts fine and silently answers without grounding.
 if [[ ! -f "$ROOT_DIR/backend/embeddings_cache.json" ]]; then
-  echo "Falta backend/embeddings_cache.json. Ejecuta primero: python scripts/index_documents.py"
+  echo "Falta backend/embeddings_cache.json. Ejecuta primero:"
+  echo "  python scripts/build_kb.py && python scripts/index_documents.py"
+  exit 1
+fi
+if [[ ! -f "$ROOT_DIR/backend/vocabulary.json" ]]; then
+  echo "Falta backend/vocabulary.json (guarda contra alucinaciones). Ejecuta primero:"
+  echo "  python scripts/build_kb.py"
   exit 1
 fi
 
@@ -126,34 +135,57 @@ az containerapp registry set \
 
 echo "Actualizando imagen backend en Azure Container Apps..."
 
-# Build env-vars string for the container
+# ── Credentials ──────────────────────────────────────────────────────────────
+#
+# Every credential goes in as a Container Apps SECRET and is referenced with
+# secretref:. This script previously passed them as plaintext literals to
+# --set-env-vars, which made them readable by anyone with Reader on the
+# subscription and visible in `az containerapp show` output and ARM exports.
+# It also means running this script must not silently undo that: a literal here
+# would overwrite the secretref and re-expose the value.
+
+echo "Cargando credenciales como secrets de Container Apps..."
+SECRET_ARGS=()
+add_secret() {           # add_secret <secret-name> <value>
+  [[ -n "${2:-}" ]] && SECRET_ARGS+=("$1=$2")
+}
+add_secret openai-api-key "${OPENAI_API_KEY:-}"
+add_secret google-api-key "${GOOGLE_API_KEY:-}"
+add_secret admin-read-key "${ADMIN_READ_KEY:-}"
+add_secret turnstile-secret-key "${TURNSTILE_SECRET_KEY:-}"
+
+if [[ ${#SECRET_ARGS[@]} -gt 0 ]]; then
+  az containerapp secret set \
+    --name "$AZ_BACKEND_APP" \
+    --resource-group "$AZ_RESOURCE_GROUP" \
+    --secrets "${SECRET_ARGS[@]}" \
+    --output none
+fi
+
+# Non-sensitive configuration only.
 BACKEND_ENV_VARS=(
   "APP_ENV=${APP_ENV:-production}"
   "CORS_ORIGINS=${CORS_ORIGINS:-https://domingoberbel.com,https://www.domingoberbel.com}"
   "CONTACT_EMAILS=${CONTACT_EMAILS}"
   "PROFESSIONAL_LINKEDIN=${PROFESSIONAL_LINKEDIN}"
-  "ADMIN_READ_KEY=${ADMIN_READ_KEY}"
   "MAX_REQUESTS_PER_MINUTE_PER_IP=${MAX_REQUESTS_PER_MINUTE_PER_IP}"
   "MAX_TOKENS_PER_DAY=${MAX_TOKENS_PER_DAY}"
-  "GOOGLE_API_KEY=${GOOGLE_API_KEY}"
+  "OPENAI_MODEL=${OPENAI_MODEL:-gpt-5.6-luna}"
+  "EMBEDDING_MODEL=${EMBEDDING_MODEL:-gemini-embedding-2}"
 )
 
-# Add OpenAI config
-if [[ -n "${OPENAI_API_KEY:-}" ]]; then
-  BACKEND_ENV_VARS+=("OPENAI_API_KEY=${OPENAI_API_KEY}" "OPENAI_MODEL=${OPENAI_MODEL}")
-fi
-if [[ -n "${AZURE_OPENAI_ENDPOINT:-}" ]]; then
-  BACKEND_ENV_VARS+=(
-    "AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}"
-    "AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}"
-    "AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION}"
-    "AZURE_OPENAI_CHAT_DEPLOYMENT=${AZURE_OPENAI_CHAT_DEPLOYMENT}"
-  )
-fi
-if [[ -n "${TURNSTILE_SECRET_KEY:-}" ]]; then
-  BACKEND_ENV_VARS+=("TURNSTILE_SECRET_KEY=${TURNSTILE_SECRET_KEY}")
-fi
+# Secrets by reference, never by value.
+[[ -n "${OPENAI_API_KEY:-}" ]] && BACKEND_ENV_VARS+=("OPENAI_API_KEY=secretref:openai-api-key")
+[[ -n "${GOOGLE_API_KEY:-}" ]] && BACKEND_ENV_VARS+=("GOOGLE_API_KEY=secretref:google-api-key")
+[[ -n "${ADMIN_READ_KEY:-}" ]] && BACKEND_ENV_VARS+=("ADMIN_READ_KEY=secretref:admin-read-key")
+[[ -n "${TURNSTILE_SECRET_KEY:-}" ]] && \
+  BACKEND_ENV_VARS+=("TURNSTILE_SECRET_KEY=secretref:turnstile-secret-key")
 
+# There is deliberately no AZURE_OPENAI_* or AZURE_SEARCH_* block. Both resources
+# were deleted from the subscription; generation runs against the OpenAI API
+# directly and retrieval against the index baked into the image.
+
+echo "Actualizando imagen backend en Azure Container Apps..."
 az containerapp update \
   --name "$AZ_BACKEND_APP" \
   --resource-group "$AZ_RESOURCE_GROUP" \
@@ -161,6 +193,18 @@ az containerapp update \
   --min-replicas "$BACKEND_MIN_REPLICAS" \
   --max-replicas "$BACKEND_MAX_REPLICAS" \
   --set-env-vars "${BACKEND_ENV_VARS[@]}"
+
+echo
+echo "Comprobando que ninguna credencial quedó en texto plano..."
+LEAKED=$(az containerapp show --name "$AZ_BACKEND_APP" --resource-group "$AZ_RESOURCE_GROUP" \
+  --query "properties.template.containers[0].env[?value!=null && (contains(name,'KEY') || contains(name,'SECRET'))].name" \
+  --output tsv)
+if [[ -n "$LEAKED" ]]; then
+  echo "ERROR: estas variables tienen valor en texto plano en lugar de secretref:"
+  echo "$LEAKED"
+  exit 1
+fi
+echo "OK: todas las credenciales usan secretref."
 
 echo "Eliminando referencia antigua a ACR si existe..."
 az containerapp registry remove \

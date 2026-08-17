@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { t as tr } from "../i18n/en";
+import { ZONE_COLORS, zoneForPosition } from "../lib/laliga";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
   ScatterChart, Scatter, ZAxis,
@@ -7,19 +9,6 @@ import {
 
 const GREEN = "#00FF41";
 const DIM = "rgba(0,255,65,0.4)";
-const ZONE_COLORS = {
-  champions: "#00FF41",
-  europa: "#00BFFF",
-  relegation: "#FF4136",
-  mid: "rgba(0,255,65,0.25)",
-};
-
-function zoneFromPos(pos) {
-  if (pos <= 4) return "champions";
-  if (pos <= 6) return "europa";
-  if (pos >= 18) return "relegation";
-  return "mid";
-}
 
 /* ────────── CRT tooltip ────────── */
 const CrtTooltip = ({ active, payload, label }) => {
@@ -45,14 +34,14 @@ function ChampionProb({ data }) {
     <div className="viz-panel col-span-12 lg:col-span-6">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">emoji_events</span>
-        PROBABILIDAD_CAMPEÓN
+        {tr.predictions.championProb.title}
       </h3>
       <ResponsiveContainer width="100%" height={Math.max(200, show.length * 45)}>
         <BarChart data={show} layout="vertical" margin={{ left: 70, right: 30, top: 5, bottom: 5 }}>
           <XAxis type="number" domain={[0, 100]} tick={{ fill: DIM, fontSize: 10 }} unit="%" axisLine={{ stroke: DIM }} />
           <YAxis type="category" dataKey="teamShortName" tick={{ fill: GREEN, fontSize: 10, fontFamily: "Space Grotesk" }} width={65} axisLine={false} tickLine={false} />
           <Tooltip content={<CrtTooltip />} cursor={{ fill: "rgba(0,255,65,0.05)" }} />
-          <Bar dataKey="championProb" name="P(Campeón)" radius={[0, 4, 4, 0]}>
+          <Bar dataKey="championProb" name={tr.predictions.championProb.label} radius={[0, 4, 4, 0]}>
             {show.map((t, i) => (
               <Cell key={i} fill={GREEN} fillOpacity={Math.max(0.2, t.championProb / 100)} />
             ))}
@@ -69,14 +58,14 @@ function ProjectedPoints({ data }) {
     ...t,
     errorLow: t.mc.pointsMean - t.mc.pointsP10,
     errorHigh: t.mc.pointsP90 - t.mc.pointsMean,
-    zone: zoneFromPos(t.currentPosition),
+    zone: zoneForPosition(t.currentPosition),
   }));
 
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">trending_up</span>
-        PUNTOS_PROYECTADOS (IC 80%)
+        {tr.predictions.projectedPoints.title}
       </h3>
       <ResponsiveContainer width="100%" height={420}>
         <BarChart data={chartData} layout="vertical" margin={{ left: 70, right: 30, top: 5, bottom: 5 }}>
@@ -89,15 +78,15 @@ function ProjectedPoints({ data }) {
               return (
                 <div className="bg-[#0e0e0e]/95 border border-[#00FF41]/30 px-3 py-2 text-xs font-headline uppercase text-[#00FF41] shadow-[0_0_12px_rgba(0,255,65,0.2)]">
                   <p className="font-bold">{d.teamShortName}</p>
-                  <p>Media: {d.mc.pointsMean} pts</p>
+                  <p>{tr.predictions.projectedPoints.meanLabel}: {d.mc.pointsMean} pts</p>
                   <p>IC 80%: [{d.mc.pointsP10} – {d.mc.pointsP90}]</p>
-                  <p>Rango: [{d.mc.pointsMin} – {d.mc.pointsMax}]</p>
+                  <p>{tr.predictions.projectedPoints.range}: [{d.mc.pointsMin} – {d.mc.pointsMax}]</p>
                 </div>
               );
             }}
             cursor={{ fill: "rgba(0,255,65,0.05)" }}
           />
-          <Bar dataKey="mc.pointsMean" name="Pts (media)" radius={[0, 4, 4, 0]}>
+          <Bar dataKey="mc.pointsMean" name={tr.predictions.projectedPoints.mean} radius={[0, 4, 4, 0]}>
             {chartData.map((t, i) => (
               <Cell key={i} fill={ZONE_COLORS[t.zone]} fillOpacity={0.65} />
             ))}
@@ -141,14 +130,14 @@ function GoalProbabilities({ data }) {
     <div className="viz-panel col-span-12">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">sports_soccer</span>
-        PREDICCIONES_GOLES
+        {tr.predictions.goals.title}
       </h3>
       <div className="flex flex-wrap gap-0">
-        <MiniBar items={topGF} dataKey="mostGoalsProb" title="Más goleador" icon="arrow_upward" color={GREEN} />
+        <MiniBar items={topGF} dataKey="mostGoalsProb" title={tr.predictions.goals.mostGoals} icon="arrow_upward" color={GREEN} />
         <div className="w-px bg-[#00FF41]/15 mx-3 self-stretch hidden sm:block" />
-        <MiniBar items={topGA} dataKey="mostConcededProb" title="Más goleado" icon="arrow_downward" color="#FF4136" />
+        <MiniBar items={topGA} dataKey="mostConcededProb" title={tr.predictions.goals.mostConceded} icon="arrow_downward" color="#FF4136" />
         <div className="w-px bg-[#00FF41]/15 mx-3 self-stretch hidden sm:block" />
-        <MiniBar items={topLeastGA} dataKey="leastConcededProb" title="Menos goleado" icon="shield" color="#00BFFF" />
+        <MiniBar items={topLeastGA} dataKey="leastConcededProb" title={tr.predictions.goals.leastConceded} icon="shield" color="#00BFFF" />
       </div>
     </div>
   );
@@ -159,15 +148,15 @@ function FeatureImportance({ importance }) {
   if (!importance || Object.keys(importance).length === 0) return null;
 
   const labels = {
-    ppg: "Puntos/partido",
-    winRate: "% Victorias",
-    drawRate: "% Empates",
-    lossRate: "% Derrotas",
-    gfPerGame: "GF/partido",
-    gaPerGame: "GC/partido",
-    gdPerGame: "DG/partido",
-    points: "Puntos",
-    goalDifference: "Dif. goles",
+    ppg: tr.predictions.importance.ppg,
+    winRate: tr.predictions.importance.winRate,
+    drawRate: tr.predictions.importance.drawRate,
+    lossRate: tr.predictions.importance.lossRate,
+    gfPerGame: tr.predictions.importance.gfPerGame,
+    gaPerGame: tr.predictions.importance.gaPerGame,
+    gdPerGame: tr.predictions.importance.gdPerGame,
+    points: tr.predictions.importance.points,
+    goalDifference: tr.predictions.importance.goalDifference,
   };
 
   const data = Object.entries(importance)
@@ -189,7 +178,7 @@ function FeatureImportance({ importance }) {
         </BarChart>
       </ResponsiveContainer>
       <p className="text-[0.55rem] text-[#00FF41]/25 font-headline mt-1 uppercase">
-        XGBoost multi:softprob · Features normalizadas por partido
+        {tr.predictions.importanceCaption}
       </p>
     </div>
   );
@@ -201,24 +190,24 @@ function ProjectedTable({ data }) {
     <div className="viz-panel col-span-12 lg:col-span-6">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">table_chart</span>
-        CLASIFICACIÓN_PROYECTADA (J38)
+        {tr.predictions.projectedTable.title}
       </h3>
       <div className="overflow-x-auto scrollbar-hide">
         <table className="w-full text-[0.65rem] sm:text-xs font-headline uppercase">
           <thead>
             <tr className="text-[#00FF41]/50 border-b border-[#00FF41]/10">
               <th className="py-1.5 px-1 text-left">#</th>
-              <th className="py-1.5 px-2 text-left">Equipo</th>
-              <th className="py-1.5 px-1 text-center">Actual</th>
-              <th className="py-1.5 px-1 text-center">Proy.</th>
-              <th className="py-1.5 px-1 text-center">IC 80%</th>
-              <th className="py-1.5 px-1 text-center">GF</th>
-              <th className="py-1.5 px-1 text-center">GC</th>
+              <th className="py-1.5 px-2 text-left">{tr.predictions.projectedTable.team}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.current}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.projected}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.interval}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.goalsFor}</th>
+              <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.goalsAgainst}</th>
             </tr>
           </thead>
           <tbody>
             {data.map((t, i) => {
-              const zone = zoneFromPos(i + 1);
+              const zone = zoneForPosition(i + 1);
               return (
                 <tr key={t.teamShortName} className="border-b border-[#00FF41]/5 hover:bg-[#00FF41]/5"
                   style={{ borderLeftColor: ZONE_COLORS[zone], borderLeftWidth: 3 }}>
@@ -261,7 +250,7 @@ export default function ModelosPredictivos() {
   if (error) {
     return (
       <div className="flex items-center justify-center h-full text-[#FF4136] font-headline text-sm uppercase">
-        ERROR_LOADING_PREDICTIONS: {error}
+        {tr.predictions.error}: {error}
       </div>
     );
   }
@@ -283,28 +272,39 @@ export default function ModelosPredictivos() {
       {/* Header */}
       <div className="mb-6">
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
-          MODELOS_PREDICTIVOS_LA_LIGA
+          {tr.predictions.title}
         </h2>
         <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
-          Temporada {data.season} · Jornada {data.matchday} · {data.totalMatches} jornadas totales · {data.nSimulations.toLocaleString()} simulaciones
+          {tr.predictions.subtitle(data.season, data.matchday, data.totalMatches, data.nSimulations.toLocaleString())}
         </p>
         <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
-          Modelo: {data.model} · Poisson(λ=GF/partido) + {data.nSimulations.toLocaleString()} Monte Carlo seasons
+          {tr.predictions.modelLine(data.model, data.nSimulations.toLocaleString())}
         </p>
+        {data.shrinkageK != null && (
+          <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
+            {tr.predictions.shrinkageNote(data.shrinkageK)}
+          </p>
+        )}
       </div>
+
+      {/* Too few matches for the projection to mean anything. Shown rather than
+          hidden, because the point is that the model knows its own limits. */}
+      {data.lowConfidence && (
+        <div className="mb-4 border border-[#FFD700]/30 bg-[#FFD700]/5 px-4 py-3 text-[0.7rem] text-[#FFD700]/80 font-headline uppercase leading-relaxed">
+          {tr.predictions.lowConfidence}
+        </div>
+      )}
 
       {/* Method explanation */}
       <div className="viz-panel col-span-12 mb-4">
         <h3 className="viz-title">
           <span className="material-symbols-outlined text-sm mr-2">psychology</span>
-          METODOLOGÍA
+          {tr.predictions.methodology.title}
         </h3>
         <div className="text-[0.65rem] text-[#00FF41]/60 font-headline leading-relaxed space-y-1">
-          <p><span className="text-[#00FF41]">1.</span> Feature engineering: ratios por partido (ppg, win%, GF/G, GA/G, GD/G)</p>
-          <p><span className="text-[#00FF41]">2.</span> Simulación Poisson: para cada partido restante, GF ~ Poisson(λ_gf), GA ~ Poisson(λ_ga) → resultado → puntos</p>
-          <p><span className="text-[#00FF41]">3.</span> Monte Carlo: {data.nSimulations.toLocaleString()} temporadas simuladas → distribución de puntos, goles, clasificación</p>
-          <p><span className="text-[#00FF41]">4.</span> XGBoost (multi:softprob): clasificador de zona (Champions/Europa/Mid/Descenso) sobre features actuales</p>
-
+          {tr.predictions.methodology.steps(data.nSimulations.toLocaleString()).map((step) => (
+            <p key={step}>{step}</p>
+          ))}
         </div>
       </div>
 

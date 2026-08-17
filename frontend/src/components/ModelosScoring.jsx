@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { t as tr } from "../i18n/en";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
   LineChart, Line, ReferenceLine, AreaChart, Area,
@@ -78,7 +79,7 @@ function MetricCards({ data }) {
     <div className="viz-panel col-span-12">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">dashboard</span>
-        MÉTRICAS_MODELO (test set)
+        {tr.scoring.metrics.title}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {cards.map((c) => (
@@ -129,7 +130,7 @@ function RocPanel({ roc, auc }) {
         </AreaChart>
       </ResponsiveContainer>
       <p className="text-[0.6rem] text-[#00FF41]/30 font-headline mt-1 uppercase">
-        Diagonal roja = clasificador aleatorio · Área verde = capacidad discriminativa
+        {tr.scoring.rocCaption}
       </p>
     </div>
   );
@@ -138,20 +139,20 @@ function RocPanel({ roc, auc }) {
 /* ═══════════ 3. FEATURE IMPORTANCE ═══════════ */
 function ImportancePanel({ rows }) {
   const labels = {
-    age: "Edad",
-    annual_income: "Ingresos anuales",
-    employment_years: "Años empleo",
-    loan_amount: "Importe préstamo",
-    payment_history_pct: "% Pagos a tiempo",
-    credit_utilization: "% Utilización",
-    credit_age_years: "Antigüedad crédito",
-    num_credit_accounts: "Nº cuentas",
-    recent_inquiries: "Consultas recientes",
-    derogatory_marks: "Marcas negativas",
-    debt_to_income: "DTI",
-    loan_to_income: "Préstamo / ingresos",
-    loan_purpose: "Propósito préstamo",
-    home_ownership: "Vivienda",
+    age: tr.scoring.features.age,
+    annual_income: tr.scoring.features.annual_income,
+    employment_years: tr.scoring.features.employment_years,
+    loan_amount: tr.scoring.features.loan_amount,
+    payment_history_pct: tr.scoring.features.payment_history_pct,
+    credit_utilization: tr.scoring.features.credit_utilization,
+    credit_age_years: tr.scoring.features.credit_age_years,
+    num_credit_accounts: tr.scoring.features.num_credit_accounts,
+    recent_inquiries: tr.scoring.features.recent_inquiries,
+    derogatory_marks: tr.scoring.features.derogatory_marks,
+    debt_to_income: tr.scoring.features.debt_to_income,
+    loan_to_income: tr.scoring.features.loan_to_income,
+    loan_purpose: tr.scoring.features.loan_purpose,
+    home_ownership: tr.scoring.features.home_ownership,
   };
   const data = rows.slice(0, 10).map((r) => ({ ...r, label: labels[r.feature] || r.feature }));
   return (
@@ -169,7 +170,7 @@ function ImportancePanel({ rows }) {
         </BarChart>
       </ResponsiveContainer>
       <p className="text-[0.6rem] text-[#00FF41]/30 font-headline mt-1 uppercase">
-        Caída media de AUC al permutar la feature · Mayor barra = mayor impacto
+        {tr.scoring.importanceCaption}
       </p>
     </div>
   );
@@ -187,7 +188,7 @@ function ScoreDistribution({ histogram, bands }) {
     <div className="viz-panel col-span-12 lg:col-span-7">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">bar_chart</span>
-        DISTRIBUCIÓN_SCORES (300–850)
+        {tr.scoring.distribution.title}
       </h3>
       <ResponsiveContainer width="100%" height={280}>
         <BarChart data={data} margin={{ left: 0, right: 10, top: 10, bottom: 10 }}>
@@ -226,16 +227,16 @@ function ScoreDistribution({ histogram, bands }) {
 
 /* ═══════════ 5. INTERACTIVE SCORECARD ═══════════ */
 const SLIDER_FIELDS = [
-  { key: "age", label: "Edad", min: 21, max: 70, step: 1, unit: "años" },
-  { key: "annual_income", label: "Ingresos anuales", min: 15000, max: 300000, step: 1000, unit: "€" },
-  { key: "employment_years", label: "Años de empleo", min: 0, max: 40, step: 1, unit: "años" },
-  { key: "loan_amount", label: "Importe del préstamo", min: 1000, max: 100000, step: 500, unit: "€" },
-  { key: "payment_history_pct", label: "% Pagos a tiempo", min: 0, max: 100, step: 1, unit: "%" },
-  { key: "credit_utilization", label: "% Utilización crédito", min: 0, max: 100, step: 1, unit: "%" },
-  { key: "credit_age_years", label: "Antigüedad crédito", min: 0, max: 35, step: 0.5, unit: "años" },
-  { key: "num_credit_accounts", label: "Nº cuentas crédito", min: 1, max: 15, step: 1, unit: "" },
-  { key: "recent_inquiries", label: "Consultas recientes", min: 0, max: 10, step: 1, unit: "" },
-  { key: "derogatory_marks", label: "Marcas negativas", min: 0, max: 5, step: 1, unit: "" },
+  { key: "age", label: tr.scoring.features.age, min: 21, max: 70, step: 1, unit: tr.scoring.units.years },
+  { key: "annual_income", label: tr.scoring.features.annual_income, min: 15000, max: 300000, step: 1000, unit: "€" },
+  { key: "employment_years", label: tr.scoring.features.employment_years, min: 0, max: 40, step: 1, unit: tr.scoring.units.years },
+  { key: "loan_amount", label: tr.scoring.features.loan_amount, min: 1000, max: 100000, step: 500, unit: "€" },
+  { key: "payment_history_pct", label: tr.scoring.features.payment_history_pct, min: 0, max: 100, step: 1, unit: "%" },
+  { key: "credit_utilization", label: tr.scoring.features.credit_utilization, min: 0, max: 100, step: 1, unit: "%" },
+  { key: "credit_age_years", label: tr.scoring.features.credit_age_years, min: 0, max: 35, step: 0.5, unit: tr.scoring.units.years },
+  { key: "num_credit_accounts", label: tr.scoring.features.num_credit_accounts, min: 1, max: 15, step: 1, unit: "" },
+  { key: "recent_inquiries", label: tr.scoring.features.recent_inquiries, min: 0, max: 10, step: 1, unit: "" },
+  { key: "derogatory_marks", label: tr.scoring.features.derogatory_marks, min: 0, max: 5, step: 1, unit: "" },
 ];
 
 const DEFAULT_APPLICANT = {
@@ -330,7 +331,7 @@ function InteractiveScorecard({ weights, levels }) {
         {["loan_purpose", "home_ownership"].map((feat) => (
           <div key={feat} className="flex justify-between items-center gap-2">
             <span className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70">
-              {feat === "loan_purpose" ? "Propósito préstamo" : "Vivienda"}
+              {feat === "loan_purpose" ? tr.scoring.features.loan_purpose : tr.scoring.features.home_ownership}
             </span>
             <select
               value={applicant[feat]}
@@ -365,12 +366,12 @@ function SampleApplicants({ rows }) {
           <thead>
             <tr className="text-[#00FF41]/50 border-b border-[#00FF41]/10">
               <th className="py-1.5 px-2 text-center">#</th>
-              <th className="py-1.5 px-2 text-left">Edad</th>
-              <th className="py-1.5 px-2 text-right">Ingresos</th>
-              <th className="py-1.5 px-2 text-right">Préstamo</th>
-              <th className="py-1.5 px-2 text-right">DTI</th>
-              <th className="py-1.5 px-2 text-right">Pagos</th>
-              <th className="py-1.5 px-2 text-right">Util.</th>
+              <th className="py-1.5 px-2 text-left">{tr.scoring.sampleTable.age}</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.income}</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.loan}</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.dti}</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.payments}</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.utilisation}</th>
               <th className="py-1.5 px-2 text-right">Marcas</th>
               <th className="py-1.5 px-2 text-right">P(LR)</th>
               <th className="py-1.5 px-2 text-right">P(GBM)</th>
@@ -421,7 +422,7 @@ export default function ModelosScoring() {
   if (error) {
     return (
       <div className="flex items-center justify-center h-full text-[#FF4136] font-headline text-sm uppercase">
-        ERROR_LOADING_SCORING_MODEL: {error}
+        {tr.scoring.error}: {error}
       </div>
     );
   }
@@ -452,38 +453,30 @@ export default function ModelosScoring() {
       <div className="viz-panel col-span-12 mb-4">
         <h3 className="viz-title">
           <span className="material-symbols-outlined text-sm mr-2">help</span>
-          ¿QUÉ HACE ESTE MODELO?
+          {tr.scoring.explainer.title}
         </h3>
         <div className="text-[0.7rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2">
           <p>
-            <span className="text-[#00FF41] font-bold">PROBLEMA:</span> Un banco recibe 5 000 solicitudes de préstamo
-            y necesita decidir cuáles aprobar sin revisar cada una a mano. ¿Quién pagará y quién entrará en mora?
+            <span className="text-[#00FF41] font-bold">{tr.scoring.explainer.problemLabel}</span>{" "}
+            {tr.scoring.explainer.problem}
           </p>
           <p>
-            <span className="text-[#00FF41] font-bold">SOLUCIÓN:</span> entrenamos dos modelos que aprenden el patrón
-            de los morosos pasados (% pagos a tiempo, utilización de crédito, marcas negativas, ingresos…) y devuelven
-            una probabilidad de impago para cada cliente nuevo. Esa probabilidad se traduce a un score 300–850 estilo FICO
-            usando la fórmula PDO de la banca: a más score, más fiable.
+            <span className="text-[#00FF41] font-bold">{tr.scoring.explainer.solutionLabel}</span>{" "}
+            {tr.scoring.explainer.solution}
           </p>
           <p>
-            <span className="text-[#00FF41] font-bold">CÓMO PROBARLO:</span> en el panel
-            <span className="text-[#00FF41]"> SCORECARD_INTERACTIVO</span> mueve los sliders (ingresos, % pagos puntuales,
-            utilización…) y observa cómo el score y la probabilidad de default cambian en vivo. La inferencia se ejecuta
-            <span className="text-[#00FF41]"> en tu navegador</span> con los coeficientes de la regresión logística
-            exportados desde scikit-learn.
+            <span className="text-[#00FF41] font-bold">{tr.scoring.explainer.tryItLabel}</span>{" "}
+            {tr.scoring.explainer.tryIt}
           </p>
         </div>
         <details className="mt-3">
           <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/50 cursor-pointer hover:text-[#00FF41]">
-            ▸ ver detalle técnico (pipeline ML)
+            {tr.scoring.explainer.detailsSummary}
           </summary>
           <div className="text-[0.6rem] text-[#00FF41]/50 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
-            <p>1. Dataset sintético calibrado a tasa de default ~17% (12 features numéricas + 2 categóricas)</p>
-            <p>2. Preprocesado: StandardScaler + OneHotEncoder · split estratificado 75/25</p>
-            <p>3. Logistic Regression (interpretable) + Gradient Boosting calibrado vía Platt sigmoid</p>
-            <p>4. Validación: 5-fold StratifiedKFold (AUC, AvgPrecision, F1) + held-out test set</p>
-            <p>5. Scorecard PDO: factor = PDO / ln 2, offset = base − factor · ln(odds), clip 300–850</p>
-            <p>6. Permutation importance, ROC, KS, Gini, Brier sobre el test set</p>
+            {tr.scoring.explainer.steps.map((step) => (
+              <p key={step}>{step}</p>
+            ))}
           </div>
         </details>
       </div>

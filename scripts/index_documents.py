@@ -1,152 +1,166 @@
 #!/usr/bin/env python3
-"""
-Re-index documents with Google Generative AI embeddings.
+"""Embed the generated knowledge base into `embeddings_cache.json`.
 
-Generates embeddings for all .docx files in documentos/ and caches them
-in embeddings_cache.json with metadata for automatic change detection.
+Reads `data/kb/*.md` — the entity documents produced by `scripts/build_kb.py` —
+and writes one embedding per document. Run `build_kb.py` first; this script does
+not read `data/profile.yml` and will not notice if the corpus is stale.
+
+    export GOOGLE_API_KEY=...
+    python scripts/build_kb.py
+    python scripts/index_documents.py
+
+Why there is no chunking: each document is already one entity (a role, a
+project, a degree) and comfortably inside the model's input limit. Splitting them
+again would reintroduce the duplication that made the previous corpus 25 chunks
+with 8 near-duplicates, and would break `get_entity(id)`, which needs one
+document to have one address.
 """
+
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
-import google.generativeai as genai
-
 ROOT_DIR = Path(__file__).resolve().parents[1]
-DOCS_DIR = ROOT_DIR / "documentos"
+for _path in (ROOT_DIR, ROOT_DIR / "backend"):
+    if str(_path) not in sys.path:
+        sys.path.insert(0, str(_path))
+
+KB_DIR = ROOT_DIR / "data" / "kb"
 CACHE_FILE_ROOT = ROOT_DIR / "embeddings_cache.json"
 CACHE_FILE_BACKEND = ROOT_DIR / "backend" / "embeddings_cache.json"
-EMBEDDING_MODEL = "gemini-embedding-001"
-EMBEDDING_API_MODEL = f"models/{EMBEDDING_MODEL}"
+
+# Must match backend/app/config.py's embedding_model. gemini-embedding-2's space
+# is NOT compatible with gemini-embedding-001, so changing it invalidates the
+# whole cache rather than just appending to it.
+EMBEDDING_MODEL = "gemini-embedding-2"
 EMBEDDING_DIMENSIONS = 3072
-CHUNK_SIZE = 650
-CHUNK_OVERLAP = 100
 
 
-def chunk_text(text: str, size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> list[str]:
-    """Split text into overlapping chunks."""
-    text = " ".join(text.split())
-    chunks: list[str] = []
-    start = 0
-    while start < len(text):
-        end = min(len(text), start + size)
-        chunks.append(text[start:end])
-        if end == len(text):
-            break
-        start = max(end - overlap, 0)
-    return chunks
+def load_documents(kb_dir: Path = KB_DIR) -> list[dict[str, str]]:
+    """Read every entity document, keyed by its frontmatter id.
 
+    The id becomes the chunk `source`, which is what makes a document
+    addressable by the agent's `get_entity` tool. The previous indexer used the
+    filename, so every chunk from `cv_rag.docx` shared one opaque source.
+    """
+    sys.path.insert(0, str(ROOT_DIR))
+    from scripts.build_kb import parse_frontmatter
 
-def extract_docx(path: Path) -> str:
-    """Extract text from a .docx file."""
-    from docx import Document
-    doc = Document(path)
-    return "\n".join([p.text for p in doc.paragraphs if p.text.strip()])
-
-
-def embed_text(text: str, api_key: str) -> list[float]:
-    """Generate embedding for text using Google Generative AI."""
-    genai.configure(api_key=api_key)
-    try:
-        response = genai.embed_content(
-            model=EMBEDDING_API_MODEL,
-            content=text,
-            task_type="RETRIEVAL_DOCUMENT",
-            title="Document chunk",
+    if not kb_dir.exists():
+        raise SystemExit(
+            f"error: {kb_dir} does not exist. Run 'python scripts/build_kb.py' first."
         )
-        return response["embedding"]
-    except Exception as e:
-        print(f"Error embedding text: {e}", file=sys.stderr)
-        raise
+
+    documents: list[dict[str, str]] = []
+    for path in sorted(kb_dir.glob("*.md")):
+        meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
+        entity_id = meta.get("id")
+        if not entity_id:
+            raise SystemExit(f"error: {path.name} has no id in its frontmatter")
+        text = body.strip()
+        if not text:
+            raise SystemExit(f"error: {path.name} has an empty body")
+        documents.append(
+            {
+                "id": entity_id,
+                "source": entity_id,
+                "category": meta.get("category", ""),
+                "title": meta.get("title", ""),
+                "chunk": text,
+            }
+        )
+
+    if not documents:
+        raise SystemExit(f"error: no documents found in {kb_dir}")
+    return documents
 
 
-def load_existing_cache() -> dict | None:
-    """Load existing cache if it exists and is valid."""
-    # Prefer root cache, fallback to backend cache for local/docker parity.
-    cache_file = CACHE_FILE_ROOT if CACHE_FILE_ROOT.exists() else CACHE_FILE_BACKEND
-    if not cache_file.exists():
-        return None
-    try:
-        with open(cache_file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"Warning: Could not load existing cache: {e}")
-        return None
+def build_cache(
+    documents: list[dict[str, str]], api_key: str, model: str = EMBEDDING_MODEL
+) -> dict:
+    """Embed every document with the same service the backend queries with, so
+    indexing and retrieval cannot drift apart on model or task type."""
+    from app.services.embedding_service import EmbeddingService
 
+    embedder = EmbeddingService(api_key, model)
 
-def main() -> None:
-    api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key:
-        print("Error: GOOGLE_API_KEY environment variable not set", file=sys.stderr)
-        sys.exit(1)
-
-    # Check if we should regenerate
-    existing_cache = load_existing_cache()
-    if existing_cache:
-        cached_model = existing_cache.get("model")
-        cached_dims = existing_cache.get("dimensions")
-        if cached_model == EMBEDDING_MODEL and cached_dims == EMBEDDING_DIMENSIONS:
-            print(
-                f"Cache is valid (model={cached_model}, dimensions={cached_dims}). "
-                "Skipping regeneration unless documents changed."
-            )
-            # For now, we'll regenerate anyway to ensure freshness, but in production
-            # you could compare document mtimes with cache timestamp
-        else:
-            print(
-                f"Cache model mismatch: cached={cached_model}, current={EMBEDDING_MODEL}. "
-                "Regenerating..."
-            )
-
-    # Collect all documents and chunks
     payload = []
-    for doc_path in sorted(DOCS_DIR.glob("*.docx")):
-        print(f"Processing {doc_path.name}...")
-        text = extract_docx(doc_path)
-        chunks = chunk_text(text)
-        print(f"  Generated {len(chunks)} chunks")
+    total = len(documents)
+    for index, doc in enumerate(documents, start=1):
+        print(f"  [{index}/{total}] {doc['id']} …", end=" ", flush=True)
+        embedding = embedder.embed_document(doc["chunk"])
+        payload.append(
+            {
+                "id": doc["id"],
+                "source": doc["source"],
+                "category": doc["category"],
+                "title": doc["title"],
+                "chunk": doc["chunk"],
+                "embedding": embedding,
+            }
+        )
+        print("ok")
 
-        for i, chunk in enumerate(chunks, start=1):
-            chunk_id = f"{doc_path.stem}-{i}"
-            print(f"  Embedding chunk {i}/{len(chunks)} ({chunk_id})...", end=" ", flush=True)
-            try:
-                embedding = embed_text(chunk, api_key)
-                payload.append({
-                    "id": chunk_id,
-                    "source": doc_path.name,
-                    "chunk": chunk,
-                    "embedding": embedding,
-                })
-                print("✓")
-            except Exception as e:
-                print(f"✗ (Error: {e})")
-                sys.exit(1)
-
-    if not payload:
-        print("Error: No .docx documents found in documentos/", file=sys.stderr)
-        sys.exit(1)
-
-    # Save cache with metadata
-    cache_data = {
-        "model": EMBEDDING_MODEL,
-        "dimensions": EMBEDDING_DIMENSIONS,
-        "generated_at": datetime.utcnow().isoformat(),
+    return {
+        "model": model,
+        "dimensions": len(payload[0]["embedding"]) if payload else EMBEDDING_DIMENSIONS,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "chunks": payload,
     }
 
-    for cache_file in (CACHE_FILE_ROOT, CACHE_FILE_BACKEND):
-        cache_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(cache_file, "w", encoding="utf-8") as f:
-            json.dump(cache_data, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✓ Cached {len(payload)} chunks to {CACHE_FILE_ROOT}")
-    print(f"✓ Synced cache to {CACHE_FILE_BACKEND}")
-    print(f"  Model: {EMBEDDING_MODEL}")
-    print(f"  Dimensions: {EMBEDDING_DIMENSIONS}")
+def write_cache(cache: dict, targets: tuple[Path, ...]) -> None:
+    """Write atomically to each target so a crash cannot truncate a live cache."""
+    for target in targets:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        tmp = target.with_suffix(target.suffix + ".tmp")
+        tmp.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
+        os.replace(tmp, target)
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--model", default=EMBEDDING_MODEL)
+    parser.add_argument("--kb-dir", type=Path, default=KB_DIR)
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="load and report the corpus without calling the embedding API",
+    )
+    args = parser.parse_args(argv)
+
+    documents = load_documents(args.kb_dir)
+    print(f"loaded {len(documents)} documents from {args.kb_dir}")
+
+    if args.dry_run:
+        by_category: dict[str, int] = {}
+        for doc in documents:
+            by_category[doc["category"]] = by_category.get(doc["category"], 0) + 1
+        for category, count in sorted(by_category.items()):
+            print(f"  {category:<14} {count}")
+        chars = sum(len(d["chunk"]) for d in documents)
+        print(f"  {'total chars':<14} {chars}")
+        return 0
+
+    api_key = os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        print("error: GOOGLE_API_KEY is not set", file=sys.stderr)
+        return 1
+
+    print(f"embedding with {args.model} …")
+    cache = build_cache(documents, api_key, args.model)
+    write_cache(cache, (CACHE_FILE_ROOT, CACHE_FILE_BACKEND))
+
+    print(f"\nwrote {len(cache['chunks'])} embeddings ({cache['dimensions']} dimensions)")
+    print(f"  {CACHE_FILE_ROOT}")
+    print(f"  {CACHE_FILE_BACKEND}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
