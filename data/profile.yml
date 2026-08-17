@@ -292,9 +292,14 @@ projects:
       A retrieval-augmented assistant over a structured profile. The knowledge
       base is a single validated YAML file generated into one document per entity
       — role, project, degree, certification — embedded with Google's
-      gemini-embedding-2. Retrieval is hybrid: dense vectors fused with BM25
-      keyword scores via Reciprocal Rank Fusion, then reranked by the language
-      model. Generation runs on the OpenAI API. The model is given search tools
+      gemini-embedding-2 using the asymmetric query and document task types.
+      Retrieval is hybrid: dense cosine similarity combined with BM25 keyword
+      scores, each min-max normalised and then weighted, with the lexical half
+      deliberately kept light. That choice was measured rather than assumed —
+      Reciprocal Rank Fusion was tried first and scored worse on a golden set of
+      real questions taken from the site's own logs, because discarding score
+      magnitude let a weak keyword match displace a confident semantic one.
+      Generation runs on the OpenAI API. The model is given search tools
       rather than a fixed context, so it decides what to look up and can search
       again when the first pass is thin. A groundedness check compares named
       entities in the answer against the profile vocabulary before the answer is

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from backend.app.profile_schema import Profile, ProfileError, load_profile
+from app.profile_schema import Profile, ProfileError, load_profile
 
 
 def test_accepts_minimal_valid_profile(minimal_profile):

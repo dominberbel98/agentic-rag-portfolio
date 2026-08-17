@@ -45,3 +45,5 @@ migration/
 
 # Generated knowledge base (rebuild with scripts/build_kb.py)
 data/kb/
+embeddings_cache.previous.json
+backend/embeddings_cache.previous.json

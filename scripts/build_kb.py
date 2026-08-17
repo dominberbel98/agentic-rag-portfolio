@@ -31,10 +31,14 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+# `backend` on the path so this imports `app.profile_schema` — the same name the
+# container uses. Importing it as `backend.app.profile_schema` here and `app.
+# profile_schema` there would give two distinct module objects for one file.
+for _path in (REPO_ROOT, REPO_ROOT / "backend"):
+    if str(_path) not in sys.path:
+        sys.path.insert(0, str(_path))
 
-from backend.app.profile_schema import (  # noqa: E402
+from app.profile_schema import (  # noqa: E402
     Certification,
     Education,
     Profile,

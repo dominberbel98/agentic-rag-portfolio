@@ -290,6 +290,10 @@ class Profile(_Strict):
         """
         vocab: set[str] = set()
         vocab.add(self.meta.name)
+        # Contact channels. The assistant is instructed to point recruiters at
+        # them, so they must be attributable — otherwise a perfectly correct
+        # answer gets flagged for naming LinkedIn.
+        vocab.update({"LinkedIn", "GitHub", "email"})
         vocab |= self.skills.all()
         for role in self.roles:
             vocab.add(role.company)

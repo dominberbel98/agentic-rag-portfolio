@@ -15,7 +15,9 @@ class HistoryMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     question: str = Field(..., min_length=1, max_length=8000)
-    top_k: int = Field(default=35, ge=1, le=50)
+    # Advisory only: the agent chooses how much to retrieve per search now.
+    # The old default of 35 exceeded the corpus size, so every query got everything.
+    top_k: int = Field(default=6, ge=1, le=50)
     captcha_token: str | None = Field(None, max_length=2048)
     history: list[HistoryMessage] = Field(default_factory=list, max_length=20)
 

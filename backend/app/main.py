@@ -33,10 +33,10 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load embeddings cache at application startup."""
-    logger.info("Loading embeddings cache on startup...")
-    AgenticRAGService.initialize_cache("embeddings_cache.json")
-    logger.info("Startup complete, cache loaded")
+    """Load the retrieval index and grounding vocabulary at startup."""
+    logger.info("Loading retrieval index on startup...")
+    AgenticRAGService.initialize_cache()
+    logger.info("Startup complete")
     yield
     logger.info("Application shutdown")
 

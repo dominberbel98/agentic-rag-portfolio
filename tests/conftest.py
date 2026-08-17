@@ -99,7 +99,7 @@ def minimal_profile() -> dict:
 @pytest.fixture
 def small_profile(minimal_profile):
     """The minimal profile, validated. Fast: no file I/O."""
-    from backend.app.profile_schema import Profile
+    from app.profile_schema import Profile
 
     return Profile.from_mapping(minimal_profile)
 
@@ -107,7 +107,7 @@ def small_profile(minimal_profile):
 @pytest.fixture(scope="session")
 def real_profile(repo_root):
     """The actual authored profile. Session-scoped — parsing it is not free."""
-    from backend.app.profile_schema import load_profile
+    from app.profile_schema import load_profile
 
     return load_profile(repo_root / "data" / "profile.yml")
 

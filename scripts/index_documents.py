@@ -26,16 +26,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
+for _path in (ROOT_DIR, ROOT_DIR / "backend"):
+    if str(_path) not in sys.path:
+        sys.path.insert(0, str(_path))
+
 KB_DIR = ROOT_DIR / "data" / "kb"
 CACHE_FILE_ROOT = ROOT_DIR / "embeddings_cache.json"
 CACHE_FILE_BACKEND = ROOT_DIR / "backend" / "embeddings_cache.json"
 
-EMBEDDING_MODEL = "gemini-embedding-001"
+# Must match backend/app/config.py's embedding_model. gemini-embedding-2's space
+# is NOT compatible with gemini-embedding-001, so changing it invalidates the
+# whole cache rather than just appending to it.
+EMBEDDING_MODEL = "gemini-embedding-2"
 EMBEDDING_DIMENSIONS = 3072
-
-
-def _api_model(model: str) -> str:
-    return f"models/{model}"
 
 
 def load_documents(kb_dir: Path = KB_DIR) -> list[dict[str, str]]:
@@ -77,27 +80,20 @@ def load_documents(kb_dir: Path = KB_DIR) -> list[dict[str, str]]:
     return documents
 
 
-def embed_text(text: str, api_key: str, model: str = EMBEDDING_MODEL) -> list[float]:
-    """Embed one document for retrieval."""
-    import google.generativeai as genai
-
-    genai.configure(api_key=api_key)
-    response = genai.embed_content(
-        model=_api_model(model),
-        content=text,
-        task_type="RETRIEVAL_DOCUMENT",
-    )
-    return response["embedding"]
-
-
 def build_cache(
     documents: list[dict[str, str]], api_key: str, model: str = EMBEDDING_MODEL
 ) -> dict:
+    """Embed every document with the same service the backend queries with, so
+    indexing and retrieval cannot drift apart on model or task type."""
+    from app.services.embedding_service import EmbeddingService
+
+    embedder = EmbeddingService(api_key, model)
+
     payload = []
     total = len(documents)
     for index, doc in enumerate(documents, start=1):
         print(f"  [{index}/{total}] {doc['id']} …", end=" ", flush=True)
-        embedding = embed_text(doc["chunk"], api_key, model)
+        embedding = embedder.embed_document(doc["chunk"])
         payload.append(
             {
                 "id": doc["id"],
