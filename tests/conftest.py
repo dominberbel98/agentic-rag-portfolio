@@ -71,12 +71,16 @@ _MINIMAL = {
         }
     ],
     "skills": {
-        "languages": ["Python"],
+        "programming": ["Python"],
         "data": [],
         "cloud": [],
         "ml": [],
         "bi": ["Power BI"],
     },
+    "languages": [
+        {"language": "Spanish", "level": "Native"},
+        {"language": "English", "level": "Professional", "evidence": "Erasmus in Slovakia."},
+    ],
     "narrative": {
         "adaptability": "Has lived and worked independently since eighteen.",
         "resilience": "Changed career into data science deliberately.",

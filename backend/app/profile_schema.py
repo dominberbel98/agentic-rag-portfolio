@@ -10,10 +10,17 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from typing import Annotated, Any, Literal
+from typing import Annotated, Any, ClassVar
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
+from pydantic import (
+    BaseModel,
+    BeforeValidator,
+    ConfigDict,
+    Field,
+    ValidationError,
+    model_validator,
+)
 
 __all__ = [
     "Profile",
@@ -25,13 +32,24 @@ __all__ = [
     "Project",
     "Certification",
     "Skills",
+    "SpokenLanguage",
     "Grade",
     "Narrative",
 ]
 
 # "2025" or "2025-10". Day precision is noise for a CV.
+#
+# YAML parses a bare `2016` as an int and `2016-10` as a string, so the same
+# field arrives as two types depending on precision. Coerce rather than forcing
+# the author to remember quotes — `start: 2016` is the natural thing to write.
 _DATE_RE = r"^\d{4}(-(0[1-9]|1[0-2]))?$"
-YearMonth = Annotated[str, Field(pattern=_DATE_RE)]
+
+
+def _stringify_year(value: Any) -> Any:
+    return str(value) if isinstance(value, int) else value
+
+
+YearMonth = Annotated[str, BeforeValidator(_stringify_year), Field(pattern=_DATE_RE)]
 
 NARRATIVE_KEYS = ("adaptability", "resilience", "teamwork", "career_change")
 
@@ -121,14 +139,29 @@ class Certification(_Strict):
 
 
 class Skills(_Strict):
-    languages: list[str] = Field(default_factory=list)
+    """Technical skills. `programming` is languages-as-in-code; spoken languages
+    live in `Profile.languages`, since they are asked about separately and often."""
+
+    programming: list[str] = Field(default_factory=list)
     data: list[str] = Field(default_factory=list)
     cloud: list[str] = Field(default_factory=list)
     ml: list[str] = Field(default_factory=list)
     bi: list[str] = Field(default_factory=list)
+    web: list[str] = Field(default_factory=list)
+
+    CATEGORIES: ClassVar[tuple[str, ...]] = ("programming", "data", "cloud", "ml", "bi", "web")
 
     def all(self) -> set[str]:
-        return set(self.languages) | set(self.data) | set(self.cloud) | set(self.ml) | set(self.bi)
+        out: set[str] = set()
+        for category in self.CATEGORIES:
+            out |= set(getattr(self, category))
+        return out
+
+
+class SpokenLanguage(_Strict):
+    language: str
+    level: str
+    evidence: str | None = None
 
 
 class Narrative(_Strict):
@@ -148,6 +181,7 @@ class Profile(_Strict):
     projects: list[Project] = Field(min_length=1)
     certifications: list[Certification] = Field(default_factory=list)
     skills: Skills
+    languages: list[SpokenLanguage] = Field(min_length=1)
     narrative: Narrative
 
     # --- cross-field rules --------------------------------------------------
@@ -244,6 +278,7 @@ class Profile(_Strict):
         ids += [f"education:{e.id}" for e in self.education]
         ids += [f"project:{p.id}" for p in self.projects]
         ids += [f"certification:{c.id}" for c in self.certifications]
+        ids.append("languages:spoken")
         ids += [f"narrative:{key}" for key, _ in self.narrative.items()]
         return ids
 
@@ -268,6 +303,8 @@ class Profile(_Strict):
             vocab.add(cert.title)
             vocab.add(cert.issuer)
             vocab.update(cert.skills)
+        for lang in self.languages:
+            vocab.add(lang.language)
         return {v for v in vocab if v}
 
 
