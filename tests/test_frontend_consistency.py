@@ -260,3 +260,66 @@ def test_la_liga_data_carries_the_fields_the_dashboard_renders(repo_root):
         assert "form" in team
         assert team.get("teamId") is not None
         assert team.get("zone") in ZONES
+
+
+# --- contrast ----------------------------------------------------------------
+#
+# The CRT palette is fixed, so contrast is governed entirely by the opacity the
+# text is drawn at. Measured against the #0e0e0e background: phosphor green needs
+# /55 to clear WCAG AA for normal text (4.79:1), and the red #FF4136 only reaches
+# 5.57:1 at full strength, so any reduction on red fails. Most text on this site
+# is 0.55-0.7rem, which is "normal" for WCAG purposes, not "large".
+
+_SURFACE = (14, 14, 14)
+MIN_RATIO = 4.5
+
+
+def _relative_luminance(rgb):
+    def channel(value):
+        v = value / 255
+        return v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4
+
+    r, g, b = (channel(c) for c in rgb)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def contrast_ratio(foreground, background=_SURFACE):
+    high, low = sorted(
+        (_relative_luminance(foreground), _relative_luminance(background)), reverse=True
+    )
+    return (high + 0.05) / (low + 0.05)
+
+
+def _blend(hex_colour: str, opacity: float, background=_SURFACE):
+    fg = tuple(int(hex_colour[i : i + 2], 16) for i in (1, 3, 5))
+    return tuple(round(f * opacity + b * (1 - opacity)) for f, b in zip(fg, background))
+
+
+def test_the_contrast_helper_agrees_with_known_values():
+    """Sanity-check the maths before trusting it: white on black is 21:1."""
+    assert contrast_ratio((255, 255, 255), (0, 0, 0)) == pytest.approx(21.0, abs=0.01)
+    assert contrast_ratio((0, 255, 65)) == pytest.approx(14.14, abs=0.01)
+
+
+def test_every_text_colour_clears_wcag_aa(component_sources):
+    offenders = []
+    for name, source in component_sources.items():
+        for number, line in enumerate(source.splitlines(), start=1):
+            for hex_colour, opacity in re.findall(
+                r"text-\[(#[0-9A-Fa-f]{6})\]/(\d+)", line
+            ):
+                ratio = contrast_ratio(_blend(hex_colour, int(opacity) / 100))
+                if ratio < MIN_RATIO:
+                    offenders.append(
+                        f"{name}:{number}: {hex_colour}/{opacity} = {ratio:.2f}:1"
+                    )
+    assert not offenders, (
+        f"text below {MIN_RATIO}:1 against the surface:\n" + "\n".join(offenders)
+    )
+
+
+def test_full_strength_palette_colours_are_all_usable_as_text():
+    """A colour that fails even at 100% could not be fixed by raising opacity."""
+    for hex_colour in ("#00FF41", "#FFD700", "#FF4136", "#00BFFF"):
+        rgb = tuple(int(hex_colour[i : i + 2], 16) for i in (1, 3, 5))
+        assert contrast_ratio(rgb) >= MIN_RATIO, f"{hex_colour} fails even at full opacity"

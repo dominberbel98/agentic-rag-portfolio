@@ -114,6 +114,26 @@ def chat_stream(payload: ChatRequest, request: Request):
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
 
+@router.get("/meta")
+def meta() -> dict[str, object]:
+    """Public, non-sensitive facts about the running assistant.
+
+    This exists so the footer can show real numbers instead of the decorative
+    ones it used to display ("OPTIMIZER: ADAM", "LEARNING_RATE: 0.001"). Nothing
+    here is a secret: the retrieval architecture and both model names are already
+    described publicly in the profile the assistant answers from. Deliberately
+    absent: environment name, paths, budgets, usage counts and anything that
+    would help someone probe the deployment.
+    """
+    index = AgenticRAGService._get_index()
+    return {
+        "documents": len(index),
+        "vocabulary": len(index.vocabulary),
+        "embeddingModel": index.model,
+        "chatModel": settings.openai_model,
+    }
+
+
 def _check_admin_key(x_admin_key: str) -> None:
     """Timing-safe admin key check to prevent timing attacks."""
     if not settings.admin_read_key:

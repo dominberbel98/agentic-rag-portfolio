@@ -138,3 +138,52 @@ body {
 .recharts-tooltip-wrapper {
   outline: none;
 }
+
+/* ── Mascot ─────────────────────────────────────────────────────────────────
+ *
+ * Docked inside the content area, clear of the sidebar. It previously sat at
+ * left: 20px with z-index 60 over the z-index 40 navigation, so it covered the
+ * menu — most visibly on short laptop screens, where its 72% vertical anchor
+ * landed on the nav items.
+ *
+ * Animated in CSS rather than with Lottie or Rive: those add 50-60 KB to a
+ * bundle already flagged as too large, and a flat vector character would read as
+ * a sticker pasted onto a phosphor terminal. Keyframes on the existing glyph
+ * cost nothing and stay in the aesthetic.
+ */
+/* Not positioned: it is an ordinary block at the foot of the sidebar, so it
+ * participates in that column's layout and cannot overlap anything. */
+
+/* Still hidden on a short viewport, where the nav itself needs the room. */
+@media (max-height: 700px) {
+  .mascot-dock { display: none !important; }
+}
+
+/* Idle float. Deliberately slow and small — it should read as a standby
+ * indicator, not as something demanding attention. */
+@keyframes mascot-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+.mascot-bob { animation: mascot-bob 3.2s ease-in-out infinite; }
+
+/* Antenna: a slow blink with a phosphor bloom, matching the CRT flicker. */
+@keyframes mascot-antenna {
+  0%, 42%  { opacity: 1;    box-shadow: 0 0 6px 1px rgba(0, 255, 65, 0.8); }
+  50%      { opacity: 0.25; box-shadow: 0 0 2px 0 rgba(0, 255, 65, 0.3); }
+  58%, 100%{ opacity: 1;    box-shadow: 0 0 6px 1px rgba(0, 255, 65, 0.8); }
+}
+.mascot-antenna { animation: mascot-antenna 2.4s ease-in-out infinite; }
+
+/* A newly added animation has to honour the preference. This covers the mascot
+ * only; the pre-existing flicker, scanline and matrix animations are still
+ * unguarded site-wide. */
+@media (prefers-reduced-motion: reduce) {
+  .mascot-bob,
+  .mascot-antenna {
+    animation: none;
+  }
+  .mascot-antenna {
+    box-shadow: 0 0 6px 1px rgba(0, 255, 65, 0.8);
+  }
+}

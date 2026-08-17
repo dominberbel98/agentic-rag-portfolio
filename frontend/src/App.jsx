@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chat from "./components/Chat";
 import { t as tr } from "./i18n/en";
+import { getTelemetry, loadBackendMeta, subscribeTelemetry } from "./lib/telemetry";
 import Visualizaciones from "./components/Visualizaciones";
 import ModelosPredictivos from "./components/ModelosPredictivos";
 import ModelosScoring from "./components/ModelosScoring";
@@ -31,7 +32,7 @@ function NavList({ activeSection, modelsOpen, onToggleModels, onSelect, hover })
   const transition = hover ? " transition-colors" : "";
   const activeCls   = "bg-[#00FF41]/10 text-[#00FF41] border-l-4 border-[#00FF41]";
   const inactiveCls = (sub) =>
-    `${sub ? "text-[#00FF41]/35" : "text-[#00FF41]/40"} ${
+    `${sub ? "text-[#00FF41]/60" : "text-[#00FF41]/65"} ${
       hover ? "hover:bg-[#00FF41]/5 hover:text-[#00FF41]" : ""
     } border-l-4 border-transparent`;
 
@@ -76,10 +77,23 @@ function NavList({ activeSection, modelsOpen, onToggleModels, onSelect, hover })
   });
 }
 
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  `${window.location.protocol}//api.${window.location.hostname.replace(/^www\./, "")}`;
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("chat_cv");
   const [modelsOpen, setModelsOpen] = useState(false);
+  const [telemetry, setTelemetryState] = useState(getTelemetry);
+  const [mascotVisible, setMascotVisible] = useState(true);
+
+  // The footer reports what the backend actually is, so ask it once and then
+  // follow the store that Chat updates after every answer.
+  useEffect(() => {
+    loadBackendMeta(API_URL);
+    return subscribeTelemetry(setTelemetryState);
+  }, []);
 
   useEffect(() => {
     if (MODEL_IDS.includes(activeSection)) setModelsOpen(true);
@@ -129,7 +143,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
         <div className="md:hidden fixed top-14 left-0 w-full z-[45] bg-[#0e0e0e]/95 backdrop-blur-xl border-b border-[#00FF41]/15 font-headline text-[0.75rem] uppercase max-h-[calc(100vh-56px)] overflow-y-auto scrollbar-hide">
           <div className="px-4 py-3 border-b border-[#00FF41]/10">
             <div className="text-[#00FF41] font-bold">{tr.app.workspace}</div>
-            <div className="text-[#00FF41]/40 tracking-widest text-[0.65rem] mt-0.5">{tr.app.session}</div>
+            <div className="text-[#00FF41]/65 tracking-widest text-[0.65rem] mt-0.5">{tr.app.session}</div>
           </div>
           <NavList
             activeSection={activeSection}
@@ -150,10 +164,10 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       )}
 
       {/* Side Nav — desktop */}
-      <aside className="fixed left-0 top-16 h-[calc(100vh-64px)] hidden md:flex flex-col z-40 bg-[#0e0e0e] w-64 border-r border-[#00FF41]/15 font-headline text-[0.75rem] uppercase">
+      <aside className="fixed left-0 top-16 bottom-8 hidden md:flex flex-col z-40 bg-[#0e0e0e] w-64 border-r border-[#00FF41]/15 font-headline text-[0.75rem] uppercase">
         <div className="p-6 border-b border-[#00FF41]/10">
           <div className="text-[#00FF41] font-bold text-lg">{tr.app.workspace}</div>
-          <div className="text-[#00FF41]/40 tracking-widest mt-1">{tr.app.session}</div>
+          <div className="text-[#00FF41]/65 tracking-widest mt-1">{tr.app.session}</div>
         </div>
         <div className="flex-1 py-4 overflow-y-auto scrollbar-hide">
           <NavList
@@ -164,6 +178,40 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
             hover
           />
         </div>
+
+        {/*
+          Mascot, docked in the sidebar's own empty space.
+
+          It was `fixed top-[72%] left-[20px] z-[60]` over a `z-40` sidebar that
+          is `left-0 w-64`, so it drew on top of the navigation — worst on a short
+          laptop screen, where 72% landed on the menu items. Moving it into the
+          content area only traded one overlap for another: it then covered the
+          chat composer. The sidebar has ample unused vertical space below four
+          nav items, and nothing else competes for it, so it cannot overlap
+          anything here at any viewport width.
+        */}
+        {mascotVisible && (
+          <div className="mascot-dock shrink-0 border-t border-[#00FF41]/10 p-4">
+            <div className="flex items-start gap-2">
+              <span className="material-symbols-outlined text-[#00FF41] text-3xl mascot-bob drop-shadow-[0_0_8px_rgba(0,255,65,0.6)] shrink-0">
+                smart_toy
+              </span>
+              <span className="mascot-antenna h-1.5 w-1.5 bg-[#00FF41] rounded-full mt-1 shrink-0" />
+              <button
+                type="button"
+                onClick={() => setMascotVisible(false)}
+                aria-label={tr.app.mascotDismiss}
+                title={tr.app.mascotDismiss}
+                className="ml-auto w-5 h-5 flex items-center justify-center text-[#00FF41]/70 hover:text-[#00FF41] hover:bg-[#00FF41]/10 rounded shrink-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#00FF41]"
+              >
+                ✕
+              </button>
+            </div>
+            <p className="mt-2 text-[#00FF41]/75 text-[0.65rem] font-headline uppercase leading-snug normal-case">
+              {tr.app.mascot}
+            </p>
+          </div>
+        )}
       </aside>
 
       {/* Main Content */}
@@ -181,13 +229,29 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       </main>
 
       {/* Footer Stats */}
-      <footer className="fixed bottom-0 left-0 w-full h-8 bg-surface-container border-t border-[#00FF41]/10 px-3 sm:px-6 flex items-center justify-between z-50 text-[0.55rem] sm:text-[0.6rem] font-headline uppercase text-[#00FF41]/40">
+      <footer className="fixed bottom-0 left-0 w-full h-8 bg-surface-container border-t border-[#00FF41]/10 px-3 sm:px-6 flex items-center justify-between z-50 text-[0.55rem] sm:text-[0.6rem] font-headline uppercase text-[#00FF41]/65">
         <div className="flex gap-2 sm:gap-4">
-          <span>{tr.footer.trainingSet}</span>
-          <span className="hidden md:inline">{tr.footer.optimizer}</span>
-          <span className="hidden sm:inline">{tr.footer.learningRate}</span>
+          <span>
+            {telemetry.documents == null
+              ? tr.footer.indexUnknown
+              : tr.footer.index(telemetry.documents)}
+          </span>
+          {telemetry.chatModel && (
+            <span className="hidden md:inline">{tr.footer.model(telemetry.chatModel)}</span>
+          )}
+          {telemetry.embeddingModel && (
+            <span className="hidden lg:inline">
+              {tr.footer.embeddings(telemetry.embeddingModel)}
+            </span>
+          )}
         </div>
         <div className="flex gap-2 sm:gap-4 items-center">
+          {telemetry.firstTokenMs != null && (
+            <span className="hidden lg:inline">{tr.footer.firstToken(telemetry.firstTokenMs)}</span>
+          )}
+          {telemetry.lastLatencyMs != null && (
+            <span className="hidden sm:inline">{tr.footer.latency(telemetry.lastLatencyMs)}</span>
+          )}
           <span className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-primary flicker" />
             {tr.footer.running}
@@ -196,21 +260,6 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
         </div>
       </footer>
 
-      {/* Mascot — desktop: left rail | mobile: bottom-left corner */}
-      {/* Desktop */}
-      <div className="fixed top-[72%] left-[20px] z-[60] hidden md:flex items-end gap-4 pointer-events-none -translate-y-1/2">
-        <div className="flex flex-col items-start gap-2">
-          <div className="bg-[#00FF41]/10 border border-[#00FF41]/30 p-3 rounded-lg backdrop-blur-md max-w-[220px] shadow-[0_0_15px_rgba(0,255,65,0.1)]">
-            <p className="text-[#00FF41] text-[0.7rem] font-headline uppercase leading-tight">
-              {tr.app.mascot}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#00FF41] text-4xl flicker drop-shadow-[0_0_8px_rgba(0,255,65,0.6)]">smart_toy</span>
-            <div className="h-2 w-2 bg-[#00FF41] rounded-full animate-pulse" />
-          </div>
-        </div>
-      </div>
 
     </>
   );

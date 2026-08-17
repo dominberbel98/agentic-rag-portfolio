@@ -84,7 +84,7 @@ function MetricCards({ data }) {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {cards.map((c) => (
           <div key={c.label} className="border border-[#00FF41]/15 rounded p-3 bg-black/20">
-            <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/50 tracking-widest mb-1">
+            <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">
               {c.label}
             </div>
             <div
@@ -96,7 +96,7 @@ function MetricCards({ data }) {
           </div>
         ))}
       </div>
-      <p className="text-[0.6rem] text-[#00FF41]/30 font-headline mt-3 uppercase">
+      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
         Dataset: {data.dataset.n.toLocaleString()} solicitantes · Tasa de default {(data.dataset.defaultRate * 100).toFixed(1)}% · {data.dataset.trainSize}/{data.dataset.testSize} split estratificado
       </p>
     </div>
@@ -129,7 +129,7 @@ function RocPanel({ roc, auc }) {
           <Area type="monotone" dataKey="tpr" stroke={GREEN} strokeWidth={2} fill="url(#rocFill)" name="TPR" isAnimationActive={false} />
         </AreaChart>
       </ResponsiveContainer>
-      <p className="text-[0.6rem] text-[#00FF41]/30 font-headline mt-1 uppercase">
+      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-1 uppercase">
         {tr.scoring.rocCaption}
       </p>
     </div>
@@ -169,7 +169,7 @@ function ImportancePanel({ rows }) {
           <Bar dataKey="importance" name="Δ AUC" fill={GREEN} fillOpacity={0.65} radius={[0, 4, 4, 0]} />
         </BarChart>
       </ResponsiveContainer>
-      <p className="text-[0.6rem] text-[#00FF41]/30 font-headline mt-1 uppercase">
+      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-1 uppercase">
         {tr.scoring.importanceCaption}
       </p>
     </div>
@@ -276,7 +276,7 @@ function InteractiveScorecard({ weights, levels }) {
 
       {/* Score gauge */}
       <div className="flex flex-col items-center mb-4 p-4 border border-[#00FF41]/15 rounded bg-black/30">
-        <div className="text-[0.6rem] font-headline uppercase text-[#00FF41]/50 tracking-widest mb-1">Credit Score</div>
+        <div className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">Credit Score</div>
         <div
           className="text-5xl sm:text-6xl font-bold font-headline tabular-nums"
           style={{ color: bandColor, textShadow: `0 0 18px ${bandColor}80` }}
@@ -346,7 +346,7 @@ function InteractiveScorecard({ weights, levels }) {
         ))}
       </div>
 
-      <p className="text-[0.55rem] text-[#00FF41]/25 font-headline mt-3 uppercase">
+      <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-3 uppercase">
         Inferencia client-side: sigmoid(β·x) con coeficientes LR exportados · PDO=50, base=600, odds=50
       </p>
     </div>
@@ -364,7 +364,7 @@ function SampleApplicants({ rows }) {
       <div className="overflow-x-auto scrollbar-hide">
         <table className="w-full text-[0.65rem] font-headline uppercase">
           <thead>
-            <tr className="text-[#00FF41]/50 border-b border-[#00FF41]/10">
+            <tr className="text-[#00FF41]/70 border-b border-[#00FF41]/10">
               <th className="py-1.5 px-2 text-center">#</th>
               <th className="py-1.5 px-2 text-left">{tr.scoring.sampleTable.age}</th>
               <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.income}</th>
@@ -383,16 +383,16 @@ function SampleApplicants({ rows }) {
             {rows.map((r, i) => (
               <tr key={i} className="border-b border-[#00FF41]/5 hover:bg-[#00FF41]/5"
                   style={{ borderLeftColor: BAND_COLOR[r.band], borderLeftWidth: 3 }}>
-                <td className="py-1 px-2 text-center text-[#00FF41]/40">{i + 1}</td>
+                <td className="py-1 px-2 text-center text-[#00FF41]/65">{i + 1}</td>
                 <td className="py-1 px-2 text-[#00FF41]/70">{r.age}</td>
                 <td className="py-1 px-2 text-right text-[#00FF41]/70">{r.annual_income.toLocaleString()}€</td>
                 <td className="py-1 px-2 text-right text-[#00FF41]/70">{r.loan_amount.toLocaleString()}€</td>
                 <td className="py-1 px-2 text-right text-[#00FF41]/70">{r.debt_to_income.toFixed(2)}</td>
                 <td className="py-1 px-2 text-right text-[#00FF41]/70">{r.payment_history_pct}%</td>
                 <td className="py-1 px-2 text-right text-[#00FF41]/70">{r.credit_utilization}%</td>
-                <td className="py-1 px-2 text-right text-[#FF4136]/70">{r.derogatory_marks}</td>
-                <td className="py-1 px-2 text-right text-[#00FF41]/50">{(r.prob_default_lr * 100).toFixed(1)}%</td>
-                <td className="py-1 px-2 text-right text-[#00FF41]/50">{(r.prob_default_gbm * 100).toFixed(1)}%</td>
+                <td className="py-1 px-2 text-right text-[#FF4136]">{r.derogatory_marks}</td>
+                <td className="py-1 px-2 text-right text-[#00FF41]/70">{(r.prob_default_lr * 100).toFixed(1)}%</td>
+                <td className="py-1 px-2 text-right text-[#00FF41]/70">{(r.prob_default_gbm * 100).toFixed(1)}%</td>
                 <td className="py-1 px-2 text-center font-bold" style={{ color: BAND_COLOR[r.band] }}>{r.score}</td>
                 <td className="py-1 px-2 text-[#00FF41]/70">{r.band}</td>
               </tr>
@@ -442,10 +442,10 @@ export default function ModelosScoring() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           CREDIT_SCORING_PIPELINE
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
+        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
           Logistic Regression + Gradient Boosting · 5-fold CV + held-out test · scorecard 300–850
         </p>
-        <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
+        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
           Generado: {new Date(data.generatedAt).toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" })}
         </p>
       </div>
@@ -470,10 +470,10 @@ export default function ModelosScoring() {
           </p>
         </div>
         <details className="mt-3">
-          <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/50 cursor-pointer hover:text-[#00FF41]">
+          <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 cursor-pointer hover:text-[#00FF41]">
             {tr.scoring.explainer.detailsSummary}
           </summary>
-          <div className="text-[0.6rem] text-[#00FF41]/50 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
+          <div className="text-[0.6rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
             {tr.scoring.explainer.steps.map((step) => (
               <p key={step}>{step}</p>
             ))}

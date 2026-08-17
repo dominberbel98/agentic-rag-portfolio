@@ -40,7 +40,7 @@ const EmptyPanel = ({ title, icon, message }) => (
       <span className="material-symbols-outlined text-sm mr-2">{icon}</span>
       {title}
     </h3>
-    <p className="text-[0.7rem] text-[#00FF41]/40 font-headline uppercase py-6 text-center">
+    <p className="text-[0.7rem] text-[#00FF41]/65 font-headline uppercase py-6 text-center">
       {message}
     </p>
   </div>
@@ -58,7 +58,7 @@ function StandingsTable({ data }) {
       <div className="overflow-x-auto scrollbar-hide">
         <table className="w-full text-[0.7rem] sm:text-xs font-headline uppercase">
           <thead>
-            <tr className="text-[#00FF41]/50 border-b border-[#00FF41]/10">
+            <tr className="text-[#00FF41]/70 border-b border-[#00FF41]/10">
               <th className="py-2 px-1 text-left">{S.pos}</th>
               <th className="py-2 px-2 text-left">{S.team}</th>
               <th className="py-2 px-1 text-center">{S.played}</th>
@@ -88,12 +88,12 @@ function StandingsTable({ data }) {
                     {team.teamShortName || team.teamName}
                   </span>
                 </td>
-                <td className="py-1.5 px-1 text-center text-[#00FF41]/50">{team.playedGames}</td>
+                <td className="py-1.5 px-1 text-center text-[#00FF41]/70">{team.playedGames}</td>
                 <td className="py-1.5 px-1 text-center text-[#00FF41]/70">{team.won}</td>
-                <td className="py-1.5 px-1 text-center text-[#00FF41]/50">{team.draw}</td>
-                <td className="py-1.5 px-1 text-center text-[#FF4136]/70">{team.lost}</td>
+                <td className="py-1.5 px-1 text-center text-[#00FF41]/70">{team.draw}</td>
+                <td className="py-1.5 px-1 text-center text-[#FF4136]">{team.lost}</td>
                 <td className="py-1.5 px-1 text-center text-[#00FF41]/60">{team.goalsFor}</td>
-                <td className="py-1.5 px-1 text-center text-[#FF4136]/50">{team.goalsAgainst}</td>
+                <td className="py-1.5 px-1 text-center text-[#FF4136]">{team.goalsAgainst}</td>
                 <td
                   className="py-1.5 px-1 text-center"
                   style={{ color: team.goalDifference >= 0 ? GREEN : "#FF4136" }}
@@ -120,7 +120,7 @@ function StandingsTable({ data }) {
                       ))}
                     </span>
                   ) : (
-                    <span className="text-[#00FF41]/20">{S.formEmpty}</span>
+                    <span className="text-[#00FF41]/55">{S.formEmpty}</span>
                   )}
                 </td>
               </tr>
@@ -128,7 +128,7 @@ function StandingsTable({ data }) {
           </tbody>
         </table>
       </div>
-      <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 text-[0.6rem] text-[#00FF41]/40 font-headline uppercase">
+      <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 text-[0.6rem] text-[#00FF41]/65 font-headline uppercase">
         {LEGEND_ZONES.map((zone) => (
           <span key={zone} className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full" style={{ background: zoneColor(zone) }} />
@@ -220,7 +220,7 @@ function AttackVsDefence({ data }) {
           </Scatter>
         </ScatterChart>
       </ResponsiveContainer>
-      <p className="text-[0.6rem] text-[#00FF41]/30 font-headline mt-1 uppercase">{A.caption}</p>
+      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-1 uppercase">{A.caption}</p>
     </div>
   );
 }
@@ -291,7 +291,7 @@ function ResultRateMatrix({ data }) {
           <Bar dataKey="lossRate" name={W.loss} stackId="rate" fill="#FF4136" fillOpacity={0.5} />
         </BarChart>
       </ResponsiveContainer>
-      <div className="flex gap-4 mt-2 text-[0.6rem] text-[#00FF41]/40 font-headline uppercase">
+      <div className="flex gap-4 mt-2 text-[0.6rem] text-[#00FF41]/65 font-headline uppercase">
         {legend.map(([label, color, opacity]) => (
           <span key={label} className="flex items-center gap-1">
             <span className="w-2 h-2" style={{ background: color, opacity }} />
@@ -376,7 +376,7 @@ function Top5Radar({ data }) {
           </span>
         ))}
       </div>
-      <p className="text-[0.6rem] text-[#00FF41]/25 font-headline mt-1 uppercase">{R.caption}</p>
+      <p className="text-[0.6rem] text-[#00FF41]/55 font-headline mt-1 uppercase">{R.caption}</p>
     </div>
   );
 }
@@ -396,7 +396,7 @@ function LatestResults({ results }) {
       <div className="flex flex-col divide-y divide-[#00FF41]/5">
         {results.slice(0, 10).map((match) => (
           <div key={match.id} className="flex items-center gap-2 py-2 text-[0.7rem] font-headline uppercase">
-            <span className="text-[#00FF41]/30 w-9 shrink-0">{R.matchdayShort(match.matchday)}</span>
+            <span className="text-[#00FF41]/60 w-9 shrink-0">{R.matchdayShort(match.matchday)}</span>
             <span className="flex-1 text-right truncate text-[#00FF41]/80">{match.homeName}</span>
             <span className="px-2 font-bold text-[#00FF41] tabular-nums">
               {match.homeGoals}–{match.awayGoals}
@@ -428,15 +428,15 @@ function UpcomingFixtures({ fixtures }) {
         {fixtures.slice(0, 10).map((match) => (
           <div key={match.id} className="flex items-center gap-2 py-2 text-[0.7rem] font-headline uppercase">
             <span className="flex-1 text-right truncate text-[#00FF41]/80">{match.homeName}</span>
-            <span className="px-2 text-[#00FF41]/30">vs</span>
+            <span className="px-2 text-[#00FF41]/60">vs</span>
             <span className="flex-1 truncate text-[#00FF41]/80">{match.awayName}</span>
-            <span className="text-[0.55rem] text-[#00FF41]/35 shrink-0 w-[110px] text-right">
+            <span className="text-[0.55rem] text-[#00FF41]/60 shrink-0 w-[110px] text-right">
               {formatKickoff(match.kickoff)}
             </span>
           </div>
         ))}
       </div>
-      <p className="text-[0.6rem] text-[#00FF41]/25 font-headline mt-2 uppercase">{F.caption}</p>
+      <p className="text-[0.6rem] text-[#00FF41]/55 font-headline mt-2 uppercase">{F.caption}</p>
     </div>
   );
 }
@@ -489,12 +489,12 @@ export default function Visualizaciones() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {L.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
+        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
           {tr.common.season} {data.season} · {tr.common.matchday} {data.matchday}
           {state.phase ? ` · ${tr.seasonPhase[state.phase]}` : ""} · {tr.common.updated}:{" "}
           {formatDateTime(data.updatedAt)}
         </p>
-        <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
+        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
           {L.pipeline}
         </p>
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { t as tr } from "../i18n/en";
+import { setTelemetry } from "../lib/telemetry";
 
 const API_URL =
   import.meta.env.VITE_API_URL ||
@@ -59,11 +60,12 @@ export default function Chat() {
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   }, [messages, loading]);
 
-  const send = async (event) => {
-    event.preventDefault();
-    if (!question.trim() || loading) return;
+  const send = async (event, override) => {
+    event?.preventDefault();
+    const raw = override ?? question;
+    if (!raw.trim() || loading) return;
 
-    const currentQuestion = question.trim();
+    const currentQuestion = raw.trim();
     setQuestion("");
     setLoading(true);
     setMessages((prev) => [...prev, { role: "user", text: currentQuestion }]);
@@ -75,6 +77,11 @@ export default function Chat() {
 
     const assistantIdx = messages.length + 1;
     setMessages((prev) => [...prev, { role: "assistant", text: "", meta: "" }]);
+
+    // Measured client-side, so it is the latency the visitor actually felt —
+    // retrieval, generation and network included.
+    const startedAt = performance.now();
+    let firstTokenAt = null;
 
     try {
       const response = await fetch(`${API_URL}/api/chat/stream`, {
@@ -113,6 +120,7 @@ export default function Chat() {
             setContactEmails(payload.contact_emails || []);
             setContactLinkedin(payload.contact_linkedin || "");
           } else if (payload.token !== undefined) {
+            if (firstTokenAt === null) firstTokenAt = performance.now();
             setMessages((prev) => {
               const updated = [...prev];
               updated[assistantIdx] = {
@@ -136,6 +144,10 @@ export default function Chat() {
       });
     } finally {
       setLoading(false);
+      setTelemetry({
+        lastLatencyMs: Math.round(performance.now() - startedAt),
+        firstTokenMs: firstTokenAt === null ? null : Math.round(firstTokenAt - startedAt),
+      });
     }
   };
 
@@ -182,7 +194,7 @@ export default function Chat() {
         {/* Boot log */}
         <div className="space-y-1 hidden sm:block">
           {tr.chat.boot.map((line) => (
-            <div key={line} className="text-on-surface-variant opacity-50 text-[0.65rem] font-mono">{line}</div>
+            <div key={line} className="text-on-surface-variant opacity-80 text-[0.65rem] font-mono">{line}</div>
           ))}
         </div>
 
@@ -202,6 +214,30 @@ export default function Chat() {
                 analysis, and machine learning architectures. What insights can I extract from the
                 portfolio for you today?
               </p>
+            </div>
+
+            {/* Suggested openers. A visitor arriving cold does not know what this
+                thing can answer, and the logs show the same few questions asked
+                over and over — so offer those. Styled as terminal commands to
+                match the composer prompt below. */}
+            <div className="mt-2 flex flex-col gap-1.5 max-w-[95%] sm:max-w-[90%]">
+              <span className="text-[0.6rem] font-bold tracking-widest text-[#00FF41]/60">
+                {tr.chat.suggestionsLabel}
+              </span>
+              <div className="flex flex-col gap-1.5">
+                {tr.chat.suggestions.map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    disabled={loading}
+                    onClick={() => send(null, suggestion)}
+                    className="group flex items-start gap-2 text-left px-3 py-2 border border-[#00FF41]/20 bg-[#00FF41]/[0.03] text-[0.7rem] font-headline text-[#00FF41]/75 hover:bg-[#00FF41]/10 hover:border-[#00FF41]/40 hover:text-[#00FF41] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#00FF41] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <span className="text-[#00FF41]/60 group-hover:text-[#00FF41] shrink-0">&gt;</span>
+                    <span>{suggestion}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}

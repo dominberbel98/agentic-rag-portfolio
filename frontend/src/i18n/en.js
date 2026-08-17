@@ -18,8 +18,10 @@ export const t = {
     workspace: "DS_WORKSPACE",
     session: "SESSION: DATA_EXPLORER",
     menuLabel: "Menu",
+    // Kept short: the sidebar column is 256px wide.
     mascot:
-      "Hi! Try the AI assistant, or explore the menu: La Liga visualisations, models (La Liga prediction, credit scoring, product recommender) and my certifications.",
+      "Ask the assistant anything about my work — or explore the La Liga dashboard, the models and my certifications.",
+    mascotDismiss: "Dismiss",
   },
 
   nav: {
@@ -32,10 +34,17 @@ export const t = {
     certificaciones: "certifications",
   },
 
+  // Real telemetry, not decoration. This used to read "TRAINING_SET: 100% ·
+  // OPTIMIZER: ADAM · LEARNING_RATE: 0.001", none of which described anything
+  // that existed.
   footer: {
-    trainingSet: "TRAINING_SET: 100%",
-    optimizer: "OPTIMIZER: ADAM",
-    learningRate: "LEARNING_RATE: 0.001",
+    index: (documents) => `INDEX: ${documents} DOCS`,
+    indexUnknown: "INDEX: —",
+    model: (name) => `MODEL: ${name.toUpperCase()}`,
+    embeddings: (name) => `EMBED: ${name.toUpperCase()}`,
+    latency: (ms) => `LAST ANSWER: ${ms} MS`,
+    firstToken: (ms) => `TTFT: ${ms} MS`,
+    idle: "IDLE",
     running: "RUNNING_INFERENCE",
     domain: "domingoberbel.com",
   },
@@ -51,6 +60,17 @@ export const t = {
     placeholder: "ASK ABOUT MODELS, TOOLS, OR EXPERIENCE...",
     send: "Send",
     connectionError: "Could not reach the backend.",
+
+    // Drawn from the site's own logs: "a que se dedica" is by far the most asked
+    // question, followed by education and achievements. The fourth is the one a
+    // recruiter actually wants answered but nobody thought to type.
+    suggestionsLabel: "TRY:",
+    suggestions: [
+      "What does Domingo do, and what is he best at?",
+      "What did he study, and with what grades?",
+      "What has he achieved in his roles so far?",
+      "Would he fit a data science role on my team?",
+    ],
     boot: [
       "[0.00104] IMPORTING PANDAS AS PD...",
       "[0.00255] LOADING PRETRAINED_MODELS/BERBEL_CV.PKL...",

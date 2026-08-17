@@ -120,7 +120,7 @@ function GoalProbabilities({ data }) {
               style={{ width: `${t[dataKey]}%`, background: color, opacity: 0.7 }}
             />
           </div>
-          <span className="text-[0.6rem] font-headline text-[#00FF41]/50 w-10 text-right">{t[dataKey]}%</span>
+          <span className="text-[0.6rem] font-headline text-[#00FF41]/70 w-10 text-right">{t[dataKey]}%</span>
         </div>
       ))}
     </div>
@@ -177,7 +177,7 @@ function FeatureImportance({ importance }) {
           <Bar dataKey="importance" name="Importancia" fill={GREEN} fillOpacity={0.6} radius={[0, 4, 4, 0]} />
         </BarChart>
       </ResponsiveContainer>
-      <p className="text-[0.55rem] text-[#00FF41]/25 font-headline mt-1 uppercase">
+      <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-1 uppercase">
         {tr.predictions.importanceCaption}
       </p>
     </div>
@@ -195,7 +195,7 @@ function ProjectedTable({ data }) {
       <div className="overflow-x-auto scrollbar-hide">
         <table className="w-full text-[0.65rem] sm:text-xs font-headline uppercase">
           <thead>
-            <tr className="text-[#00FF41]/50 border-b border-[#00FF41]/10">
+            <tr className="text-[#00FF41]/70 border-b border-[#00FF41]/10">
               <th className="py-1.5 px-1 text-left">#</th>
               <th className="py-1.5 px-2 text-left">{tr.predictions.projectedTable.team}</th>
               <th className="py-1.5 px-1 text-center">{tr.predictions.projectedTable.current}</th>
@@ -216,11 +216,11 @@ function ProjectedTable({ data }) {
                     <img src={t.teamCrest} alt="" className="w-4 h-4" loading="lazy" />
                     <span className="text-[#00FF41]/80 truncate max-w-[90px]">{t.teamShortName}</span>
                   </td>
-                  <td className="py-1 px-1 text-center text-[#00FF41]/40">{t.currentPoints}</td>
+                  <td className="py-1 px-1 text-center text-[#00FF41]/65">{t.currentPoints}</td>
                   <td className="py-1 px-1 text-center font-bold text-[#00FF41]">{t.mc.pointsMean}</td>
-                  <td className="py-1 px-1 text-center text-[#00FF41]/40">[{t.mc.pointsP10}–{t.mc.pointsP90}]</td>
-                  <td className="py-1 px-1 text-center text-[#00FF41]/50">{t.mc.gfMean}</td>
-                  <td className="py-1 px-1 text-center text-[#FF4136]/50">{t.mc.gaMean}</td>
+                  <td className="py-1 px-1 text-center text-[#00FF41]/65">[{t.mc.pointsP10}–{t.mc.pointsP90}]</td>
+                  <td className="py-1 px-1 text-center text-[#00FF41]/70">{t.mc.gfMean}</td>
+                  <td className="py-1 px-1 text-center text-[#FF4136]">{t.mc.gaMean}</td>
                 </tr>
               );
             })}
@@ -274,14 +274,14 @@ export default function ModelosPredictivos() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {tr.predictions.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
+        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
           {tr.predictions.subtitle(data.season, data.matchday, data.totalMatches, data.nSimulations.toLocaleString())}
         </p>
-        <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
+        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
           {tr.predictions.modelLine(data.model, data.nSimulations.toLocaleString())}
         </p>
         {data.shrinkageK != null && (
-          <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
+          <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
             {tr.predictions.shrinkageNote(data.shrinkageK)}
           </p>
         )}

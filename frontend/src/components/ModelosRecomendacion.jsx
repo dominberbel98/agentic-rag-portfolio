@@ -101,9 +101,9 @@ function ProductCard({ product, selected, onToggle, similarity }) {
           </div>
           <div className="flex items-center gap-2 mt-0.5 text-[0.55rem] font-headline uppercase">
             <span style={{ color }}>{product.category}</span>
-            <span className="text-[#00FF41]/30">·</span>
-            <span className="text-[#00FF41]/50">€{product.price}</span>
-            <span className="text-[#00FF41]/30">·</span>
+            <span className="text-[#00FF41]/60">·</span>
+            <span className="text-[#00FF41]/70">€{product.price}</span>
+            <span className="text-[#00FF41]/60">·</span>
             <span className="text-[#FFD700]/70">★ {product.rating}</span>
           </div>
           {similarity !== undefined && (
@@ -112,7 +112,7 @@ function ProductCard({ product, selected, onToggle, similarity }) {
             </div>
           )}
           {similarity !== undefined && (
-            <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/50 mt-0.5">
+            <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/70 mt-0.5">
               similarity {similarity.toFixed(3)}
             </div>
           )}
@@ -138,7 +138,7 @@ function PersonaSummary({ personas, onApply }) {
           <div key={p.persona} className="flex items-center justify-between border border-[#00FF41]/15 rounded px-3 py-2 bg-black/20">
             <div>
               <div className="text-[0.7rem] font-headline uppercase text-[#00FF41] font-bold">{p.persona}</div>
-              <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/40">
+              <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/65">
                 {tr.recommender.personaItems(p.history.length, p.diversity.toFixed(2))}
               </div>
             </div>
@@ -304,10 +304,10 @@ export default function ModelosRecomendacion() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {tr.recommender.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/40 font-headline uppercase mt-1">
+        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
           {tr.recommender.subtitle}
         </p>
-        <p className="text-[0.6rem] text-[#00FF41]/25 font-headline uppercase mt-0.5">
+        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
           {tr.recommender.stats(data.catalog.length, data.categories.length, data.featureMatrix[0].length, (data.metrics.catalogCoverage * 100).toFixed(0))}
         </p>
       </div>
@@ -332,10 +332,10 @@ export default function ModelosRecomendacion() {
           </p>
         </div>
         <details className="mt-3">
-          <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/50 cursor-pointer hover:text-[#00FF41]">
+          <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 cursor-pointer hover:text-[#00FF41]">
             {tr.recommender.explainer.detailsSummary}
           </summary>
-          <div className="text-[0.6rem] text-[#00FF41]/50 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
+          <div className="text-[0.6rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
             {tr.recommender.explainer.steps.map((step) => (
               <p key={step}>{step}</p>
             ))}
@@ -398,7 +398,7 @@ export default function ModelosRecomendacion() {
             {tr.recommender.recommendations(topN)}
           </h3>
           {selected.size === 0 && (
-            <div className="text-[0.7rem] font-headline uppercase text-[#00FF41]/40 py-8 text-center">
+            <div className="text-[0.7rem] font-headline uppercase text-[#00FF41]/65 py-8 text-center">
               {tr.recommender.emptySelection}
             </div>
           )}
@@ -433,7 +433,7 @@ export default function ModelosRecomendacion() {
         )}
       </div>
 
-      <p className="text-[0.55rem] text-[#00FF41]/25 font-headline mt-4 uppercase">
+      <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-4 uppercase">
         {tr.recommender.explainCaption}
       </p>
 
