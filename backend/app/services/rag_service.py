@@ -60,7 +60,14 @@ class AgenticRAGService:
         taking the service offline.
         """
         primary = Path(cache_path or settings.embeddings_cache_path)
+
         vocabulary = Path(vocabulary_path or settings.vocabulary_path)
+        if not vocabulary.exists() and not vocabulary_path:
+            # Container layout puts it beside the app; a checkout puts it under
+            # data/kb/. Try both rather than silently losing grounding.
+            fallback = Path(settings.vocabulary_path_fallback)
+            if fallback.exists():
+                vocabulary = fallback
 
         index = RetrievalIndex.load(primary, vocabulary)
         if index.is_empty:

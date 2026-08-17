@@ -52,6 +52,12 @@ DEFAULT_PROFILE = REPO_ROOT / "data" / "profile.yml"
 DEFAULT_KB_DIR = REPO_ROOT / "data" / "kb"
 DEFAULT_FRONTEND_DIR = REPO_ROOT / "frontend" / "public" / "data"
 
+# The Docker build context is `backend/`, so anything the running service needs
+# has to sit inside it. `data/kb/` does not, and shipping without the vocabulary
+# would silently degrade the groundedness check to permissive — losing the
+# protection without any error to notice.
+BACKEND_VOCABULARY = REPO_ROOT / "backend" / "vocabulary.json"
+
 _MONTHS = (
     "January",
     "February",
@@ -339,6 +345,9 @@ def build(profile: Profile, out_dir: Path, frontend_dir: Path) -> BuildResult:
             written.append(_slug(entity_id))
 
         vocabulary_size = _write_vocabulary(profile, tmp_dir / "vocabulary.json")
+        # Second copy inside the Docker build context, for the running service.
+        BACKEND_VOCABULARY.parent.mkdir(parents=True, exist_ok=True)
+        _write_vocabulary(profile, BACKEND_VOCABULARY)
 
         frontend_dir.mkdir(parents=True, exist_ok=True)
         frontend_file = frontend_dir / "profile.json"

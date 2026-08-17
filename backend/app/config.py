@@ -28,7 +28,10 @@ class Settings(BaseSettings):
     # so a bad reindex cannot take the service down.
     embeddings_cache_path: str = "embeddings_cache.json"
     embeddings_cache_fallback: str = "embeddings_cache.previous.json"
-    vocabulary_path: str = "data/kb/vocabulary.json"
+    # In the container this sits beside the app; in a checkout it is under
+    # data/kb/. initialize_cache tries the configured path then the other.
+    vocabulary_path: str = "vocabulary.json"
+    vocabulary_path_fallback: str = "data/kb/vocabulary.json"
 
     # Product guardrails
     contact_emails: str = ""
