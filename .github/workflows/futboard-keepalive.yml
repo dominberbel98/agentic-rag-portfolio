@@ -1,0 +1,33 @@
+# Weekly touch of the FUTBOARD database.
+#
+# This is insurance, not a requirement. Neon's free plan suspends the compute
+# after five minutes of inactivity, but suspension is a pause: the data stays
+# and the next connection wakes it in about half a second. There is no general
+# policy of deleting idle free projects — the "inactive for 90 days" rule that
+# circulates applies only to Neon's deprecated Azure regions, and this project
+# is in aws-eu-central-1.
+#
+# What this must NOT become is a warm-keeping ping. The free plan allows 100
+# CU-hours per project per month and the smallest compute is 0.25 CU, so a
+# database kept awake around the clock costs 0.25 x 730 = 182 CU-hours and runs
+# out mid-month. Weekly is deliberate: frequent enough to prove the endpoint
+# still works, rare enough to cost nothing.
+name: FUTBOARD keepalive
+
+on:
+  schedule:
+    - cron: "17 6 * * 1" # Mondays, 06:17 UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Touch the FUTBOARD database
+        run: |
+          response=$(curl -fsS --max-time 60 https://api.domingoberbel.com/api/futboard/health)
+          echo "$response"
+          echo "$response" | grep -q '"reachable":true' || {
+            echo "FUTBOARD reported the database as unreachable."
+            exit 1
+          }

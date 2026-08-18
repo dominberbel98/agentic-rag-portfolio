@@ -44,6 +44,19 @@ class Settings(BaseSettings):
     # Captcha (Cloudflare Turnstile)
     turnstile_secret_key: str | None = None
 
+    # FUTBOARD (Neon Postgres). Unset is a supported state, not an error: the
+    # endpoints answer 503 and the frontend says so, which keeps the rest of the
+    # site — chat, retrieval, the static models — working with no database at all.
+    # Use the -pooler host. Neon suspends the compute after 5 minutes of
+    # inactivity, so a direct connection is dropped between visits and the
+    # pooler is what makes reconnecting cheap.
+    futboard_database_url: str | None = None
+    # Writes are open by design (no access code), so the per-IP write ceiling is
+    # the only thing standing between the tables and a bored scraper.
+    futboard_max_writes_per_minute_per_ip: int = 12
+    futboard_max_teams: int = 200
+    futboard_max_players: int = 500
+
     # extra="ignore" on purpose. The container's environment is managed
     # separately from this code (Container Apps env vars and secrets), so a
     # variable that outlives the field that read it must not crash startup.

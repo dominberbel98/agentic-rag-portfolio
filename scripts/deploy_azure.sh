@@ -153,6 +153,9 @@ add_secret openai-api-key "${OPENAI_API_KEY:-}"
 add_secret google-api-key "${GOOGLE_API_KEY:-}"
 add_secret admin-read-key "${ADMIN_READ_KEY:-}"
 add_secret turnstile-secret-key "${TURNSTILE_SECRET_KEY:-}"
+# FUTBOARD talks to Neon. Optional: leaving it unset ships a backend whose
+# FUTBOARD endpoints answer 503 while everything else works normally.
+add_secret futboard-database-url "${FUTBOARD_DATABASE_URL:-}"
 
 if [[ ${#SECRET_ARGS[@]} -gt 0 ]]; then
   az containerapp secret set \
@@ -180,6 +183,8 @@ BACKEND_ENV_VARS=(
 [[ -n "${ADMIN_READ_KEY:-}" ]] && BACKEND_ENV_VARS+=("ADMIN_READ_KEY=secretref:admin-read-key")
 [[ -n "${TURNSTILE_SECRET_KEY:-}" ]] && \
   BACKEND_ENV_VARS+=("TURNSTILE_SECRET_KEY=secretref:turnstile-secret-key")
+[[ -n "${FUTBOARD_DATABASE_URL:-}" ]] && \
+  BACKEND_ENV_VARS+=("FUTBOARD_DATABASE_URL=secretref:futboard-database-url")
 
 # There is deliberately no AZURE_OPENAI_* or AZURE_SEARCH_* block. Both resources
 # were deleted from the subscription; generation runs against the OpenAI API
@@ -197,7 +202,7 @@ az containerapp update \
 echo
 echo "Comprobando que ninguna credencial quedó en texto plano..."
 LEAKED=$(az containerapp show --name "$AZ_BACKEND_APP" --resource-group "$AZ_RESOURCE_GROUP" \
-  --query "properties.template.containers[0].env[?value!=null && (contains(name,'KEY') || contains(name,'SECRET'))].name" \
+  --query "properties.template.containers[0].env[?value!=null && (contains(name,'KEY') || contains(name,'SECRET') || contains(name,'DATABASE_URL'))].name" \
   --output tsv)
 if [[ -n "$LEAKED" ]]; then
   echo "ERROR: estas variables tienen valor en texto plano en lugar de secretref:"

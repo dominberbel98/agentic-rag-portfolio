@@ -48,9 +48,17 @@ def dictionary_js(repo_root):
 
 @pytest.fixture(scope="module")
 def component_sources(repo_root):
+    """Every component, including the ones in subdirectories.
+
+    The glob used to be flat, so `components/futboard/*.jsx` escaped the Spanish
+    sweep and the contrast check entirely — the two guards this module exists
+    for. Keyed by path relative to the components directory rather than by bare
+    filename, so a name reused in two folders cannot silently drop one of them.
+    """
+    root = repo_root / COMPONENTS
     return {
-        path.name: path.read_text(encoding="utf-8")
-        for path in sorted((repo_root / COMPONENTS).glob("*.jsx"))
+        str(path.relative_to(root)): path.read_text(encoding="utf-8")
+        for path in sorted(root.rglob("*.jsx"))
     }
 
 

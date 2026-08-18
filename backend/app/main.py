@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.api.chat import router as chat_router
+from app.api.futboard import router as futboard_router
 from app.config import settings
 from app.services.rag_service import AgenticRAGService
 
@@ -48,11 +49,12 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["POST", "GET", "OPTIONS"],
+    allow_methods=["POST", "GET", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "X-Admin-Key"],
 )
 
 app.include_router(chat_router, prefix="/api")
+app.include_router(futboard_router, prefix="/api")
 
 
 @app.get("/health")

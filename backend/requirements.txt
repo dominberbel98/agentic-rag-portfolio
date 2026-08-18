@@ -13,3 +13,7 @@ rank-bm25==0.2.2
 python-dotenv==1.2.2
 httpx==0.28.1
 PyYAML==6.0.3  # profile_schema; python-docx dropped — the .docx corpus is gone
+# FUTBOARD storage on Neon Postgres. The pool matters more than the driver:
+# Neon suspends the compute after 5 min idle, so connections must be checked
+# and re-established rather than held open.
+psycopg[binary,pool]==3.2.13

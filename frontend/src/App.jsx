@@ -7,6 +7,7 @@ import ModelosPredictivos from "./components/ModelosPredictivos";
 import ModelosScoring from "./components/ModelosScoring";
 import ModelosRecomendacion from "./components/ModelosRecomendacion";
 import Certificaciones from "./components/Certificaciones";
+import Futboard from "./components/futboard/Futboard";
 
 const NAV_ITEMS = [
   { id: "chat_cv", icon: "chat", label: tr.nav.chat_cv },
@@ -22,13 +23,14 @@ const NAV_ITEMS = [
     ],
   },
   { id: "certificaciones", icon: "workspace_premium", label: tr.nav.certificaciones },
+  { id: "futboard", icon: "sports_soccer", label: tr.nav.futboard },
 ];
 
 const MODEL_IDS = ["prediccion_la_liga", "modelo_scoring", "modelo_recomendation"];
 
 function NavList({ activeSection, modelsOpen, onToggleModels, onSelect, hover }) {
   const baseRow = "flex items-center gap-3 px-6 py-4 cursor-pointer active:scale-95";
-  const subRow  = "flex items-center gap-3 pl-12 pr-6 py-3 cursor-pointer active:scale-95 text-[0.7rem]";
+  const subRow  = "flex items-center gap-3 pl-12 pr-6 py-3 cursor-pointer active:scale-95 text-[0.75rem]";
   const transition = hover ? " transition-colors" : "";
   const activeCls   = "bg-[#00FF41]/10 text-[#00FF41] border-l-4 border-[#00FF41]";
   const inactiveCls = (sub) =>
@@ -164,12 +166,12 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       )}
 
       {/* Side Nav — desktop */}
-      <aside className="fixed left-0 top-16 bottom-8 hidden md:flex flex-col z-40 bg-[#0e0e0e] w-64 border-r border-[#00FF41]/15 font-headline text-[0.75rem] uppercase">
+      <aside className="fixed left-0 top-16 bottom-8 hidden md:flex flex-col z-40 bg-[#0e0e0e] w-72 border-r border-[#00FF41]/15 font-headline text-[0.8rem] uppercase overflow-y-auto scrollbar-hide">
         <div className="p-6 border-b border-[#00FF41]/10">
           <div className="text-[#00FF41] font-bold text-lg">{tr.app.workspace}</div>
           <div className="text-[#00FF41]/65 tracking-widest mt-1">{tr.app.session}</div>
         </div>
-        <div className="flex-1 py-4 overflow-y-auto scrollbar-hide">
+        <div className="py-4 shrink-0">
           <NavList
             activeSection={activeSection}
             modelsOpen={modelsOpen}
@@ -183,21 +185,27 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
           Mascot, docked in the sidebar's own empty space.
 
           It was `fixed top-[72%] left-[20px] z-[60]` over a `z-40` sidebar that
-          is `left-0 w-64`, so it drew on top of the navigation — worst on a short
+          is `left-0 w-72`, so it drew on top of the navigation — worst on a short
           laptop screen, where 72% landed on the menu items. Moving it into the
           content area only traded one overlap for another: it then covered the
           chat composer. The sidebar has ample unused vertical space below four
           nav items, and nothing else competes for it, so it cannot overlap
           anything here at any viewport width.
+
+          `mt-auto` parks it at the bottom when there is spare room, and the
+          sidebar itself scrolls when there is not. Giving the nav its own
+          scroll area instead made the two compete for a fixed height: with
+          `models` expanded, the last menu entry was clipped behind the dock
+          with no visible scrollbar to explain where it had gone.
         */}
         {mascotVisible && (
-          <div className="mascot-dock shrink-0 border-t border-[#00FF41]/10 px-4 py-3 overflow-y-auto scrollbar-hide">
+          <div className="mascot-dock mt-auto shrink-0 border-t border-[#00FF41]/10 px-4 py-3">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-[#00FF41] text-2xl mascot-bob drop-shadow-[0_0_8px_rgba(0,255,65,0.6)] shrink-0">
                 smart_toy
               </span>
               <span className="mascot-antenna h-1.5 w-1.5 bg-[#00FF41] rounded-full shrink-0" />
-              <span className="text-[#00FF41] text-[0.7rem] font-bold tracking-wide normal-case">
+              <span className="text-[#00FF41] text-[0.78rem] font-bold tracking-wide normal-case">
                 {tr.app.mascotTitle}
               </span>
               <button
@@ -211,17 +219,17 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
               </button>
             </div>
 
-            <p className="mt-2 text-[#00FF41]/75 text-[0.63rem] leading-snug normal-case">
+            <p className="mt-2 text-[#00FF41]/75 text-[0.72rem] leading-relaxed normal-case">
               {tr.app.mascotLead}
             </p>
 
             <dl className="mt-2.5 space-y-1.5">
               {tr.app.mascotSections.map((section) => (
                 <div key={section.label}>
-                  <dt className="text-[#00FF41]/90 text-[0.6rem] font-bold tracking-wide">
+                  <dt className="text-[#00FF41]/90 text-[0.68rem] font-bold tracking-wide">
                     {section.label}
                   </dt>
-                  <dd className="text-[#00FF41]/65 text-[0.6rem] leading-snug normal-case">
+                  <dd className="text-[#00FF41]/65 text-[0.68rem] leading-relaxed normal-case">
                     {section.text}
                   </dd>
                 </div>
@@ -232,13 +240,14 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       </aside>
 
       {/* Main Content */}
-      <main className="fixed md:left-64 top-14 sm:top-16 right-0 bottom-8 overflow-hidden flex flex-col items-center justify-center p-2 sm:p-6 md:p-8 bg-surface">
+      <main className="fixed left-0 md:left-72 top-14 sm:top-16 right-0 bottom-8 overflow-hidden flex flex-col items-center justify-center p-2 sm:p-6 md:p-8 bg-surface">
         {activeSection === "chat_cv" && <Chat />}
         {activeSection === "visualizaciones" && <Visualizaciones />}
         {activeSection === "prediccion_la_liga" && <ModelosPredictivos />}
         {activeSection === "modelo_scoring" && <ModelosScoring />}
         {activeSection === "modelo_recomendation" && <ModelosRecomendacion />}
         {activeSection === "certificaciones" && <Certificaciones />}
+        {activeSection === "futboard" && <Futboard />}
         {/* Radial glow behind chat */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] z-[-2] pointer-events-none opacity-20">
           <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#00FF4133_0%,_transparent_70%)]" />
