@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import { t as tr } from "../i18n/en";
+import { useT } from "../i18n";
 import { setTelemetry } from "../lib/telemetry";
 
 const API_URL =
@@ -9,6 +9,7 @@ const API_URL =
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
 export default function Chat() {
+  const tr = useT();
   const [question, setQuestion] = useState("");
 
   // Warm-up: ping backend on mount so cold-start resolves while user reads

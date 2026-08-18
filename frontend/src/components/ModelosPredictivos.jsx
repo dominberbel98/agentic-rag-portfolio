@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { t as tr } from "../i18n/en";
+import { useT } from "../i18n";
 import { ZONE_COLORS, zoneForPosition } from "../lib/laliga";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
@@ -27,6 +27,7 @@ const CrtTooltip = ({ active, payload, label }) => {
 
 /* ═══════════ 1. CHAMPION PROBABILITY BAR ═══════════ */
 function ChampionProb({ data }) {
+  const tr = useT();
   const filtered = data.filter((t) => t.championProb > 0);
   // If only one team has prob, show top 5 anyway for context
   const show = filtered.length > 1 ? filtered : data.slice(0, 5);
@@ -54,6 +55,7 @@ function ChampionProb({ data }) {
 
 /* ═══════════ 2. PROJECTED POINTS with confidence ═══════════ */
 function ProjectedPoints({ data }) {
+  const tr = useT();
   const chartData = data.map((t) => ({
     ...t,
     errorLow: t.mc.pointsMean - t.mc.pointsP10,
@@ -100,6 +102,7 @@ function ProjectedPoints({ data }) {
 
 /* ═══════════ 3. MOST GOALS / LEAST CONCEDED ═══════════ */
 function GoalProbabilities({ data }) {
+  const tr = useT();
   const topGF = [...data].sort((a, b) => b.mostGoalsProb - a.mostGoalsProb).slice(0, 5);
   const topGA = [...data].sort((a, b) => b.mostConcededProb - a.mostConcededProb).slice(0, 5);
   const topLeastGA = [...data].sort((a, b) => b.leastConcededProb - a.leastConcededProb).slice(0, 5);
@@ -145,6 +148,7 @@ function GoalProbabilities({ data }) {
 
 /* ═══════════ 4. XGBoost Feature Importance ═══════════ */
 function FeatureImportance({ importance }) {
+  const tr = useT();
   if (!importance || Object.keys(importance).length === 0) return null;
 
   const labels = {
@@ -186,6 +190,7 @@ function FeatureImportance({ importance }) {
 
 /* ═══════════ 5. PROJECTED TABLE ═══════════ */
 function ProjectedTable({ data }) {
+  const tr = useT();
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
       <h3 className="viz-title">
@@ -234,6 +239,7 @@ function ProjectedTable({ data }) {
 
 /* ═══════════ MAIN EXPORT ═══════════ */
 export default function ModelosPredictivos() {
+  const tr = useT();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 

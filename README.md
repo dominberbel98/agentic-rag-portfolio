@@ -1,6 +1,6 @@
 # Portfolio — Agentic RAG, live analytics and in-browser models
 
-An interactive professional portfolio you can interrogate. A retrieval-augmented
+An interactive professional portfolio you can interrogate, in English and Spanish. A retrieval-augmented
 assistant answers questions about a real career from a structured profile, a
 scheduled PySpark job publishes live La Liga analytics, three machine learning
 models run entirely in the browser, and FUTBOARD keeps the score for a Sunday
@@ -9,6 +9,9 @@ football game.
 **Live:** [domingoberbel.com](https://domingoberbel.com)
 
 ## What is in it
+
+Every section is available in both languages; the switch is in the header and the
+choice is remembered.
 
 | Section | What it does |
 |---------|--------------|
@@ -153,10 +156,17 @@ against the CRT surface.
 Backend to Azure Container Apps, frontend to Azure Static Web Apps:
 
 ```bash
+git push origin main          # required, see below
 az login
 source infra/aca/azure.env
 ./scripts/deploy_azure.sh
 ```
+
+**Push before deploying.** The La Liga workflow rebuilds the frontend from
+`origin/main` every 30 minutes and redeploys it, so a local deploy whose commits
+are not pushed is reverted within half an hour — silently, because both
+deployments succeed. The script refuses to run with unpushed commits for that
+reason.
 
 Every credential is stored as a Container Apps secret and referenced with
 `secretref:`; the script fails the deploy if any of them ends up as a plaintext

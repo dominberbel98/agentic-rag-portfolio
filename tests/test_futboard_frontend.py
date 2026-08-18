@@ -1,4 +1,4 @@
-"""Guards on the two FUTBOARD modules that cannot fail loudly on their own.
+"""The match clock, exercised over a scripted timeline.
 
 Written in pytest and driven through `node`, for the same reason the rest of the
 frontend checks are: the repository has no JS test runner, and standing one up to
@@ -6,15 +6,10 @@ cover two modules would cost more than it returns. Node is already a build
 dependency, so importing the real ESM module and asserting on it is honest —
 these are the shipped functions, not a transcription of them.
 
-Two things are covered.
-
-**The dictionary**, because a key present in English and missing in Spanish
-renders as the string `undefined` in the UI rather than failing the build. That
-is invisible until someone switches language on a pitch.
-
-**The clock**, because it is the one piece with no safe failure mode. It is
-derived from timestamps precisely so a phone that sleeps mid-half comes back
-correct, and the substitution cue arithmetic decides when a whistle blows.
+The clock is the one piece of FUTBOARD with no safe failure mode. It is derived
+from timestamps precisely so a phone that sleeps mid-half comes back correct, and
+the substitution cue arithmetic decides when a whistle blows. Dictionary parity
+is covered separately, in tests/test_i18n.py.
 """
 
 from __future__ import annotations
@@ -29,7 +24,6 @@ pytestmark = pytest.mark.skipif(
     shutil.which("node") is None, reason="node is not installed; frontend checks need it"
 )
 
-I18N = "src/i18n/futboard.js"
 CLOCK = "src/lib/matchClock.js"
 
 
@@ -45,51 +39,6 @@ def _node(repo_root, script: str):
     if result.returncode != 0:
         raise AssertionError(f"node failed:\n{result.stderr}")
     return json.loads(result.stdout)
-
-
-# ── dictionary ──────────────────────────────────────────────────────────────
-
-
-@pytest.fixture(scope="module")
-def dictionaries(repo_root):
-    return _node(
-        repo_root,
-        f"""
-        import {{ dictionary }} from "./{I18N}";
-        const walk = (node, prefix = "") =>
-          Object.entries(node).flatMap(([key, value]) => {{
-            const path = prefix ? `${{prefix}}.${{key}}` : key;
-            return value && typeof value === "object" && !Array.isArray(value)
-              ? walk(value, path)
-              : [[path, typeof value]];
-          }});
-        console.log(JSON.stringify({{
-          en: Object.fromEntries(walk(dictionary.en)),
-          es: Object.fromEntries(walk(dictionary.es)),
-        }}));
-        """,
-    )
-
-
-def test_both_languages_define_exactly_the_same_keys(dictionaries):
-    english, spanish = set(dictionaries["en"]), set(dictionaries["es"])
-    assert not english - spanish, f"missing from Spanish: {sorted(english - spanish)}"
-    assert not spanish - english, f"missing from English: {sorted(spanish - english)}"
-
-
-def test_a_key_is_a_function_in_both_languages_or_neither(dictionaries):
-    """A string where the UI calls `f.live.of(25)` throws at render time."""
-    mismatched = [
-        key
-        for key, kind in dictionaries["en"].items()
-        if kind != dictionaries["es"][key]
-    ]
-    assert not mismatched, f"type differs between languages: {mismatched}"
-
-
-def test_no_value_is_empty(dictionaries):
-    assert all(dictionaries["en"].values()), "an English entry has no value"
-    assert all(dictionaries["es"].values()), "a Spanish entry has no value"
 
 
 # ── clock ───────────────────────────────────────────────────────────────────

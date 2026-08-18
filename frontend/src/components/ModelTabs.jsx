@@ -28,13 +28,13 @@ export function ModelTabs({ tabs, active, onChange }) {
             role="tab"
             aria-selected={on}
             onClick={() => onChange(tab.id)}
-            className={`flex items-center gap-2 whitespace-nowrap px-4 sm:px-5 py-3.5 min-h-[52px] font-headline uppercase text-[0.82rem] sm:text-[0.9rem] tracking-widest border-b-2 -mb-px transition-colors ${
+            className={`flex flex-1 sm:flex-none items-center justify-center sm:justify-start gap-2 whitespace-nowrap px-2 sm:px-5 py-3.5 min-h-[52px] font-headline uppercase text-[0.78rem] sm:text-[0.9rem] tracking-wide sm:tracking-widest border-b-2 -mb-px transition-colors ${
               on
                 ? "border-[#00FF41] text-[#00FF41] bg-[#00FF41]/10 drop-shadow-[0_0_6px_rgba(0,255,65,0.35)]"
                 : "border-transparent text-[#00FF41]/55 hover:text-[#00FF41] hover:bg-[#00FF41]/5"
             }`}
           >
-            <span className="material-symbols-outlined text-[1.15rem]">{tab.icon}</span>
+            <span className="material-symbols-outlined text-[1.15rem] hidden sm:inline">{tab.icon}</span>
             {tab.label}
           </button>
         );

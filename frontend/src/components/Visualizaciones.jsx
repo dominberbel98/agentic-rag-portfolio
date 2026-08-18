@@ -4,7 +4,7 @@ import {
   ScatterChart, Scatter, ZAxis, Cell,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
 } from "recharts";
-import { t as tr } from "../i18n/en";
+import { useT } from "../i18n";
 import {
   FORM_COLORS,
   LEGEND_ZONES,
@@ -16,7 +16,8 @@ import {
 
 const GREEN = "#00FF41";
 const DIM = "rgba(0,255,65,0.4)";
-const L = tr.laliga;
+// `const L = tr.laliga` used to live here as a module-level alias. It froze the
+// labels at import time, which is invisible with one language and wrong with two.
 
 /* ────────── custom tooltip ────────── */
 const CrtTooltip = ({ active, payload, label }) => {
@@ -48,6 +49,8 @@ const EmptyPanel = ({ title, icon, message }) => (
 
 /* ═══════════ 1. STANDINGS TABLE ═══════════ */
 function StandingsTable({ data }) {
+  const tr = useT();
+  const L = tr.laliga;
   const S = L.standings;
   return (
     <div className="viz-panel col-span-12">
@@ -142,6 +145,7 @@ function StandingsTable({ data }) {
 
 /* ═══════════ 2. POINTS BAR CHART ═══════════ */
 function PointsDistribution({ data }) {
+  const L = useT().laliga;
   const sorted = [...data].sort((a, b) => b.points - a.points);
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
@@ -174,6 +178,7 @@ function PointsDistribution({ data }) {
 
 /* ═══════════ 3. ATTACK vs DEFENCE SCATTER ═══════════ */
 function AttackVsDefence({ data }) {
+  const L = useT().laliga;
   const A = L.attackDefence;
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
@@ -227,6 +232,7 @@ function AttackVsDefence({ data }) {
 
 /* ═══════════ 4. GOAL DIFFERENCE DIVERGING BAR ═══════════ */
 function GoalDiffSpectrum({ data }) {
+  const L = useT().laliga;
   const sorted = [...data].sort((a, b) => b.goalDifference - a.goalDifference);
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
@@ -260,6 +266,7 @@ function GoalDiffSpectrum({ data }) {
 
 /* ═══════════ 5. RESULT RATE MATRIX ═══════════ */
 function ResultRateMatrix({ data }) {
+  const L = useT().laliga;
   const sorted = [...data].sort((a, b) => a.position - b.position);
   const W = L.winRate;
   const legend = [
@@ -305,6 +312,7 @@ function ResultRateMatrix({ data }) {
 
 /* ═══════════ 6. TOP-5 RADAR ═══════════ */
 function Top5Radar({ data }) {
+  const L = useT().laliga;
   const R = L.radar;
   const top5 = [...data].sort((a, b) => a.position - b.position).slice(0, 5);
   const metrics = ["won", "draw", "lost", "goalsFor", "goalsAgainst"];
@@ -383,6 +391,7 @@ function Top5Radar({ data }) {
 
 /* ═══════════ 7. LATEST RESULTS ═══════════ */
 function LatestResults({ results }) {
+  const L = useT().laliga;
   const R = L.results;
   if (!results.length) {
     return <EmptyPanel title={R.title} icon="sports_soccer" message={R.empty} />;
@@ -414,6 +423,7 @@ function LatestResults({ results }) {
 
 /* ═══════════ 8. UPCOMING FIXTURES ═══════════ */
 function UpcomingFixtures({ fixtures }) {
+  const L = useT().laliga;
   const F = L.fixtures;
   if (!fixtures.length) {
     return <EmptyPanel title={F.title} icon="event" message={F.empty} />;
@@ -443,6 +453,8 @@ function UpcomingFixtures({ fixtures }) {
 
 /* ═══════════ MAIN EXPORT ═══════════ */
 export default function Visualizaciones() {
+  const tr = useT();
+  const L = tr.laliga;
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 

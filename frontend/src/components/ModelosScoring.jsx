@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { t as tr } from "../i18n/en";
+import { useT } from "../i18n";
 import { MetricStrip, ModelTabs } from "./ModelTabs";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
@@ -39,12 +39,31 @@ function probToScore(prob, scorecard) {
   return Math.max(minScore, Math.min(maxScore, Math.round(raw)));
 }
 
+/**
+ * The band an applicant falls in.
+ *
+ * The English name stays the internal key: it indexes BAND_COLOR and it is what
+ * `credit_scoring.json` carries for every sample applicant, so translating it
+ * here would break both. `bandLabel` translates it at the point of display.
+ */
 function bandFromScore(s) {
   if (s < 580) return "Poor";
   if (s < 670) return "Fair";
   if (s < 740) return "Good";
   if (s < 800) return "Very Good";
   return "Exceptional";
+}
+
+const BAND_KEYS = {
+  Poor: "poor",
+  Fair: "fair",
+  Good: "good",
+  "Very Good": "veryGood",
+  Exceptional: "exceptional",
+};
+
+function bandLabel(tr, band) {
+  return tr.scoring.bands[BAND_KEYS[band]] || band;
 }
 
 function predictWithLR(weights, applicant) {
@@ -76,6 +95,7 @@ const CrtTooltip = ({ active, payload, label }) => {
 
 /* ═══════════ 1. METRIC CARDS ═══════════ */
 function MetricCards({ data }) {
+  const tr = useT();
   const lr = data.models.logistic;
   const gbm = data.models.gbm;
   const cards = [
@@ -121,6 +141,7 @@ function MetricCards({ data }) {
 
 /* ═══════════ 2. ROC CURVE ═══════════ */
 function RocPanel({ roc, auc }) {
+  const tr = useT();
   const data = roc.map((p) => ({ fpr: p.fpr, tpr: p.tpr }));
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
@@ -154,6 +175,7 @@ function RocPanel({ roc, auc }) {
 
 /* ═══════════ 3. FEATURE IMPORTANCE ═══════════ */
 function ImportancePanel({ rows }) {
+  const tr = useT();
   const labels = {
     age: tr.scoring.features.age,
     annual_income: tr.scoring.features.annual_income,
@@ -194,6 +216,7 @@ function ImportancePanel({ rows }) {
 
 /* ═══════════ 4. SCORE DISTRIBUTION ═══════════ */
 function ScoreDistribution({ histogram, bands }) {
+  const tr = useT();
   const data = histogram.map((b) => ({
     bin: b.bin,
     range: `${b.from}–${b.to}`,
@@ -217,7 +240,7 @@ function ScoreDistribution({ histogram, bands }) {
               return (
                 <div className="bg-[#0e0e0e]/95 border border-[#00FF41]/30 px-3 py-2 text-xs font-headline uppercase text-[#00FF41] shadow-[0_0_12px_rgba(0,255,65,0.2)]">
                   <p className="font-bold">Score {d.range}</p>
-                  <p style={{ color: BAND_COLOR[d.band] }}>{d.band}</p>
+                  <p style={{ color: BAND_COLOR[d.band] }}>{bandLabel(tr, d.band)}</p>
                   <p>{tr.scoring.applicants(d.count)}</p>
                 </div>
               );
@@ -233,7 +256,7 @@ function ScoreDistribution({ histogram, bands }) {
         {bands.map((b) => (
           <span key={b.band} className="flex items-center gap-1" style={{ color: BAND_COLOR[b.band] }}>
             <span className="w-2 h-2 rounded-full" style={{ background: BAND_COLOR[b.band] }} />
-            {b.band} · {b.count}
+            {bandLabel(tr, b.band)} · {b.count}
           </span>
         ))}
       </div>
@@ -242,18 +265,30 @@ function ScoreDistribution({ histogram, bands }) {
 }
 
 /* ═══════════ 5. INTERACTIVE SCORECARD ═══════════ */
-const SLIDER_FIELDS = [
-  { key: "age", label: tr.scoring.features.age, min: 21, max: 70, step: 1, unit: tr.scoring.units.years },
-  { key: "annual_income", label: tr.scoring.features.annual_income, min: 15000, max: 300000, step: 1000, unit: "€" },
-  { key: "employment_years", label: tr.scoring.features.employment_years, min: 0, max: 40, step: 1, unit: tr.scoring.units.years },
-  { key: "loan_amount", label: tr.scoring.features.loan_amount, min: 1000, max: 100000, step: 500, unit: "€" },
-  { key: "payment_history_pct", label: tr.scoring.features.payment_history_pct, min: 0, max: 100, step: 1, unit: "%" },
-  { key: "credit_utilization", label: tr.scoring.features.credit_utilization, min: 0, max: 100, step: 1, unit: "%" },
-  { key: "credit_age_years", label: tr.scoring.features.credit_age_years, min: 0, max: 35, step: 0.5, unit: tr.scoring.units.years },
-  { key: "num_credit_accounts", label: tr.scoring.features.num_credit_accounts, min: 1, max: 15, step: 1, unit: "" },
-  { key: "recent_inquiries", label: tr.scoring.features.recent_inquiries, min: 0, max: 10, step: 1, unit: "" },
-  { key: "derogatory_marks", label: tr.scoring.features.derogatory_marks, min: 0, max: 5, step: 1, unit: "" },
+
+// Bounds are language-independent, so they stay at module scope. The labels are
+// not: this used to be one constant carrying both, which froze the slider names
+// in whichever language loaded first.
+const SLIDER_BOUNDS = [
+  { key: "age", min: 21, max: 70, step: 1, unit: "years" },
+  { key: "annual_income", min: 15000, max: 300000, step: 1000, unit: "€" },
+  { key: "employment_years", min: 0, max: 40, step: 1, unit: "years" },
+  { key: "loan_amount", min: 1000, max: 100000, step: 500, unit: "€" },
+  { key: "payment_history_pct", min: 0, max: 100, step: 1, unit: "%" },
+  { key: "credit_utilization", min: 0, max: 100, step: 1, unit: "%" },
+  { key: "credit_age_years", min: 0, max: 35, step: 0.5, unit: "years" },
+  { key: "num_credit_accounts", min: 1, max: 15, step: 1, unit: "" },
+  { key: "recent_inquiries", min: 0, max: 10, step: 1, unit: "" },
+  { key: "derogatory_marks", min: 0, max: 5, step: 1, unit: "" },
 ];
+
+function sliderFields(tr) {
+  return SLIDER_BOUNDS.map((field) => ({
+    ...field,
+    label: tr.scoring.features[field.key],
+    unit: field.unit === "years" ? tr.scoring.units.years : field.unit,
+  }));
+}
 
 // A typical applicant, not a flattering one: this lands at roughly 644, in Fair,
 // which is the band 57% of the portfolio occupies. It also sits just under the
@@ -277,6 +312,8 @@ function deriveExtras(a) {
 }
 
 function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplicant }) {
+  const tr = useT();
+  const fields = useMemo(() => sliderFields(tr), [tr]);
   const result = useMemo(() => {
     const full = { ...applicant, ...deriveExtras(applicant) };
     const prob = predictWithLR(weights, full);
@@ -295,14 +332,14 @@ function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplic
 
       {/* Score gauge */}
       <div className="flex flex-col items-center mb-4 p-4 border border-[#00FF41]/15 rounded bg-black/30">
-        <div className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">Credit Score</div>
+        <div className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">{tr.scoring.creditScore}</div>
         <div
           className="text-5xl sm:text-6xl font-bold font-headline tabular-nums"
           style={{ color: bandColor, textShadow: `0 0 18px ${bandColor}80` }}
         >
           {result.score}
         </div>
-        <div className="text-xs font-headline uppercase mt-1" style={{ color: bandColor }}>{result.band}</div>
+        <div className="text-xs font-headline uppercase mt-1" style={{ color: bandColor }}>{bandLabel(tr, result.band)}</div>
         <div className="text-[0.65rem] font-headline uppercase text-[#00FF41]/60 mt-2">
           P(default) = <span className="text-[#00FF41]">{(result.prob * 100).toFixed(2)}%</span>
         </div>
@@ -330,7 +367,7 @@ function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplic
 
       {/* Sliders */}
       <div className="space-y-2.5 max-h-[420px] overflow-y-auto scrollbar-hide pr-1">
-        {SLIDER_FIELDS.map((f) => (
+        {fields.map((f) => (
           <div key={f.key}>
             <div className="flex justify-between text-[0.6rem] font-headline uppercase">
               <span className="text-[#00FF41]/70">{f.label}</span>
@@ -404,6 +441,7 @@ function scoreDrivers(weights, applicant) {
 }
 
 function ScoreDrivers({ weights, applicant }) {
+  const tr = useT();
   const drivers = useMemo(() => scoreDrivers(weights, applicant), [weights, applicant]);
   const widest = Math.max(...drivers.map((d) => Math.abs(d.effect)), 0.001);
 
@@ -456,6 +494,7 @@ function ScoreDrivers({ weights, applicant }) {
 
 /* ═══════════ 7. SAMPLE APPLICANTS ═══════════ */
 function SampleApplicants({ rows }) {
+  const tr = useT();
   return (
     <div className="viz-panel col-span-12">
       <h3 className="viz-title">
@@ -495,7 +534,7 @@ function SampleApplicants({ rows }) {
                 <td className="py-1 px-2 text-right text-[#00FF41]/70">{(r.prob_default_lr * 100).toFixed(1)}%</td>
                 <td className="py-1 px-2 text-right text-[#00FF41]/70">{(r.prob_default_gbm * 100).toFixed(1)}%</td>
                 <td className="py-1 px-2 text-center font-bold" style={{ color: BAND_COLOR[r.band] }}>{r.score}</td>
-                <td className="py-1 px-2 text-[#00FF41]/70">{r.band}</td>
+                <td className="py-1 px-2 text-[#00FF41]/70">{bandLabel(tr, r.band)}</td>
               </tr>
             ))}
           </tbody>
@@ -507,13 +546,16 @@ function SampleApplicants({ rows }) {
 
 /* ═══════════ MAIN EXPORT ═══════════ */
 
-const TABS = [
-  { id: "try", icon: "tune", label: tr.tabs.tryIt },
-  { id: "how", icon: "help", label: tr.tabs.howItWorks },
-  { id: "evidence", icon: "query_stats", label: tr.tabs.evidence },
-];
+function modelTabs(tr) {
+  return [
+    { id: "try", icon: "tune", label: tr.tabs.tryIt },
+    { id: "how", icon: "help", label: tr.tabs.howItWorks },
+    { id: "evidence", icon: "query_stats", label: tr.tabs.evidence },
+  ];
+}
 
 export default function ModelosScoring() {
+  const tr = useT();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [tab, setTab] = useState("try");
@@ -567,7 +609,7 @@ export default function ModelosScoring() {
         </p>
       </div>
 
-      <ModelTabs tabs={TABS} active={tab} onChange={setTab} />
+      <ModelTabs tabs={modelTabs(tr)} active={tab} onChange={setTab} />
       <MetricStrip items={headline} />
 
       {tab === "try" && (

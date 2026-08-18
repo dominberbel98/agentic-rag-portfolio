@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { t as tr } from "../i18n/en";
+import { useT } from "../i18n";
 
 /**
  * Certifications, read from /data/profile.json.
@@ -9,6 +9,7 @@ import { t as tr } from "../i18n/en";
  * from data/profile.yml by scripts/build_kb.py.
  */
 export default function Certificaciones() {
+  const tr = useT();
   const [certs, setCerts] = useState(null);
   const [error, setError] = useState(null);
   const [selected, setSelected] = useState(null);

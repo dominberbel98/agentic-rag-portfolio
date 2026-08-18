@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Deploys backend + frontend to Azure Container Apps using GitHub Container Registry (ghcr.io).
+# Deploys the backend to Azure Container Apps (image via ghcr.io) and the
+# frontend to Azure Static Web Apps.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -10,6 +11,42 @@ ENV_FILE="$ROOT_DIR/infra/aca/azure.env"
 if [[ ! -f "$ENV_FILE" ]]; then
   echo "Falta $ENV_FILE (copia infra/aca/azure.env.example)."
   exit 1
+fi
+
+# ── The frontend has two publishers, and this one does not win ───────────────
+#
+# .github/workflows/update-laliga.yml rebuilds the frontend from origin/main and
+# redeploys it to Static Web Apps every 30 minutes. So a deploy from this script
+# whose commits are not pushed is silently reverted within half an hour: the cron
+# checks out origin/main, builds the older code and publishes it over the top.
+#
+# That happened on 2026-08-18. The site served a frontend from before the deploy
+# while the backend was current, and nothing reported an error, because from
+# Azure's point of view both deployments succeeded.
+#
+# Pushing first is therefore not tidiness, it is a requirement. Refuse rather
+# than warn: a warning scrolls past in a log nobody reads.
+if git -C "$ROOT_DIR" rev-parse --git-dir >/dev/null 2>&1; then
+  git -C "$ROOT_DIR" fetch origin main --quiet 2>/dev/null || true
+
+  if ! git -C "$ROOT_DIR" diff --quiet HEAD -- ':!frontend/public/data'; then
+    echo "ERROR: hay cambios sin commitear. El cron de La Liga desplegaría origin/main"
+    echo "       por encima de este despliegue en menos de 30 minutos."
+    git -C "$ROOT_DIR" status --short -- ':!frontend/public/data' | sed 's/^/       /'
+    exit 1
+  fi
+
+  UNPUSHED="$(git -C "$ROOT_DIR" rev-list --count origin/main..HEAD 2>/dev/null || echo 0)"
+  if [[ "$UNPUSHED" -gt 0 ]]; then
+    echo "ERROR: $UNPUSHED commit(s) sin subir a origin/main."
+    git -C "$ROOT_DIR" log --oneline origin/main..HEAD | sed 's/^/       /'
+    echo
+    echo "       El workflow update-laliga.yml recompila el frontend desde origin/main"
+    echo "       cada 30 minutos, así que este despliegue se revertiría solo."
+    echo "       Ejecuta:  git push origin main"
+    exit 1
+  fi
+  echo "OK: el árbol está limpio y sincronizado con origin/main."
 fi
 
 source "$ENV_FILE"

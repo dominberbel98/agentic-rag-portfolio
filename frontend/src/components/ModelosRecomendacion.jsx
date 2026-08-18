@@ -1,4 +1,4 @@
-import { t as tr } from "../i18n/en";
+import { useT } from "../i18n";
 import React, { useEffect, useMemo, useState } from "react";
 import { MetricStrip, ModelTabs } from "./ModelTabs";
 import {
@@ -77,6 +77,7 @@ const CrtTooltip = ({ active, payload, label }) => {
 
 /* ════════ Product card ════════ */
 function ProductCard({ product, selected, onToggle, similarity }) {
+  const tr = useT();
   const color = CATEGORY_COLOR[product.category] || GREEN;
   return (
     <button
@@ -114,7 +115,7 @@ function ProductCard({ product, selected, onToggle, similarity }) {
           )}
           {similarity !== undefined && (
             <div className="text-[0.68rem] font-headline uppercase text-[#00FF41]/70 mt-1">
-              similarity {similarity.toFixed(3)}
+              {tr.recommender.similarityLabel} {similarity.toFixed(3)}
             </div>
           )}
         </div>
@@ -128,6 +129,7 @@ function ProductCard({ product, selected, onToggle, similarity }) {
 
 /* ════════ Personas summary ════════ */
 function PersonaSummary({ personas, onApply }) {
+  const tr = useT();
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
       <h3 className="viz-title">
@@ -158,6 +160,7 @@ function PersonaSummary({ personas, onApply }) {
 
 /* ════════ Top-N similarity bar chart ════════ */
 function SimilarityBars({ recs }) {
+  const tr = useT();
   const data = recs.map((r) => ({ name: r.name, sim: r.similarity, cat: r.category }));
   return (
     <div className="viz-panel col-span-12 lg:col-span-6">
@@ -183,6 +186,7 @@ function SimilarityBars({ recs }) {
 
 /* ════════ Why this rec — feature breakdown ════════ */
 function ExplainPanel({ profile, item, vocab, breakdown }) {
+  const tr = useT();
   if (!profile || !item) return null;
   const tfidfDim = breakdown.tfidf_dims;
 
@@ -231,12 +235,15 @@ function ExplainPanel({ profile, item, vocab, breakdown }) {
 
 /* ════════ MAIN EXPORT ════════ */
 
-const TABS = [
-  { id: "try", icon: "tune", label: tr.tabs.tryIt },
-  { id: "how", icon: "help", label: tr.tabs.howItWorks },
-  { id: "evidence", icon: "query_stats", label: tr.tabs.evidence },
-];
+function modelTabs(tr) {
+  return [
+    { id: "try", icon: "tune", label: tr.tabs.tryIt },
+    { id: "how", icon: "help", label: tr.tabs.howItWorks },
+    { id: "evidence", icon: "query_stats", label: tr.tabs.evidence },
+  ];
+}
 export default function ModelosRecomendacion() {
+  const tr = useT();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [selected, setSelected] = useState(new Set());
@@ -325,7 +332,7 @@ export default function ModelosRecomendacion() {
         </p>
       </div>
 
-      <ModelTabs tabs={TABS} active={tab} onChange={setTab} />
+      <ModelTabs tabs={modelTabs(tr)} active={tab} onChange={setTab} />
       <MetricStrip items={headline} />
 
       {tab === "try" && (

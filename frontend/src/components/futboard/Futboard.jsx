@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useFutboardLanguage } from "../../i18n/futboard";
+import { useT } from "../../i18n";
 import { futboardApi } from "../../lib/futboardApi";
 import LiveMatch, { clearStoredMatch, createMatch, loadStoredMatch } from "./LiveMatch";
 import MatchSetup from "./MatchSetup";
 import SquadsScreen from "./SquadsScreen";
 import StatsScreen from "./StatsScreen";
-import { Button, ErrorState, LanguageToggle, ListRow, Loading, Notice, Panel } from "./ui";
+import { Button, ErrorState, ListRow, Loading, Notice, Panel } from "./ui";
 
 /**
  * FUTBOARD: the hub, and the only component that talks to the API.
@@ -30,7 +30,10 @@ const HUB_CARDS = [
 ];
 
 export default function Futboard() {
-  const { language, setLanguage, f } = useFutboardLanguage();
+  // FUTBOARD used to carry its own language switch. Now the whole site is
+  // bilingual it reads the global one: two independent switches on one page was
+  // a worse answer than one, and this section is not special.
+  const f = useT().futboard;
 
   const [screen, setScreen] = useState(SCREENS.HUB);
   const [data, setData] = useState(null);
@@ -183,7 +186,6 @@ export default function Futboard() {
             {f.tagline}
           </p>
         </div>
-        <LanguageToggle language={language} onChange={setLanguage} />
       </div>
 
       {saved && (
@@ -195,7 +197,7 @@ export default function Futboard() {
       {resumable && (
         <div className="mb-4 border border-[#FFD700]/40 rounded p-3">
           <p className="font-headline text-[0.75rem] text-[#FFD700] normal-case">
-            {f.live.resume_match}
+            {f.live.resumeMatch}
           </p>
           <p className="font-headline text-[0.68rem] text-[#00FF41]/70 normal-case mt-0.5">
             {f.live.resumeHint}

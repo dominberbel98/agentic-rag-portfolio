@@ -184,26 +184,3 @@ export function ErrorState({ message, onRetry, retryLabel }) {
     </div>
   );
 }
-
-/** The EN/ES switch. Both options are always visible, so it reads as a choice. */
-export function LanguageToggle({ language, onChange }) {
-  return (
-    <div className="shrink-0 flex border border-[#00FF41]/30 rounded overflow-hidden">
-      {["en", "es"].map((code) => (
-        <button
-          key={code}
-          type="button"
-          onClick={() => onChange(code)}
-          aria-pressed={language === code}
-          className={`min-h-[38px] px-3 font-headline uppercase text-[0.68rem] tracking-widest transition-colors ${
-            language === code
-              ? "bg-[#00FF41]/20 text-[#00FF41] font-bold"
-              : "text-[#00FF41]/60 hover:text-[#00FF41] hover:bg-[#00FF41]/5"
-          }`}
-        >
-          {code}
-        </button>
-      ))}
-    </div>
-  );
-}
