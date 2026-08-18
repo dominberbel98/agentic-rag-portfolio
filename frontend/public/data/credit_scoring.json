@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-28T16:58:25+00:00",
+  "generatedAt": "2026-08-18T15:37:18+00:00",
   "dataset": {
     "n": 5000,
     "defaultRate": 0.1712,
@@ -46,29 +46,29 @@
         "brier": 0.20216734562273025
       },
       "weights": {
-        "intercept": -0.21679534969821884,
+        "intercept": -0.21679534969821873,
         "numerical": [
           {
             "feature": "age",
-            "coef": -0.010857814454558018,
+            "coef": -0.01085781445455802,
             "mean": 44.9032,
             "std": 14.22585310013662
           },
           {
             "feature": "annual_income",
-            "coef": -0.043403194568211026,
+            "coef": -0.04340319456821108,
             "mean": 59329.8592,
             "std": 38272.55382032284
           },
           {
             "feature": "employment_years",
-            "coef": -0.193587991291892,
+            "coef": -0.19358799129189194,
             "mean": 5.637333333333333,
             "std": 6.076594952950396
           },
           {
             "feature": "loan_amount",
-            "coef": 0.06253894672347594,
+            "coef": 0.06253894672347585,
             "mean": 17304.5056,
             "std": 13418.43167659949
           },
@@ -92,31 +92,31 @@
           },
           {
             "feature": "num_credit_accounts",
-            "coef": -0.037266533110843054,
+            "coef": -0.03726653311084298,
             "mean": 4.040533333333333,
             "std": 1.998121713565573
           },
           {
             "feature": "recent_inquiries",
-            "coef": 0.25468024967800523,
+            "coef": 0.2546802496780053,
             "mean": 2.0090666666666666,
             "std": 1.4353342684623056
           },
           {
             "feature": "derogatory_marks",
-            "coef": 0.29219428158859756,
+            "coef": 0.2921942815885975,
             "mean": 0.30693333333333334,
             "std": 0.5493559218656779
           },
           {
             "feature": "debt_to_income",
-            "coef": 0.16459717780123334,
+            "coef": 0.16459717780123326,
             "mean": 0.2440365333333333,
             "std": 0.2566928395287168
           },
           {
             "feature": "loan_to_income",
-            "coef": 0.16441938144833607,
+            "coef": 0.16441938144833612,
             "mean": 0.4067261333333333,
             "std": 0.42781753423281854
           }
@@ -130,37 +130,37 @@
           {
             "feature": "loan_purpose",
             "level": "business",
-            "coef": 0.25805264199371236
+            "coef": 0.2580526419937123
           },
           {
             "feature": "loan_purpose",
             "level": "education",
-            "coef": -0.25605798615724734
+            "coef": -0.25605798615724745
           },
           {
             "feature": "loan_purpose",
             "level": "mortgage",
-            "coef": -0.09074881150745634
+            "coef": -0.09074881150745631
           },
           {
             "feature": "loan_purpose",
             "level": "personal",
-            "coef": -0.013900481715252717
+            "coef": -0.01390048171525283
           },
           {
             "feature": "home_ownership",
             "level": "mortgage",
-            "coef": 0.030557856333681025
+            "coef": 0.03055785633368095
           },
           {
             "feature": "home_ownership",
             "level": "own",
-            "coef": -0.293325378652263
+            "coef": -0.29332537865226294
           },
           {
             "feature": "home_ownership",
             "level": "rent",
-            "coef": 0.058281484625092465
+            "coef": 0.05828148462509222
           }
         ],
         "categorical_features": [
@@ -186,22 +186,22 @@
     "gbm": {
       "name": "Gradient Boosting (sigmoid-calibrated)",
       "cv": {
-        "auc_mean": 0.7251444454132812,
-        "auc_std": 0.013355385642460024,
-        "ap_mean": 0.3851904873786446,
-        "ap_std": 0.017104640894218703,
-        "f1_mean": 0.24814763530479533,
-        "f1_std": 0.02649596810768496
+        "auc_mean": 0.7255539803053308,
+        "auc_std": 0.013692045537536803,
+        "ap_mean": 0.38571191952859984,
+        "ap_std": 0.017812181453966142,
+        "f1_mean": 0.2520438663268097,
+        "f1_std": 0.030138896908688057
       },
       "test": {
-        "auc": 0.7236179771226501,
-        "gini": 0.44723595424530016,
+        "auc": 0.7236134666041207,
+        "gini": 0.4472269332082415,
         "ks": 0.34236639844116484,
-        "average_precision": 0.3566872592782181,
+        "average_precision": 0.35664962310126164,
         "f1": 0.10084033613445378,
         "precision": 0.5,
         "recall": 0.056074766355140186,
-        "brier": 0.1281870071069613
+        "brier": 0.12818567889258037
       }
     }
   },
@@ -227,123 +227,123 @@
       "tpr": 0.1028
     },
     {
-      "fpr": 0.0251,
-      "tpr": 0.1449
+      "fpr": 0.027,
+      "tpr": 0.1495
     },
     {
-      "fpr": 0.0386,
-      "tpr": 0.1542
+      "fpr": 0.0415,
+      "tpr": 0.1589
     },
     {
       "fpr": 0.0444,
-      "tpr": 0.1869
+      "tpr": 0.1916
     },
     {
-      "fpr": 0.0473,
-      "tpr": 0.2009
+      "fpr": 0.0492,
+      "tpr": 0.2056
     },
     {
-      "fpr": 0.0531,
+      "fpr": 0.0541,
       "tpr": 0.215
     },
     {
-      "fpr": 0.056,
-      "tpr": 0.2336
+      "fpr": 0.0569,
+      "tpr": 0.271
     },
     {
       "fpr": 0.0656,
-      "tpr": 0.285
+      "tpr": 0.2897
     },
     {
-      "fpr": 0.0695,
-      "tpr": 0.2991
+      "fpr": 0.0743,
+      "tpr": 0.3037
     },
     {
-      "fpr": 0.0792,
-      "tpr": 0.3084
+      "fpr": 0.0849,
+      "tpr": 0.3178
     },
     {
       "fpr": 0.0946,
-      "tpr": 0.3271
+      "tpr": 0.3318
     },
     {
-      "fpr": 0.1023,
-      "tpr": 0.3458
+      "fpr": 0.1033,
+      "tpr": 0.3551
     },
     {
-      "fpr": 0.1071,
+      "fpr": 0.11,
       "tpr": 0.3645
     },
     {
-      "fpr": 0.1207,
-      "tpr": 0.3738
+      "fpr": 0.1448,
+      "tpr": 0.3785
     },
     {
       "fpr": 0.1467,
-      "tpr": 0.3972
+      "tpr": 0.4019
     },
     {
-      "fpr": 0.1554,
-      "tpr": 0.4159
+      "fpr": 0.1602,
+      "tpr": 0.4206
     },
     {
-      "fpr": 0.1737,
+      "fpr": 0.1776,
       "tpr": 0.4346
     },
     {
       "fpr": 0.1969,
-      "tpr": 0.4439
+      "tpr": 0.4486
     },
     {
       "fpr": 0.2124,
-      "tpr": 0.4579
+      "tpr": 0.4626
     },
     {
-      "fpr": 0.222,
+      "fpr": 0.2268,
       "tpr": 0.472
     },
     {
-      "fpr": 0.2317,
-      "tpr": 0.4813
+      "fpr": 0.2375,
+      "tpr": 0.4907
     },
     {
-      "fpr": 0.2413,
-      "tpr": 0.4953
+      "fpr": 0.2432,
+      "tpr": 0.5093
     },
     {
-      "fpr": 0.2461,
-      "tpr": 0.514
+      "fpr": 0.2568,
+      "tpr": 0.528
     },
     {
-      "fpr": 0.2616,
-      "tpr": 0.5327
+      "fpr": 0.2683,
+      "tpr": 0.5374
     },
     {
-      "fpr": 0.2703,
-      "tpr": 0.5421
+      "fpr": 0.2712,
+      "tpr": 0.5561
     },
     {
-      "fpr": 0.277,
-      "tpr": 0.5607
+      "fpr": 0.2819,
+      "tpr": 0.5748
     },
     {
-      "fpr": 0.2886,
-      "tpr": 0.5794
+      "fpr": 0.3098,
+      "tpr": 0.5841
     },
     {
-      "fpr": 0.3166,
-      "tpr": 0.5981
+      "fpr": 0.3214,
+      "tpr": 0.6028
     },
     {
-      "fpr": 0.334,
-      "tpr": 0.6121
+      "fpr": 0.3349,
+      "tpr": 0.6215
     },
     {
       "fpr": 0.3407,
       "tpr": 0.6308
     },
     {
-      "fpr": 0.3465,
+      "fpr": 0.3494,
       "tpr": 0.6449
     },
     {
@@ -352,26 +352,26 @@
     },
     {
       "fpr": 0.36,
-      "tpr": 0.6729
+      "tpr": 0.6776
     },
     {
-      "fpr": 0.3668,
+      "fpr": 0.3687,
       "tpr": 0.6916
     },
     {
-      "fpr": 0.3726,
+      "fpr": 0.3832,
       "tpr": 0.715
     },
     {
-      "fpr": 0.39,
-      "tpr": 0.7243
+      "fpr": 0.3909,
+      "tpr": 0.729
     },
     {
       "fpr": 0.4102,
       "tpr": 0.7383
     },
     {
-      "fpr": 0.4411,
+      "fpr": 0.4431,
       "tpr": 0.757
     },
     {
@@ -380,14 +380,14 @@
     },
     {
       "fpr": 0.4672,
-      "tpr": 0.785
+      "tpr": 0.7897
     },
     {
       "fpr": 0.4759,
       "tpr": 0.7991
     },
     {
-      "fpr": 0.4836,
+      "fpr": 0.4875,
       "tpr": 0.8131
     },
     {
@@ -399,7 +399,7 @@
       "tpr": 0.8411
     },
     {
-      "fpr": 0.5299,
+      "fpr": 0.5396,
       "tpr": 0.8598
     },
     {
@@ -408,14 +408,14 @@
     },
     {
       "fpr": 0.5598,
-      "tpr": 0.8832
+      "tpr": 0.8879
     },
     {
       "fpr": 0.5927,
       "tpr": 0.8972
     },
     {
-      "fpr": 0.61,
+      "fpr": 0.6409,
       "tpr": 0.9112
     },
     {
@@ -641,8 +641,8 @@
       "recall": 0.4159
     },
     {
-      "precision": 0.3547,
-      "recall": 0.3879
+      "precision": 0.359,
+      "recall": 0.3925
     },
     {
       "precision": 0.3821,
@@ -692,72 +692,72 @@
   "featureImportance": [
     {
       "feature": "payment_history_pct",
-      "importance": 0.06796,
+      "importance": 0.06801,
       "std": 0.00928
     },
     {
       "feature": "credit_utilization",
-      "importance": 0.05787,
+      "importance": 0.0579,
       "std": 0.00715
     },
     {
       "feature": "credit_age_years",
-      "importance": 0.0457,
+      "importance": 0.04572,
       "std": 0.01212
     },
     {
       "feature": "recent_inquiries",
-      "importance": 0.01598,
-      "std": 0.00472
+      "importance": 0.01602,
+      "std": 0.00473
     },
     {
       "feature": "derogatory_marks",
-      "importance": 0.01068,
+      "importance": 0.01069,
       "std": 0.00539
     },
     {
       "feature": "employment_years",
-      "importance": 0.00875,
-      "std": 0.00399
+      "importance": 0.0088,
+      "std": 0.004
     },
     {
       "feature": "home_ownership",
-      "importance": 0.00662,
+      "importance": 0.00668,
       "std": 0.00351
     },
     {
+      "feature": "loan_to_income",
+      "importance": 0.00664,
+      "std": 0.00243
+    },
+    {
       "feature": "loan_purpose",
-      "importance": 0.00585,
+      "importance": 0.00589,
       "std": 0.00276
     },
     {
-      "feature": "loan_to_income",
-      "importance": 0.00561,
-      "std": 0.0032
-    },
-    {
-      "feature": "debt_to_income",
-      "importance": 0.00368,
-      "std": 0.0033
-    },
-    {
       "feature": "loan_amount",
-      "importance": 0.00238,
-      "std": 0.00293
-    },
-    {
-      "feature": "annual_income",
-      "importance": 0.00168,
+      "importance": 0.00246,
       "std": 0.00295
     },
     {
+      "feature": "debt_to_income",
+      "importance": 0.00222,
+      "std": 0.00332
+    },
+    {
+      "feature": "annual_income",
+      "importance": 0.00164,
+      "std": 0.00296
+    },
+    {
       "feature": "num_credit_accounts",
-      "importance": 0.00115,
-      "std": 0.00148
+      "importance": 0.00118,
+      "std": 0.00147
     },
     {
       "feature": "age",
-      "importance": 0.00053,
+      "importance": 0.00056,
       "std": 0.00298
     }
   ],
@@ -766,115 +766,115 @@
       "bin": 312,
       "from": 300,
       "to": 325,
-      "count": 198
+      "count": 0
     },
     {
       "bin": 338,
       "from": 325,
       "to": 350,
-      "count": 145
+      "count": 0
     },
     {
       "bin": 362,
       "from": 350,
       "to": 375,
-      "count": 259
+      "count": 1
     },
     {
       "bin": 388,
       "from": 375,
       "to": 400,
-      "count": 441
+      "count": 3
     },
     {
       "bin": 412,
       "from": 400,
       "to": 425,
-      "count": 585
+      "count": 12
     },
     {
       "bin": 438,
       "from": 425,
       "to": 450,
-      "count": 805
+      "count": 28
     },
     {
       "bin": 462,
       "from": 450,
       "to": 475,
-      "count": 881
+      "count": 72
     },
     {
       "bin": 488,
       "from": 475,
       "to": 500,
-      "count": 793
+      "count": 111
     },
     {
       "bin": 512,
       "from": 500,
       "to": 525,
-      "count": 554
+      "count": 175
     },
     {
       "bin": 538,
       "from": 525,
       "to": 550,
-      "count": 271
+      "count": 309
     },
     {
       "bin": 562,
       "from": 550,
       "to": 575,
-      "count": 56
+      "count": 473
     },
     {
       "bin": 588,
       "from": 575,
       "to": 600,
-      "count": 11
+      "count": 667
     },
     {
       "bin": 612,
       "from": 600,
       "to": 625,
-      "count": 1
+      "count": 798
     },
     {
       "bin": 638,
       "from": 625,
       "to": 650,
-      "count": 0
+      "count": 901
     },
     {
       "bin": 662,
       "from": 650,
       "to": 675,
-      "count": 0
+      "count": 738
     },
     {
       "bin": 688,
       "from": 675,
       "to": 700,
-      "count": 0
+      "count": 482
     },
     {
       "bin": 712,
       "from": 700,
       "to": 725,
-      "count": 0
+      "count": 190
     },
     {
       "bin": 738,
       "from": 725,
       "to": 750,
-      "count": 0
+      "count": 36
     },
     {
       "bin": 762,
       "from": 750,
       "to": 775,
-      "count": 0
+      "count": 4
     },
     {
       "bin": 788,
@@ -898,19 +898,19 @@
   "bandDistribution": [
     {
       "band": "Poor",
-      "count": 4995
+      "count": 1301
     },
     {
       "band": "Fair",
-      "count": 5
+      "count": 2858
     },
     {
       "band": "Good",
-      "count": 0
+      "count": 829
     },
     {
       "band": "Very Good",
-      "count": 0
+      "count": 12
     },
     {
       "band": "Exceptional",
@@ -934,9 +934,9 @@
       "loan_purpose": "business",
       "home_ownership": "rent",
       "prob_default_lr": 0.3441,
-      "prob_default_gbm": 0.1006,
-      "score": 476,
-      "band": "Poor"
+      "prob_default_gbm": 0.1007,
+      "score": 644,
+      "band": "Fair"
     },
     {
       "age": 65,
@@ -955,8 +955,8 @@
       "home_ownership": "rent",
       "prob_default_lr": 0.2526,
       "prob_default_gbm": 0.1255,
-      "score": 458,
-      "band": "Poor"
+      "score": 626,
+      "band": "Fair"
     },
     {
       "age": 49,
@@ -975,8 +975,8 @@
       "home_ownership": "rent",
       "prob_default_lr": 0.2811,
       "prob_default_gbm": 0.0864,
-      "score": 488,
-      "band": "Poor"
+      "score": 656,
+      "band": "Fair"
     },
     {
       "age": 34,
@@ -995,7 +995,7 @@
       "home_ownership": "mortgage",
       "prob_default_lr": 0.8586,
       "prob_default_gbm": 0.5471,
-      "score": 304,
+      "score": 473,
       "band": "Poor"
     },
     {
@@ -1015,7 +1015,7 @@
       "home_ownership": "own",
       "prob_default_lr": 0.4738,
       "prob_default_gbm": 0.2349,
-      "score": 403,
+      "score": 571,
       "band": "Poor"
     },
     {
@@ -1035,8 +1035,8 @@
       "home_ownership": "mortgage",
       "prob_default_lr": 0.1517,
       "prob_default_gbm": 0.0588,
-      "score": 518,
-      "band": "Poor"
+      "score": 686,
+      "band": "Good"
     },
     {
       "age": 51,
@@ -1055,8 +1055,8 @@
       "home_ownership": "mortgage",
       "prob_default_lr": 0.1043,
       "prob_default_gbm": 0.0767,
-      "score": 497,
-      "band": "Poor"
+      "score": 666,
+      "band": "Fair"
     },
     {
       "age": 65,
@@ -1075,14 +1075,14 @@
       "home_ownership": "own",
       "prob_default_lr": 0.3888,
       "prob_default_gbm": 0.123,
-      "score": 459,
-      "band": "Poor"
+      "score": 628,
+      "band": "Fair"
     }
   ],
   "scorecard": {
     "pdo": 50,
     "baseScore": 600,
-    "baseOdds": 50.0,
+    "baseOdds": 4.8411,
     "minScore": 300,
     "maxScore": 850
   },

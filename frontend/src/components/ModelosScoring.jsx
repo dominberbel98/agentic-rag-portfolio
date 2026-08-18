@@ -21,12 +21,22 @@ const BAND_COLOR = {
 /* ────────── helpers ────────── */
 const sigmoid = (z) => 1 / (1 + Math.exp(-z));
 
-function probToScore(prob, pdo = 50, baseScore = 600, baseOdds = 50) {
+/**
+ * Map a default probability onto the 300-850 scale.
+ *
+ * The anchor comes from `data.scorecard`, which the Python pipeline derives from
+ * the portfolio's actual default rate. Hardcoding it here as well is how the two
+ * ends drifted apart: the browser scored against 50:1 odds — a 1.96% chance of
+ * default — while the population defaults at 17%, so the interactive score sat
+ * roughly 168 points below the distribution charted beside it.
+ */
+function probToScore(prob, scorecard) {
+  const { pdo, baseScore, baseOdds, minScore, maxScore } = scorecard;
   const factor = pdo / Math.log(2);
   const offset = baseScore - factor * Math.log(baseOdds);
   const odds = (1 - prob) / Math.max(prob, 1e-9);
   const raw = offset + factor * Math.log(odds);
-  return Math.max(300, Math.min(850, Math.round(raw)));
+  return Math.max(minScore, Math.min(maxScore, Math.round(raw)));
 }
 
 function bandFromScore(s) {
@@ -245,10 +255,15 @@ const SLIDER_FIELDS = [
   { key: "derogatory_marks", label: tr.scoring.features.derogatory_marks, min: 0, max: 5, step: 1, unit: "" },
 ];
 
+// A typical applicant, not a flattering one: this lands at roughly 644, in Fair,
+// which is the band 57% of the portfolio occupies. It also sits just under the
+// Good boundary, so moving a single slider changes the band — which is the point
+// of an interactive scorecard, and something the previous default could not do
+// from the bottom of the scale.
 const DEFAULT_APPLICANT = {
-  age: 35, annual_income: 55000, employment_years: 5, loan_amount: 15000,
-  payment_history_pct: 92, credit_utilization: 28, credit_age_years: 8,
-  num_credit_accounts: 4, recent_inquiries: 2, derogatory_marks: 0,
+  age: 35, annual_income: 55000, employment_years: 8, loan_amount: 15000,
+  payment_history_pct: 96, credit_utilization: 18, credit_age_years: 12,
+  num_credit_accounts: 4, recent_inquiries: 1, derogatory_marks: 0,
   loan_purpose: "personal", home_ownership: "rent",
 };
 
@@ -261,13 +276,13 @@ function deriveExtras(a) {
   };
 }
 
-function InteractiveScorecard({ weights, levels, applicant, setApplicant }) {
+function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplicant }) {
   const result = useMemo(() => {
     const full = { ...applicant, ...deriveExtras(applicant) };
     const prob = predictWithLR(weights, full);
-    const score = probToScore(prob);
+    const score = probToScore(prob, scorecard);
     return { prob, score, band: bandFromScore(score) };
-  }, [applicant, weights]);
+  }, [applicant, weights, scorecard]);
 
   const bandColor = BAND_COLOR[result.band];
 
@@ -560,6 +575,7 @@ export default function ModelosScoring() {
           <InteractiveScorecard
             weights={data.models.logistic.weights}
             levels={data.models.logistic.weights.categorical_levels}
+            scorecard={data.scorecard}
             applicant={applicant}
             setApplicant={setApplicant}
           />

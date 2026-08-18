@@ -225,8 +225,27 @@ def pr_curve_points(pipeline: Pipeline, X_test: pd.DataFrame, y_test: pd.Series,
 # 4. Scorecard
 # ---------------------------------------------------------------------------
 
-def prob_to_score(prob_default: np.ndarray, pdo: int = 50, base_score: int = 600,
-                  base_odds: float = 50.0) -> np.ndarray:
+def population_odds(default_rate: float) -> float:
+    """Good:bad odds of the portfolio the scorecard is being built for."""
+    return (1.0 - default_rate) / max(default_rate, 1e-9)
+
+
+def prob_to_score(prob_default: np.ndarray, base_odds: float, pdo: int = 50,
+                  base_score: int = 600) -> np.ndarray:
+    """Map a default probability onto the 300-850 scale.
+
+    `base_odds` is the anchor: it declares what odds the base score means, and it
+    has to be the odds of the population being scored. It used to be hardcoded at
+    50.0, which asserts that 600 points is a 1.96% chance of default — while this
+    portfolio defaults at 17%, odds of roughly 4.8:1. Every applicant therefore
+    landed about 168 points below where they belonged, and the scorecard reported
+    4,995 of 5,000 as Poor with nobody at all reaching Good. A scale on which the
+    entire population occupies the bottom band ranks correctly and communicates
+    nothing, which is the opposite of what a scorecard is for.
+
+    Anchoring on the real rate puts the average applicant at the base score and
+    spreads the rest around it, so a band finally carries meaning.
+    """
     factor = pdo / np.log(2)
     offset = base_score - factor * np.log(base_odds)
     odds = (1 - prob_default) / np.maximum(prob_default, 1e-9)
@@ -398,8 +417,11 @@ def main() -> None:
         print(f"    {row['feature']:<22} {row['importance']:.4f}")
 
     # --- Score distribution (using GBM probabilities on full dataset) ---
+    # The anchor comes from the portfolio's own default rate, so the base score
+    # describes the average applicant rather than an arbitrary 50:1.
+    base_odds = population_odds(float(y.mean()))
     full_probs = cal_gbm.predict_proba(X)[:, 1]
-    scores = prob_to_score(full_probs)
+    scores = prob_to_score(full_probs, base_odds)
     histogram = score_histogram(scores)
     bands = band_distribution(scores)
 
@@ -407,7 +429,7 @@ def main() -> None:
     sample = X_test.sample(8, random_state=7).copy()
     s_probs_lr  = lr.predict_proba(sample)[:, 1]
     s_probs_gbm = cal_gbm.predict_proba(sample)[:, 1]
-    s_scores    = prob_to_score(s_probs_gbm)
+    s_scores    = prob_to_score(s_probs_gbm, base_odds)
     sample_records = []
     for (_, row), p_lr, p_gbm, sc in zip(sample.iterrows(), s_probs_lr, s_probs_gbm, s_scores):
         rec = {k: (int(v) if isinstance(v, (np.integer,)) else float(v) if isinstance(v, (np.floating,)) else v)
@@ -448,7 +470,9 @@ def main() -> None:
         "scoreHistogram": histogram,
         "bandDistribution": bands,
         "sampleApplicants": sample_records,
-        "scorecard": {"pdo": 50, "baseScore": 600, "baseOdds": 50.0,
+        # Exported so the browser scores with the same anchor. It used to be
+        # hardcoded in both places, which is how they could disagree.
+        "scorecard": {"pdo": 50, "baseScore": 600, "baseOdds": round(base_odds, 4),
                       "minScore": 300, "maxScore": 850},
         "thresholds": {"poor": 580, "fair": 670, "good": 740, "veryGood": 800},
     }
