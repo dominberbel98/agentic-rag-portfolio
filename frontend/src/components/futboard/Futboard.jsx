@@ -182,7 +182,7 @@ export default function Futboard() {
           <h2 className="text-xl sm:text-2xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_12px_rgba(0,255,65,0.45)]">
             {f.title}
           </h2>
-          <p className="text-[0.72rem] text-[#00FF41]/70 font-headline mt-1 normal-case">
+          <p className="text-[0.84rem] text-[#00FF41]/70 font-headline mt-1 normal-case">
             {f.tagline}
           </p>
         </div>
@@ -196,10 +196,10 @@ export default function Futboard() {
 
       {resumable && (
         <div className="mb-4 border border-[#FFD700]/40 rounded p-3">
-          <p className="font-headline text-[0.75rem] text-[#FFD700] normal-case">
+          <p className="font-headline text-[0.86rem] text-[#FFD700] normal-case">
             {f.live.resumeMatch}
           </p>
-          <p className="font-headline text-[0.68rem] text-[#00FF41]/70 normal-case mt-0.5">
+          <p className="font-headline text-[0.8rem] text-[#00FF41]/70 normal-case mt-0.5">
             {f.live.resumeHint}
           </p>
           <div className="flex gap-2 mt-3">
@@ -233,10 +233,10 @@ export default function Futboard() {
               {card.icon}
             </span>
             <span className="min-w-0">
-              <span className="block font-headline uppercase font-bold text-[0.85rem] tracking-wide text-[#00FF41]">
+              <span className="block font-headline uppercase font-bold text-[0.95rem] tracking-wide text-[#00FF41]">
                 {f.hub[card.key]}
               </span>
-              <span className="block font-headline text-[0.66rem] text-[#00FF41]/70 normal-case mt-0.5 leading-snug">
+              <span className="block font-headline text-[0.78rem] text-[#00FF41]/70 normal-case mt-0.5 leading-snug">
                 {f.hub[card.hint]}
               </span>
             </span>
@@ -248,20 +248,20 @@ export default function Futboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
         <Panel title={f.hub.recent} icon="history">
           {data.matches.length === 0 ? (
-            <p className="font-headline text-[0.7rem] text-[#00FF41]/70 normal-case py-3 text-center">
+            <p className="font-headline text-[0.82rem] text-[#00FF41]/70 normal-case py-3 text-center">
               {f.hub.noMatchesYet}
             </p>
           ) : (
             <div className="space-y-1.5">
               {data.matches.slice(0, 5).map((entry) => (
                 <ListRow key={entry.id}>
-                  <span className="flex-1 font-headline text-[0.72rem] text-[#00FF41]/85 truncate text-right">
+                  <span className="flex-1 font-headline text-[0.84rem] text-[#00FF41]/85 truncate text-right">
                     {entry.home_team_name}
                   </span>
-                  <span className="shrink-0 font-headline font-bold tabular-nums text-[0.78rem] text-[#00FF41] px-1">
+                  <span className="shrink-0 font-headline font-bold tabular-nums text-[0.88rem] text-[#00FF41] px-1">
                     {entry.home_goals}—{entry.away_goals}
                   </span>
-                  <span className="flex-1 font-headline text-[0.72rem] text-[#00FF41]/85 truncate">
+                  <span className="flex-1 font-headline text-[0.84rem] text-[#00FF41]/85 truncate">
                     {entry.away_team_name}
                   </span>
                 </ListRow>
@@ -272,7 +272,7 @@ export default function Futboard() {
 
         <Panel title={f.hub.topScorer} icon="trophy">
           {!topScorer ? (
-            <p className="font-headline text-[0.7rem] text-[#00FF41]/70 normal-case py-3 text-center">
+            <p className="font-headline text-[0.82rem] text-[#00FF41]/70 normal-case py-3 text-center">
               {f.hub.noMatchesYet}
             </p>
           ) : (
@@ -282,7 +282,7 @@ export default function Futboard() {
                 <div className="font-headline text-[0.95rem] font-bold text-[#00FF41] truncate">
                   {topScorer.name}
                 </div>
-                <div className="font-headline text-[0.68rem] text-[#00FF41]/70 normal-case">
+                <div className="font-headline text-[0.8rem] text-[#00FF41]/70 normal-case">
                   {f.hub.goalCount(topScorer.goals)} · {f.hub.matchCount(topScorer.matches)}
                 </div>
               </div>

@@ -115,7 +115,7 @@ function MetricCards({ data }) {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {cards.map((c) => (
           <div key={c.label} className="border border-[#00FF41]/15 rounded p-3 bg-black/20">
-            <div className="text-[0.55rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">
+            <div className="text-[0.72rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">
               {c.label}
             </div>
             <div
@@ -127,7 +127,7 @@ function MetricCards({ data }) {
           </div>
         ))}
       </div>
-      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
+      <p className="text-[0.74rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
         {tr.scoring.datasetLine(
           data.dataset.n.toLocaleString(),
           (data.dataset.defaultRate * 100).toFixed(1),
@@ -166,7 +166,7 @@ function RocPanel({ roc, auc }) {
           <Area type="monotone" dataKey="tpr" stroke={GREEN} strokeWidth={2} fill="url(#rocFill)" name="TPR" isAnimationActive={false} />
         </AreaChart>
       </ResponsiveContainer>
-      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-1 uppercase">
+      <p className="text-[0.74rem] text-[#00FF41]/60 font-headline mt-1 uppercase">
         {tr.scoring.rocCaption}
       </p>
     </div>
@@ -207,7 +207,7 @@ function ImportancePanel({ rows }) {
           <Bar dataKey="importance" name="Δ AUC" fill={GREEN} fillOpacity={0.65} radius={[0, 4, 4, 0]} />
         </BarChart>
       </ResponsiveContainer>
-      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-1 uppercase">
+      <p className="text-[0.74rem] text-[#00FF41]/60 font-headline mt-1 uppercase">
         {tr.scoring.importanceCaption}
       </p>
     </div>
@@ -252,7 +252,7 @@ function ScoreDistribution({ histogram, bands }) {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div className="flex flex-wrap gap-3 mt-2 text-[0.6rem] font-headline uppercase">
+      <div className="flex flex-wrap gap-3 mt-2 text-[0.74rem] font-headline uppercase">
         {bands.map((b) => (
           <span key={b.band} className="flex items-center gap-1" style={{ color: BAND_COLOR[b.band] }}>
             <span className="w-2 h-2 rounded-full" style={{ background: BAND_COLOR[b.band] }} />
@@ -332,7 +332,7 @@ function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplic
 
       {/* Score gauge */}
       <div className="flex flex-col items-center mb-4 p-4 border border-[#00FF41]/15 rounded bg-black/30">
-        <div className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">{tr.scoring.creditScore}</div>
+        <div className="text-[0.74rem] font-headline uppercase text-[#00FF41]/70 tracking-widest mb-1">{tr.scoring.creditScore}</div>
         <div
           className="text-5xl sm:text-6xl font-bold font-headline tabular-nums"
           style={{ color: bandColor, textShadow: `0 0 18px ${bandColor}80` }}
@@ -340,7 +340,7 @@ function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplic
           {result.score}
         </div>
         <div className="text-xs font-headline uppercase mt-1" style={{ color: bandColor }}>{bandLabel(tr, result.band)}</div>
-        <div className="text-[0.65rem] font-headline uppercase text-[#00FF41]/60 mt-2">
+        <div className="text-[0.78rem] font-headline uppercase text-[#00FF41]/60 mt-2">
           P(default) = <span className="text-[#00FF41]">{(result.prob * 100).toFixed(2)}%</span>
         </div>
 
@@ -369,7 +369,7 @@ function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplic
       <div className="space-y-2.5 max-h-[420px] overflow-y-auto scrollbar-hide pr-1">
         {fields.map((f) => (
           <div key={f.key}>
-            <div className="flex justify-between text-[0.6rem] font-headline uppercase">
+            <div className="flex justify-between text-[0.74rem] font-headline uppercase">
               <span className="text-[#00FF41]/70">{f.label}</span>
               <span className="text-[#00FF41] tabular-nums">
                 {applicant[f.key]}{f.unit ? ` ${f.unit}` : ""}
@@ -386,13 +386,13 @@ function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplic
         {/* Categorical selects */}
         {["loan_purpose", "home_ownership"].map((feat) => (
           <div key={feat} className="flex justify-between items-center gap-2">
-            <span className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70">
+            <span className="text-[0.74rem] font-headline uppercase text-[#00FF41]/70">
               {feat === "loan_purpose" ? tr.scoring.features.loan_purpose : tr.scoring.features.home_ownership}
             </span>
             <select
               value={applicant[feat]}
               onChange={(e) => setApplicant((s) => ({ ...s, [feat]: e.target.value }))}
-              className="bg-black/40 border border-[#00FF41]/20 text-[#00FF41] text-[0.65rem] font-headline uppercase px-2 py-1 rounded outline-none focus:border-[#00FF41]/50"
+              className="bg-black/40 border border-[#00FF41]/20 text-[#00FF41] text-[0.78rem] font-headline uppercase px-2 py-1 rounded outline-none focus:border-[#00FF41]/50"
             >
               {(levels[feat] || []).map((lvl) => (
                 <option key={lvl} value={lvl}>{lvl}</option>
@@ -402,7 +402,7 @@ function InteractiveScorecard({ weights, levels, scorecard, applicant, setApplic
         ))}
       </div>
 
-      <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-3 uppercase">
+      <p className="text-[0.72rem] text-[#00FF41]/55 font-headline mt-3 uppercase">
         {tr.scoring.inferenceNote}
       </p>
     </div>
@@ -452,7 +452,7 @@ function ScoreDrivers({ weights, applicant }) {
         {tr.scoring.drivers.title}
       </h3>
 
-      <div className="flex gap-5 mb-4 text-[0.75rem] font-headline uppercase">
+      <div className="flex gap-5 mb-4 text-[0.86rem] font-headline uppercase">
         <span className="text-[#00FF41]">▲ {tr.scoring.drivers.raises}</span>
         <span className="text-[#FF4136]">▼ {tr.scoring.drivers.lowers}</span>
       </div>
@@ -463,7 +463,7 @@ function ScoreDrivers({ weights, applicant }) {
           const width = (Math.abs(d.effect) / widest) * 50;
           return (
             <div key={`${d.feature}-${d.z}`} className="flex items-center gap-2">
-              <span className="w-[38%] shrink-0 text-right text-[0.78rem] font-headline uppercase text-[#00FF41]/80 truncate">
+              <span className="w-[38%] shrink-0 text-right text-[0.88rem] font-headline uppercase text-[#00FF41]/80 truncate">
                 {tr.scoring.features[d.feature] || d.feature}
               </span>
               {/* Diverging bar: the centre line is "no effect", so length and
@@ -485,7 +485,7 @@ function ScoreDrivers({ weights, applicant }) {
         })}
       </div>
 
-      <p className="text-[0.72rem] text-[#00FF41]/65 font-headline mt-4 normal-case leading-relaxed">
+      <p className="text-[0.84rem] text-[#00FF41]/65 font-headline mt-4 normal-case leading-relaxed">
         {tr.scoring.drivers.caption}
       </p>
     </div>
@@ -502,7 +502,7 @@ function SampleApplicants({ rows }) {
         {tr.scoring.sampleTable.title}
       </h3>
       <div className="overflow-x-auto scrollbar-hide">
-        <table className="w-full text-[0.65rem] font-headline uppercase">
+        <table className="w-full text-[0.78rem] font-headline uppercase">
           <thead>
             <tr className="text-[#00FF41]/70 border-b border-[#00FF41]/10">
               <th className="py-1.5 px-2 text-center">#</th>
@@ -604,7 +604,7 @@ export default function ModelosScoring() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {tr.scoring.title}
         </h2>
-        <p className="text-[0.7rem] text-[#00FF41]/70 font-headline mt-1 leading-relaxed max-w-3xl normal-case">
+        <p className="text-[0.82rem] text-[#00FF41]/70 font-headline mt-1 leading-relaxed max-w-3xl normal-case">
           {tr.scoring.explainer.problem}
         </p>
       </div>
@@ -632,7 +632,7 @@ export default function ModelosScoring() {
               <span className="material-symbols-outlined text-sm mr-2">help</span>
               {tr.scoring.explainer.title}
             </h3>
-            <div className="text-[0.72rem] text-[#00FF41]/75 font-headline leading-relaxed space-y-3 normal-case">
+            <div className="text-[0.84rem] text-[#00FF41]/75 font-headline leading-relaxed space-y-3 normal-case">
               <p>
                 <span className="text-[#00FF41] font-bold uppercase">{tr.scoring.explainer.problemLabel}</span>{" "}
                 {tr.scoring.explainer.problem}
@@ -653,12 +653,12 @@ export default function ModelosScoring() {
               <span className="material-symbols-outlined text-sm mr-2">account_tree</span>
               {tr.scoring.explainer.pipelineTitle}
             </h3>
-            <div className="text-[0.66rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2 normal-case">
+            <div className="text-[0.78rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2 normal-case">
               {tr.scoring.explainer.steps.map((step) => (
                 <p key={step} className="pl-3 border-l border-[#00FF41]/20">{step}</p>
               ))}
             </div>
-            <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
+            <p className="text-[0.74rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
               {tr.scoring.generated(
                 new Date(data.generatedAt).toLocaleString("en-GB", { dateStyle: "short", timeStyle: "short" }),
               )}

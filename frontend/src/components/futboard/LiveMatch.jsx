@@ -280,7 +280,7 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
         >
           {formatClock(elapsed)}
         </div>
-        <div className="font-headline uppercase text-[0.65rem] tracking-[0.2em] text-[#00FF41]/70 mt-1">
+        <div className="font-headline uppercase text-[0.78rem] tracking-[0.2em] text-[#00FF41]/70 mt-1">
           {halfLabel} · {f.live.of(match.halfMinutes)}
         </div>
       </div>
@@ -301,7 +301,7 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
 
       {flash ? (
         <div
-          className="text-center font-headline font-bold uppercase tracking-[0.25em] text-[0.8rem] py-2 rounded flicker"
+          className="text-center font-headline font-bold uppercase tracking-[0.25em] text-[0.9rem] py-2 rounded flicker"
           style={{ color: flash === "subs" ? AMBER : GREEN, background: "rgba(0,255,65,0.08)" }}
         >
           {flashText}
@@ -310,7 +310,7 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
         toNextCue !== null &&
         clock.status === RUNNING && (
           <div
-            className="text-center font-headline uppercase text-[0.65rem] tracking-widest"
+            className="text-center font-headline uppercase text-[0.78rem] tracking-widest"
             style={{ color: AMBER }}
           >
             {f.live.nextSubs} {formatClock(toNextCue)}
@@ -325,7 +325,7 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
             key={side}
             className="flex flex-col border border-[#00FF41]/20 rounded p-2 sm:p-3 bg-black/20 min-h-0"
           >
-            <h3 className="font-headline uppercase text-[0.7rem] sm:text-[0.8rem] text-center text-[#00FF41]/85 tracking-wide truncate">
+            <h3 className="font-headline uppercase text-[0.82rem] sm:text-[0.9rem] text-center text-[#00FF41]/85 tracking-wide truncate">
               {match[side].name}
             </h3>
             <div
@@ -339,14 +339,14 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
               type="button"
               onClick={() => setPicker(side)}
               disabled={clock.status === MATCH_OVER}
-              className="w-full min-h-[56px] my-2 border border-[#00FF41]/55 rounded bg-[#00FF41]/15 hover:bg-[#00FF41]/25 active:scale-95 font-headline font-bold uppercase text-[0.85rem] tracking-widest text-[#00FF41] disabled:opacity-40 disabled:active:scale-100"
+              className="w-full min-h-[56px] my-2 border border-[#00FF41]/55 rounded bg-[#00FF41]/15 hover:bg-[#00FF41]/25 active:scale-95 font-headline font-bold uppercase text-[0.95rem] tracking-widest text-[#00FF41] disabled:opacity-40 disabled:active:scale-100"
             >
               + {f.live.goal}
             </button>
 
             <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide space-y-1">
               {match.goals.filter((g) => g.side === side).length === 0 ? (
-                <p className="font-headline text-[0.6rem] text-[#00FF41]/65 text-center normal-case pt-1">
+                <p className="font-headline text-[0.74rem] text-[#00FF41]/65 text-center normal-case pt-1">
                   {f.live.noScorers}
                 </p>
               ) : (
@@ -357,7 +357,7 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
                     return (
                       <div
                         key={`${goal.minute}-${index}`}
-                        className="flex justify-between gap-2 font-headline text-[0.62rem] text-[#00FF41]/75 normal-case"
+                        className="flex justify-between gap-2 font-headline text-[0.75rem] text-[#00FF41]/75 normal-case"
                       >
                         <span className="truncate">{scorer ? scorer.name : "—"}</span>
                         <span className="tabular-nums shrink-0">{goal.minute}'</span>
@@ -431,7 +431,7 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
             className="w-full max-w-md border-2 border-[#00FF41]/50 rounded-lg bg-[#0a0a0a] p-4"
             onClick={(event) => event.stopPropagation()}
           >
-            <h4 className="font-headline uppercase text-[0.75rem] tracking-widest text-[#00FF41] text-center mb-3">
+            <h4 className="font-headline uppercase text-[0.86rem] tracking-widest text-[#00FF41] text-center mb-3">
               {f.live.whoScored(match[picker].name)}
             </h4>
             <div className="flex flex-wrap gap-2 max-h-[45vh] overflow-y-auto scrollbar-hide">
@@ -440,7 +440,7 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
                   key={player.id}
                   type="button"
                   onClick={() => recordGoal(picker, player.id)}
-                  className="min-h-[44px] px-3 border border-[#00FF41]/30 rounded font-headline text-[0.75rem] text-[#00FF41]/85 hover:bg-[#00FF41]/10 hover:text-[#00FF41] active:scale-95"
+                  className="min-h-[44px] px-3 border border-[#00FF41]/30 rounded font-headline text-[0.86rem] text-[#00FF41]/85 hover:bg-[#00FF41]/10 hover:text-[#00FF41] active:scale-95"
                 >
                   {player.name}
                 </button>
@@ -449,14 +449,14 @@ export default function LiveMatch({ f, match: initialMatch, onExit, onSave }) {
             <button
               type="button"
               onClick={() => recordGoal(picker, null)}
-              className="w-full min-h-[52px] mt-3 border border-[#00FF41]/60 rounded bg-[#00FF41]/15 hover:bg-[#00FF41]/25 font-headline font-bold uppercase text-[0.75rem] tracking-widest text-[#00FF41] active:scale-95"
+              className="w-full min-h-[52px] mt-3 border border-[#00FF41]/60 rounded bg-[#00FF41]/15 hover:bg-[#00FF41]/25 font-headline font-bold uppercase text-[0.86rem] tracking-widest text-[#00FF41] active:scale-95"
             >
               {f.live.notSpecified}
             </button>
             <button
               type="button"
               onClick={() => setPicker(null)}
-              className="w-full min-h-[44px] mt-2 font-headline uppercase text-[0.68rem] tracking-widest text-[#00FF41]/65 hover:text-[#00FF41]"
+              className="w-full min-h-[44px] mt-2 font-headline uppercase text-[0.8rem] tracking-widest text-[#00FF41]/65 hover:text-[#00FF41]"
             >
               {f.common.cancel}
             </button>

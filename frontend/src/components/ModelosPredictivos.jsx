@@ -109,21 +109,21 @@ function GoalProbabilities({ data }) {
 
   const MiniBar = ({ items, dataKey, title, icon, color }) => (
     <div className="flex-1 min-w-[250px]">
-      <h4 className="text-[0.65rem] font-headline uppercase text-[#00FF41]/60 mb-2 flex items-center gap-1">
+      <h4 className="text-[0.78rem] font-headline uppercase text-[#00FF41]/60 mb-2 flex items-center gap-1">
         <span className="material-symbols-outlined text-xs">{icon}</span>
         {title}
       </h4>
       {items.map((t) => (
         <div key={t.teamShortName} className="flex items-center gap-2 mb-1.5">
           <img src={t.teamCrest} alt="" className="w-4 h-4" loading="lazy" />
-          <span className="text-[0.6rem] text-[#00FF41]/70 font-headline w-16 truncate">{t.teamShortName}</span>
+          <span className="text-[0.74rem] text-[#00FF41]/70 font-headline w-16 truncate">{t.teamShortName}</span>
           <div className="flex-1 h-3 bg-[#00FF41]/5 rounded overflow-hidden">
             <div
               className="h-full rounded transition-all"
               style={{ width: `${t[dataKey]}%`, background: color, opacity: 0.7 }}
             />
           </div>
-          <span className="text-[0.6rem] font-headline text-[#00FF41]/70 w-10 text-right">{t[dataKey]}%</span>
+          <span className="text-[0.74rem] font-headline text-[#00FF41]/70 w-10 text-right">{t[dataKey]}%</span>
         </div>
       ))}
     </div>
@@ -181,7 +181,7 @@ function FeatureImportance({ importance }) {
           <Bar dataKey="importance" name="Importancia" fill={GREEN} fillOpacity={0.6} radius={[0, 4, 4, 0]} />
         </BarChart>
       </ResponsiveContainer>
-      <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-1 uppercase">
+      <p className="text-[0.72rem] text-[#00FF41]/55 font-headline mt-1 uppercase">
         {tr.predictions.importanceCaption}
       </p>
     </div>
@@ -198,7 +198,7 @@ function ProjectedTable({ data }) {
         {tr.predictions.projectedTable.title}
       </h3>
       <div className="overflow-x-auto scrollbar-hide">
-        <table className="w-full text-[0.65rem] sm:text-xs font-headline uppercase">
+        <table className="w-full text-[0.78rem] sm:text-xs font-headline uppercase">
           <thead>
             <tr className="text-[#00FF41]/70 border-b border-[#00FF41]/10">
               <th className="py-1.5 px-1 text-left">#</th>
@@ -280,14 +280,14 @@ export default function ModelosPredictivos() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {tr.predictions.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
+        <p className="text-[0.78rem] text-[#00FF41]/65 font-headline uppercase mt-1">
           {tr.predictions.subtitle(data.season, data.matchday, data.totalMatches, data.nSimulations.toLocaleString())}
         </p>
-        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
+        <p className="text-[0.74rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
           {tr.predictions.modelLine(data.model, data.nSimulations.toLocaleString())}
         </p>
         {data.shrinkageK != null && (
-          <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
+          <p className="text-[0.74rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
             {tr.predictions.shrinkageNote(data.shrinkageK)}
           </p>
         )}
@@ -296,7 +296,7 @@ export default function ModelosPredictivos() {
       {/* Too few matches for the projection to mean anything. Shown rather than
           hidden, because the point is that the model knows its own limits. */}
       {data.lowConfidence && (
-        <div className="mb-4 border border-[#FFD700]/30 bg-[#FFD700]/5 px-4 py-3 text-[0.7rem] text-[#FFD700]/80 font-headline uppercase leading-relaxed">
+        <div className="mb-4 border border-[#FFD700]/30 bg-[#FFD700]/5 px-4 py-3 text-[0.82rem] text-[#FFD700]/80 font-headline uppercase leading-relaxed">
           {tr.predictions.lowConfidence}
         </div>
       )}
@@ -307,7 +307,7 @@ export default function ModelosPredictivos() {
           <span className="material-symbols-outlined text-sm mr-2">psychology</span>
           {tr.predictions.methodology.title}
         </h3>
-        <div className="text-[0.65rem] text-[#00FF41]/60 font-headline leading-relaxed space-y-1">
+        <div className="text-[0.78rem] text-[#00FF41]/60 font-headline leading-relaxed space-y-1">
           {tr.predictions.methodology.steps(data.nSimulations.toLocaleString()).map((step) => (
             <p key={step}>{step}</p>
           ))}

@@ -159,7 +159,7 @@ def test_every_referenced_dictionary_key_exists(component_sources, dictionary_js
     defined = _dictionary_paths(dictionary_js)
     # Array and function entries are invoked, so the reference carries a trailing
     # method name that is not part of the dictionary path.
-    METHODS = {"map", "join", "length", "slice", "filter", "forEach", "toLocaleString"}
+    METHODS = {"map", "join", "length", "slice", "split", "filter", "forEach", "toLocaleString"}
     missing: list[str] = []
     for name, source in component_sources.items():
         # The dictionary is imported as `tr` everywhere. It is deliberately not

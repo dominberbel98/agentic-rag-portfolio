@@ -8,6 +8,24 @@ body {
   height: 100vh;
   width: 100vw;
   margin: 0;
+
+  /*
+    Readability floor for the whole site.
+
+    Space Grotesk is drawn tight, and almost every label here is set small to fit
+    the terminal look. With no base tracking or leading the result reads as a wall
+    of cramped glyphs — legible if you lean in, tiring if you don't.
+
+    These are deliberately modest: 0.015em is roughly a quarter of what
+    `tracking-wide` applies, enough to open the letterforms without turning body
+    copy into a title. Anything with an explicit `tracking-*` class overrides it,
+    so the UPPER_SNAKE labels that are meant to be widely spaced still are.
+
+    1.6 line-height matters more than the tracking at these sizes: the previous
+    default packed lines close enough that a three-line paragraph read as a block.
+  */
+  letter-spacing: 0.015em;
+  line-height: 1.6;
 }
 
 .scanline-overlay {

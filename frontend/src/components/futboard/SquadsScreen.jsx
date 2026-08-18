@@ -96,10 +96,10 @@ export default function SquadsScreen({ f, teams, players, onBack, onCreateTeam, 
                   <span className="material-symbols-outlined text-[1.1rem] text-[#00FF41]/75">
                     shield
                   </span>
-                  <span className="flex-1 font-headline text-[0.8rem] text-[#00FF41] truncate">
+                  <span className="flex-1 font-headline text-[0.9rem] text-[#00FF41] truncate">
                     {team.name}
                   </span>
-                  <span className="font-headline text-[0.62rem] text-[#00FF41]/70 shrink-0">
+                  <span className="font-headline text-[0.75rem] text-[#00FF41]/70 shrink-0">
                     {f.squads.playerCount(team.player_count)}
                   </span>
                 </ListRow>
@@ -148,10 +148,10 @@ export default function SquadsScreen({ f, teams, players, onBack, onCreateTeam, 
                     person
                   </span>
                   <span className="flex-1 min-w-0">
-                    <span className="block font-headline text-[0.8rem] text-[#00FF41] truncate">
+                    <span className="block font-headline text-[0.9rem] text-[#00FF41] truncate">
                       {player.name}
                     </span>
-                    <span className="block font-headline text-[0.6rem] text-[#00FF41]/70 truncate normal-case">
+                    <span className="block font-headline text-[0.74rem] text-[#00FF41]/70 truncate normal-case">
                       {f.squads.playsFor}: {teamNameOf(player)}
                     </span>
                   </span>
@@ -172,7 +172,7 @@ export default function SquadsScreen({ f, teams, players, onBack, onCreateTeam, 
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <p className="font-headline uppercase text-[0.62rem] tracking-widest text-[#00FF41]/70 mb-2">
+                  <p className="font-headline uppercase text-[0.75rem] tracking-widest text-[#00FF41]/70 mb-2">
                     {f.squads.teams} · {f.squads.playerCount(squad.length)}
                   </p>
                   {squad.length === 0 ? (
@@ -181,7 +181,7 @@ export default function SquadsScreen({ f, teams, players, onBack, onCreateTeam, 
                     <div className="space-y-1.5">
                       {squad.map((player) => (
                         <ListRow key={player.id}>
-                          <span className="flex-1 font-headline text-[0.78rem] text-[#00FF41] truncate">
+                          <span className="flex-1 font-headline text-[0.88rem] text-[#00FF41] truncate">
                             {player.name}
                           </span>
                           <button
@@ -203,7 +203,7 @@ export default function SquadsScreen({ f, teams, players, onBack, onCreateTeam, 
                 </div>
 
                 <div>
-                  <p className="font-headline uppercase text-[0.62rem] tracking-widest text-[#00FF41]/70 mb-2">
+                  <p className="font-headline uppercase text-[0.75rem] tracking-widest text-[#00FF41]/70 mb-2">
                     {f.squads.addPlayer}
                   </p>
                   {outsiders.length === 0 ? (
@@ -216,7 +216,7 @@ export default function SquadsScreen({ f, teams, players, onBack, onCreateTeam, 
                           type="button"
                           disabled={busy}
                           onClick={() => run(() => onAddToTeam(selectedTeam.id, player.id))}
-                          className="inline-flex items-center gap-1 min-h-[40px] px-3 border border-[#00FF41]/25 rounded font-headline text-[0.72rem] text-[#00FF41]/85 hover:bg-[#00FF41]/10 hover:text-[#00FF41] active:scale-95 disabled:opacity-40"
+                          className="inline-flex items-center gap-1 min-h-[40px] px-3 border border-[#00FF41]/25 rounded font-headline text-[0.84rem] text-[#00FF41]/85 hover:bg-[#00FF41]/10 hover:text-[#00FF41] active:scale-95 disabled:opacity-40"
                         >
                           <span className="material-symbols-outlined text-[1rem]">add</span>
                           {player.name}

@@ -8,6 +8,28 @@ const API_URL =
   `${window.location.protocol}//api.${window.location.hostname.replace(/^www\./, "")}`;
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
+/**
+ * The opening message, with {assistant} and {owner} filled in and highlighted.
+ *
+ * The sentence lives in the dictionary as one string so a translation can put
+ * the pieces wherever that language wants them; this only decides how the two
+ * named parts are drawn.
+ */
+function renderGreeting(tr) {
+  const values = {
+    assistant: tr.chat.greetingAssistant,
+    owner: tr.chat.greetingOwner,
+  };
+  return tr.chat.greeting.split(/(\{assistant\}|\{owner\})/).map((part, index) => {
+    const key = part === "{assistant}" ? "assistant" : part === "{owner}" ? "owner" : null;
+    return key ? (
+      <span key={index} className="text-primary font-bold">{values[key]}</span>
+    ) : (
+      <React.Fragment key={index}>{part}</React.Fragment>
+    );
+  });
+}
+
 export default function Chat() {
   const tr = useT();
   const [question, setQuestion] = useState("");
@@ -179,11 +201,11 @@ export default function Chat() {
           <div className="w-2.5 h-2.5 rounded-full bg-error-dim shadow-[0_0_5px_rgba(255,115,81,0.5)]" />
           <div className="w-2.5 h-2.5 rounded-full bg-secondary-dim shadow-[0_0_5px_rgba(252,175,0,0.5)]" />
           <div className="w-2.5 h-2.5 rounded-full bg-primary-dim shadow-[0_0_5px_rgba(0,252,64,0.5)]" />
-          <span className="ml-2 sm:ml-4 font-headline text-[0.58rem] sm:text-[0.7rem] uppercase tracking-wider sm:tracking-widest text-on-surface-variant truncate max-w-[170px] sm:max-w-none">
+          <span className="ml-2 sm:ml-4 font-headline text-[0.72rem] sm:text-[0.82rem] uppercase tracking-wider sm:tracking-widest text-on-surface-variant truncate max-w-[170px] sm:max-w-none">
             {tr.chat.windowTitle}
           </span>
         </div>
-        <div className={`hidden sm:block text-primary-dim font-headline text-[0.7rem] tracking-tighter ${loading ? "flicker" : ""}`}>
+        <div className={`hidden sm:block text-primary-dim font-headline text-[0.82rem] tracking-tighter ${loading ? "flicker" : ""}`}>
           {loading ? tr.chat.kernelBusy : tr.chat.kernelIdle}
         </div>
       </div>
@@ -196,7 +218,7 @@ export default function Chat() {
         {/* Boot log */}
         <div className="space-y-1 hidden sm:block">
           {tr.chat.boot.map((line) => (
-            <div key={line} className="text-on-surface-variant opacity-80 text-[0.65rem] font-mono">{line}</div>
+            <div key={line} className="text-on-surface-variant opacity-80 text-[0.78rem] font-mono">{line}</div>
           ))}
         </div>
 
@@ -205,16 +227,11 @@ export default function Chat() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2 text-tertiary">
               <span className="material-symbols-outlined text-sm">psychology</span>
-              <span className="text-[0.65rem] font-bold tracking-widest">{tr.chat.assistant}</span>
+              <span className="text-[0.78rem] font-bold tracking-widest">{tr.chat.assistant}</span>
             </div>
             <div className="bg-surface-container px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-primary/30 max-w-[95%] sm:max-w-[90%]">
               <p className="text-on-surface leading-relaxed crt-glow">
-                Hello. I am the{" "}
-                <span className="text-primary font-bold">Data Science Assistant</span> for{" "}
-                <span className="text-primary font-bold">Domingo Berbel</span>. I have access to
-                his entire dataset: professional experience in predictive modeling, statistical
-                analysis, and machine learning architectures. What insights can I extract from the
-                portfolio for you today?
+                {renderGreeting(tr)}
               </p>
             </div>
 
@@ -223,7 +240,7 @@ export default function Chat() {
                 over and over — so offer those. Styled as terminal commands to
                 match the composer prompt below. */}
             <div className="mt-2 flex flex-col gap-1.5 max-w-[95%] sm:max-w-[90%]">
-              <span className="text-[0.6rem] font-bold tracking-widest text-[#00FF41]/60">
+              <span className="text-[0.74rem] font-bold tracking-widest text-[#00FF41]/60">
                 {tr.chat.suggestionsLabel}
               </span>
               <div className="flex flex-col gap-1.5">
@@ -233,7 +250,7 @@ export default function Chat() {
                     type="button"
                     disabled={loading}
                     onClick={() => send(null, suggestion)}
-                    className="group flex items-start gap-2 text-left px-3 py-2 border border-[#00FF41]/20 bg-[#00FF41]/[0.03] text-[0.7rem] font-headline text-[#00FF41]/75 hover:bg-[#00FF41]/10 hover:border-[#00FF41]/40 hover:text-[#00FF41] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#00FF41] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    className="group flex items-start gap-2 text-left px-3 py-2 border border-[#00FF41]/20 bg-[#00FF41]/[0.03] text-[0.82rem] font-headline text-[#00FF41]/75 hover:bg-[#00FF41]/10 hover:border-[#00FF41]/40 hover:text-[#00FF41] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#00FF41] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   >
                     <span className="text-[#00FF41]/60 group-hover:text-[#00FF41] shrink-0">&gt;</span>
                     <span>{suggestion}</span>
@@ -250,7 +267,7 @@ export default function Chat() {
             <div key={idx} className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-tertiary">
                 <span className="material-symbols-outlined text-sm">psychology</span>
-                <span className="text-[0.65rem] font-bold tracking-widest">{tr.chat.assistant}</span>
+                <span className="text-[0.78rem] font-bold tracking-widest">{tr.chat.assistant}</span>
               </div>
               <div className="bg-surface-container px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-primary/30 max-w-[95%] sm:max-w-[90%]">
                 <p className="text-on-surface leading-relaxed crt-glow whitespace-pre-wrap">
@@ -260,14 +277,14 @@ export default function Chat() {
                   )}
                 </p>
                 {msg.meta && (
-                  <small className="block mt-2 text-error text-[0.65rem]">{msg.meta}</small>
+                  <small className="block mt-2 text-error text-[0.78rem]">{msg.meta}</small>
                 )}
               </div>
             </div>
           ) : (
             <div key={idx} className="flex flex-col gap-2 items-end">
               <div className="flex items-center gap-2 text-secondary">
-                <span className="text-[0.65rem] font-bold tracking-widest">{tr.chat.userInput}</span>
+                <span className="text-[0.78rem] font-bold tracking-widest">{tr.chat.userInput}</span>
                 <span className="material-symbols-outlined text-sm">person</span>
               </div>
               <div className="bg-surface-container-high px-4 sm:px-5 py-3 sm:py-4 rounded-lg border-l-2 border-secondary/40 max-w-[95%] sm:max-w-[90%]">
@@ -281,7 +298,7 @@ export default function Chat() {
         {loading && messages[messages.length - 1]?.role !== "assistant" && (
           <div className="flex items-center gap-2 text-primary/60">
             <span className="material-symbols-outlined text-sm flicker">pending</span>
-            <span className="text-[0.65rem] font-bold tracking-widest flicker">{tr.chat.processing}</span>
+            <span className="text-[0.78rem] font-bold tracking-widest flicker">{tr.chat.processing}</span>
           </div>
         )}
       </div>
@@ -307,7 +324,7 @@ export default function Chat() {
           <button
             type="submit"
             disabled={loading || !question.trim()}
-            className="px-3 py-2 text-[0.65rem] sm:text-xs font-headline uppercase tracking-widest border border-[#00FF41]/35 text-primary bg-[#00FF41]/5 hover:bg-[#00FF41]/10 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-3 py-2 text-[0.78rem] sm:text-xs font-headline uppercase tracking-widest border border-[#00FF41]/35 text-primary bg-[#00FF41]/5 hover:bg-[#00FF41]/10 disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {tr.chat.send}
           </button>
@@ -322,7 +339,7 @@ export default function Chat() {
           className="p-3 sm:p-6 bg-surface-container border-t border-[#00FF41]/10 space-y-3 shrink-0"
         >
           <div className="flex items-center justify-between gap-2">
-            <p className="text-[0.65rem] font-bold tracking-widest text-tertiary uppercase">
+            <p className="text-[0.78rem] font-bold tracking-widest text-tertiary uppercase">
               {tr.chat.contact.heading}
             </p>
             <button

@@ -41,7 +41,7 @@ const EmptyPanel = ({ title, icon, message }) => (
       <span className="material-symbols-outlined text-sm mr-2">{icon}</span>
       {title}
     </h3>
-    <p className="text-[0.7rem] text-[#00FF41]/65 font-headline uppercase py-6 text-center">
+    <p className="text-[0.82rem] text-[#00FF41]/65 font-headline uppercase py-6 text-center">
       {message}
     </p>
   </div>
@@ -59,17 +59,17 @@ function StandingsTable({ data }) {
         {S.title}
       </h3>
       <div className="overflow-x-auto scrollbar-hide">
-        <table className="w-full text-[0.7rem] sm:text-xs font-headline uppercase">
+        <table className="w-full text-[0.78rem] sm:text-[0.82rem] font-headline uppercase">
           <thead>
             <tr className="text-[#00FF41]/70 border-b border-[#00FF41]/10">
               <th className="py-2 px-1 text-left">{S.pos}</th>
               <th className="py-2 px-2 text-left">{S.team}</th>
               <th className="py-2 px-1 text-center">{S.played}</th>
-              <th className="py-2 px-1 text-center">{S.won}</th>
-              <th className="py-2 px-1 text-center">{S.drawn}</th>
-              <th className="py-2 px-1 text-center">{S.lost}</th>
-              <th className="py-2 px-1 text-center">{S.goalsFor}</th>
-              <th className="py-2 px-1 text-center">{S.goalsAgainst}</th>
+              <th className="hidden sm:table-cell py-2 px-1 text-center">{S.won}</th>
+              <th className="hidden sm:table-cell py-2 px-1 text-center">{S.drawn}</th>
+              <th className="hidden sm:table-cell py-2 px-1 text-center">{S.lost}</th>
+              <th className="hidden sm:table-cell py-2 px-1 text-center">{S.goalsFor}</th>
+              <th className="hidden sm:table-cell py-2 px-1 text-center">{S.goalsAgainst}</th>
               <th className="py-2 px-1 text-center">{S.goalDifference}</th>
               <th className="py-2 px-1 text-center font-bold">{S.points}</th>
               <th className="py-2 px-2 text-center" title={S.formTooltip}>{S.form}</th>
@@ -92,11 +92,11 @@ function StandingsTable({ data }) {
                   </span>
                 </td>
                 <td className="py-1.5 px-1 text-center text-[#00FF41]/70">{team.playedGames}</td>
-                <td className="py-1.5 px-1 text-center text-[#00FF41]/70">{team.won}</td>
-                <td className="py-1.5 px-1 text-center text-[#00FF41]/70">{team.draw}</td>
-                <td className="py-1.5 px-1 text-center text-[#FF4136]">{team.lost}</td>
-                <td className="py-1.5 px-1 text-center text-[#00FF41]/60">{team.goalsFor}</td>
-                <td className="py-1.5 px-1 text-center text-[#FF4136]">{team.goalsAgainst}</td>
+                <td className="hidden sm:table-cell py-1.5 px-1 text-center text-[#00FF41]/70">{team.won}</td>
+                <td className="hidden sm:table-cell py-1.5 px-1 text-center text-[#00FF41]/70">{team.draw}</td>
+                <td className="hidden sm:table-cell py-1.5 px-1 text-center text-[#FF4136]">{team.lost}</td>
+                <td className="hidden sm:table-cell py-1.5 px-1 text-center text-[#00FF41]/60">{team.goalsFor}</td>
+                <td className="hidden sm:table-cell py-1.5 px-1 text-center text-[#FF4136]">{team.goalsAgainst}</td>
                 <td
                   className="py-1.5 px-1 text-center"
                   style={{ color: team.goalDifference >= 0 ? GREEN : "#FF4136" }}
@@ -111,7 +111,7 @@ function StandingsTable({ data }) {
                         <span
                           key={i}
                           title={result}
-                          className="w-[14px] h-[14px] leading-[14px] text-[0.55rem] font-bold rounded-sm"
+                          className="w-[14px] h-[14px] leading-[14px] text-[0.72rem] font-bold rounded-sm"
                           style={{
                             background: `${FORM_COLORS[result] ?? DIM}22`,
                             color: FORM_COLORS[result] ?? DIM,
@@ -131,7 +131,7 @@ function StandingsTable({ data }) {
           </tbody>
         </table>
       </div>
-      <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 text-[0.6rem] text-[#00FF41]/65 font-headline uppercase">
+      <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 text-[0.74rem] text-[#00FF41]/65 font-headline uppercase">
         {LEGEND_ZONES.map((zone) => (
           <span key={zone} className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full" style={{ background: zoneColor(zone) }} />
@@ -225,7 +225,7 @@ function AttackVsDefence({ data }) {
           </Scatter>
         </ScatterChart>
       </ResponsiveContainer>
-      <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-1 uppercase">{A.caption}</p>
+      <p className="text-[0.74rem] text-[#00FF41]/60 font-headline mt-1 uppercase">{A.caption}</p>
     </div>
   );
 }
@@ -298,7 +298,7 @@ function ResultRateMatrix({ data }) {
           <Bar dataKey="lossRate" name={W.loss} stackId="rate" fill="#FF4136" fillOpacity={0.5} />
         </BarChart>
       </ResponsiveContainer>
-      <div className="flex gap-4 mt-2 text-[0.6rem] text-[#00FF41]/65 font-headline uppercase">
+      <div className="flex gap-4 mt-2 text-[0.74rem] text-[#00FF41]/65 font-headline uppercase">
         {legend.map(([label, color, opacity]) => (
           <span key={label} className="flex items-center gap-1">
             <span className="w-2 h-2" style={{ background: color, opacity }} />
@@ -376,7 +376,7 @@ function Top5Radar({ data }) {
           <Tooltip content={<RadarTooltip />} />
         </RadarChart>
       </ResponsiveContainer>
-      <div className="flex flex-wrap gap-3 mt-2 text-[0.6rem] font-headline uppercase">
+      <div className="flex flex-wrap gap-3 mt-2 text-[0.74rem] font-headline uppercase">
         {top5.map((team, i) => (
           <span key={team.teamId} className="flex items-center gap-1" style={{ color: colors[i] }}>
             <span className="w-2 h-2 rounded-full" style={{ background: colors[i] }} />
@@ -384,7 +384,7 @@ function Top5Radar({ data }) {
           </span>
         ))}
       </div>
-      <p className="text-[0.6rem] text-[#00FF41]/55 font-headline mt-1 uppercase">{R.caption}</p>
+      <p className="text-[0.74rem] text-[#00FF41]/55 font-headline mt-1 uppercase">{R.caption}</p>
     </div>
   );
 }
@@ -404,7 +404,7 @@ function LatestResults({ results }) {
       </h3>
       <div className="flex flex-col divide-y divide-[#00FF41]/5">
         {results.slice(0, 10).map((match) => (
-          <div key={match.id} className="flex items-center gap-2 py-2 text-[0.7rem] font-headline uppercase">
+          <div key={match.id} className="flex items-center gap-2 py-2 text-[0.82rem] font-headline uppercase">
             <span className="text-[#00FF41]/60 w-9 shrink-0">{R.matchdayShort(match.matchday)}</span>
             <span className="flex-1 text-right truncate text-[#00FF41]/80">{match.homeName}</span>
             <span className="px-2 font-bold text-[#00FF41] tabular-nums">
@@ -412,7 +412,7 @@ function LatestResults({ results }) {
             </span>
             <span className="flex-1 truncate text-[#00FF41]/80">{match.awayName}</span>
             {match.live && (
-              <span className="text-[0.55rem] text-[#FF4136] flicker shrink-0">{R.live}</span>
+              <span className="text-[0.72rem] text-[#FF4136] flicker shrink-0">{R.live}</span>
             )}
           </div>
         ))}
@@ -436,17 +436,17 @@ function UpcomingFixtures({ fixtures }) {
       </h3>
       <div className="flex flex-col divide-y divide-[#00FF41]/5">
         {fixtures.slice(0, 10).map((match) => (
-          <div key={match.id} className="flex items-center gap-2 py-2 text-[0.7rem] font-headline uppercase">
+          <div key={match.id} className="flex items-center gap-2 py-2 text-[0.82rem] font-headline uppercase">
             <span className="flex-1 text-right truncate text-[#00FF41]/80">{match.homeName}</span>
             <span className="px-2 text-[#00FF41]/60">vs</span>
             <span className="flex-1 truncate text-[#00FF41]/80">{match.awayName}</span>
-            <span className="text-[0.55rem] text-[#00FF41]/60 shrink-0 w-[110px] text-right">
+            <span className="text-[0.72rem] text-[#00FF41]/60 shrink-0 w-[110px] text-right">
               {formatKickoff(match.kickoff)}
             </span>
           </div>
         ))}
       </div>
-      <p className="text-[0.6rem] text-[#00FF41]/55 font-headline mt-2 uppercase">{F.caption}</p>
+      <p className="text-[0.74rem] text-[#00FF41]/55 font-headline mt-2 uppercase">{F.caption}</p>
     </div>
   );
 }
@@ -501,12 +501,12 @@ export default function Visualizaciones() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {L.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
+        <p className="text-[0.78rem] text-[#00FF41]/65 font-headline uppercase mt-1">
           {tr.common.season} {data.season} · {tr.common.matchday} {data.matchday}
           {state.phase ? ` · ${tr.seasonPhase[state.phase]}` : ""} · {tr.common.updated}:{" "}
           {formatDateTime(data.updatedAt)}
         </p>
-        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
+        <p className="text-[0.74rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
           {L.pipeline}
         </p>
       </div>
@@ -514,12 +514,12 @@ export default function Visualizaciones() {
       {/* Season-state notices. The site showed a finished season's table as the
           current one for days, so an empty or barely-started season says so. */}
       {preseason && (
-        <div className="mb-4 border border-[#FFD700]/30 bg-[#FFD700]/5 px-4 py-2 text-[0.7rem] text-[#FFD700]/80 font-headline uppercase">
+        <div className="mb-4 border border-[#FFD700]/30 bg-[#FFD700]/5 px-4 py-2 text-[0.82rem] text-[#FFD700]/80 font-headline uppercase">
           {L.preseasonNotice}
         </div>
       )}
       {!preseason && state.lowConfidence && (
-        <div className="mb-4 border border-[#FFD700]/20 bg-[#FFD700]/5 px-4 py-2 text-[0.7rem] text-[#FFD700]/70 font-headline uppercase">
+        <div className="mb-4 border border-[#FFD700]/20 bg-[#FFD700]/5 px-4 py-2 text-[0.82rem] text-[#FFD700]/70 font-headline uppercase">
           {L.lowConfidenceNotice(state.maxGamesPlayed ?? 0)}
         </div>
       )}

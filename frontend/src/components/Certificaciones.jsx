@@ -53,7 +53,7 @@ export default function Certificaciones() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {C.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
+        <p className="text-[0.78rem] text-[#00FF41]/65 font-headline uppercase mt-1">
           {certs.length} verified certifications · Data Engineering &amp; Analytics
         </p>
       </div>
@@ -78,10 +78,10 @@ export default function Certificaciones() {
             </div>
 
             {/* Info */}
-            <h3 className="text-[0.75rem] font-bold text-[#00FF41] font-headline uppercase leading-tight">
+            <h3 className="text-[0.86rem] font-bold text-[#00FF41] font-headline uppercase leading-tight">
               {cert.title}
             </h3>
-            <div className="flex items-center gap-2 mt-1.5 text-[0.6rem] text-[#00FF41]/70 font-headline uppercase">
+            <div className="flex items-center gap-2 mt-1.5 text-[0.74rem] text-[#00FF41]/70 font-headline uppercase">
               <span>{cert.issuer}</span>
               <span className="text-[#00FF41]/55">·</span>
               <span>{cert.date}</span>
@@ -98,7 +98,7 @@ export default function Certificaciones() {
               {(cert.skills || []).map((skill) => (
                 <span
                   key={skill}
-                  className="text-[0.55rem] px-1.5 py-0.5 rounded border border-[#00FF41]/15 text-[#00FF41]/70 font-headline uppercase"
+                  className="text-[0.72rem] px-1.5 py-0.5 rounded border border-[#00FF41]/15 text-[#00FF41]/70 font-headline uppercase"
                 >
                   {skill}
                 </span>

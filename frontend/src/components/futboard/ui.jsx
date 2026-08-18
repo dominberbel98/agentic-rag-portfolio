@@ -24,7 +24,7 @@ export function ScreenHeader({ title, subtitle, onBack, backLabel, right }) {
         <button
           type="button"
           onClick={onBack}
-          className="shrink-0 flex items-center gap-1 min-h-[44px] px-3 -ml-1 font-headline uppercase text-[0.7rem] tracking-widest text-[#00FF41]/75 hover:text-[#00FF41] active:scale-95"
+          className="shrink-0 flex items-center gap-1 min-h-[44px] px-3 -ml-1 font-headline uppercase text-[0.82rem] tracking-widest text-[#00FF41]/75 hover:text-[#00FF41] active:scale-95"
         >
           <span className="material-symbols-outlined text-[1.1rem]">arrow_back</span>
           {backLabel}
@@ -35,7 +35,7 @@ export function ScreenHeader({ title, subtitle, onBack, backLabel, right }) {
           {title}
         </h2>
         {subtitle && (
-          <p className="text-[0.7rem] text-[#00FF41]/70 font-headline mt-0.5 normal-case">
+          <p className="text-[0.82rem] text-[#00FF41]/70 font-headline mt-0.5 normal-case">
             {subtitle}
           </p>
         )}
@@ -80,7 +80,7 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 border rounded font-headline uppercase text-[0.7rem] tracking-widest transition-colors active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100 ${palette[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 border rounded font-headline uppercase text-[0.82rem] tracking-widest transition-colors active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100 ${palette[variant]} ${className}`}
     >
       {icon && <span className="material-symbols-outlined text-[1.1rem]">{icon}</span>}
       {children}
@@ -101,7 +101,7 @@ export function TextField({ value, onChange, placeholder, onSubmit, maxLength = 
       }}
       placeholder={placeholder}
       maxLength={maxLength}
-      className="flex-1 min-w-0 min-h-[44px] bg-black/40 border border-[#00FF41]/25 rounded px-3 text-[0.85rem] font-headline text-[#00FF41] placeholder:text-[#00FF41]/60 outline-none focus:border-[#00FF41]/60"
+      className="flex-1 min-w-0 min-h-[44px] bg-black/40 border border-[#00FF41]/25 rounded px-3 text-[0.95rem] font-headline text-[#00FF41] placeholder:text-[#00FF41]/60 outline-none focus:border-[#00FF41]/60"
     />
   );
 }
@@ -132,7 +132,7 @@ export function Notice({ children, tone = "info" }) {
   };
   return (
     <p
-      className={`border rounded px-3 py-2.5 font-headline text-[0.7rem] leading-relaxed normal-case ${palette[tone]}`}
+      className={`border rounded px-3 py-2.5 font-headline text-[0.82rem] leading-relaxed normal-case ${palette[tone]}`}
     >
       {children}
     </p>
@@ -143,7 +143,7 @@ export function EmptyState({ children, icon = "inbox" }) {
   return (
     <div className="flex flex-col items-center gap-2 py-8 text-center">
       <span className="material-symbols-outlined text-[1.8rem] text-[#00FF41]/55">{icon}</span>
-      <p className="font-headline text-[0.72rem] text-[#00FF41]/70 normal-case max-w-xs">
+      <p className="font-headline text-[0.84rem] text-[#00FF41]/70 normal-case max-w-xs">
         {children}
       </p>
     </div>
@@ -160,12 +160,12 @@ export function EmptyState({ children, icon = "inbox" }) {
 export function Loading({ label, slow }) {
   return (
     <div className="flex flex-col items-center justify-center gap-2 py-12">
-      <div className="font-headline text-[0.8rem] uppercase text-[#00FF41] flicker">
+      <div className="font-headline text-[0.9rem] uppercase text-[#00FF41] flicker">
         {label}
         <span className="cursor-blink">_</span>
       </div>
       {slow && (
-        <div className="font-headline text-[0.68rem] text-[#00FF41]/70 normal-case">{slow}</div>
+        <div className="font-headline text-[0.8rem] text-[#00FF41]/70 normal-case">{slow}</div>
       )}
     </div>
   );
@@ -175,7 +175,7 @@ export function ErrorState({ message, onRetry, retryLabel }) {
   return (
     <div className="flex flex-col items-center gap-3 py-10 text-center">
       <span className="material-symbols-outlined text-[1.8rem] text-[#FF4136]">error</span>
-      <p className="font-headline text-[0.75rem] text-[#FF4136] normal-case max-w-sm">{message}</p>
+      <p className="font-headline text-[0.86rem] text-[#FF4136] normal-case max-w-sm">{message}</p>
       {onRetry && (
         <Button onClick={onRetry} icon="refresh">
           {retryLabel}

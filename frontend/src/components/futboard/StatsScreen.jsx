@@ -19,9 +19,9 @@ const TABS = [
 function Table({ head, children }) {
   return (
     <div className="overflow-x-auto scrollbar-hide">
-      <table className="w-full text-[0.7rem] font-headline">
+      <table className="w-full text-[0.82rem] font-headline">
         <thead>
-          <tr className="text-[#00FF41]/75 border-b border-[#00FF41]/15 uppercase text-[0.6rem]">
+          <tr className="text-[#00FF41]/75 border-b border-[#00FF41]/15 uppercase text-[0.74rem]">
             {head}
           </tr>
         </thead>
@@ -48,7 +48,7 @@ export default function StatsScreen({ f, stats, matches, onBack }) {
             key={entry.id}
             type="button"
             onClick={() => setTab(entry.id)}
-            className={`flex items-center gap-1.5 min-h-[44px] px-3 sm:px-4 font-headline uppercase text-[0.68rem] tracking-widest border-b-2 -mb-px transition-colors ${
+            className={`flex items-center gap-1.5 min-h-[44px] px-3 sm:px-4 font-headline uppercase text-[0.8rem] tracking-widest border-b-2 -mb-px transition-colors ${
               tab === entry.id
                 ? "border-[#00FF41] text-[#00FF41] bg-[#00FF41]/10"
                 : "border-transparent text-[#00FF41]/60 hover:text-[#00FF41]"
@@ -135,7 +135,7 @@ export default function StatsScreen({ f, stats, matches, onBack }) {
               <div className="space-y-2">
                 {matches.map((match) => (
                   <div key={match.id} className="border border-[#00FF41]/15 rounded p-3 bg-black/20">
-                    <div className="flex items-center gap-2 font-headline text-[0.78rem]">
+                    <div className="flex items-center gap-2 font-headline text-[0.88rem]">
                       <span className="flex-1 text-right text-[#00FF41] truncate">
                         {match.home_team_name}
                       </span>
@@ -144,7 +144,7 @@ export default function StatsScreen({ f, stats, matches, onBack }) {
                       </span>
                       <span className="flex-1 text-[#00FF41] truncate">{match.away_team_name}</span>
                     </div>
-                    <div className="mt-1.5 font-headline text-[0.6rem] text-[#00FF41]/70 text-center normal-case">
+                    <div className="mt-1.5 font-headline text-[0.74rem] text-[#00FF41]/70 text-center normal-case">
                       {new Date(match.played_at).toLocaleDateString("en-GB", {
                         day: "2-digit",
                         month: "short",

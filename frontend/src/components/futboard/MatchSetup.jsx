@@ -19,7 +19,7 @@ const SUB_PRESETS = [3, 5, 7, 10];
 function NumberChoice({ label, value, options, unit, onChange }) {
   return (
     <div>
-      <p className="font-headline uppercase text-[0.65rem] tracking-widest text-[#00FF41]/75 mb-2">
+      <p className="font-headline uppercase text-[0.78rem] tracking-widest text-[#00FF41]/75 mb-2">
         {label}
       </p>
       <div className="flex flex-wrap gap-2">
@@ -28,7 +28,7 @@ function NumberChoice({ label, value, options, unit, onChange }) {
             key={option}
             type="button"
             onClick={() => onChange(option)}
-            className={`min-h-[44px] min-w-[64px] px-3 border rounded font-headline text-[0.8rem] tabular-nums active:scale-95 transition-colors ${
+            className={`min-h-[44px] min-w-[64px] px-3 border rounded font-headline text-[0.9rem] tabular-nums active:scale-95 transition-colors ${
               option === value
                 ? "border-[#00FF41]/60 bg-[#00FF41]/20 text-[#00FF41] font-bold"
                 : "border-[#00FF41]/25 text-[#00FF41]/75 hover:bg-[#00FF41]/10"
@@ -45,7 +45,7 @@ function NumberChoice({ label, value, options, unit, onChange }) {
 function TeamPicker({ label, teams, value, disabledId, onChange }) {
   return (
     <div>
-      <p className="font-headline uppercase text-[0.65rem] tracking-widest text-[#00FF41]/75 mb-2">
+      <p className="font-headline uppercase text-[0.78rem] tracking-widest text-[#00FF41]/75 mb-2">
         {label}
       </p>
       <div className="flex flex-wrap gap-2">
@@ -57,7 +57,7 @@ function TeamPicker({ label, teams, value, disabledId, onChange }) {
               type="button"
               disabled={blocked}
               onClick={() => onChange(team.id === value ? null : team.id)}
-              className={`min-h-[44px] px-3 border rounded font-headline text-[0.78rem] active:scale-95 transition-colors ${
+              className={`min-h-[44px] px-3 border rounded font-headline text-[0.88rem] active:scale-95 transition-colors ${
                 team.id === value
                   ? "border-[#00FF41]/60 bg-[#00FF41]/20 text-[#00FF41] font-bold"
                   : "border-[#00FF41]/25 text-[#00FF41]/75 hover:bg-[#00FF41]/10"
@@ -77,21 +77,21 @@ function LineupPicker({ f, team, players, selected, onToggle, onAll, onNone }) {
   return (
     <div>
       <div className="flex items-center justify-between gap-2 mb-2">
-        <p className="font-headline uppercase text-[0.65rem] tracking-widest text-[#00FF41]/75 truncate">
+        <p className="font-headline uppercase text-[0.78rem] tracking-widest text-[#00FF41]/75 truncate">
           {f.setup.whoPlays(team.name)}
         </p>
         <div className="flex gap-1 shrink-0">
           <button
             type="button"
             onClick={onAll}
-            className="min-h-[36px] px-2 font-headline uppercase text-[0.6rem] tracking-widest text-[#00FF41]/70 hover:text-[#00FF41]"
+            className="min-h-[36px] px-2 font-headline uppercase text-[0.74rem] tracking-widest text-[#00FF41]/70 hover:text-[#00FF41]"
           >
             {f.setup.selectAll}
           </button>
           <button
             type="button"
             onClick={onNone}
-            className="min-h-[36px] px-2 font-headline uppercase text-[0.6rem] tracking-widest text-[#00FF41]/70 hover:text-[#00FF41]"
+            className="min-h-[36px] px-2 font-headline uppercase text-[0.74rem] tracking-widest text-[#00FF41]/70 hover:text-[#00FF41]"
           >
             {f.setup.selectNone}
           </button>
@@ -108,7 +108,7 @@ function LineupPicker({ f, team, players, selected, onToggle, onAll, onNone }) {
                 key={player.id}
                 type="button"
                 onClick={() => onToggle(player.id)}
-                className={`inline-flex items-center gap-1.5 min-h-[44px] px-3 border rounded font-headline text-[0.75rem] active:scale-95 transition-colors ${
+                className={`inline-flex items-center gap-1.5 min-h-[44px] px-3 border rounded font-headline text-[0.86rem] active:scale-95 transition-colors ${
                   on
                     ? "border-[#00FF41]/60 bg-[#00FF41]/15 text-[#00FF41]"
                     : "border-[#00FF41]/20 text-[#00FF41]/60 hover:bg-[#00FF41]/5"
@@ -239,7 +239,7 @@ export default function MatchSetup({ f, teams, players, onBack, onStart }) {
           variant="primary"
           icon="play_arrow"
           disabled={!ready}
-          className="w-full min-h-[56px] text-[0.85rem]"
+          className="w-full min-h-[56px] text-[0.95rem]"
           onClick={() =>
             onStart({
               home,

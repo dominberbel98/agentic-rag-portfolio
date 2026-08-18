@@ -98,10 +98,10 @@ function ProductCard({ product, selected, onToggle, similarity }) {
           </span>
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-[0.82rem] font-bold font-headline uppercase text-[#00FF41] truncate">
+          <div className="text-[0.92rem] font-bold font-headline uppercase text-[#00FF41] truncate">
             {product.name}
           </div>
-          <div className="flex items-center gap-2 mt-1 text-[0.68rem] font-headline uppercase">
+          <div className="flex items-center gap-2 mt-1 text-[0.8rem] font-headline uppercase">
             <span style={{ color }}>{product.category}</span>
             <span className="text-[#00FF41]/60">·</span>
             <span className="text-[#00FF41]/70">€{product.price}</span>
@@ -114,7 +114,7 @@ function ProductCard({ product, selected, onToggle, similarity }) {
             </div>
           )}
           {similarity !== undefined && (
-            <div className="text-[0.68rem] font-headline uppercase text-[#00FF41]/70 mt-1">
+            <div className="text-[0.8rem] font-headline uppercase text-[#00FF41]/70 mt-1">
               {tr.recommender.similarityLabel} {similarity.toFixed(3)}
             </div>
           )}
@@ -140,14 +140,14 @@ function PersonaSummary({ personas, onApply }) {
         {personas.map((p) => (
           <div key={p.persona} className="flex items-center justify-between border border-[#00FF41]/15 rounded px-3 py-2 bg-black/20">
             <div>
-              <div className="text-[0.82rem] font-headline uppercase text-[#00FF41] font-bold">{p.persona}</div>
-              <div className="text-[0.68rem] font-headline uppercase text-[#00FF41]/65">
+              <div className="text-[0.92rem] font-headline uppercase text-[#00FF41] font-bold">{p.persona}</div>
+              <div className="text-[0.8rem] font-headline uppercase text-[#00FF41]/65">
                 {tr.recommender.personaItems(p.history.length, p.diversity.toFixed(2))}
               </div>
             </div>
             <button
               onClick={() => onApply(p.history)}
-              className="text-[0.6rem] font-headline uppercase text-[#00FF41] border border-[#00FF41]/30 rounded px-2 py-1 hover:bg-[#00FF41]/10"
+              className="text-[0.74rem] font-headline uppercase text-[#00FF41] border border-[#00FF41]/30 rounded px-2 py-1 hover:bg-[#00FF41]/10"
             >
               {tr.recommender.load}
             </button>
@@ -207,7 +207,7 @@ function ExplainPanel({ profile, item, vocab, breakdown }) {
 
   return (
     <div className="border border-[#00FF41]/15 rounded p-3 bg-black/20 mt-3">
-      <div className="text-[0.72rem] font-headline uppercase text-[#00FF41]/70 mb-2">
+      <div className="text-[0.84rem] font-headline uppercase text-[#00FF41]/70 mb-2">
         {tr.recommender.explain.title}
       </div>
       <div className="flex gap-1 mb-2 h-2 rounded overflow-hidden bg-[#00FF41]/5">
@@ -215,7 +215,7 @@ function ExplainPanel({ profile, item, vocab, breakdown }) {
         <div style={{ width: `${(catContrib / total) * 100}%`, background: "#00BFFF", opacity: 0.65 }} />
         <div style={{ width: `${(numContrib / total) * 100}%`, background: "#FFD700", opacity: 0.65 }} />
       </div>
-      <div className="flex flex-wrap gap-3 text-[0.68rem] font-headline uppercase">
+      <div className="flex flex-wrap gap-3 text-[0.8rem] font-headline uppercase">
         <span className="text-[#00FF41]">■ {tr.recommender.explain.tfidf}</span>
         <span className="text-[#00BFFF]">■ {tr.recommender.explain.category}</span>
         <span className="text-[#FFD700]">■ {tr.recommender.explain.priceRating}</span>
@@ -223,7 +223,7 @@ function ExplainPanel({ profile, item, vocab, breakdown }) {
       {topTerms.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-1.5">
           {topTerms.map((t) => (
-            <span key={t.term} className="text-[0.68rem] font-headline uppercase text-[#00FF41] border border-[#00FF41]/25 rounded px-2 py-0.5">
+            <span key={t.term} className="text-[0.8rem] font-headline uppercase text-[#00FF41] border border-[#00FF41]/25 rounded px-2 py-0.5">
               {t.term}
             </span>
           ))}
@@ -327,7 +327,7 @@ export default function ModelosRecomendacion() {
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {tr.recommender.title}
         </h2>
-        <p className="text-[0.7rem] text-[#00FF41]/70 font-headline mt-1 leading-relaxed max-w-3xl normal-case">
+        <p className="text-[0.82rem] text-[#00FF41]/70 font-headline mt-1 leading-relaxed max-w-3xl normal-case">
           {tr.recommender.explainer.problem}
         </p>
       </div>
@@ -340,20 +340,20 @@ export default function ModelosRecomendacion() {
           {/* Controls */}
           <div className="viz-panel col-span-12 mt-4 mb-4">
             <div className="flex flex-wrap items-center gap-3">
-              <div className="text-[0.78rem] font-headline uppercase text-[#00FF41]/70">
+              <div className="text-[0.88rem] font-headline uppercase text-[#00FF41]/70">
                 {tr.recommender.selectedCount} <span className="text-[#00FF41] font-bold">{selected.size}</span>
               </div>
               <button
                 onClick={clearAll}
-                className="min-h-[38px] text-[0.72rem] font-headline uppercase text-[#FF4136] border border-[#FF4136]/30 rounded px-3 hover:bg-[#FF4136]/10"
+                className="min-h-[38px] text-[0.84rem] font-headline uppercase text-[#FF4136] border border-[#FF4136]/30 rounded px-3 hover:bg-[#FF4136]/10"
               >
                 {tr.recommender.clear}
               </button>
-              <label className="flex items-center gap-2 text-[0.72rem] font-headline uppercase text-[#00FF41]/70">
+              <label className="flex items-center gap-2 text-[0.84rem] font-headline uppercase text-[#00FF41]/70">
                 <input type="checkbox" checked={useMmr} onChange={(e) => setUseMmr(e.target.checked)} className="accent-[#00FF41]" />
                 MMR diversity
               </label>
-              <div className="flex items-center gap-2 text-[0.72rem] font-headline uppercase text-[#00FF41]/70">
+              <div className="flex items-center gap-2 text-[0.84rem] font-headline uppercase text-[#00FF41]/70">
                 top_N
                 <input
                   type="range" min={3} max={10} step={1} value={topN}
@@ -386,7 +386,7 @@ export default function ModelosRecomendacion() {
                 {tr.recommender.recommendations(topN)}
               </h3>
               {selected.size === 0 && (
-                <div className="text-[0.7rem] font-headline uppercase text-[#00FF41]/65 py-8 text-center">
+                <div className="text-[0.82rem] font-headline uppercase text-[#00FF41]/65 py-8 text-center">
                   {tr.recommender.emptySelection}
                 </div>
               )}
@@ -409,7 +409,7 @@ export default function ModelosRecomendacion() {
                   ))}
                 </div>
               )}
-              <p className="text-[0.7rem] text-[#00FF41]/65 font-headline mt-3 normal-case leading-relaxed">
+              <p className="text-[0.82rem] text-[#00FF41]/65 font-headline mt-3 normal-case leading-relaxed">
                 {tr.recommender.explainCaption}
               </p>
             </div>
@@ -424,7 +424,7 @@ export default function ModelosRecomendacion() {
               <span className="material-symbols-outlined text-sm mr-2">help</span>
               {tr.recommender.explainer.title}
             </h3>
-            <div className="text-[0.72rem] text-[#00FF41]/75 font-headline leading-relaxed space-y-3 normal-case">
+            <div className="text-[0.84rem] text-[#00FF41]/75 font-headline leading-relaxed space-y-3 normal-case">
               <p>
                 <span className="text-[#00FF41] font-bold uppercase">{tr.recommender.explainer.problemLabel}</span>{" "}
                 {tr.recommender.explainer.problem}
@@ -445,12 +445,12 @@ export default function ModelosRecomendacion() {
               <span className="material-symbols-outlined text-sm mr-2">account_tree</span>
               {tr.recommender.explainer.pipelineTitle}
             </h3>
-            <div className="text-[0.66rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2 normal-case">
+            <div className="text-[0.78rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2 normal-case">
               {tr.recommender.explainer.steps.map((step) => (
                 <p key={step} className="pl-3 border-l border-[#00FF41]/20">{step}</p>
               ))}
             </div>
-            <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
+            <p className="text-[0.74rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
               {tr.recommender.subtitle}
             </p>
           </div>

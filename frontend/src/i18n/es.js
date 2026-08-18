@@ -89,6 +89,11 @@ export const t = {
     send: "Enviar",
     connectionError: "No se ha podido contactar con el servidor.",
 
+    greeting:
+      "Hola. Soy el {assistant} de {owner}. Tengo acceso a todo su historial: experiencia profesional en modelos predictivos, análisis estadístico y arquitecturas de machine learning. ¿Qué quieres saber del portfolio?",
+    greetingAssistant: "Asistente de Data Science",
+    greetingOwner: "Domingo Berbel",
+
     suggestionsLabel: "PRUEBA:",
     suggestions: [
       "¿A qué se dedica Domingo y en qué es mejor?",

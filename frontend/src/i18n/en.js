@@ -95,6 +95,14 @@ export const t = {
     send: "Send",
     connectionError: "Could not reach the backend.",
 
+    // The opening message, before anyone has asked anything. Written as one
+    // string with {assistant} and {owner} placeholders rather than as
+    // sentence fragments, so a translation is free to reorder it.
+    greeting:
+      "Hello. I am the {assistant} for {owner}. I have access to his entire dataset: professional experience in predictive modelling, statistical analysis and machine learning architectures. What can I tell you about the portfolio today?",
+    greetingAssistant: "Data Science Assistant",
+    greetingOwner: "Domingo Berbel",
+
     // Drawn from the site's own logs: "a que se dedica" is by far the most asked
     // question, followed by education and achievements. The fourth is the one a
     // recruiter actually wants answered but nobody thought to type.

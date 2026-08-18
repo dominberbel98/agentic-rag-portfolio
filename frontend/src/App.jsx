@@ -42,7 +42,7 @@ function useNavItems(tr) {
 
 function NavList({ items, activeSection, modelsOpen, onToggleModels, onSelect, hover }) {
   const baseRow = "flex items-center gap-3 px-6 py-4 cursor-pointer active:scale-95";
-  const subRow  = "flex items-center gap-3 pl-12 pr-6 py-3 cursor-pointer active:scale-95 text-[0.75rem]";
+  const subRow  = "flex items-center gap-3 pl-12 pr-6 py-3 cursor-pointer active:scale-95 text-[0.86rem]";
   const transition = hover ? " transition-colors" : "";
   const activeCls   = "bg-[#00FF41]/10 text-[#00FF41] border-l-4 border-[#00FF41]";
   const inactiveCls = (sub) =>
@@ -113,7 +113,7 @@ function LanguageSwitch({ language, onChange, label, compact = false }) {
           onClick={() => onChange(code)}
           aria-pressed={language === code}
           className={`font-headline uppercase tracking-widest transition-colors ${
-            compact ? "min-h-[36px] px-2.5 text-[0.7rem]" : "min-h-[38px] px-3 text-[0.78rem]"
+            compact ? "min-h-[36px] px-2.5 text-[0.82rem]" : "min-h-[38px] px-3 text-[0.88rem]"
           } ${
             language === code
               ? "bg-[#00FF41]/20 text-[#00FF41] font-bold drop-shadow-[0_0_6px_rgba(0,255,65,0.4)]"
@@ -131,16 +131,16 @@ function LanguageSwitch({ language, onChange, label, compact = false }) {
 function MascotBody({ tr, large = false }) {
   return (
     <>
-      <p className={`text-[#00FF41]/75 leading-relaxed normal-case ${large ? "text-[0.92rem]" : "text-[0.72rem]"}`}>
+      <p className={`text-[#00FF41]/75 leading-relaxed normal-case ${large ? "text-[0.92rem]" : "text-[0.84rem]"}`}>
         {tr.app.mascotLead}
       </p>
       <dl className={large ? "mt-4 space-y-3" : "mt-2.5 space-y-1.5"}>
         {tr.app.mascotSections.map((section) => (
           <div key={section.label}>
-            <dt className={`text-[#00FF41]/90 font-bold tracking-wide ${large ? "text-[0.85rem]" : "text-[0.68rem]"}`}>
+            <dt className={`text-[#00FF41]/90 font-bold tracking-wide ${large ? "text-[0.95rem]" : "text-[0.8rem]"}`}>
               {section.label}
             </dt>
-            <dd className={`text-[#00FF41]/65 leading-relaxed normal-case ${large ? "text-[0.85rem]" : "text-[0.68rem]"}`}>
+            <dd className={`text-[#00FF41]/65 leading-relaxed normal-case ${large ? "text-[0.95rem]" : "text-[0.8rem]"}`}>
               {section.text}
             </dd>
           </div>
@@ -263,7 +263,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
           </button>
 
           <nav className="hidden md:flex items-center">
-            <div className="font-headline uppercase tracking-[0.25em] text-[0.85rem] text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.6)] font-bold">
+            <div className="font-headline uppercase tracking-[0.25em] text-[0.95rem] text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.6)] font-bold">
               {tr.app.owner}
             </div>
           </nav>
@@ -272,10 +272,10 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
 
       {/* Mobile dropdown menu */}
       {menuOpen && (
-        <div className="md:hidden fixed top-14 left-0 w-full z-[45] bg-[#0e0e0e]/95 backdrop-blur-xl border-b border-[#00FF41]/15 font-headline text-[0.75rem] uppercase max-h-[calc(100vh-56px)] overflow-y-auto scrollbar-hide">
+        <div className="md:hidden fixed top-14 left-0 w-full z-[45] bg-[#0e0e0e]/95 backdrop-blur-xl border-b border-[#00FF41]/15 font-headline text-[0.86rem] uppercase max-h-[calc(100vh-56px)] overflow-y-auto scrollbar-hide">
           <div className="px-4 py-3 border-b border-[#00FF41]/10">
             <div className="text-[#00FF41] font-bold">{tr.app.workspace}</div>
-            <div className="text-[#00FF41]/65 tracking-widest text-[0.65rem] mt-0.5">{tr.app.session}</div>
+            <div className="text-[#00FF41]/65 tracking-widest text-[0.78rem] mt-0.5">{tr.app.session}</div>
           </div>
           <NavList
             items={navItems}
@@ -326,7 +326,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
             <button
               type="button"
               onClick={closeMascotSheet}
-              className="w-full min-h-[52px] border border-[#00FF41]/60 rounded bg-[#00FF41]/15 hover:bg-[#00FF41]/25 active:scale-[0.98] font-headline font-bold uppercase tracking-widest text-[0.85rem] text-[#00FF41]"
+              className="w-full min-h-[52px] border border-[#00FF41]/60 rounded bg-[#00FF41]/15 hover:bg-[#00FF41]/25 active:scale-[0.98] font-headline font-bold uppercase tracking-widest text-[0.95rem] text-[#00FF41]"
             >
               {tr.app.mascotClose}
             </button>
@@ -335,7 +335,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       )}
 
       {/* Side Nav — desktop */}
-      <aside className="fixed left-0 top-16 bottom-8 hidden md:flex flex-col z-40 bg-[#0e0e0e] w-72 border-r border-[#00FF41]/15 font-headline text-[0.8rem] uppercase overflow-y-auto scrollbar-hide">
+      <aside className="fixed left-0 top-16 bottom-8 hidden md:flex flex-col z-40 bg-[#0e0e0e] w-72 border-r border-[#00FF41]/15 font-headline text-[0.9rem] uppercase overflow-y-auto scrollbar-hide">
         <div className="p-6 border-b border-[#00FF41]/10">
           <div className="text-[#00FF41] font-bold text-lg">{tr.app.workspace}</div>
           <div className="text-[#00FF41]/65 tracking-widest mt-1">{tr.app.session}</div>
@@ -375,7 +375,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
                 smart_toy
               </span>
               <span className="mascot-antenna h-1.5 w-1.5 bg-[#00FF41] rounded-full shrink-0" />
-              <span className="text-[#00FF41] text-[0.78rem] font-bold tracking-wide normal-case">
+              <span className="text-[#00FF41] text-[0.88rem] font-bold tracking-wide normal-case">
                 {tr.app.mascotTitle}
               </span>
               <button
@@ -412,7 +412,7 @@ H₀: μ₁=μ₂  α=0.05  tanh(x)  ReLU(x)  softmax(zᵢ)=e^ᶻⁱ/∑e^ᶻʲ 
       </main>
 
       {/* Footer Stats */}
-      <footer className="fixed bottom-0 left-0 w-full h-8 bg-surface-container border-t border-[#00FF41]/10 px-3 sm:px-6 flex items-center justify-between z-50 text-[0.55rem] sm:text-[0.6rem] font-headline uppercase text-[#00FF41]/65">
+      <footer className="fixed bottom-0 left-0 w-full h-8 bg-surface-container border-t border-[#00FF41]/10 px-3 sm:px-6 flex items-center justify-between z-50 text-[0.72rem] sm:text-[0.74rem] font-headline uppercase text-[#00FF41]/65">
         <div className="flex gap-2 sm:gap-4">
           <span>
             {telemetry.documents == null
