@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-18T01:25:23.837401+00:00",
+  "updatedAt": "2026-08-18T02:38:44.463105+00:00",
   "season": "2026",
   "matchday": 1,
   "seasonStart": "2026-08-16",
@@ -121,7 +121,7 @@
     {
       "position": 6,
       "playedGames": 1,
-      "form": "",
+      "form": "D",
       "won": 0,
       "draw": 1,
       "lost": 0,
@@ -142,7 +142,7 @@
     {
       "position": 7,
       "playedGames": 1,
-      "form": "",
+      "form": "D",
       "won": 0,
       "draw": 1,
       "lost": 0,
@@ -438,7 +438,7 @@
     {
       "id": 564635,
       "utcDate": "2026-08-17T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 1,
       "homeId": 560,
       "homeName": "Deportivo",
@@ -447,9 +447,9 @@
       "awayName": "Elche",
       "awayCrest": "https://sportsrc.org/img/score/285.png",
       "homeGoals": 1,
-      "awayGoals": 0,
-      "winner": "HOME_TEAM",
-      "live": true
+      "awayGoals": 1,
+      "winner": "DRAW",
+      "live": false
     },
     {
       "id": 564632,
