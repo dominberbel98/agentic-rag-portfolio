@@ -39,12 +39,12 @@ descargar_preguntas
 DEPLOYMENT.md
 embeddings_cache.json
 backend/embeddings_cache.json
-backup/
-migration/
-=0.2.2
 
 # Generated knowledge base (rebuild with scripts/build_kb.py)
 data/kb/
 embeddings_cache.previous.json
 backend/embeddings_cache.previous.json
 backend/vocabulary.json
+
+# Visual brainstorming companion (superpowers)
+.superpowers/

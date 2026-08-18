@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import json
 import logging
-from collections.abc import Callable, Iterator
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any
@@ -411,24 +411,3 @@ class ProfileAgent:
             regenerated=True,
         )
 
-    def stream(
-        self,
-        question: str,
-        history: list[dict] | None = None,
-        language: str = "es",
-        now: datetime | None = None,
-    ) -> Iterator[str]:
-        """Yield answer text in chunks.
-
-        Retrieval and grounding both need the whole answer, so the loop runs to
-        completion and the finished text is chunked out. The alternative — token
-        streaming with a grounding check afterwards — would mean retracting text
-        the user has already read.
-        """
-        result = self.answer(question, history, language, now)
-        if result.out_of_scope:
-            return
-        text = result.answer
-        step = 24
-        for start in range(0, len(text), step):
-            yield text[start : start + step]
