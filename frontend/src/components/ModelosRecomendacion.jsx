@@ -1,5 +1,6 @@
 import { t as tr } from "../i18n/en";
 import React, { useEffect, useMemo, useState } from "react";
+import { MetricStrip, ModelTabs } from "./ModelTabs";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
 } from "recharts";
@@ -146,7 +147,7 @@ function PersonaSummary({ personas, onApply }) {
               onClick={() => onApply(p.history)}
               className="text-[0.6rem] font-headline uppercase text-[#00FF41] border border-[#00FF41]/30 rounded px-2 py-1 hover:bg-[#00FF41]/10"
             >
-              cargar
+              {tr.recommender.load}
             </button>
           </div>
         ))}
@@ -229,6 +230,12 @@ function ExplainPanel({ profile, item, vocab, breakdown }) {
 }
 
 /* ════════ MAIN EXPORT ════════ */
+
+const TABS = [
+  { id: "try", icon: "tune", label: tr.tabs.tryIt },
+  { id: "how", icon: "help", label: tr.tabs.howItWorks },
+  { id: "evidence", icon: "query_stats", label: tr.tabs.evidence },
+];
 export default function ModelosRecomendacion() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -236,6 +243,7 @@ export default function ModelosRecomendacion() {
   const [useMmr, setUseMmr] = useState(true);
   const [topN, setTopN] = useState(6);
   const [explainId, setExplainId] = useState(null);
+  const [tab, setTab] = useState("try");
 
   useEffect(() => {
     fetch("/data/product_recommendations.json")
@@ -298,144 +306,156 @@ export default function ModelosRecomendacion() {
   });
   const clearAll = () => setSelected(new Set());
 
+  const headline = [
+    { label: "PRODUCTS", value: data.catalog.length },
+    { label: "CATEGORIES", value: data.categories.length },
+    { label: "FEATURE DIM", value: data.featureMatrix[0].length },
+    { label: "DIVERSITY", value: data.metrics.avgDiversity.toFixed(2) },
+    { label: "COVERAGE", value: `${(data.metrics.catalogCoverage * 100).toFixed(0)}%` },
+  ];
+
   return (
     <div className="w-full h-full overflow-y-auto scrollbar-hide p-3 sm:p-6">
-      <div className="mb-6">
+      <div className="mb-3">
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
           {tr.recommender.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
-          {tr.recommender.subtitle}
-        </p>
-        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
-          {tr.recommender.stats(data.catalog.length, data.categories.length, data.featureMatrix[0].length, (data.metrics.catalogCoverage * 100).toFixed(0))}
+        <p className="text-[0.7rem] text-[#00FF41]/70 font-headline mt-1 leading-relaxed max-w-3xl normal-case">
+          {tr.recommender.explainer.problem}
         </p>
       </div>
 
-      <div className="viz-panel col-span-12 mb-4">
-        <h3 className="viz-title">
-          <span className="material-symbols-outlined text-sm mr-2">help</span>
-          {tr.recommender.explainer.title}
-        </h3>
-        <div className="text-[0.7rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2">
-          <p>
-            <span className="text-[#00FF41] font-bold">{tr.recommender.explainer.problemLabel}</span>{" "}
-            {tr.recommender.explainer.problem}
-          </p>
-          <p>
-            <span className="text-[#00FF41] font-bold">{tr.recommender.explainer.solutionLabel}</span>{" "}
-            {tr.recommender.explainer.solution}
-          </p>
-          <p>
-            <span className="text-[#00FF41] font-bold">{tr.recommender.explainer.tryItLabel}</span>{" "}
-            {tr.recommender.explainer.tryIt}
-          </p>
-        </div>
-        <details className="mt-3">
-          <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 cursor-pointer hover:text-[#00FF41]">
-            {tr.recommender.explainer.detailsSummary}
-          </summary>
-          <div className="text-[0.6rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
-            {tr.recommender.explainer.steps.map((step) => (
-              <p key={step}>{step}</p>
-            ))}
-          </div>
-        </details>
-      </div>
+      <ModelTabs tabs={TABS} active={tab} onChange={setTab} />
+      <MetricStrip items={headline} />
 
-      {/* Controls */}
-      <div className="viz-panel col-span-12 mb-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="text-[0.65rem] font-headline uppercase text-[#00FF41]/70">
-            {tr.recommender.selectedCount} <span className="text-[#00FF41] font-bold">{selected.size}</span>
-          </div>
-          <button
-            onClick={clearAll}
-            className="text-[0.6rem] font-headline uppercase text-[#FF4136] border border-[#FF4136]/30 rounded px-2 py-1 hover:bg-[#FF4136]/10"
-          >
-            limpiar
-          </button>
-          <label className="flex items-center gap-2 text-[0.6rem] font-headline uppercase text-[#00FF41]/70">
-            <input type="checkbox" checked={useMmr} onChange={(e) => setUseMmr(e.target.checked)} className="accent-[#00FF41]" />
-            MMR diversity
-          </label>
-          <div className="flex items-center gap-2 text-[0.6rem] font-headline uppercase text-[#00FF41]/70">
-            top_N
-            <input
-              type="range" min={3} max={10} step={1} value={topN}
-              onChange={(e) => setTopN(Number(e.target.value))}
-              className="w-24 h-1 appearance-none bg-[#00FF41]/20 rounded outline-none accent-[#00FF41]"
-            />
-            <span className="text-[#00FF41] font-bold tabular-nums">{topN}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Catalog grid + recommendations */}
-      <div className="grid grid-cols-12 gap-4">
-        {/* Catalog */}
-        <div className="viz-panel col-span-12 lg:col-span-7">
-          <h3 className="viz-title">
-            <span className="material-symbols-outlined text-sm mr-2">grid_view</span>
-            {tr.recommender.catalog(data.catalog.length)}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[520px] overflow-y-auto scrollbar-hide pr-1">
-            {data.catalog.map((p) => (
-              <ProductCard
-                key={p.id}
-                product={p}
-                selected={selected.has(p.id)}
-                onToggle={toggle}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Recommendations */}
-        <div className="viz-panel col-span-12 lg:col-span-5">
-          <h3 className="viz-title">
-            <span className="material-symbols-outlined text-sm mr-2">recommend</span>
-            {tr.recommender.recommendations(topN)}
-          </h3>
-          {selected.size === 0 && (
-            <div className="text-[0.7rem] font-headline uppercase text-[#00FF41]/65 py-8 text-center">
-              {tr.recommender.emptySelection}
+      {tab === "try" && (
+        <>
+          {/* Controls */}
+          <div className="viz-panel col-span-12 mt-4 mb-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="text-[0.65rem] font-headline uppercase text-[#00FF41]/70">
+                {tr.recommender.selectedCount} <span className="text-[#00FF41] font-bold">{selected.size}</span>
+              </div>
+              <button
+                onClick={clearAll}
+                className="text-[0.6rem] font-headline uppercase text-[#FF4136] border border-[#FF4136]/30 rounded px-2 py-1 hover:bg-[#FF4136]/10"
+              >
+                {tr.recommender.clear}
+              </button>
+              <label className="flex items-center gap-2 text-[0.6rem] font-headline uppercase text-[#00FF41]/70">
+                <input type="checkbox" checked={useMmr} onChange={(e) => setUseMmr(e.target.checked)} className="accent-[#00FF41]" />
+                MMR diversity
+              </label>
+              <div className="flex items-center gap-2 text-[0.6rem] font-headline uppercase text-[#00FF41]/70">
+                top_N
+                <input
+                  type="range" min={3} max={10} step={1} value={topN}
+                  onChange={(e) => setTopN(Number(e.target.value))}
+                  className="w-24 h-1 appearance-none bg-[#00FF41]/20 rounded outline-none accent-[#00FF41]"
+                />
+                <span className="text-[#00FF41] font-bold tabular-nums">{topN}</span>
+              </div>
             </div>
-          )}
-          {recommendations && recommendations.length > 0 && (
-            <div className="space-y-2 max-h-[520px] overflow-y-auto scrollbar-hide pr-1">
-              {recommendations.map((r) => (
-                <div key={r.id}>
-                  <div onClick={() => setExplainId((id) => (id === r.id ? null : r.id))} className="cursor-pointer">
-                    <ProductCard product={r} similarity={r.similarity} />
-                  </div>
-                  {explainId === r.id && profileVec && (
-                    <ExplainPanel
-                      profile={profileVec}
-                      item={data.featureMatrix[data.catalog.findIndex((p) => p.id === r.id)]}
-                      vocab={data.tfidfVocab}
-                      breakdown={data.featureBreakdown}
-                    />
-                  )}
+          </div>
+
+          <div className="grid grid-cols-12 gap-4">
+            {/* Catalogue */}
+            <div className="viz-panel col-span-12 lg:col-span-7">
+              <h3 className="viz-title">
+                <span className="material-symbols-outlined text-sm mr-2">grid_view</span>
+                {tr.recommender.catalog(data.catalog.length)}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[520px] overflow-y-auto scrollbar-hide pr-1">
+                {data.catalog.map((p) => (
+                  <ProductCard key={p.id} product={p} selected={selected.has(p.id)} onToggle={toggle} />
+                ))}
+              </div>
+            </div>
+
+            {/* Recommendations */}
+            <div className="viz-panel col-span-12 lg:col-span-5">
+              <h3 className="viz-title">
+                <span className="material-symbols-outlined text-sm mr-2">recommend</span>
+                {tr.recommender.recommendations(topN)}
+              </h3>
+              {selected.size === 0 && (
+                <div className="text-[0.7rem] font-headline uppercase text-[#00FF41]/65 py-8 text-center">
+                  {tr.recommender.emptySelection}
                 </div>
+              )}
+              {recommendations && recommendations.length > 0 && (
+                <div className="space-y-2 max-h-[520px] overflow-y-auto scrollbar-hide pr-1">
+                  {recommendations.map((r) => (
+                    <div key={r.id}>
+                      <div onClick={() => setExplainId((id) => (id === r.id ? null : r.id))} className="cursor-pointer">
+                        <ProductCard product={r} similarity={r.similarity} />
+                      </div>
+                      {explainId === r.id && profileVec && (
+                        <ExplainPanel
+                          profile={profileVec}
+                          item={data.featureMatrix[data.catalog.findIndex((p) => p.id === r.id)]}
+                          vocab={data.tfidfVocab}
+                          breakdown={data.featureBreakdown}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+              <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-3 uppercase">
+                {tr.recommender.explainCaption}
+              </p>
+            </div>
+          </div>
+        </>
+      )}
+
+      {tab === "how" && (
+        <div className="grid grid-cols-12 gap-4 mt-4">
+          <div className="viz-panel col-span-12 lg:col-span-7">
+            <h3 className="viz-title">
+              <span className="material-symbols-outlined text-sm mr-2">help</span>
+              {tr.recommender.explainer.title}
+            </h3>
+            <div className="text-[0.72rem] text-[#00FF41]/75 font-headline leading-relaxed space-y-3 normal-case">
+              <p>
+                <span className="text-[#00FF41] font-bold uppercase">{tr.recommender.explainer.problemLabel}</span>{" "}
+                {tr.recommender.explainer.problem}
+              </p>
+              <p>
+                <span className="text-[#00FF41] font-bold uppercase">{tr.recommender.explainer.solutionLabel}</span>{" "}
+                {tr.recommender.explainer.solution}
+              </p>
+              <p>
+                <span className="text-[#00FF41] font-bold uppercase">{tr.recommender.explainer.tryItLabel}</span>{" "}
+                {tr.recommender.explainer.tryIt}
+              </p>
+            </div>
+          </div>
+
+          <div className="viz-panel col-span-12 lg:col-span-5">
+            <h3 className="viz-title">
+              <span className="material-symbols-outlined text-sm mr-2">account_tree</span>
+              {tr.recommender.explainer.pipelineTitle}
+            </h3>
+            <div className="text-[0.66rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2 normal-case">
+              {tr.recommender.explainer.steps.map((step) => (
+                <p key={step} className="pl-3 border-l border-[#00FF41]/20">{step}</p>
               ))}
             </div>
-          )}
+            <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
+              {tr.recommender.subtitle}
+            </p>
+          </div>
         </div>
+      )}
 
-        <PersonaSummary
-          personas={data.personas}
-          onApply={(history) => setSelected(new Set(history))}
-        />
-
-        {recommendations && recommendations.length > 0 && (
-          <SimilarityBars recs={recommendations} />
-        )}
-      </div>
-
-      <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-4 uppercase">
-        {tr.recommender.explainCaption}
-      </p>
+      {tab === "evidence" && (
+        <div className="grid grid-cols-12 gap-4 mt-4">
+          <PersonaSummary personas={data.personas} onApply={(history) => { setSelected(new Set(history)); setTab("try"); }} />
+          {recommendations && recommendations.length > 0 && <SimilarityBars recs={recommendations} />}
+        </div>
+      )}
 
       <div className="h-8" />
     </div>

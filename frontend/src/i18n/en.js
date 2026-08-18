@@ -53,6 +53,7 @@ export const t = {
     modelo_scoring: "credit_scoring",
     modelo_recomendation: "recommender",
     certificaciones: "certifications",
+    futboard: "futboard",
   },
 
   // Real telemetry, not decoration. This used to read "TRAINING_SET: 100% ·
@@ -118,6 +119,14 @@ export const t = {
     season: "Season",
     matchday: "Matchday",
     noData: "NO_DATA_AVAILABLE",
+  },
+
+  // Both model sections split into the same three views, so the labels are
+  // shared rather than duplicated per section.
+  tabs: {
+    tryIt: "Try it",
+    howItWorks: "How it works",
+    evidence: "Evidence",
   },
 
   zones: {
@@ -306,12 +315,34 @@ export const t = {
     rocCaption: "Red diagonal = random classifier · Green area = discriminative power",
     importanceCaption: "Mean AUC drop when the feature is permuted · Taller bar = more impact",
     sampleTable: {
+      title: "SAMPLE_APPLICANTS (test set)",
       age: "Age",
       income: "Income",
       loan: "Loan",
       dti: "DTI",
       payments: "Payments",
       utilisation: "Util.",
+      marks: "Marks",
+      probLr: "P(LR)",
+      probGbm: "P(GBM)",
+      score: "Score",
+      band: "Band",
+    },
+    loadingModel: "TRAINING_MODEL",
+    generated: (when) => `Generated: ${when}`,
+    datasetLine: (n, rate, train, test) =>
+      `Dataset: ${n} applicants \u00b7 default rate ${rate}% \u00b7 ${train}/${test} stratified split`,
+    applicants: (n) => `${n} applicants`,
+    inferenceNote:
+      "Client-side inference: sigmoid(\u03b2\u00b7x) with exported LR coefficients \u00b7 PDO=50, base=600, odds=50",
+    // The number on its own says nothing. This is what turns it into something a
+    // reader understands: which inputs are pushing it up, and which down.
+    drivers: {
+      title: "WHY THIS SCORE",
+      caption:
+        "Each bar is one input's contribution to this applicant's score, from the logistic regression coefficients",
+      raises: "Raises the score",
+      lowers: "Lowers the score",
     },
     explainer: {
       title: "WHAT DOES THIS MODEL DO?",
@@ -325,6 +356,7 @@ export const t = {
       tryIt:
         "In the interactive scorecard panel, move the sliders (income, on-time payments, utilisation) and watch the score and default probability change live. Inference runs in your browser, using logistic regression coefficients exported from scikit-learn.",
       detailsSummary: "▸ technical detail (ML pipeline)",
+      pipelineTitle: "TECHNICAL_DETAIL (ML PIPELINE)",
       steps: [
         "1. Synthetic dataset calibrated to a ~17% default rate (12 numerical + 2 categorical features)",
         "2. Preprocessing: StandardScaler + OneHotEncoder · stratified 75/25 split",
@@ -347,6 +379,8 @@ export const t = {
     recommendations: (n) => `RECOMMENDATIONS (top-${n})`,
     metrics: { title: "MODEL_METRICS" },
     reset: "Reset",
+    load: "Load",
+    clear: "Clear",
     loadingCatalog: "LOADING_CATALOGUE",
     subtitle: "Content-based · TF-IDF + category + price/rating · MMR re-ranking",
     stats: (products, categories, dim, coverage) =>
@@ -374,6 +408,7 @@ export const t = {
       tryIt:
         "Click products in the catalogue, or load one of the demo personas below. The list on the right recalculates instantly, in the browser. Toggle MMR diversity to see how varied the result becomes, move top_N, and click a recommendation to see why it was chosen — which TF-IDF terms, and how much weight came from category and price.",
       detailsSummary: "▸ technical detail (ML pipeline)",
+      pipelineTitle: "TECHNICAL_DETAIL (ML PIPELINE)",
       steps: [
         "1. Per-item feature engineering: TF-IDF (1-2 grams, EN stop-words, max 120) + one-hot category · 0.6 + MinMax(price, rating) · 0.4",
         "2. User profile u = mean(v_i) over the selected items",

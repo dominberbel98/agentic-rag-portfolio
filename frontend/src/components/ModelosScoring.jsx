@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { t as tr } from "../i18n/en";
+import { MetricStrip, ModelTabs } from "./ModelTabs";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
   LineChart, Line, ReferenceLine, AreaChart, Area,
@@ -97,7 +98,12 @@ function MetricCards({ data }) {
         ))}
       </div>
       <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
-        Dataset: {data.dataset.n.toLocaleString()} solicitantes · Tasa de default {(data.dataset.defaultRate * 100).toFixed(1)}% · {data.dataset.trainSize}/{data.dataset.testSize} split estratificado
+        {tr.scoring.datasetLine(
+          data.dataset.n.toLocaleString(),
+          (data.dataset.defaultRate * 100).toFixed(1),
+          data.dataset.trainSize,
+          data.dataset.testSize,
+        )}
       </p>
     </div>
   );
@@ -185,7 +191,7 @@ function ScoreDistribution({ histogram, bands }) {
     band: bandFromScore(b.bin),
   }));
   return (
-    <div className="viz-panel col-span-12 lg:col-span-7">
+    <div className="viz-panel col-span-12">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">bar_chart</span>
         {tr.scoring.distribution.title}
@@ -202,7 +208,7 @@ function ScoreDistribution({ histogram, bands }) {
                 <div className="bg-[#0e0e0e]/95 border border-[#00FF41]/30 px-3 py-2 text-xs font-headline uppercase text-[#00FF41] shadow-[0_0_12px_rgba(0,255,65,0.2)]">
                   <p className="font-bold">Score {d.range}</p>
                   <p style={{ color: BAND_COLOR[d.band] }}>{d.band}</p>
-                  <p>{d.count} solicitantes</p>
+                  <p>{tr.scoring.applicants(d.count)}</p>
                 </div>
               );
             }}
@@ -255,9 +261,7 @@ function deriveExtras(a) {
   };
 }
 
-function InteractiveScorecard({ weights, levels }) {
-  const [applicant, setApplicant] = useState(DEFAULT_APPLICANT);
-
+function InteractiveScorecard({ weights, levels, applicant, setApplicant }) {
   const result = useMemo(() => {
     const full = { ...applicant, ...deriveExtras(applicant) };
     const prob = predictWithLR(weights, full);
@@ -271,7 +275,7 @@ function InteractiveScorecard({ weights, levels }) {
     <div className="viz-panel col-span-12 lg:col-span-5">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">tune</span>
-        SCORECARD_INTERACTIVO
+        {tr.scoring.simulator.title}
       </h3>
 
       {/* Score gauge */}
@@ -347,19 +351,101 @@ function InteractiveScorecard({ weights, levels }) {
       </div>
 
       <p className="text-[0.55rem] text-[#00FF41]/55 font-headline mt-3 uppercase">
-        Inferencia client-side: sigmoid(β·x) con coeficientes LR exportados · PDO=50, base=600, odds=50
+        {tr.scoring.inferenceNote}
       </p>
     </div>
   );
 }
 
-/* ═══════════ 6. SAMPLE APPLICANTS ═══════════ */
+/* ═══════════ 6. WHY THIS SCORE ═══════════ */
+
+/**
+ * Per-input contribution to the score shown next to it.
+ *
+ * The gauge alone gives a number with no reason attached, which is exactly the
+ * complaint a scorecard is supposed to answer. These are the logistic
+ * regression's own terms — the standardised value times its coefficient — so the
+ * explanation is the model, not a story told about it.
+ *
+ * Sign convention: z rises with default risk and the score falls as z rises, so
+ * a positive z contribution is drawn as a negative effect on the score.
+ */
+function scoreDrivers(weights, applicant) {
+  const rows = [];
+  for (const f of weights.numerical) {
+    const value = Number(applicant[f.feature] ?? 0);
+    rows.push({ feature: f.feature, z: ((value - f.mean) / (f.std || 1)) * f.coef });
+  }
+  for (const c of weights.categorical) {
+    if (String(applicant[c.feature]) === String(c.level)) {
+      rows.push({ feature: c.feature, z: c.coef });
+    }
+  }
+  return rows
+    .map((r) => ({ ...r, effect: -r.z }))
+    .filter((r) => Math.abs(r.effect) > 0.005)
+    .sort((a, b) => Math.abs(b.effect) - Math.abs(a.effect))
+    .slice(0, 7);
+}
+
+function ScoreDrivers({ weights, applicant }) {
+  const drivers = useMemo(() => scoreDrivers(weights, applicant), [weights, applicant]);
+  const widest = Math.max(...drivers.map((d) => Math.abs(d.effect)), 0.001);
+
+  return (
+    <div className="viz-panel col-span-12 lg:col-span-7">
+      <h3 className="viz-title">
+        <span className="material-symbols-outlined text-sm mr-2">insights</span>
+        {tr.scoring.drivers.title}
+      </h3>
+
+      <div className="flex gap-4 mb-3 text-[0.6rem] font-headline uppercase">
+        <span className="text-[#00FF41]">▲ {tr.scoring.drivers.raises}</span>
+        <span className="text-[#FF4136]">▼ {tr.scoring.drivers.lowers}</span>
+      </div>
+
+      <div className="space-y-2">
+        {drivers.map((d) => {
+          const up = d.effect > 0;
+          const width = (Math.abs(d.effect) / widest) * 50;
+          return (
+            <div key={`${d.feature}-${d.z}`} className="flex items-center gap-2">
+              <span className="w-[38%] shrink-0 text-right text-[0.62rem] font-headline uppercase text-[#00FF41]/75 truncate">
+                {tr.scoring.features[d.feature] || d.feature}
+              </span>
+              {/* Diverging bar: the centre line is "no effect", so length and
+                  side are both readable at a glance. */}
+              <div className="flex-1 h-3 relative">
+                <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#00FF41]/25" />
+                <div
+                  className="absolute top-0 bottom-0 rounded-sm"
+                  style={{
+                    width: `${width}%`,
+                    [up ? "left" : "right"]: "50%",
+                    background: up ? GREEN : RED,
+                    opacity: 0.7,
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <p className="text-[0.6rem] text-[#00FF41]/55 font-headline mt-3 uppercase">
+        {tr.scoring.drivers.caption}
+      </p>
+    </div>
+  );
+}
+
+/* ═══════════ 7. SAMPLE APPLICANTS ═══════════ */
 function SampleApplicants({ rows }) {
   return (
     <div className="viz-panel col-span-12">
       <h3 className="viz-title">
         <span className="material-symbols-outlined text-sm mr-2">groups</span>
-        APLICANTES_DE_EJEMPLO (test set)
+        {tr.scoring.sampleTable.title}
       </h3>
       <div className="overflow-x-auto scrollbar-hide">
         <table className="w-full text-[0.65rem] font-headline uppercase">
@@ -372,11 +458,11 @@ function SampleApplicants({ rows }) {
               <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.dti}</th>
               <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.payments}</th>
               <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.utilisation}</th>
-              <th className="py-1.5 px-2 text-right">Marcas</th>
-              <th className="py-1.5 px-2 text-right">P(LR)</th>
-              <th className="py-1.5 px-2 text-right">P(GBM)</th>
-              <th className="py-1.5 px-2 text-center">Score</th>
-              <th className="py-1.5 px-2 text-left">Banda</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.marks}</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.probLr}</th>
+              <th className="py-1.5 px-2 text-right">{tr.scoring.sampleTable.probGbm}</th>
+              <th className="py-1.5 px-2 text-center">{tr.scoring.sampleTable.score}</th>
+              <th className="py-1.5 px-2 text-left">{tr.scoring.sampleTable.band}</th>
             </tr>
           </thead>
           <tbody>
@@ -405,9 +491,20 @@ function SampleApplicants({ rows }) {
 }
 
 /* ═══════════ MAIN EXPORT ═══════════ */
+
+const TABS = [
+  { id: "try", icon: "tune", label: tr.tabs.tryIt },
+  { id: "how", icon: "help", label: tr.tabs.howItWorks },
+  { id: "evidence", icon: "query_stats", label: tr.tabs.evidence },
+];
+
 export default function ModelosScoring() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [tab, setTab] = useState("try");
+  // Lifted out of InteractiveScorecard so the drivers panel scores the same
+  // applicant the sliders are describing.
+  const [applicant, setApplicant] = useState(DEFAULT_APPLICANT);
 
   useEffect(() => {
     fetch("/data/credit_scoring.json")
@@ -430,68 +527,97 @@ export default function ModelosScoring() {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-[#00FF41] font-headline text-sm uppercase flicker">
-          ENTRENANDO_MODELO<span className="cursor-blink">_</span>
+          {tr.scoring.loadingModel}<span className="cursor-blink">_</span>
         </div>
       </div>
     );
   }
 
+  const gbm = data.models.gbm.test;
+  const headline = [
+    { label: "AUC", value: gbm.auc.toFixed(3) },
+    { label: "KS", value: gbm.ks.toFixed(3) },
+    { label: "GINI", value: gbm.gini.toFixed(3) },
+    { label: "BRIER", value: gbm.brier.toFixed(3) },
+  ];
+
   return (
     <div className="w-full h-full overflow-y-auto scrollbar-hide p-3 sm:p-6">
-      <div className="mb-6">
+      <div className="mb-3">
         <h2 className="text-lg sm:text-xl font-bold text-[#00FF41] font-headline uppercase tracking-tight drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
-          CREDIT_SCORING_PIPELINE
+          {tr.scoring.title}
         </h2>
-        <p className="text-[0.65rem] text-[#00FF41]/65 font-headline uppercase mt-1">
-          Logistic Regression + Gradient Boosting · 5-fold CV + held-out test · scorecard 300–850
-        </p>
-        <p className="text-[0.6rem] text-[#00FF41]/55 font-headline uppercase mt-0.5">
-          Generado: {new Date(data.generatedAt).toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" })}
+        <p className="text-[0.7rem] text-[#00FF41]/70 font-headline mt-1 leading-relaxed max-w-3xl normal-case">
+          {tr.scoring.explainer.problem}
         </p>
       </div>
 
-      <div className="viz-panel col-span-12 mb-4">
-        <h3 className="viz-title">
-          <span className="material-symbols-outlined text-sm mr-2">help</span>
-          {tr.scoring.explainer.title}
-        </h3>
-        <div className="text-[0.7rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2">
-          <p>
-            <span className="text-[#00FF41] font-bold">{tr.scoring.explainer.problemLabel}</span>{" "}
-            {tr.scoring.explainer.problem}
-          </p>
-          <p>
-            <span className="text-[#00FF41] font-bold">{tr.scoring.explainer.solutionLabel}</span>{" "}
-            {tr.scoring.explainer.solution}
-          </p>
-          <p>
-            <span className="text-[#00FF41] font-bold">{tr.scoring.explainer.tryItLabel}</span>{" "}
-            {tr.scoring.explainer.tryIt}
-          </p>
+      <ModelTabs tabs={TABS} active={tab} onChange={setTab} />
+      <MetricStrip items={headline} />
+
+      {tab === "try" && (
+        <div className="grid grid-cols-12 gap-4 mt-4">
+          <InteractiveScorecard
+            weights={data.models.logistic.weights}
+            levels={data.models.logistic.weights.categorical_levels}
+            applicant={applicant}
+            setApplicant={setApplicant}
+          />
+          <ScoreDrivers weights={data.models.logistic.weights} applicant={applicant} />
         </div>
-        <details className="mt-3">
-          <summary className="text-[0.6rem] font-headline uppercase text-[#00FF41]/70 cursor-pointer hover:text-[#00FF41]">
-            {tr.scoring.explainer.detailsSummary}
-          </summary>
-          <div className="text-[0.6rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-1 mt-2 pl-3 border-l border-[#00FF41]/20">
-            {tr.scoring.explainer.steps.map((step) => (
-              <p key={step}>{step}</p>
-            ))}
-          </div>
-        </details>
-      </div>
+      )}
 
-      <div className="grid grid-cols-12 gap-4">
-        <MetricCards data={data} />
-        <RocPanel roc={data.rocCurve} auc={data.models.gbm.test.auc} />
-        <ImportancePanel rows={data.featureImportance} />
-        <ScoreDistribution histogram={data.scoreHistogram} bands={data.bandDistribution} />
-        <InteractiveScorecard
-          weights={data.models.logistic.weights}
-          levels={data.models.logistic.weights.categorical_levels}
-        />
-        <SampleApplicants rows={data.sampleApplicants} />
-      </div>
+      {tab === "how" && (
+        <div className="grid grid-cols-12 gap-4 mt-4">
+          <div className="viz-panel col-span-12 lg:col-span-7">
+            <h3 className="viz-title">
+              <span className="material-symbols-outlined text-sm mr-2">help</span>
+              {tr.scoring.explainer.title}
+            </h3>
+            <div className="text-[0.72rem] text-[#00FF41]/75 font-headline leading-relaxed space-y-3 normal-case">
+              <p>
+                <span className="text-[#00FF41] font-bold uppercase">{tr.scoring.explainer.problemLabel}</span>{" "}
+                {tr.scoring.explainer.problem}
+              </p>
+              <p>
+                <span className="text-[#00FF41] font-bold uppercase">{tr.scoring.explainer.solutionLabel}</span>{" "}
+                {tr.scoring.explainer.solution}
+              </p>
+              <p>
+                <span className="text-[#00FF41] font-bold uppercase">{tr.scoring.explainer.tryItLabel}</span>{" "}
+                {tr.scoring.explainer.tryIt}
+              </p>
+            </div>
+          </div>
+
+          <div className="viz-panel col-span-12 lg:col-span-5">
+            <h3 className="viz-title">
+              <span className="material-symbols-outlined text-sm mr-2">account_tree</span>
+              {tr.scoring.explainer.pipelineTitle}
+            </h3>
+            <div className="text-[0.66rem] text-[#00FF41]/70 font-headline leading-relaxed space-y-2 normal-case">
+              {tr.scoring.explainer.steps.map((step) => (
+                <p key={step} className="pl-3 border-l border-[#00FF41]/20">{step}</p>
+              ))}
+            </div>
+            <p className="text-[0.6rem] text-[#00FF41]/60 font-headline mt-3 uppercase">
+              {tr.scoring.generated(
+                new Date(data.generatedAt).toLocaleString("en-GB", { dateStyle: "short", timeStyle: "short" }),
+              )}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {tab === "evidence" && (
+        <div className="grid grid-cols-12 gap-4 mt-4">
+          <MetricCards data={data} />
+          <RocPanel roc={data.rocCurve} auc={data.models.gbm.test.auc} />
+          <ImportancePanel rows={data.featureImportance} />
+          <ScoreDistribution histogram={data.scoreHistogram} bands={data.bandDistribution} />
+          <SampleApplicants rows={data.sampleApplicants} />
+        </div>
+      )}
 
       <div className="h-8" />
     </div>
