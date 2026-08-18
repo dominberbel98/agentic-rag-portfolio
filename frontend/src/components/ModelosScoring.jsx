@@ -414,23 +414,23 @@ function ScoreDrivers({ weights, applicant }) {
         {tr.scoring.drivers.title}
       </h3>
 
-      <div className="flex gap-4 mb-3 text-[0.6rem] font-headline uppercase">
+      <div className="flex gap-5 mb-4 text-[0.75rem] font-headline uppercase">
         <span className="text-[#00FF41]">▲ {tr.scoring.drivers.raises}</span>
         <span className="text-[#FF4136]">▼ {tr.scoring.drivers.lowers}</span>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-3">
         {drivers.map((d) => {
           const up = d.effect > 0;
           const width = (Math.abs(d.effect) / widest) * 50;
           return (
             <div key={`${d.feature}-${d.z}`} className="flex items-center gap-2">
-              <span className="w-[38%] shrink-0 text-right text-[0.62rem] font-headline uppercase text-[#00FF41]/75 truncate">
+              <span className="w-[38%] shrink-0 text-right text-[0.78rem] font-headline uppercase text-[#00FF41]/80 truncate">
                 {tr.scoring.features[d.feature] || d.feature}
               </span>
               {/* Diverging bar: the centre line is "no effect", so length and
                   side are both readable at a glance. */}
-              <div className="flex-1 h-3 relative">
+              <div className="flex-1 h-4 relative">
                 <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#00FF41]/25" />
                 <div
                   className="absolute top-0 bottom-0 rounded-sm"
@@ -447,7 +447,7 @@ function ScoreDrivers({ weights, applicant }) {
         })}
       </div>
 
-      <p className="text-[0.6rem] text-[#00FF41]/55 font-headline mt-3 uppercase">
+      <p className="text-[0.72rem] text-[#00FF41]/65 font-headline mt-4 normal-case leading-relaxed">
         {tr.scoring.drivers.caption}
       </p>
     </div>

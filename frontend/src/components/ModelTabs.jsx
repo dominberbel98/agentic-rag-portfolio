@@ -28,13 +28,13 @@ export function ModelTabs({ tabs, active, onChange }) {
             role="tab"
             aria-selected={on}
             onClick={() => onChange(tab.id)}
-            className={`flex items-center gap-1.5 whitespace-nowrap px-3 sm:px-4 py-2.5 font-headline uppercase text-[0.65rem] sm:text-[0.7rem] tracking-widest border-b-2 -mb-px transition-colors ${
+            className={`flex items-center gap-2 whitespace-nowrap px-4 sm:px-5 py-3.5 min-h-[52px] font-headline uppercase text-[0.82rem] sm:text-[0.9rem] tracking-widest border-b-2 -mb-px transition-colors ${
               on
                 ? "border-[#00FF41] text-[#00FF41] bg-[#00FF41]/10 drop-shadow-[0_0_6px_rgba(0,255,65,0.35)]"
                 : "border-transparent text-[#00FF41]/55 hover:text-[#00FF41] hover:bg-[#00FF41]/5"
             }`}
           >
-            <span className="material-symbols-outlined text-[0.95rem]">{tab.icon}</span>
+            <span className="material-symbols-outlined text-[1.15rem]">{tab.icon}</span>
             {tab.label}
           </button>
         );
@@ -46,14 +46,14 @@ export function ModelTabs({ tabs, active, onChange }) {
 /** Headline numbers that stay on screen whichever tab is open. */
 export function MetricStrip({ items }) {
   return (
-    <div className="flex flex-wrap gap-x-5 gap-y-1.5 px-1 py-2.5 border-b border-[#00FF41]/10">
+    <div className="flex flex-wrap gap-x-6 gap-y-2 px-1 py-3 border-b border-[#00FF41]/10">
       {items.map((item) => (
         <div key={item.label} className="flex items-baseline gap-1.5">
-          <span className="text-[0.55rem] font-headline uppercase tracking-widest text-[#00FF41]/55">
+          <span className="text-[0.68rem] font-headline uppercase tracking-widest text-[#00FF41]/65">
             {item.label}
           </span>
           <span
-            className="text-[0.8rem] font-headline font-bold tabular-nums"
+            className="text-[0.95rem] font-headline font-bold tabular-nums"
             style={{ color: item.color || "#00FF41" }}
           >
             {item.value}

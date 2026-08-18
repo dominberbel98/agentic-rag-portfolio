@@ -41,6 +41,13 @@ export const t = {
         label: "Certifications",
         text: "The verified ones, with what each covers.",
       },
+      {
+        // The one entry that names its stack. The others describe what a visitor
+        // can do; this one is a working full-stack feature, so what it is built
+        // on is the interesting part.
+        label: "Futboard",
+        text: "A scoreboard for our Sunday football, on serverless Postgres (Neon): relational schema, stats aggregated in SQL, clock driven by timestamps.",
+      },
     ],
     mascotDismiss: "Dismiss",
   },
@@ -100,6 +107,7 @@ export const t = {
     ],
     contact: {
       heading: "— Direct contact",
+      dismiss: "Close and keep chatting",
       viewLinkedin: "View LinkedIn profile",
       name: "Your name",
       email: "Your email",

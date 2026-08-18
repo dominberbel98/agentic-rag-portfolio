@@ -268,10 +268,11 @@ function initialLanguage() {
   if (typeof window === "undefined") return "en";
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (LANGUAGES.includes(stored)) return stored;
-  // A visitor whose browser is set to Spanish gets Spanish on the first visit;
-  // everyone else gets English, like the rest of the site.
-  const preferred = (window.navigator.language || "").slice(0, 2).toLowerCase();
-  return preferred === "es" ? "es" : "en";
+  // English on a first visit, always. Sniffing `navigator.language` meant a
+  // recruiter on a Spanish-configured machine landed on a section in Spanish
+  // while the rest of the site was in English, which reads as a bug rather than
+  // a courtesy. Choosing Spanish is one tap, and the choice is remembered.
+  return "en";
 }
 
 /** The active FUTBOARD language, its dictionary, and a toggle. */

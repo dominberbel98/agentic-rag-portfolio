@@ -68,6 +68,7 @@ export default function Chat() {
     const currentQuestion = raw.trim();
     setQuestion("");
     setLoading(true);
+    setShowContactForm(false);
     setMessages((prev) => [...prev, { role: "user", text: currentQuestion }]);
 
     const recentHistory = messages.slice(-20).map((m) => ({
@@ -319,9 +320,20 @@ export default function Chat() {
           onSubmit={sendContact}
           className="p-3 sm:p-6 bg-surface-container border-t border-[#00FF41]/10 space-y-3 shrink-0"
         >
-          <p className="text-[0.65rem] font-bold tracking-widest text-tertiary uppercase">
-            {tr.chat.contact.heading}
-          </p>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[0.65rem] font-bold tracking-widest text-tertiary uppercase">
+              {tr.chat.contact.heading}
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowContactForm(false)}
+              title={tr.chat.contact.dismiss}
+              aria-label={tr.chat.contact.dismiss}
+              className="shrink-0 w-8 h-8 flex items-center justify-center rounded text-[#00FF41]/70 hover:text-[#00FF41] hover:bg-[#00FF41]/10 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#00FF41]"
+            >
+              <span className="material-symbols-outlined text-[1.1rem]">close</span>
+            </button>
+          </div>
           {contactLinkedin && (
             <a
               href={contactLinkedin}
