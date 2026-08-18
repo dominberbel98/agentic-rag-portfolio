@@ -147,7 +147,16 @@ echo "Actualizando imagen backend en Azure Container Apps..."
 echo "Cargando credenciales como secrets de Container Apps..."
 SECRET_ARGS=()
 add_secret() {           # add_secret <secret-name> <value>
+  # The `return 0` is load-bearing. As a bare `[[ -n ... ]] && ...` list, this
+  # function returned 1 whenever the value was empty, and under `set -e` that
+  # killed the deploy on the spot — silently, because the test prints nothing.
+  # TURNSTILE_SECRET_KEY is deliberately empty (captcha is disabled), so every
+  # run died here: after building the image, pushing it to GHCR and pointing the
+  # registry at it, but before updating the container. The deploy looked like it
+  # had worked and the app kept serving the previous revision, which is how the
+  # live configuration and infra/aca/azure.env drifted apart.
   [[ -n "${2:-}" ]] && SECRET_ARGS+=("$1=$2")
+  return 0
 }
 add_secret openai-api-key "${OPENAI_API_KEY:-}"
 add_secret google-api-key "${GOOGLE_API_KEY:-}"
@@ -200,9 +209,12 @@ az containerapp update \
   --set-env-vars "${BACKEND_ENV_VARS[@]}"
 
 echo
+# An empty string is not a leaked credential. JMESPath treats '' as != null, so
+# the check flagged TURNSTILE_SECRET_KEY="" — left over from a deploy made while
+# captcha was still configured — and aborted before the frontend was published.
 echo "Comprobando que ninguna credencial quedó en texto plano..."
 LEAKED=$(az containerapp show --name "$AZ_BACKEND_APP" --resource-group "$AZ_RESOURCE_GROUP" \
-  --query "properties.template.containers[0].env[?value!=null && (contains(name,'KEY') || contains(name,'SECRET') || contains(name,'DATABASE_URL'))].name" \
+  --query "properties.template.containers[0].env[?value!=null && value!='' && (contains(name,'KEY') || contains(name,'SECRET') || contains(name,'DATABASE_URL'))].name" \
   --output tsv)
 if [[ -n "$LEAKED" ]]; then
   echo "ERROR: estas variables tienen valor en texto plano en lugar de secretref:"
