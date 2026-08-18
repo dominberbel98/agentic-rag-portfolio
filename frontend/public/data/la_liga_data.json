@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T23:49:48.013399+00:00",
+  "updatedAt": "2026-08-18T01:25:23.837401+00:00",
   "season": "2026",
   "matchday": 1,
   "seasonStart": "2026-08-16",
@@ -518,11 +518,18 @@
   ],
   "fixtures": [
     {
-      "id": "ppv-atl-tico-madrid-vs-m-laga",
+      "id": "atletico-madrid-vs-malaga-football-1570334",
       "homeName": "Atleti",
       "awayName": "Málaga",
       "kickoff": 1787166000000,
-      "title": "Atlético Madrid vs. Málaga"
+      "title": "Atletico Madrid vs Malaga"
+    },
+    {
+      "id": "atl-tico-madrid-vs-m-laga-2506170",
+      "homeName": "Atleti",
+      "awayName": "Málaga",
+      "kickoff": 1787166000000,
+      "title": "Atlético Madrid vs Málaga"
     },
     {
       "id": "ppv-rayo-vallecano-vs-alav-s",
