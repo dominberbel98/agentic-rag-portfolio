@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-18T23:49:59.130373+00:00",
+  "updatedAt": "2026-08-19T01:26:49.563056+00:00",
   "season": "2026",
   "matchday": 1,
   "seasonStart": "2026-08-16",
@@ -532,11 +532,18 @@
       "title": "Atlético Madrid vs Málaga"
     },
     {
-      "id": "ppv-rayo-vallecano-vs-alav-s",
+      "id": "rayo-vallecano-vs-alaves-football-1570351",
       "homeName": "Rayo Vallecano",
       "awayName": "Alavés",
       "kickoff": 1787252400000,
-      "title": "Rayo Vallecano vs. Alavés"
+      "title": "Rayo Vallecano vs Alaves"
+    },
+    {
+      "id": "rayo-vallecano-vs-deportivo-alav-s-2506187",
+      "homeName": "Rayo Vallecano",
+      "awayName": "Alavés",
+      "kickoff": 1787252400000,
+      "title": "Rayo Vallecano vs Deportivo Alavés"
     },
     {
       "id": "ppv-real-betis-vs-real-sociedad",
