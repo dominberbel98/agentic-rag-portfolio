@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-19T23:49:58.233155+00:00",
+  "updatedAt": "2026-08-20T01:26:20.787587+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -58,7 +58,7 @@
     {
       "position": 3,
       "playedGames": 1,
-      "form": "",
+      "form": "W",
       "won": 1,
       "draw": 0,
       "lost": 0,
@@ -373,7 +373,7 @@
     {
       "position": 18,
       "playedGames": 1,
-      "form": "",
+      "form": "L",
       "won": 0,
       "draw": 0,
       "lost": 1,
@@ -435,6 +435,22 @@
     }
   ],
   "results": [
+    {
+      "id": 564628,
+      "utcDate": "2026-08-19T19:00:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeId": 78,
+      "homeName": "Atleti",
+      "homeCrest": "https://sportsrc.org/img/score/78.png",
+      "awayId": 84,
+      "awayName": "Málaga",
+      "awayCrest": "https://sportsrc.org/img/score/84.png",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "winner": "HOME_TEAM",
+      "live": false
+    },
     {
       "id": 564635,
       "utcDate": "2026-08-17T19:00:00Z",
@@ -532,11 +548,11 @@
       "title": "Rayo Vallecano vs Deportivo Alavés"
     },
     {
-      "id": "ppv-real-betis-vs-real-sociedad",
+      "id": "real-betis-vs-real-sociedad-2506184",
       "homeName": "Real Betis",
       "awayName": "Real Sociedad",
       "kickoff": 1787338800000,
-      "title": "Real Betis vs. Real Sociedad"
+      "title": "Real Betis vs Real Sociedad"
     },
     {
       "id": "ppv-athletic-club-vs-sevilla",
