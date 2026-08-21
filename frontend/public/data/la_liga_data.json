@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T18:41:47.520070+00:00",
+  "updatedAt": "2026-08-21T19:29:13.471185+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -435,6 +435,22 @@
     }
   ],
   "results": [
+    {
+      "id": 564647,
+      "utcDate": "2026-08-21T19:00:00Z",
+      "status": "IN_PLAY",
+      "matchday": 2,
+      "homeId": 90,
+      "homeName": "Real Betis",
+      "homeCrest": "https://sportsrc.org/img/score/90.png",
+      "awayId": 92,
+      "awayName": "Real Sociedad",
+      "awayCrest": "https://sportsrc.org/img/score/92.png",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "winner": "DRAW",
+      "live": true
+    },
     {
       "id": 564638,
       "utcDate": "2026-08-20T19:00:00Z",
