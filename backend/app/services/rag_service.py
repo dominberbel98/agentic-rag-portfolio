@@ -146,10 +146,11 @@ class AgenticRAGService:
         top_k: int = 6,
         history: list[dict] | None = None,
         current_time: datetime | None = None,
+        language: str | None = None,
     ) -> ChatResponse:
         history = history or []
         now = current_time or datetime.now(timezone.utc)
-        language = detect_language(question, history)
+        language = resolve_language(question, history, language)
         logger.info("[ASK] q=%r lang=%s turns=%d", question[:120], language, len(history))
 
         fast_path = self._fast_path(question, language)
@@ -177,11 +178,16 @@ class AgenticRAGService:
         top_k: int = 6,
         history: list[dict] | None = None,
         current_time: datetime | None = None,
+        language: str | None = None,
     ) -> Generator[str, None, None]:
         """Yield SSE frames. The wire format is what Chat.jsx parses; do not change it."""
         history = history or []
         now = current_time or datetime.now(timezone.utc)
-        language = detect_language(question, history)
+        language = resolve_language(question, history, language)
+        # This log lives in `ask` too. Without it here the streaming path — the
+        # one the site actually uses — was undiagnosable: production had 35 chat
+        # requests and not one line saying which language was picked.
+        logger.info("[STREAM] q=%r lang=%s turns=%d", question[:120], language, len(history))
 
         fast_path = self._fast_path(question, language)
         if fast_path is not None:
@@ -373,45 +379,130 @@ def is_inappropriate(question: str) -> bool:
     return any(p in q for p in _INAPPROPRIATE)
 
 
-_ENGLISH_MARKERS = frozenset(
-    {"what", "which", "where", "when", "why", "how", "who", "your", "you", "are", "is",
-     "do", "does", "experience", "projects", "skills", "education", "career",
-     "background", "currently", "work", "worked", "english", "speak", "tell", "about",
-     "hello", "hi", "hey", "whats", "job", "role", "current", "the", "and", "his", "he"}
-)
-_SPANISH_MARKERS = frozenset(
-    {"que", "qué", "donde", "dónde", "cuando", "cuándo", "como", "cómo", "quien",
-     "quién", "trabaja", "experiencia", "proyectos", "habilidades", "formacion",
-     "formación", "trayectoria", "actualmente", "idiomas", "habla", "sobre", "su",
-     "es", "de", "en", "para", "cual", "cuál", "tiene", "sabe"}
-)
+# Function words, not topic words. A closed list of topic words ("experience",
+# "projects") only recognises the questions we thought of; function words are the
+# part of a sentence a writer cannot avoid, whatever they are asking about.
+#
+# Any token that exists in both languages is removed from both below: leaving it
+# in makes it cancel out on one side while inflating the other, which is how the
+# previous version scored "me" and "a" as Spanish evidence in English sentences.
+_EN_RAW = frozenset({
+    "a", "an", "the", "is", "are", "was", "were", "be", "been", "am",
+    "do", "does", "did", "can", "could", "would", "should", "will", "shall",
+    "has", "have", "had", "he", "his", "him", "she", "her", "they", "them",
+    "you", "your", "yours", "me", "my", "i", "we", "our", "it", "its",
+    "of", "in", "on", "at", "to", "for", "with", "from", "about", "into",
+    "and", "or", "but", "if", "than", "then", "there", "here",
+    "what", "which", "who", "whom", "whose", "where", "when", "why", "how",
+    "tell", "give", "show", "list", "any", "some", "more", "most", "much",
+    "many", "best", "also", "please", "not", "no", "yes", "so", "as", "that",
+    "this", "these", "those", "over", "under", "between", "during", "before",
+    "after", "again", "still", "just", "only", "very", "really",
+})
+_ES_RAW = frozenset({
+    "el", "la", "los", "las", "un", "una", "unos", "unas", "lo", "al", "del",
+    "de", "en", "con", "por", "para", "sin", "sobre", "entre", "hasta", "desde",
+    "que", "qué", "quien", "quién", "cual", "cuál", "cuando", "cuándo",
+    "donde", "dónde", "como", "cómo", "cuanto", "cuánto", "cuantos", "cuántos",
+    "es", "son", "esta", "está", "estan", "están", "ser", "estar", "fue",
+    "tiene", "tienen", "tuvo", "hay", "ha", "han", "hizo", "hace",
+    "su", "sus", "mi", "mis", "tu", "tus", "nos", "me", "te", "se", "le", "les",
+    "y", "o", "pero", "si", "no", "muy", "más", "menos", "también", "ademas",
+    "además", "trabaja", "trabajo", "estudia", "estudio", "habla", "sabe",
+    "dame", "cuentame", "cuéntame", "explica", "dime", "resumen",
+    "experiencia", "proyectos", "formacion", "formación", "trayectoria",
+    "actualmente", "idiomas", "empresa", "puesto", "perfil", "titulacion",
+    "titulación", "estudios", "conocimientos", "habilidades",
+})
+
+# A token that means something in both languages is evidence for neither.
+_AMBIGUOUS = _EN_RAW & _ES_RAW
+_ENGLISH_MARKERS = _EN_RAW - _AMBIGUOUS
+_SPANISH_MARKERS = _ES_RAW - _AMBIGUOUS
+
+# Morphology generalises where word lists do not: "certifications",
+# "expectations" and "qualifications" are recruiter vocabulary we never listed,
+# but the -tions ending is unmistakably English. Matched with endswith, so the
+# Spanish "-mente" does not register as the English "-ment".
+_EN_SUFFIXES = ("tion", "tions", "ment", "ments", "ness", "ship", "ing", "ly", "ies")
+_ES_SUFFIXES = ("ción", "ciones", "miento", "mientos", "mente", "ando", "endo",
+                "idad", "idades", "ancia", "encia")
+
+_ACCENTS = "áéíóúñü"
+_INVERTED = "¿¡"
+
+SUPPORTED_LANGUAGES = frozenset({"en", "es"})
+DEFAULT_LANGUAGE = "es"
+
+
+def _score(text: str) -> tuple[int, int]:
+    """Evidence for English and for Spanish, independently counted."""
+    lowered = text.lower()
+    tokens = re.findall(r"[a-z" + _ACCENTS + r"]+", lowered)
+
+    english = sum(1 for t in tokens if t in _ENGLISH_MARKERS)
+    spanish = sum(1 for t in tokens if t in _SPANISH_MARKERS)
+
+    english += sum(1 for t in tokens if len(t) > 4 and t.endswith(_EN_SUFFIXES))
+    spanish += sum(1 for t in tokens if len(t) > 4 and t.endswith(_ES_SUFFIXES))
+
+    # Accents are evidence, never a verdict. Domingo worked in Almería and
+    # studied in España; an English question naming those places is still
+    # English, and the old code answered every one of them in Spanish.
+    if any(ch in lowered for ch in _ACCENTS):
+        spanish += 1
+
+    return english, spanish
+
+
+def _verdict(text: str) -> str | None:
+    """The language this text argues for, or None when it argues for neither."""
+    if any(ch in text for ch in _INVERTED):
+        return "es"  # No English keyboard produces ¿ or ¡ by accident.
+    english, spanish = _score(text)
+    if english == spanish:
+        return None
+    return "en" if english > spanish else "es"
 
 
 def detect_language(question: str, history: list[dict] | None = None) -> str:
-    """Pick the answer language from the question.
+    """Infer the answer language from what the visitor wrote.
 
-    The corpus is English; the assistant answers in whatever the visitor wrote,
-    so a Spanish recruiter is not forced into English.
+    Used only when the caller did not state a language — see `resolve_language`.
+    The corpus is English; the assistant answers in whatever the visitor used, so
+    a Spanish recruiter is not forced into English.
     """
-    text = question.lower().strip()
-    if not text and history:
-        text = next(
-            (m.get("content", "") for m in reversed(history) if m.get("role") == "user"), ""
-        ).lower()
+    verdict = _verdict((question or "").strip())
+    if verdict is not None:
+        return verdict
 
-    normalized = text.replace("'", "").replace("?", " ").replace("!", " ").strip()
-    if normalized in {"hello", "hi", "hey"}:
-        return "en"
-    if normalized.startswith(("whats ", "what is ", "what's ", "who is ", "where is ", "how is ")):
-        return "en"
+    # The question carries no signal of its own ("Certifications?"). Stay in the
+    # language the conversation is already being held in, rather than flipping
+    # mid-thread, which is what visitors actually complained about.
+    for message in reversed(history or []):
+        if message.get("role") != "user":
+            continue
+        prior = _verdict((message.get("content") or "").strip())
+        if prior is not None:
+            return prior
 
-    # Spanish-only orthography is decisive.
-    if any(ch in text for ch in ("¿", "¡", "ñ", "á", "é", "í", "ó", "ú")):
-        return "es"
+    return DEFAULT_LANGUAGE
 
-    tokens = re.findall(r"[a-zA-Z]+", text)
-    if not tokens:
-        return "es"
-    english = sum(1 for t in tokens if t in _ENGLISH_MARKERS)
-    spanish = sum(1 for t in tokens if t in _SPANISH_MARKERS)
-    return "en" if english > spanish else "es"
+
+def resolve_language(
+    question: str,
+    history: list[dict] | None = None,
+    requested: str | None = None,
+) -> str:
+    """What the visitor chose beats what we would guess.
+
+    The frontend already knows the language — it has a switch and remembers the
+    choice — so for anyone using the site there is nothing to infer. `requested`
+    is client-supplied, so anything that is not a language we actually serve is
+    discarded rather than trusted.
+    """
+    if isinstance(requested, str):
+        candidate = requested.strip().lower()
+        if candidate in SUPPORTED_LANGUAGES:
+            return candidate
+    return detect_language(question, history)

@@ -20,6 +20,10 @@ class ChatRequest(BaseModel):
     top_k: int = Field(default=6, ge=1, le=50)
     captcha_token: str | None = Field(None, max_length=2048)
     history: list[HistoryMessage] = Field(default_factory=list, max_length=20)
+    # The site has a language switch and remembers the choice, so for a visitor
+    # there is nothing to infer. Optional, because direct API callers may omit
+    # it; anything unsupported is discarded rather than trusted.
+    language: str | None = Field(None, max_length=8)
 
 
 class Citation(BaseModel):

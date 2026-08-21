@@ -44,7 +44,9 @@ def chat(payload: ChatRequest, request: Request) -> ChatResponse:
 
     try:
         history = [{"role": m.role, "content": m.content} for m in payload.history]
-        response = rag_service.ask(payload.question, payload.top_k, history=history)
+        response = rag_service.ask(
+            payload.question, payload.top_k, history=history, language=payload.language
+        )
         analytics_store.increment_today_usage(estimated_tokens)
         analytics_store.log_question(
             client_ip=client_ip,
@@ -85,7 +87,9 @@ def chat_stream(payload: ChatRequest, request: Request):
         collected_tokens = []
         out_of_scope = False
         try:
-            for chunk in rag_service.ask_stream(payload.question, payload.top_k, history=history):
+            for chunk in rag_service.ask_stream(
+                payload.question, payload.top_k, history=history, language=payload.language
+            ):
                 yield chunk
                 # Parse SSE data lines to capture answer text
                 if chunk.startswith("data: "):

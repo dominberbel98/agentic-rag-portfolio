@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import { useT } from "../i18n";
+import { useLanguage, useT } from "../i18n";
 import { setTelemetry } from "../lib/telemetry";
 
 const API_URL =
@@ -32,6 +32,9 @@ function renderGreeting(tr) {
 
 export default function Chat() {
   const tr = useT();
+  // The visitor already chose a language with the switch; send it instead of
+  // making the backend infer it from the wording of each question.
+  const { language } = useLanguage();
   const [question, setQuestion] = useState("");
 
   // Warm-up: ping backend on mount so cold-start resolves while user reads
@@ -116,6 +119,7 @@ export default function Chat() {
           top_k: 10,
           captcha_token: captchaToken || null,
           history: recentHistory,
+          language,
         }),
       });
 
