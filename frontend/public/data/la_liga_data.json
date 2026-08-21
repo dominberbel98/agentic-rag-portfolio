@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T04:11:21.935172+00:00",
+  "updatedAt": "2026-08-21T05:06:06.038386+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -555,13 +555,6 @@
       "awayName": "Real Sociedad",
       "kickoff": 1787338800000,
       "title": "Real Betis vs Real Sociedad"
-    },
-    {
-      "id": "real-madrid-iii-vs-getafe-ii-football-1627020",
-      "homeName": "Real Madrid",
-      "awayName": "Getafe",
-      "kickoff": 1787400000000,
-      "title": "Real Madrid III vs Getafe II"
     },
     {
       "id": "athletic-bilbao-vs-sevilla-2506180",
