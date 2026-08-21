@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T23:54:28.701870+00:00",
+  "updatedAt": "2026-08-21T01:36:10.926736+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -16,7 +16,7 @@
     {
       "position": 1,
       "playedGames": 2,
-      "form": "W",
+      "form": "DW",
       "won": 1,
       "draw": 1,
       "lost": 0,
@@ -184,7 +184,7 @@
     {
       "position": 9,
       "playedGames": 2,
-      "form": "L",
+      "form": "DL",
       "won": 0,
       "draw": 1,
       "lost": 1,
@@ -438,7 +438,7 @@
     {
       "id": 564638,
       "utcDate": "2026-08-20T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 2,
       "homeId": 87,
       "homeName": "Rayo Vallecano",
@@ -447,9 +447,9 @@
       "awayName": "Alavés",
       "awayCrest": "https://sportsrc.org/img/score/263.png",
       "homeGoals": 1,
-      "awayGoals": 0,
-      "winner": "HOME_TEAM",
-      "live": true
+      "awayGoals": 1,
+      "winner": "DRAW",
+      "live": false
     },
     {
       "id": 564628,
@@ -550,13 +550,6 @@
   ],
   "fixtures": [
     {
-      "id": "rayo-vallecano-vs-deportivo-alav-s-2506187",
-      "homeName": "Rayo Vallecano",
-      "awayName": "Alavés",
-      "kickoff": 1787252400000,
-      "title": "Rayo Vallecano vs Deportivo Alavés"
-    },
-    {
       "id": "real-betis-vs-real-sociedad-2506184",
       "homeName": "Real Betis",
       "awayName": "Real Sociedad",
@@ -564,25 +557,32 @@
       "title": "Real Betis vs Real Sociedad"
     },
     {
-      "id": "ppv-athletic-club-vs-sevilla",
+      "id": "real-madrid-iii-vs-getafe-ii-football-1627020",
+      "homeName": "Real Madrid",
+      "awayName": "Getafe",
+      "kickoff": 1787400000000,
+      "title": "Real Madrid III vs Getafe II"
+    },
+    {
+      "id": "athletic-bilbao-vs-sevilla-2506180",
       "homeName": "Athletic",
       "awayName": "Sevilla FC",
       "kickoff": 1787410800000,
-      "title": "Athletic Club vs. Sevilla"
+      "title": "Athletic Bilbao vs Sevilla"
     },
     {
-      "id": "ppv-valencia-vs-celta-vigo",
+      "id": "valencia-vs-celta-vigo-2506181",
       "homeName": "Valencia",
       "awayName": "Celta",
       "kickoff": 1787419800000,
-      "title": "Valencia vs. Celta Vigo"
+      "title": "Valencia vs Celta Vigo"
     },
     {
-      "id": "ppv-espanyol-vs-real-madrid",
+      "id": "espanyol-vs-real-madrid-2506183",
       "homeName": "Espanyol",
       "awayName": "Real Madrid",
       "kickoff": 1787427000000,
-      "title": "Espanyol vs. Real Madrid"
+      "title": "Espanyol vs Real Madrid"
     },
     {
       "id": "ppv-atl-tico-madrid-vs-villarreal",
