@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T23:52:24.692264+00:00",
+  "updatedAt": "2026-08-22T01:25:30.449293+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -100,7 +100,7 @@
     {
       "position": 5,
       "playedGames": 1,
-      "form": "",
+      "form": "W",
       "won": 1,
       "draw": 0,
       "lost": 0,
@@ -352,7 +352,7 @@
     {
       "position": 17,
       "playedGames": 1,
-      "form": "",
+      "form": "L",
       "won": 0,
       "draw": 0,
       "lost": 1,
@@ -438,7 +438,7 @@
     {
       "id": 564647,
       "utcDate": "2026-08-21T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 2,
       "homeId": 90,
       "homeName": "Real Betis",
@@ -446,10 +446,10 @@
       "awayId": 92,
       "awayName": "Real Sociedad",
       "awayCrest": "https://sportsrc.org/img/score/92.png",
-      "homeGoals": 0,
+      "homeGoals": 1,
       "awayGoals": 0,
-      "winner": "DRAW",
-      "live": true
+      "winner": "HOME_TEAM",
+      "live": false
     },
     {
       "id": 564638,
@@ -587,25 +587,32 @@
       "title": "Espanyol vs Real Madrid"
     },
     {
-      "id": "ppv-atl-tico-madrid-vs-villarreal",
+      "id": "atletico-madrid-vs-villarreal-football-1570344",
       "homeName": "Atleti",
       "awayName": "Villarreal",
       "kickoff": 1787497200000,
-      "title": "Atlético Madrid vs. Villarreal"
+      "title": "Atletico Madrid vs Villarreal"
     },
     {
-      "id": "ppv-getafe-vs-racing-santander",
+      "id": "atl-tico-madrid-vs-villarreal-2506179",
+      "homeName": "Atleti",
+      "awayName": "Villarreal",
+      "kickoff": 1787497200000,
+      "title": "Atlético Madrid vs Villarreal"
+    },
+    {
+      "id": "getafe-vs-racing-de-santander-2506185",
       "homeName": "Getafe",
       "awayName": "Santander",
       "kickoff": 1787506200000,
-      "title": "Getafe vs. Racing Santander"
+      "title": "Getafe vs Racing de Santander"
     },
     {
-      "id": "ppv-elche-vs-barcelona",
+      "id": "elche-vs-barcelona-2506188",
       "homeName": "Elche",
       "awayName": "Barça",
       "kickoff": 1787513400000,
-      "title": "Elche vs. Barcelona"
+      "title": "Elche vs Barcelona"
     },
     {
       "id": "ppv-osasuna-vs-levante",
