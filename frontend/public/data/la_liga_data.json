@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T17:24:52.933650+00:00",
+  "updatedAt": "2026-08-22T17:49:14.965258+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -581,13 +581,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "athletic-bilbao-vs-sevilla-2506180",
-      "homeName": "Athletic",
-      "awayName": "Sevilla FC",
-      "kickoff": 1787410800000,
-      "title": "Athletic Bilbao vs Sevilla"
-    },
     {
       "id": "valencia-vs-celta-vigo-2506181",
       "homeName": "Valencia",
