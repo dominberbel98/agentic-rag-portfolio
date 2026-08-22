@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T18:36:40.443173+00:00",
+  "updatedAt": "2026-08-22T19:26:19.283903+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -438,7 +438,7 @@
     {
       "id": 564643,
       "utcDate": "2026-08-22T17:30:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": 2,
       "homeId": 95,
       "homeName": "Valencia",
