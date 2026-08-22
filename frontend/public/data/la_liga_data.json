@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T19:26:19.283903+00:00",
+  "updatedAt": "2026-08-22T19:48:16.643731+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -435,6 +435,22 @@
     }
   ],
   "results": [
+    {
+      "id": 564645,
+      "utcDate": "2026-08-22T19:30:00Z",
+      "status": "IN_PLAY",
+      "matchday": 2,
+      "homeId": 80,
+      "homeName": "Espanyol",
+      "homeCrest": "https://sportsrc.org/img/score/80.png",
+      "awayId": 86,
+      "awayName": "Real Madrid",
+      "awayCrest": "https://sportsrc.org/img/score/86.png",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "winner": "DRAW",
+      "live": true
+    },
     {
       "id": 564643,
       "utcDate": "2026-08-22T17:30:00Z",
