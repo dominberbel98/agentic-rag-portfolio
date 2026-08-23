@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23T17:25:15.063439+00:00",
+  "updatedAt": "2026-08-23T17:48:31.530889+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -629,13 +629,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "atl-tico-madrid-vs-villarreal-2506179",
-      "homeName": "Atleti",
-      "awayName": "Villarreal",
-      "kickoff": 1787497200000,
-      "title": "Atlético Madrid vs Villarreal"
-    },
     {
       "id": "getafe-vs-racing-de-santander-2506185",
       "homeName": "Getafe",
