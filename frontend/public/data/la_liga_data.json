@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24T23:50:48.945845+00:00",
+  "updatedAt": "2026-08-25T01:27:11.320768+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -205,7 +205,7 @@
     {
       "position": 10,
       "playedGames": 2,
-      "form": "D",
+      "form": "DD",
       "won": 0,
       "draw": 2,
       "lost": 0,
@@ -226,7 +226,7 @@
     {
       "position": 11,
       "playedGames": 1,
-      "form": "",
+      "form": "D",
       "won": 0,
       "draw": 1,
       "lost": 0,
@@ -331,7 +331,7 @@
     {
       "position": 16,
       "playedGames": 2,
-      "form": "L",
+      "form": "DL",
       "won": 0,
       "draw": 1,
       "lost": 1,
@@ -352,7 +352,7 @@
     {
       "position": 17,
       "playedGames": 2,
-      "form": "L",
+      "form": "DL",
       "won": 0,
       "draw": 1,
       "lost": 1,
@@ -438,7 +438,7 @@
     {
       "id": 564640,
       "utcDate": "2026-08-24T19:30:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 2,
       "homeId": 84,
       "homeName": "Málaga",
@@ -449,12 +449,12 @@
       "homeGoals": 1,
       "awayGoals": 1,
       "winner": "DRAW",
-      "live": true
+      "live": false
     },
     {
       "id": 564639,
       "utcDate": "2026-08-24T17:30:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 2,
       "homeId": 79,
       "homeName": "Osasuna",
@@ -465,7 +465,7 @@
       "homeGoals": 0,
       "awayGoals": 0,
       "winner": "DRAW",
-      "live": true
+      "live": false
     },
     {
       "id": 564642,
@@ -694,13 +694,6 @@
   ],
   "fixtures": [
     {
-      "id": "m-laga-vs-deportivo-de-a-coru-a-2506182",
-      "homeName": "Málaga",
-      "awayName": "Deportivo",
-      "kickoff": 1787599800000,
-      "title": "Málaga vs Deportivo de A Coruña"
-    },
-    {
       "id": "valencia-vs-real-betis-2506171",
       "homeName": "Valencia",
       "awayName": "Real Betis",
@@ -708,11 +701,11 @@
       "title": "Valencia vs Real Betis"
     },
     {
-      "id": "ppv-real-madrid-vs-real-sociedad",
+      "id": "real-madrid-vs-real-sociedad-2506175",
       "homeName": "Real Madrid",
       "awayName": "Real Sociedad",
       "kickoff": 1787770800000,
-      "title": "Real Madrid vs. Real Sociedad"
+      "title": "Real Madrid vs Real Sociedad"
     },
     {
       "id": "ppv-celta-vigo-vs-osasuna",
