@@ -339,7 +339,7 @@ projects:
       - BM25
       - SQLite
       - Nginx
-    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    repo: https://github.com/dominberbel98/domingoberbel.com
     live_url: https://domingoberbel.com
 
   - id: tfm-tourism-recommender
@@ -404,7 +404,7 @@ projects:
       - GitHub Actions
       - React
       - Recharts
-    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    repo: https://github.com/dominberbel98/domingoberbel.com
     live_url: https://domingoberbel.com
 
   - id: credit-scoring
@@ -444,7 +444,7 @@ projects:
       - NumPy
       - React
       - Recharts
-    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    repo: https://github.com/dominberbel98/domingoberbel.com
     live_url: https://domingoberbel.com
 
   - id: product-recommender
@@ -482,7 +482,7 @@ projects:
       - TF-IDF
       - React
       - Recharts
-    repo: https://github.com/dominberbel98/agentic-rag-portfolio
+    repo: https://github.com/dominberbel98/domingoberbel.com
     live_url: https://domingoberbel.com
 
   - id: ocr-suministros

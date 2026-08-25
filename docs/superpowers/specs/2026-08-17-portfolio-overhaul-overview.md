@@ -5,7 +5,7 @@
 
 ## Context
 
-`agentic-rag-portfolio` is a personal portfolio site: a React frontend on Azure
+`domingoberbel.com` is a personal portfolio site: a React frontend on Azure
 Static Web Apps, a FastAPI RAG backend on Azure Container Apps, and a scheduled
 GitHub Actions job that publishes La Liga data as static JSON.
 

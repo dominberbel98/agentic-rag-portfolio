@@ -55,7 +55,7 @@ _MINIMAL = {
             "approach": "Retrieval over a structured profile, with an agentic loop.",
             "stack": ["Python", "Power BI"],
             "outcome": "Deployed and serving live traffic.",
-            "repo": "https://github.com/dominberbel98/agentic-rag-portfolio",
+            "repo": "https://github.com/dominberbel98/domingoberbel.com",
             "live_url": "https://domingoberbel.com",
         }
     ],
