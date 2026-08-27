@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T00:34:47.970326+00:00",
+  "updatedAt": "2026-08-27T11:02:26.619468+00:00",
   "season": "2026",
   "matchday": 2,
   "seasonStart": "2026-08-16",
@@ -446,7 +446,7 @@
       "awayId": 92,
       "awayName": "Real Sociedad",
       "awayCrest": "https://sportsrc.org/img/score/92.png",
-      "homeGoals": 5,
+      "homeGoals": 4,
       "awayGoals": 1,
       "winner": "HOME_TEAM",
       "live": false
