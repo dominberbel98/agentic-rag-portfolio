@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T21:07:21.728199+00:00",
+  "updatedAt": "2026-08-28T05:34:08.353677+00:00",
   "season": "2026",
   "matchday": 3,
   "seasonStart": "2026-08-16",
@@ -21,9 +21,9 @@
       "draw": 0,
       "lost": 0,
       "points": 6,
-      "goalsFor": 6,
+      "goalsFor": 7,
       "goalsAgainst": 0,
-      "goalDifference": 6,
+      "goalDifference": 7,
       "teamId": 81,
       "teamName": "FC Barcelona",
       "teamShortName": "Barça",
@@ -400,8 +400,8 @@
       "lost": 2,
       "points": 0,
       "goalsFor": 1,
-      "goalsAgainst": 4,
-      "goalDifference": -3,
+      "goalsAgainst": 5,
+      "goalDifference": -4,
       "teamId": 77,
       "teamName": "Athletic Club",
       "teamShortName": "Athletic",
@@ -427,7 +427,7 @@
       "teamName": "Real Sociedad de Fútbol",
       "teamShortName": "Real Sociedad",
       "teamCrest": "https://sportsrc.org/img/score/92.png",
-      "apiPosition": 20,
+      "apiPosition": 19,
       "zone": "relegation",
       "winRate": 0.0,
       "drawRate": 0.0,
@@ -742,20 +742,6 @@
   ],
   "fixtures": [
     {
-      "id": "celta-vigo-vs-osasuna-2506173",
-      "homeName": "Celta",
-      "awayName": "Osasuna",
-      "kickoff": 1787855400000,
-      "title": "Celta Vigo vs Osasuna"
-    },
-    {
-      "id": "barcelona-vs-athletic-bilbao-2506169",
-      "homeName": "Barça",
-      "awayName": "Athletic",
-      "kickoff": 1787857200000,
-      "title": "Barcelona vs Athletic Bilbao"
-    },
-    {
       "id": "racing-de-santander-vs-elche-2506198",
       "homeName": "Santander",
       "awayName": "Elche",
@@ -777,25 +763,32 @@
       "title": "Deportivo Alavés vs Villarreal"
     },
     {
-      "id": "ppv-levante-vs-real-betis",
+      "id": "levante-vs-real-betis-2506192",
       "homeName": "Levante",
       "awayName": "Real Betis",
       "kickoff": 1788015600000,
-      "title": "Levante vs. Real Betis"
+      "title": "Levante vs Real Betis"
     },
     {
-      "id": "ppv-real-sociedad-vs-espanyol",
+      "id": "real-sociedad-vs-espanyol-2506196",
       "homeName": "Real Sociedad",
       "awayName": "Espanyol",
       "kickoff": 1788022800000,
-      "title": "Real Sociedad vs. Espanyol"
+      "title": "Real Sociedad vs Espanyol"
     },
     {
-      "id": "ppv-sevilla-vs-atl-tico-madrid",
+      "id": "sevilla-vs-atletico-madrid-football-1570362",
       "homeName": "Sevilla FC",
       "awayName": "Atleti",
       "kickoff": 1788031800000,
-      "title": "Sevilla vs. Atlético Madrid"
+      "title": "Sevilla vs Atletico Madrid"
+    },
+    {
+      "id": "sevilla-vs-atl-tico-madrid-2506190",
+      "homeName": "Sevilla FC",
+      "awayName": "Atleti",
+      "kickoff": 1788031800000,
+      "title": "Sevilla vs Atlético Madrid"
     },
     {
       "id": "ppv-real-madrid-vs-m-laga",
