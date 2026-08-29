@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-29T20:42:21.824816+00:00",
+  "updatedAt": "2026-08-29T23:07:53.701945+00:00",
   "season": "2026",
   "matchday": 3,
   "seasonStart": "2026-08-16",
@@ -21,8 +21,8 @@
       "draw": 1,
       "lost": 0,
       "points": 7,
-      "goalsFor": 6,
-      "goalsAgainst": 2,
+      "goalsFor": 7,
+      "goalsAgainst": 3,
       "goalDifference": 4,
       "teamId": 78,
       "teamName": "Club Atlético de Madrid",
@@ -105,8 +105,8 @@
       "draw": 0,
       "lost": 1,
       "points": 6,
-      "goalsFor": 5,
-      "goalsAgainst": 4,
+      "goalsFor": 6,
+      "goalsAgainst": 5,
       "goalDifference": 1,
       "teamId": 559,
       "teamName": "Sevilla FC",
@@ -821,20 +821,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "sevilla-vs-atletico-madrid-football-1570362",
-      "homeName": "Sevilla FC",
-      "awayName": "Atleti",
-      "kickoff": 1788031800000,
-      "title": "Sevilla vs Atletico Madrid"
-    },
-    {
-      "id": "sevilla-vs-atl-tico-madrid-2506190",
-      "homeName": "Sevilla FC",
-      "awayName": "Atleti",
-      "kickoff": 1788031800000,
-      "title": "Sevilla vs Atlético Madrid"
-    },
     {
       "id": "real-madrid-vs-m-laga-2506193",
       "homeName": "Real Madrid",
