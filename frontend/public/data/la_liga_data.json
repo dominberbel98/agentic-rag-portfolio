@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T13:56:57.574085+00:00",
+  "updatedAt": "2026-08-30T18:00:45.384749+00:00",
   "season": "2026",
   "matchday": 3,
   "seasonStart": "2026-08-16",
@@ -7,7 +7,7 @@
   "state": {
     "phase": "in_progress",
     "matchday": 3,
-    "matchesPlayed": 25,
+    "matchesPlayed": 26,
     "maxGamesPlayed": 3,
     "totalMatchdays": 38,
     "lowConfidence": true
@@ -15,6 +15,27 @@
   "standings": [
     {
       "position": 1,
+      "playedGames": 3,
+      "form": "WW",
+      "won": 3,
+      "draw": 0,
+      "lost": 0,
+      "points": 9,
+      "goalsFor": 9,
+      "goalsAgainst": 2,
+      "goalDifference": 7,
+      "teamId": 86,
+      "teamName": "Real Madrid CF",
+      "teamShortName": "Real Madrid",
+      "teamCrest": "https://sportsrc.org/img/score/86.png",
+      "apiPosition": 1,
+      "zone": "champions",
+      "winRate": 100.0,
+      "drawRate": 0.0,
+      "lossRate": 0.0
+    },
+    {
+      "position": 2,
       "playedGames": 3,
       "form": "WDW",
       "won": 2,
@@ -28,14 +49,14 @@
       "teamName": "Club Atlético de Madrid",
       "teamShortName": "Atleti",
       "teamCrest": "https://sportsrc.org/img/score/78.png",
-      "apiPosition": 1,
+      "apiPosition": 2,
       "zone": "champions",
       "winRate": 66.7,
       "drawRate": 33.3,
       "lossRate": 0.0
     },
     {
-      "position": 2,
+      "position": 3,
       "playedGames": 3,
       "form": "WDW",
       "won": 2,
@@ -49,14 +70,14 @@
       "teamName": "Deportivo Alavés",
       "teamShortName": "Alavés",
       "teamCrest": "https://sportsrc.org/img/score/263.png",
-      "apiPosition": 2,
+      "apiPosition": 3,
       "zone": "champions",
       "winRate": 66.7,
       "drawRate": 33.3,
       "lossRate": 0.0
     },
     {
-      "position": 3,
+      "position": 4,
       "playedGames": 2,
       "form": "WW",
       "won": 2,
@@ -70,27 +91,6 @@
       "teamName": "FC Barcelona",
       "teamShortName": "Barça",
       "teamCrest": "https://sportsrc.org/img/score/81.png",
-      "apiPosition": 3,
-      "zone": "champions",
-      "winRate": 100.0,
-      "drawRate": 0.0,
-      "lossRate": 0.0
-    },
-    {
-      "position": 4,
-      "playedGames": 2,
-      "form": "WW",
-      "won": 2,
-      "draw": 0,
-      "lost": 0,
-      "points": 6,
-      "goalsFor": 6,
-      "goalsAgainst": 2,
-      "goalDifference": 4,
-      "teamId": 86,
-      "teamName": "Real Madrid CF",
-      "teamShortName": "Real Madrid",
-      "teamCrest": "https://sportsrc.org/img/score/86.png",
       "apiPosition": 4,
       "zone": "champions",
       "winRate": 100.0,
@@ -372,15 +372,15 @@
     },
     {
       "position": 18,
-      "playedGames": 2,
+      "playedGames": 3,
       "form": "DL",
       "won": 0,
       "draw": 1,
-      "lost": 1,
+      "lost": 2,
       "points": 1,
       "goalsFor": 1,
-      "goalsAgainst": 3,
-      "goalDifference": -2,
+      "goalsAgainst": 6,
+      "goalDifference": -5,
       "teamId": 84,
       "teamName": "Málaga CF",
       "teamShortName": "Málaga",
@@ -388,8 +388,8 @@
       "apiPosition": 18,
       "zone": "relegation",
       "winRate": 0.0,
-      "drawRate": 50.0,
-      "lossRate": 50.0
+      "drawRate": 33.3,
+      "lossRate": 66.7
     },
     {
       "position": 19,
@@ -837,13 +837,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "real-madrid-vs-m-laga-2506193",
-      "homeName": "Real Madrid",
-      "awayName": "Málaga",
-      "kickoff": 1788102000000,
-      "title": "Real Madrid vs Málaga"
-    },
     {
       "id": "deportivo-de-a-coru-a-vs-valencia-2506195",
       "homeName": "Deportivo",
