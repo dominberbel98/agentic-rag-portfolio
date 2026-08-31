@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T23:24:45.676315+00:00",
+  "updatedAt": "2026-08-31T01:32:04.176743+00:00",
   "season": "2026",
   "matchday": 3,
   "seasonStart": "2026-08-16",
@@ -16,7 +16,7 @@
     {
       "position": 1,
       "playedGames": 3,
-      "form": "WW",
+      "form": "WWW",
       "won": 3,
       "draw": 0,
       "lost": 0,
@@ -415,7 +415,7 @@
     {
       "position": 20,
       "playedGames": 3,
-      "form": "DL",
+      "form": "LDL",
       "won": 0,
       "draw": 1,
       "lost": 2,
@@ -466,6 +466,22 @@
       "awayGoals": 1,
       "winner": "HOME_TEAM",
       "live": true
+    },
+    {
+      "id": 564656,
+      "utcDate": "2026-08-30T15:00:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeId": 86,
+      "homeName": "Real Madrid",
+      "homeCrest": "https://sportsrc.org/img/score/86.png",
+      "awayId": 84,
+      "awayName": "Málaga",
+      "awayCrest": "https://sportsrc.org/img/score/84.png",
+      "homeGoals": 4,
+      "awayGoals": 0,
+      "winner": "HOME_TEAM",
+      "live": false
     },
     {
       "id": 564649,
