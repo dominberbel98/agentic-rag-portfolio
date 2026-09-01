@@ -45,6 +45,3 @@ data/kb/
 embeddings_cache.previous.json
 backend/embeddings_cache.previous.json
 backend/vocabulary.json
-
-# Visual brainstorming companion (superpowers)
-.superpowers/
