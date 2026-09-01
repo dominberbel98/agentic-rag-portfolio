@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T01:07:14.882753+00:00",
+  "updatedAt": "2026-09-01T06:40:37.641305+00:00",
   "season": "2026",
   "matchday": 3,
   "seasonStart": "2026-08-16",
@@ -16,7 +16,7 @@
     {
       "position": 1,
       "playedGames": 3,
-      "form": "WW",
+      "form": "WWW",
       "won": 3,
       "draw": 0,
       "lost": 0,
@@ -100,7 +100,7 @@
     {
       "position": 5,
       "playedGames": 3,
-      "form": "WD",
+      "form": "WWD",
       "won": 2,
       "draw": 1,
       "lost": 0,
@@ -289,7 +289,7 @@
     {
       "position": 14,
       "playedGames": 3,
-      "form": "WL",
+      "form": "LWL",
       "won": 1,
       "draw": 0,
       "lost": 2,
@@ -373,7 +373,7 @@
     {
       "position": 18,
       "playedGames": 3,
-      "form": "DL",
+      "form": "LDL",
       "won": 0,
       "draw": 1,
       "lost": 2,
@@ -438,7 +438,7 @@
     {
       "id": 564650,
       "utcDate": "2026-08-31T19:30:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 3,
       "homeId": 81,
       "homeName": "Barça",
@@ -446,10 +446,26 @@
       "awayId": 87,
       "awayName": "Rayo Vallecano",
       "awayCrest": "https://sportsrc.org/img/score/87.png",
-      "homeGoals": 4,
+      "homeGoals": 5,
       "awayGoals": 2,
       "winner": "HOME_TEAM",
-      "live": true
+      "live": false
+    },
+    {
+      "id": 564657,
+      "utcDate": "2026-08-31T17:30:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeId": 79,
+      "homeName": "Osasuna",
+      "homeCrest": "https://sportsrc.org/img/score/79.png",
+      "awayId": 82,
+      "awayName": "Getafe",
+      "awayCrest": "https://sportsrc.org/img/score/82.png",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "winner": "HOME_TEAM",
+      "live": false
     },
     {
       "id": 564652,
@@ -901,13 +917,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "barcelona-vs-rayo-vallecano-2506189",
-      "homeName": "Barça",
-      "awayName": "Rayo Vallecano",
-      "kickoff": 1788204600000,
-      "title": "Barcelona vs Rayo Vallecano"
-    },
     {
       "id": "ppv-real-sociedad-vs-celta-vigo",
       "homeName": "Real Sociedad",
