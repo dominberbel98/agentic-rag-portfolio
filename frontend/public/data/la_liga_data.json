@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T19:48:24.088629+00:00",
+  "updatedAt": "2026-09-01T22:29:42.050647+00:00",
   "season": "2026",
   "matchday": 3,
   "seasonStart": "2026-08-16",
@@ -960,18 +960,18 @@
       "title": "Valencia vs. Barcelona"
     },
     {
-      "id": "ppv-alav-s-vs-osasuna",
-      "homeName": "Alavés",
-      "awayName": "Osasuna",
-      "kickoff": 1788712200000,
-      "title": "Alavés vs. Osasuna"
-    },
-    {
       "id": "ppv-m-laga-vs-levante",
       "homeName": "Málaga",
       "awayName": "Levante",
       "kickoff": 1788712200000,
       "title": "Málaga vs. Levante"
+    },
+    {
+      "id": "ppv-alav-s-vs-osasuna",
+      "homeName": "Alavés",
+      "awayName": "Osasuna",
+      "kickoff": 1788712200000,
+      "title": "Alavés vs. Osasuna"
     },
     {
       "id": "ppv-espanyol-vs-sevilla",
