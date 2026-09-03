@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-03T16:06:47.547961+00:00",
+  "updatedAt": "2026-09-03T19:23:40.738724+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -435,6 +435,22 @@
     }
   ],
   "results": [
+    {
+      "id": 564682,
+      "utcDate": "2026-09-03T19:00:00Z",
+      "status": "IN_PLAY",
+      "matchday": 6,
+      "homeId": 92,
+      "homeName": "Real Sociedad",
+      "homeCrest": "https://sportsrc.org/img/score/92.png",
+      "awayId": 558,
+      "awayName": "Celta",
+      "awayCrest": "https://sportsrc.org/img/score/558.png",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "winner": "DRAW",
+      "live": true
+    },
     {
       "id": 564650,
       "utcDate": "2026-08-31T19:30:00Z",
@@ -960,18 +976,18 @@
       "title": "Valencia vs. Barcelona"
     },
     {
-      "id": "ppv-m-laga-vs-levante",
-      "homeName": "Málaga",
-      "awayName": "Levante",
-      "kickoff": 1788712200000,
-      "title": "Málaga vs. Levante"
-    },
-    {
       "id": "ppv-alav-s-vs-osasuna",
       "homeName": "Alavés",
       "awayName": "Osasuna",
       "kickoff": 1788712200000,
       "title": "Alavés vs. Osasuna"
+    },
+    {
+      "id": "ppv-m-laga-vs-levante",
+      "homeName": "Málaga",
+      "awayName": "Levante",
+      "kickoff": 1788712200000,
+      "title": "Málaga vs. Levante"
     },
     {
       "id": "ppv-espanyol-vs-sevilla",
