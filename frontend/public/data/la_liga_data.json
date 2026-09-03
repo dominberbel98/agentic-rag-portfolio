@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T23:10:00.075694+00:00",
+  "updatedAt": "2026-09-03T01:21:39.964351+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -925,11 +925,11 @@
       "title": "Real Sociedad vs Celta Vigo"
     },
     {
-      "id": "ppv-real-betis-vs-real-madrid",
+      "id": "real-betis-vs-real-madrid-2506205",
       "homeName": "Real Betis",
       "awayName": "Real Madrid",
       "kickoff": 1788548400000,
-      "title": "Real Betis vs. Real Madrid"
+      "title": "Real Betis vs Real Madrid"
     },
     {
       "id": "ppv-athletic-club-vs-atl-tico-madrid",
@@ -960,18 +960,18 @@
       "title": "Valencia vs. Barcelona"
     },
     {
-      "id": "ppv-alav-s-vs-osasuna",
-      "homeName": "Alavés",
-      "awayName": "Osasuna",
-      "kickoff": 1788712200000,
-      "title": "Alavés vs. Osasuna"
-    },
-    {
       "id": "ppv-m-laga-vs-levante",
       "homeName": "Málaga",
       "awayName": "Levante",
       "kickoff": 1788712200000,
       "title": "Málaga vs. Levante"
+    },
+    {
+      "id": "ppv-alav-s-vs-osasuna",
+      "homeName": "Alavés",
+      "awayName": "Osasuna",
+      "kickoff": 1788712200000,
+      "title": "Alavés vs. Osasuna"
     },
     {
       "id": "ppv-espanyol-vs-sevilla",
