@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-03T21:51:49.074756+00:00",
+  "updatedAt": "2026-09-03T23:53:05.908090+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -933,13 +933,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "real-sociedad-vs-celta-vigo-2506226",
-      "homeName": "Real Sociedad",
-      "awayName": "Celta",
-      "kickoff": 1788462000000,
-      "title": "Real Sociedad vs Celta Vigo"
-    },
     {
       "id": "real-betis-vs-real-madrid-2506205",
       "homeName": "Real Betis",
