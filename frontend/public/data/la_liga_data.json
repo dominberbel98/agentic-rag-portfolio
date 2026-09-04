@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T21:44:27.200732+00:00",
+  "updatedAt": "2026-09-04T23:50:30.856446+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -949,13 +949,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "real-betis-vs-real-madrid-2506205",
-      "homeName": "Real Betis",
-      "awayName": "Real Madrid",
-      "kickoff": 1788548400000,
-      "title": "Real Betis vs Real Madrid"
-    },
     {
       "id": "athletic-club-vs-atletico-madrid-football-1570364",
       "homeName": "Athletic",
