@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T23:50:30.856446+00:00",
+  "updatedAt": "2026-09-05T03:43:56.717601+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -37,7 +37,7 @@
     {
       "position": 2,
       "playedGames": 4,
-      "form": "WWW",
+      "form": "LWWW",
       "won": 3,
       "draw": 0,
       "lost": 1,
@@ -58,7 +58,7 @@
     {
       "position": 3,
       "playedGames": 4,
-      "form": "LWW",
+      "form": "WLWW",
       "won": 3,
       "draw": 0,
       "lost": 1,
@@ -438,7 +438,7 @@
     {
       "id": 564667,
       "utcDate": "2026-09-04T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 4,
       "homeId": 90,
       "homeName": "Real Betis",
@@ -446,10 +446,10 @@
       "awayId": 86,
       "awayName": "Real Madrid",
       "awayCrest": "https://sportsrc.org/img/score/86.png",
-      "homeGoals": 0,
+      "homeGoals": 1,
       "awayGoals": 0,
-      "winner": "DRAW",
-      "live": true
+      "winner": "HOME_TEAM",
+      "live": false
     },
     {
       "id": 564682,
@@ -978,32 +978,46 @@
       "title": "Villarreal vs Deportivo de A Coruña"
     },
     {
-      "id": "ppv-valencia-vs-barcelona",
+      "id": "valencia-vs-barcelona-2506200",
       "homeName": "Valencia",
       "awayName": "Barça",
       "kickoff": 1788704100000,
-      "title": "Valencia vs. Barcelona"
+      "title": "Valencia vs Barcelona"
     },
     {
-      "id": "ppv-m-laga-vs-levante",
-      "homeName": "Málaga",
-      "awayName": "Levante",
-      "kickoff": 1788712200000,
-      "title": "Málaga vs. Levante"
-    },
-    {
-      "id": "ppv-alav-s-vs-osasuna",
+      "id": "alaves-vs-osasuna-football-1570363",
       "homeName": "Alavés",
       "awayName": "Osasuna",
       "kickoff": 1788712200000,
-      "title": "Alavés vs. Osasuna"
+      "title": "Alaves vs Osasuna"
     },
     {
-      "id": "ppv-espanyol-vs-sevilla",
+      "id": "malaga-vs-levante-football-1570369",
+      "homeName": "Málaga",
+      "awayName": "Levante",
+      "kickoff": 1788712200000,
+      "title": "Malaga vs Levante"
+    },
+    {
+      "id": "deportivo-alav-s-vs-osasuna-2506204",
+      "homeName": "Alavés",
+      "awayName": "Osasuna",
+      "kickoff": 1788712200000,
+      "title": "Deportivo Alavés vs Osasuna"
+    },
+    {
+      "id": "m-laga-vs-levante-2506202",
+      "homeName": "Málaga",
+      "awayName": "Levante",
+      "kickoff": 1788712200000,
+      "title": "Málaga vs Levante"
+    },
+    {
+      "id": "espanyol-vs-sevilla-2506203",
       "homeName": "Espanyol",
       "awayName": "Sevilla FC",
       "kickoff": 1788721200000,
-      "title": "Espanyol vs. Sevilla"
+      "title": "Espanyol vs Sevilla"
     },
     {
       "id": "ppv-getafe-vs-celta-vigo",
