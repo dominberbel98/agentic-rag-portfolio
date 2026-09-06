@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-05T23:40:02.144550+00:00",
+  "updatedAt": "2026-09-06T03:46:43.808827+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -79,7 +79,7 @@
     {
       "position": 4,
       "playedGames": 4,
-      "form": "WDD",
+      "form": "WWDD",
       "won": 2,
       "draw": 2,
       "lost": 0,
@@ -142,7 +142,7 @@
     {
       "position": 7,
       "playedGames": 4,
-      "form": "WDW",
+      "form": "LWDW",
       "won": 2,
       "draw": 1,
       "lost": 1,
@@ -163,7 +163,7 @@
     {
       "position": 8,
       "playedGames": 4,
-      "form": "WLL",
+      "form": "WWLL",
       "won": 2,
       "draw": 0,
       "lost": 2,
@@ -226,7 +226,7 @@
     {
       "position": 11,
       "playedGames": 4,
-      "form": "WLD",
+      "form": "LWLD",
       "won": 1,
       "draw": 1,
       "lost": 2,
@@ -247,7 +247,7 @@
     {
       "position": 12,
       "playedGames": 4,
-      "form": "LDL",
+      "form": "WLDL",
       "won": 1,
       "draw": 1,
       "lost": 2,
@@ -331,7 +331,7 @@
     {
       "position": 16,
       "playedGames": 4,
-      "form": "LDD",
+      "form": "LLDD",
       "won": 0,
       "draw": 2,
       "lost": 2,
@@ -438,7 +438,7 @@
     {
       "id": 564662,
       "utcDate": "2026-09-05T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 4,
       "homeId": 94,
       "homeName": "Villarreal",
@@ -446,15 +446,15 @@
       "awayId": 560,
       "awayName": "Deportivo",
       "awayCrest": "https://sportsrc.org/img/score/560.png",
-      "homeGoals": 0,
-      "awayGoals": 0,
-      "winner": "DRAW",
-      "live": true
+      "homeGoals": 2,
+      "awayGoals": 3,
+      "winner": "AWAY_TEAM",
+      "live": false
     },
     {
       "id": 564660,
       "utcDate": "2026-09-05T16:30:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 4,
       "homeId": 87,
       "homeName": "Rayo Vallecano",
@@ -462,15 +462,15 @@
       "awayId": 5335,
       "awayName": "Santander",
       "awayCrest": "https://sportsrc.org/img/score/5335.png",
-      "homeGoals": 2,
+      "homeGoals": 3,
       "awayGoals": 2,
-      "winner": "DRAW",
-      "live": true
+      "winner": "HOME_TEAM",
+      "live": false
     },
     {
       "id": 564663,
       "utcDate": "2026-09-05T14:15:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 4,
       "homeId": 77,
       "homeName": "Athletic",
@@ -478,10 +478,10 @@
       "awayId": 78,
       "awayName": "Atleti",
       "awayCrest": "https://sportsrc.org/img/score/78.png",
-      "homeGoals": 0,
+      "homeGoals": 3,
       "awayGoals": 0,
-      "winner": "DRAW",
-      "live": true
+      "winner": "HOME_TEAM",
+      "live": false
     },
     {
       "id": 564667,
@@ -1040,18 +1040,18 @@
       "title": "Espanyol vs Sevilla"
     },
     {
-      "id": "ppv-getafe-vs-celta-vigo",
+      "id": "getafe-vs-celta-vigo-2506206",
       "homeName": "Getafe",
       "awayName": "Celta",
       "kickoff": 1788800400000,
-      "title": "Getafe vs. Celta Vigo"
+      "title": "Getafe vs Celta Vigo"
     },
     {
-      "id": "ppv-elche-vs-real-sociedad",
+      "id": "elche-vs-real-sociedad-2506208",
       "homeName": "Elche",
       "awayName": "Real Sociedad",
       "kickoff": 1788809400000,
-      "title": "Elche vs. Real Sociedad"
+      "title": "Elche vs Real Sociedad"
     }
   ]
 }
