@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T08:30:44.302054+00:00",
+  "updatedAt": "2026-09-06T12:19:48.206233+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -1005,18 +1005,18 @@
       "title": "Valencia vs Barcelona"
     },
     {
-      "id": "malaga-vs-levante-football-1570369",
-      "homeName": "Málaga",
-      "awayName": "Levante",
-      "kickoff": 1788712200000,
-      "title": "Malaga vs Levante"
-    },
-    {
       "id": "alaves-vs-osasuna-football-1570363",
       "homeName": "Alavés",
       "awayName": "Osasuna",
       "kickoff": 1788712200000,
       "title": "Alaves vs Osasuna"
+    },
+    {
+      "id": "malaga-vs-levante-football-1570369",
+      "homeName": "Málaga",
+      "awayName": "Levante",
+      "kickoff": 1788712200000,
+      "title": "Malaga vs Levante"
     },
     {
       "id": "deportivo-alav-s-vs-osasuna-2506204",
