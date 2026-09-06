@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T12:19:48.206233+00:00",
+  "updatedAt": "2026-09-06T15:41:46.408472+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -7,7 +7,7 @@
   "state": {
     "phase": "in_progress",
     "matchday": 6,
-    "matchesPlayed": 35,
+    "matchesPlayed": 36,
     "maxGamesPlayed": 4,
     "totalMatchdays": 38,
     "lowConfidence": true
@@ -15,15 +15,15 @@
   "standings": [
     {
       "position": 1,
-      "playedGames": 3,
+      "playedGames": 4,
       "form": "WWW",
-      "won": 3,
+      "won": 4,
       "draw": 0,
       "lost": 0,
-      "points": 9,
-      "goalsFor": 12,
+      "points": 12,
+      "goalsFor": 14,
       "goalsAgainst": 2,
-      "goalDifference": 10,
+      "goalDifference": 12,
       "teamId": 81,
       "teamName": "FC Barcelona",
       "teamShortName": "Barça",
@@ -372,15 +372,15 @@
     },
     {
       "position": 18,
-      "playedGames": 3,
+      "playedGames": 4,
       "form": "LLD",
       "won": 0,
       "draw": 1,
-      "lost": 2,
+      "lost": 3,
       "points": 1,
       "goalsFor": 1,
-      "goalsAgainst": 4,
-      "goalDifference": -3,
+      "goalsAgainst": 6,
+      "goalDifference": -5,
       "teamId": 95,
       "teamName": "Valencia CF",
       "teamShortName": "Valencia",
@@ -388,8 +388,8 @@
       "apiPosition": 18,
       "zone": "relegation",
       "winRate": 0.0,
-      "drawRate": 33.3,
-      "lossRate": 66.7
+      "drawRate": 25.0,
+      "lossRate": 75.0
     },
     {
       "position": 19,
@@ -1005,18 +1005,18 @@
       "title": "Valencia vs Barcelona"
     },
     {
-      "id": "alaves-vs-osasuna-football-1570363",
-      "homeName": "Alavés",
-      "awayName": "Osasuna",
-      "kickoff": 1788712200000,
-      "title": "Alaves vs Osasuna"
-    },
-    {
       "id": "malaga-vs-levante-football-1570369",
       "homeName": "Málaga",
       "awayName": "Levante",
       "kickoff": 1788712200000,
       "title": "Malaga vs Levante"
+    },
+    {
+      "id": "alaves-vs-osasuna-football-1570363",
+      "homeName": "Alavés",
+      "awayName": "Osasuna",
+      "kickoff": 1788712200000,
+      "title": "Alaves vs Osasuna"
     },
     {
       "id": "deportivo-alav-s-vs-osasuna-2506204",
