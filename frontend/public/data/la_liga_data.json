@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T22:49:05.026340+00:00",
+  "updatedAt": "2026-09-07T00:48:39.572751+00:00",
   "season": "2026",
   "matchday": 6,
   "seasonStart": "2026-08-16",
@@ -16,7 +16,7 @@
     {
       "position": 1,
       "playedGames": 4,
-      "form": "WWW",
+      "form": "WWWW",
       "won": 4,
       "draw": 0,
       "lost": 0,
@@ -37,7 +37,7 @@
     {
       "position": 2,
       "playedGames": 4,
-      "form": "WDW",
+      "form": "WWDW",
       "won": 3,
       "draw": 1,
       "lost": 0,
@@ -142,7 +142,7 @@
     {
       "position": 7,
       "playedGames": 4,
-      "form": "LWW",
+      "form": "DLWW",
       "won": 2,
       "draw": 1,
       "lost": 1,
@@ -163,7 +163,7 @@
     {
       "position": 8,
       "playedGames": 4,
-      "form": "WWD",
+      "form": "LWWD",
       "won": 2,
       "draw": 1,
       "lost": 1,
@@ -205,7 +205,7 @@
     {
       "position": 10,
       "playedGames": 4,
-      "form": "WDL",
+      "form": "DWDL",
       "won": 1,
       "draw": 2,
       "lost": 1,
@@ -226,7 +226,7 @@
     {
       "position": 11,
       "playedGames": 4,
-      "form": "LLW",
+      "form": "DLLW",
       "won": 1,
       "draw": 1,
       "lost": 2,
@@ -373,7 +373,7 @@
     {
       "position": 18,
       "playedGames": 4,
-      "form": "LDL",
+      "form": "DLDL",
       "won": 0,
       "draw": 2,
       "lost": 2,
@@ -415,7 +415,7 @@
     {
       "position": 20,
       "playedGames": 4,
-      "form": "LLD",
+      "form": "LLLD",
       "won": 0,
       "draw": 1,
       "lost": 3,
@@ -438,7 +438,7 @@
     {
       "id": 564661,
       "utcDate": "2026-09-06T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 4,
       "homeId": 80,
       "homeName": "Espanyol",
@@ -447,14 +447,14 @@
       "awayName": "Sevilla FC",
       "awayCrest": "https://sportsrc.org/img/score/559.png",
       "homeGoals": 1,
-      "awayGoals": 0,
-      "winner": "HOME_TEAM",
-      "live": true
+      "awayGoals": 1,
+      "winner": "DRAW",
+      "live": false
     },
     {
       "id": 564664,
       "utcDate": "2026-09-06T16:30:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 4,
       "homeId": 263,
       "homeName": "Alavés",
@@ -462,15 +462,15 @@
       "awayId": 79,
       "awayName": "Osasuna",
       "awayCrest": "https://sportsrc.org/img/score/79.png",
-      "homeGoals": 3,
+      "homeGoals": 5,
       "awayGoals": 2,
       "winner": "HOME_TEAM",
-      "live": true
+      "live": false
     },
     {
       "id": 564666,
       "utcDate": "2026-09-06T16:30:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 4,
       "homeId": 84,
       "homeName": "Málaga",
@@ -481,7 +481,23 @@
       "homeGoals": 0,
       "awayGoals": 0,
       "winner": "DRAW",
-      "live": true
+      "live": false
+    },
+    {
+      "id": 564659,
+      "utcDate": "2026-09-06T14:15:00Z",
+      "status": "FINISHED",
+      "matchday": 4,
+      "homeId": 95,
+      "homeName": "Valencia",
+      "homeCrest": "https://sportsrc.org/img/score/95.png",
+      "awayId": 81,
+      "awayName": "Barça",
+      "awayCrest": "https://sportsrc.org/img/score/81.png",
+      "homeGoals": 0,
+      "awayGoals": 5,
+      "winner": "AWAY_TEAM",
+      "live": false
     },
     {
       "id": 564662,
